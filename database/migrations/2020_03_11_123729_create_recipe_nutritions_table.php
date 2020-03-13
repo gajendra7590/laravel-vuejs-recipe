@@ -16,9 +16,9 @@ class CreateRecipeNutritionsTable extends Migration
         Schema::create('recipe_nutritions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('recipe_id');
-            $table->string('nutrition_name');
-            $table->string('nutrition_value');
-            $table->enum('status',array('0','1'));
+            $table->string('nutrition_name',50)->nullable();
+            $table->string('nutrition_value',50)->nullable();
+            $table->enum('status',array('0','1'))->default(1);
             $table->timestamps();
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
         });

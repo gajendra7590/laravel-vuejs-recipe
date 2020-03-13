@@ -23,5 +23,13 @@ Route::get('categories/getCategories', array('as' => 'categories', 'uses' => 'Ca
 Route::get('categories/getCategories/{id}', array('as' => 'categories', 'uses' => 'CategoriesController@getCategory')); 
 Route::post('categories/create', array('as' => 'categories', 'uses' => 'CategoriesController@save')); 
 Route::post('categories/update/{id}', array('as' => 'categories', 'uses' => 'CategoriesController@update')); 
-Route::delete('categories/delete/{id}', array('as' => 'categories', 'uses' => 'CategoriesController@delete')); 
+Route::delete('categories/delete/{id}', array('as' => 'categories', 'uses' => 'CategoriesController@delete'));
+
+
+//Recipes API ROUTES
+Route::get('recipes/getRecipes', array('as' => 'recipes', 'uses' => 'RecipesController@getRecipes'));
+Route::get('recipes/getRecipe/{id}', array('as' => 'recipes', 'uses' => 'RecipesController@getRecipe'));
+Route::post('recipes/create', array('as' => 'recipes', 'uses' => 'RecipesController@save'));
+Route::post('recipes/update/{id}', array('as' => 'recipes', 'uses' => 'RecipesController@update'));
+Route::delete('recipes/delete/{id}', array('as' => 'recipes', 'uses' => 'RecipesController@delete'));
 

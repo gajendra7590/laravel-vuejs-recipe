@@ -16,9 +16,10 @@ class CreateCategoryTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->string('name','100')->unique();
-            $table->text('desc');
-            $table->string('img','100');
-            $table->enum('status', array('0', '1'));
+            $table->string('slug','100')->unique();
+            $table->text('desc')->nullable();
+            $table->string('img','100')->nullable();
+            $table->enum('status', array('0', '1'))->default(1);
             $table->timestamps();
         });
     }

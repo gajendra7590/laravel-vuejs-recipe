@@ -17,12 +17,14 @@ class CreateRecipesTable extends Migration
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->integer('category_id');
             $table->integer('user_id');
-            $table->string('title');
-            $table->longText('description');
-            $table->string('prepairation_time');
-            $table->string('cooking_time');
-            $table->string('serving_peoples');
-            $table->enum('status',array('0','1'));
+            $table->string('title')->unique();
+            $table->string('slug','100')->unique();
+            $table->longText('description')->nullable();
+            $table->string('recipe_image',100)->nullable();
+            $table->string('prepairation_time',50)->nullable();
+            $table->string('cooking_time',50)->nullable();
+            $table->string('serving_peoples',50)->nullable();
+            $table->enum('status',array('0','1'))->default(1);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -59,8 +59,13 @@ class CategoriesController extends Controller
             $errors = $validator->errors()->toArray();
             return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
         }else{
+
+            $slug = strtolower($post['name']);
+            $slug = preg_replace('/\s+/', '-',$slug);
+
             $category = new Categories();
             $category->name = $post['name'];
+            $category->slug = $slug;
             $category->desc = $post['desc'];
 
             if ($request->hasFile('img')) {
@@ -101,7 +106,11 @@ class CategoriesController extends Controller
                 return response()->json(['success'=>false,'message'=>'Invalid category ID']);
             }
 
+            $slug = strtolower($post['name']);
+            $slug = preg_replace('/\s+/', '-',$slug);
+
             $category->name = $post['name'];
+            $category->slug = $slug;
             $category->desc = $post['desc'];
 
             if ($request->hasFile('img')) {
