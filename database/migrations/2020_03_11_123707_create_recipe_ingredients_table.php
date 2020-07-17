@@ -18,7 +18,7 @@ class CreateRecipeIngredientsTable extends Migration
             $table->integer('recipe_id');
             $table->string('ingredient_name',50)->nullable();
             $table->string('ingredient_value',50)->nullable();
-            $table->enum('status',array('0','1'))->default(1);
+            $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
         });

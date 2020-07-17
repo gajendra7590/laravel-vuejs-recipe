@@ -13,8 +13,8 @@ class HomeController extends Controller
     }
 
     public function vueAdmin()
-    {
-        return view('admin-index');
+    {      return view('admin-index');
+       // return view('emails.reset-password-admin');
     }
 
 

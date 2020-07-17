@@ -2,57 +2,41 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\models\Categories;
+
 use Validator;
-use Webpatser\Uuid\Uuid;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+
+//Models
+use App\models\Categories;
+
 
 
 class CategoriesController extends Controller
 {
 
-    /**
-     * Get All Categories List
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getCategories(Request $request){ 
-        $result = Categories::all();
-        if($result){
-            $result = $result->toArray();
-        }
-        return response()->json(['success'=>true,'data'=>$result]);
+
+    public function getCategories(Request $request){
+        return Categories::all();
     }
 
-
-    /**
-     * Get One Category
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function getCategory(Request $request,$id){
-        $result = Categories::where(['id'=>$id,'status'=>'1'])->first();
-
-        if($result){
-            $result = $result->toArray();
-        }
-        return response()->json(['success'=>true,'data'=>$result]);
+        return Categories::where([
+                'id' => $id,
+                'status'=>'1'
+            ])
+            ->first();
     }
 
-
-    /**
-     * Create New Categories
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function save(Request $request){
+    public function createCategory(Request $request){
         $post = $request->all();
         $validator = Validator::make($post, array(
-            'name' => 'required|unique:categories',
-            'desc' => 'required',
-            'img' => 'required|image|mimes:jpg,jpeg,png'
+            'name' => 'required|unique:recipe_categories',
+            'description' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png'
         ));
 
         if ($validator->fails()) {
@@ -60,86 +44,95 @@ class CategoriesController extends Controller
             return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
         }else{
 
-            $slug = strtolower($post['name']);
-            $slug = preg_replace('/\s+/', '-',$slug);
+            $slug = slugCreator($post['name']);
 
             $category = new Categories();
             $category->name = $post['name'];
             $category->slug = $slug;
-            $category->desc = $post['desc'];
+            $category->description = $post['description'];
 
-            if ($request->hasFile('img')) {
-                $imageName = Uuid::generate().'.'.$request->img->getClientOriginalExtension();
-                $is_uploaded = $request->img->move(public_path('images'), $imageName);
+            if ($request->hasFile('image')) {
+                $imageName = gen_uuid().'.'.$request->image->getClientOriginalExtension();
+                $is_uploaded = $request->image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
-                    $category->img = $imageName;
+                    $category->photo = $imageName;
                 }
             }
-
             $save = $category->save();
             if($save){
-                return response()->json(['success'=>true,'message'=>'Category created successfully']);
+                return response()->json([
+                    'success' => true,
+                    'message'=>'Category created successfully'
+                ]);
             }
         }
     }
 
-    /***
-     * Update Categories
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request,$id){
+    public function updateCategory(Request $request,$id){
         $post = $request->all();
         $validator = Validator::make($post, array(
-            'name' => "required|unique:categories,name,{$id}",
-            'desc' => 'required',
-            'img' => 'image|mimes:jpg,jpeg,png'
+            'name' => "required|unique:recipe_categories,name,{$id}",
+            'description' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png'
         ));
 
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Incorrect form data',
+                'errors' => $errors
+            ]);
         }else{
             $category = Categories::find($id);
             if(!$category){
-                return response()->json(['success'=>false,'message'=>'Invalid category ID']);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid category ID'
+                ]);
             }
 
-            $slug = strtolower($post['name']);
-            $slug = preg_replace('/\s+/', '-',$slug);
-
+            $slug = slugCreator($post['name']);
             $category->name = $post['name'];
             $category->slug = $slug;
-            $category->desc = $post['desc'];
+            $category->description = $post['description'];
 
-            if ($request->hasFile('img')) {
-                $imageName = Uuid::generate().'.'.$request->img->getClientOriginalExtension();
-                $is_uploaded = $request->img->move(public_path('images'), $imageName);
+            if ($request->hasFile('image')) {
+                $imageName = gen_uuid().'.'.$request->image->getClientOriginalExtension();
+                $is_uploaded = $request->image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
-                    $category->img = $imageName;
+                    $category->photo = $imageName;
                 }
             }
 
 
             $save = $category->save();
             if($save){
-                return response()->json(['success'=>true,'message'=>'Category Updated Successfully']);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Category Updated Successfully'
+                ]);
             }
         }
 
     }
 
 
-    public function delete(Request $request,$id){
+    public function deleteCategory(Request $request,$id){
         $category = Categories::find($id);
         if(!$category){
-            return response()->json(['success'=>false,'message'=>'Invalid category ID']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid category ID'
+            ]);
         }
 
-        $isDelete =  $category->delete();
+        $isDelete =  $category->update(['status' => '2']);
         if($isDelete){
-            return response()->json(['success'=>true,'message'=>'Category Deleted Successfully']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Category Deleted Successfully'
+            ]);
         }
     }
 

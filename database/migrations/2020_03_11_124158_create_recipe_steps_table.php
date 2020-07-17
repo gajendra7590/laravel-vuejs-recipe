@@ -19,7 +19,7 @@ class CreateRecipeStepsTable extends Migration
             $table->string('title','100')->nullable();
             $table->longText('description')->nullable();
             $table->string('photo','100')->nullable();
-            $table->enum('status',array('0','1'))->default(1);
+            $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
 
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');

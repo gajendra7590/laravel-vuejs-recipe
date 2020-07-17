@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Webpatser\Uuid\Uuid;
 
@@ -16,18 +19,26 @@ use App\models\RecipeImages;
 class RecipesController extends Controller
 {
 
-    public function getRecipes()
+    public function getRecipes(Request $request)
     {
-        //
+        return Recipes::with([
+            'user' => function($model){ $model->select('id','first_name','last_name','display_name','email','photo'); },
+            'category' => function($model){ $model->select('id','name','slug','description','photo'); },
+        ])->get()->all();
     }
 
-    public function getRecipe($id)
+    public function getRecipe(Request $request,$id)
     {
-        //
+        return Recipes::with([
+            'user' => function($model){ $model->select('id','first_name','last_name','display_name','email','photo'); },
+            'category' => function($model){ $model->select('id','name','slug','description','photo'); },
+            'nutritions',
+            'ingredients'
+        ])->where(['id' => $id])->get()->all();
     }
 
 
-    public function save(Request $request)
+    public function createRecipe(Request $request)
     {
         $post = $request->all();
         $validator = Validator::make($post, array(
@@ -46,33 +57,36 @@ class RecipesController extends Controller
             'recipe_ingredients.*.value' => 'required'
         ));
 
-//        echo '<pre>';print_r($post);die;
+        //echo '<pre>';print_r($post);die;
 
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Incorrect form data',
+                'errors' => $errors
+            ]);
         }else{
 
             $recipe = new Recipes();
-            $slug = strtolower($post['title']);
-            $slug = preg_replace('/\s+/', '-',$slug);
+            $slug = slugCreator($post['title']);
 
             $recipe->category_id = $post['category_id'];
-            $recipe->user_id = 1;
+            $recipe->user_id = Auth::user()->id;
             $recipe->title = $post['title'];
             $recipe->slug = $slug;
             $recipe->description = $post['description'];
             $recipe->prepairation_time = $post['prepairation_time'];
             $recipe->cooking_time = $post['cooking_time'];
             $recipe->serving_peoples = $post['serving_peoples'];
-            $recipe->recipe_image = NULL;
+            $recipe->photo = NULL;
 
             //Upload Images
             if ($request->hasFile('recipe_image')) {
                 $imageName = Uuid::generate().'.'.$request->recipe_image->getClientOriginalExtension();
                 $is_uploaded = $request->recipe_image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
-                    $recipe->recipe_image = $imageName;
+                    $recipe->photo = $imageName;
                 }
             }
 
@@ -100,15 +114,21 @@ class RecipesController extends Controller
                         $NutModel->save();
                     }
                 }
-                return response()->json(['success'=>true,'message'=>'Recipe added successfully']);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Recipe added successfully'
+                ]);
             }
         }
     }
 
-    public function update(Request $request,$id){
+    public function updateRecipe(Request $request,$id){
         $recipeModel = Recipes::find($id);
         if(!$recipeModel){
-            return response()->json(['success'=>false,'message'=>'Invalid Recipe ID']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Recipe ID'
+            ]);
         }
 
 
@@ -131,7 +151,11 @@ class RecipesController extends Controller
 
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
+            return response()->json([
+                'success' => false,
+                'message '=> 'Incorrect form data',
+                'errors' => $errors
+            ]);
         }else{
             $slug = strtolower($post['title']);
             $slug = preg_replace('/\s+/', '-',$slug);
@@ -148,7 +172,7 @@ class RecipesController extends Controller
                 $imageName = Uuid::generate().'.'.$request->recipe_image->getClientOriginalExtension();
                 $is_uploaded = $request->recipe_image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
-                    $recipeModel->recipe_image = $imageName;
+                    $recipeModel->photo = $imageName;
                 }
             }
             $save = $recipeModel->save();
@@ -201,22 +225,35 @@ class RecipesController extends Controller
                         }
                     }
                 }
-                return response()->json(['success'=>true,'message'=>'Recipe detail updated successfully']);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Recipe detail updated successfully'
+                ]);
             }
         }
 
     }
 
-    public function delete($id){
+    public function deleteRecipe($id){
         $recipeModel = Recipes::find($id);
         if(!$recipeModel){
-            return response()->json(['success'=>false,'message'=>'Opps! this recipe not found( Invalid ID )']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Opps! this recipe not found( Invalid ID )'
+            ]);
         }
 
-        if($recipeModel->delete()){
-            return response()->json(['success'=>true,'message'=>'Recipe deleted successfully']);
+        $update = $recipeModel->update(['status' => '2']);
+        if($update){
+            return response()->json([
+                'success' => true,
+                'message' => 'Recipe deleted successfully'
+            ]);
         }else{
-            return response()->json(['success'=>false,'message'=>'Opps! error in delete this recipe.']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Opps! error in delete this recipe.'
+            ]);
         }
     }
 }

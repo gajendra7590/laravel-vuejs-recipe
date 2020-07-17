@@ -35,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','email_verified_at','reset_token_at'
+        'password', 'remember_token','email_verified_at'
     ];
 
     /**
@@ -48,4 +48,28 @@ class User extends Authenticatable
         'reset_token_at' => 'datetime',
         'last_login' => 'datetime',
     ];
+
+
+    public function getUserRoleNameAttribute(){
+        if( $this->hasRole('admin') ){
+            return 'admin';
+        } else if( $this->hasRole('author') ){
+            return 'author';
+        } else if( $this->hasRole('user') ){
+            return 'user';
+        }else{
+            return null;
+        }
+    }
+
+    public function getDisplayNameAttribute($value){ 
+        if($value!=''){
+            return $value;
+        }else{
+            return "{$this->first_name} {$this->last_name}";
+        }
+
+    }
+
+
 }

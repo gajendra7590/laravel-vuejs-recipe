@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\models\Categories;
+use App\models\RecipeNutritions;
+use App\models\RecipeIngredients;
+use App\models\RecipeSteps;
+
 
 class Recipes extends Model
 {
@@ -37,6 +41,16 @@ class Recipes extends Model
     public function category()
     {
         return $this->hasOne(Categories::class, 'id','category_id');
+    }
+
+    public function nutritions()
+    {
+        return $this->hasMany(RecipeNutritions::class, 'recipe_id','id');
+    }
+
+    public function ingredients()
+    {
+        return $this->hasMany(RecipeIngredients::class, 'recipe_id','id');
     }
 
 

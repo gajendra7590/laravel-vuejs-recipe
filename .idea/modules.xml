@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/laravel-vuejs-recipe.iml" filepath="$PROJECT_DIR$/.idea/laravel-vuejs-recipe.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/laravel-vuejs-recipe.iml" filepath="$PROJECT_DIR$/.idea/laravel-vuejs-recipe.iml" />
     </modules>
   </component>
 </project>
