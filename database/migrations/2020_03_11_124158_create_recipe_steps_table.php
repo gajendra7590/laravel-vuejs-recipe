@@ -18,7 +18,7 @@ class CreateRecipeStepsTable extends Migration
             $table->integer('recipe_id');
             $table->string('title','100')->nullable();
             $table->longText('description')->nullable();
-            $table->string('image','100')->nullable();
+            $table->string('photo','100')->nullable();
             $table->enum('status',array('0','1'))->default(1);
             $table->timestamps();
 

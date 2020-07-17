@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\models\Categories as Cat;
+use App\models\Categories as CatModel;
 
 class Categories extends Seeder
 {
@@ -15,16 +15,16 @@ class Categories extends Seeder
     public function run()
     {
         $category = array(
-            ['name'=>'Juice','slug'=>'juice','desc'=>'juice'],
-            ['name'=>'Coffee','slug'=>'coffee','desc'=>'coffee'],
-            ['name'=>'Poha Jalebi','slug'=>'poha-jalebi','desc'=>'poha jalebi'],
-            ['name'=>'Salad','slug'=>'salad','desc'=>'salad']
+            ['name'=>'Juice','slug'=>'juice','description'=>'juice'],
+            ['name'=>'Coffee','slug'=>'coffee','description'=>'coffee'],
+            ['name'=>'Poha Jalebi','slug'=>'poha-jalebi','description'=>'poha jalebi'],
+            ['name'=>'Salad','slug'=>'salad','description'=>'salad']
         );
 
         foreach($category as $cat){
-            $checkCategory = Cat::where(['name'=>$cat['name']])->first();
+            $checkCategory = CatModel::where(['name'=>$cat['name']])->first();
             if($checkCategory==null){
-                Cat::create($cat);
+                CatModel::create($cat);
             }
         }
     }

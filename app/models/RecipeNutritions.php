@@ -13,4 +13,11 @@ class RecipeNutritions extends Model
      */
     protected $table = 'recipe_nutritions';
 
+
+    protected $fillable = [
+        'recipe_id','nutrition_name','nutrition_value', 'status'
+    ];
+
+
+
 }

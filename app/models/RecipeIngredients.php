@@ -13,4 +13,10 @@ class RecipeIngredients extends Model
      */
     protected $table = 'recipe_ingredients';
 
+
+
+    protected $fillable = [
+        'recipe_id','ingredient_name','ingredient_value', 'status'
+    ];
+
 }

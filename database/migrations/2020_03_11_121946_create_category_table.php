@@ -13,13 +13,13 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('recipe_categories', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned(false)->length(11);
-            $table->string('name','100')->unique();
-            $table->string('slug','100')->unique();
-            $table->text('desc')->nullable();
-            $table->string('img','100')->nullable();
-            $table->enum('status', array('0', '1'))->default(1);
+            $table->string('name','256')->unique();
+            $table->string('slug','256')->unique();
+            $table->text('description')->nullable();
+            $table->string('photo','256')->nullable();
+            $table->enum('status', array('0', '1','2'))->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('recipe_categories');
     }
 }

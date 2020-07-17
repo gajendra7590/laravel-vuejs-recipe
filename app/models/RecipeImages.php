@@ -13,4 +13,8 @@ class RecipeImages extends Model
      */
     protected $table = 'recipe_images';
 
+    protected $fillable = [
+        'name','recipe_id','photo','status'
+    ];
+
 }

@@ -13,23 +13,28 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('recipe_users', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->string('first_name',50)->nullable();
             $table->string('last_name',50)->nullable();
+            $table->string('display_name',50)->nullable();
             $table->string('email',100)->unique();
-            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('phone',15)->nullable();
-            $table->string('gender',5)->nullable();
-            $table->string('image',100)->nullable();
+            $table->string('password');
+            $table->string('photo',100)->nullable();
+            $table->string('address_line_one',100)->nullable();
+            $table->string('address_line_two',100)->nullable();
             $table->string('city',50)->nullable();
             $table->string('state',50)->nullable();
             $table->string('country',50)->nullable();
             $table->string('zip',10)->nullable();
-            $table->string('resetToken',100)->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('active',array('0','1'))->default(1);
+            $table->timestamp('last_login')->nullable();
+            $table->string('ip_address',50)->nullable();
             $table->rememberToken();
+            $table->string('reset_token',100)->nullable();
+            $table->string('reset_token_at',100)->nullable();
+            $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
         });
     }
@@ -41,6 +46,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('recipe_users');
     }
 }

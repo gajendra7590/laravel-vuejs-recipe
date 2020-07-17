@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categories extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'categories';
+
+    protected $table = 'recipe_categories';
+    protected $primaryKey = 'id';
+
+
+
+    protected $fillable = [
+        'name','slug','description', 'photo','status'
+    ];
 
 
     

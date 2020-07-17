@@ -16,14 +16,44 @@ class Users extends Seeder
     {
         //Create Default Users
         $userArray = array(
-            ['first_name'=>'Test','last_name'=>'User','email'=>'test@user.com','password'=>bcrypt('12345678'),'active'=>'1'],
+            [
+                'first_name'=>'Super',
+                'last_name'=>'Admin',
+                'display_name'=>'Super Admin',
+                'email'=>'admin@recipe.com',
+                'password'=>bcrypt('12345678'),
+                'role'=>'admin',
+                'status'=>'1'
+            ],
+            [
+                'first_name'=>'Author',
+                'last_name'=>'Author',
+                'display_name'=>'Author',
+                'email'=>'author@recipe.com',
+                'password'=>bcrypt('12345678'),
+                'role'=>'author',
+                'status'=>'1'
+            ],
+            [
+                'first_name'=>'User',
+                'last_name'=>'User',
+                'display_name'=>'User',
+                'email'=>'user@recipe.com',
+                'password'=>bcrypt('12345678'),
+                'role'=>'user',
+                'status'=>'1'
+            ],
         );
 
 
         foreach($userArray as $key => $user){
             $checkUser = User::where(['email'=>$user['email']])->first();
-            if($checkUser==null){
+            if($checkUser == null){
+                $role = $user['role'];
+                unset($user['role']);
                 $createdUser = User::create($user);
+                $createdUser->assignRole($role);
+
             }
         }
     }

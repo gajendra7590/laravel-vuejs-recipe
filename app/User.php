@@ -6,9 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Spatie\Permission\Traits\HasRoles;
+
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
+
+
+    protected $table = 'recipe_users';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +23,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name','last_name','display_name', 'email', 'password',
+        'phone','photo','address_line_one','address_line_two','city',
+        'state','country','zip','last_login','ip_address','reset_token',
+        'reset_token_at','status','email_verified_at'
     ];
 
     /**
@@ -25,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','email_verified_at','reset_token_at'
     ];
 
     /**
@@ -35,5 +45,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'reset_token_at' => 'datetime',
+        'last_login' => 'datetime',
     ];
 }

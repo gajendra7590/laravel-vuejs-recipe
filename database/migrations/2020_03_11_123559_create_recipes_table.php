@@ -20,15 +20,15 @@ class CreateRecipesTable extends Migration
             $table->string('title')->unique();
             $table->string('slug','100')->unique();
             $table->longText('description')->nullable();
-            $table->string('recipe_image',100)->nullable();
+            $table->string('photo',100)->nullable();
             $table->string('prepairation_time',50)->nullable();
             $table->string('cooking_time',50)->nullable();
             $table->string('serving_peoples',50)->nullable();
             $table->enum('status',array('0','1'))->default(1);
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('recipe_categories')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('recipe_users')->onDelete('cascade');
         });
     }
 
