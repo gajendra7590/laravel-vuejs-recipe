@@ -10,10 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Load Admin Vue
+Route::get('/admin/{any}', 'HomeController@vueAdmin')->where('any', '.*');
 
-//For Front Route
-Route::get('/', function () { return view('index');  })->where('any', '.*');
-Route::get('/{any}', function () { return view('index');  })->where('any', '.*'); 
+//VueJS Load Main Page
+Route::get('/', 'HomeController@vueFrontEnd');
+Route::get('/{any}', 'HomeController@vueFrontEnd')->where('any', '.*');
+
+

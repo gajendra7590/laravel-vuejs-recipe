@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        //DataTable
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
 
         /*
@@ -228,6 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //DataTable
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];
