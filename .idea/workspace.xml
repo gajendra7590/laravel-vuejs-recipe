@@ -2,11 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="814045b9-a76b-4148-bf97-94bfe2538d85" name="Default" comment="dasda">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/laravel-vuejs-recipe.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/1583928338.png" afterPath="$PROJECT_DIR$/public/images/1583928338.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/1583928461.png" afterPath="$PROJECT_DIR$/public/images/1583928461.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/1e855290-6433-11ea-bd2d-51c352a966b9.jpg" afterPath="$PROJECT_DIR$/public/images/1e855290-6433-11ea-bd2d-51c352a966b9.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/55c3d4b0-6446-11ea-9877-87af69c2c270.jpg" afterPath="$PROJECT_DIR$/public/images/55c3d4b0-6446-11ea-9877-87af69c2c270.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/648cb700-6446-11ea-b0f1-07c11a193445.jpg" afterPath="$PROJECT_DIR$/public/images/648cb700-6446-11ea-b0f1-07c11a193445.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/829a2c50-6426-11ea-8591-51080028d6cf.jpg" afterPath="$PROJECT_DIR$/public/images/829a2c50-6426-11ea-8591-51080028d6cf.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/871310a0-6426-11ea-b851-530ff1d50984.jpg" afterPath="$PROJECT_DIR$/public/images/871310a0-6426-11ea-b851-530ff1d50984.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/8cead740-6433-11ea-9069-7f69ac32fb18.jpg" afterPath="$PROJECT_DIR$/public/images/8cead740-6433-11ea-9069-7f69ac32fb18.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/8dad7240-6434-11ea-9f33-c71e3ca7c7f7.jpg" afterPath="$PROJECT_DIR$/public/images/8dad7240-6434-11ea-9f33-c71e3ca7c7f7.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/8fec26b0-6426-11ea-ad2f-136f45feae32.jpg" afterPath="$PROJECT_DIR$/public/images/8fec26b0-6426-11ea-ad2f-136f45feae32.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/aeefdc30-6428-11ea-9a5e-d9d423d44176.jpg" afterPath="$PROJECT_DIR$/public/images/aeefdc30-6428-11ea-9a5e-d9d423d44176.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/b1a88400-6433-11ea-ad6a-9f6c323ac358.jpg" afterPath="$PROJECT_DIR$/public/images/b1a88400-6433-11ea-ad6a-9f6c323ac358.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/e0b531e0-6391-11ea-ae2a-c974072f6698.jpg" afterPath="$PROJECT_DIR$/public/images/e0b531e0-6391-11ea-ae2a-c974072f6698.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/e67d5850-6441-11ea-8f24-8d37781bef10.jpg" afterPath="$PROJECT_DIR$/public/images/e67d5850-6441-11ea-8f24-8d37781bef10.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/blade.xml" afterPath="$PROJECT_DIR$/.idea/blade.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/RecipesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/RecipesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Categories.php" afterPath="$PROJECT_DIR$/app/models/Categories.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/RecipeImages.php" afterPath="$PROJECT_DIR$/app/models/RecipeImages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/RecipeIngredients.php" afterPath="$PROJECT_DIR$/app/models/RecipeIngredients.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/RecipeNutritions.php" afterPath="$PROJECT_DIR$/app/models/RecipeNutritions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Recipes.php" afterPath="$PROJECT_DIR$/app/models/Recipes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_121946_create_category_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_121946_create_category_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_123559_create_recipes_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_123559_create_recipes_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_123707_create_recipe_ingredients_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_123707_create_recipe_ingredients_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_123729_create_recipe_nutritions_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_123729_create_recipe_nutritions_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_124158_create_recipe_steps_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_124158_create_recipe_steps_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Categories.php" afterPath="$PROJECT_DIR$/database/seeds/Categories.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Users.php" afterPath="$PROJECT_DIR$/database/seeds/Users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/app.css" afterPath="$PROJECT_DIR$/public/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/env.envfile" afterPath="$PROJECT_DIR$/public/env.envfile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mix-manifest.json" afterPath="$PROJECT_DIR$/public/mix-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/components/AppComponent.vue" afterPath="$PROJECT_DIR$/resources/js/components/AppComponent.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/components/shared/footer.vue" afterPath="$PROJECT_DIR$/resources/js/components/shared/footer.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/components/shared/header.vue" afterPath="$PROJECT_DIR$/resources/js/components/shared/header.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/components/without_login/About.vue" afterPath="$PROJECT_DIR$/resources/js/components/without_login/About.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/components/without_login/Home.vue" afterPath="$PROJECT_DIR$/resources/js/components/without_login/Home.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/home.blade.php" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/vue.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/vue.blade.php" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path=".idea/vcs.xml" />
@@ -78,6 +129,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Http" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Http" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -182,6 +287,7 @@
       <updated>1583931962939</updated>
       <workItem from="1583931964000" duration="1025000" />
       <workItem from="1583988741813" duration="2221000" />
+      <workItem from="1594958878069" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="fsdf">
       <created>1583932373061</created>
@@ -201,20 +307,20 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3246000" />
+    <option name="totallyTimeSpent" value="3599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="59" y="25" width="1861" height="1055" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20991735" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21212122" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5041322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.81984895" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.71089536" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8381877" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -279,7 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -287,7 +392,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="39" column="6" lean-forward="true" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -295,8 +399,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/1583928461.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/1583928338.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>
