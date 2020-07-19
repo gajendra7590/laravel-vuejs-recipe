@@ -7,14 +7,18 @@
           <!-- /.login-logo -->
           <div class="card">
             <div class="card-body login-card-body">
-              <p class="login-box-msg">Send Reset Password Link</p> 
-              <form action="recover-password.html" method="post">
+              <p class="login-box-msg">Send Reset Password Link</p>
+              <div class="alert" :class="alertClass" v-show="alertShow">
+                {{ alertMessage }}
+              </div> 
+              <form @submit.prevent="adminForgotPassword" enctype="multipart/form-data" method="post">
                 <div class="input-group mb-3">
                   <input type="email" 
-                         name="new_password"
-                         class="form-control" 
-                         placeholder="Your email..">
-                  <div class="input-group-append">
+                          name="email"  
+                          v-model="forgotData.email"              
+                          class="form-control" 
+                          placeholder="Your email..">
+                            <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-envelope"></span>
                     </div>
@@ -38,7 +42,41 @@
 </template> 
 <script>
 export default {
-  name: 'ForgotPassword' 
+  name: 'ForgotPassword',
+  data() {
+    return {
+      alertClass : 'alert-success',
+      alertShow : false,
+      alertMessage : '',
+      forgotData : {
+        email : ''
+      }
+    }
+  },
+  methods: {
+    // adminForgotPassword
+    adminForgotPassword(){
+        this.$store
+        .dispatch("adminForgotPassword",this.forgotData).then(res => {
+           if( typeof(res.status)!='undefined' && (res.status == true) ){ 
+             this.alertClass = 'alert-success';
+             this.alertShow = true; 
+             this.alertMessage = res.message 
+           } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
+             this.alertClass = 'alert-danger';
+             this.alertShow = true;   
+             this.alertMessage = res.message
+           } 
+        })
+        .catch(e => {
+          console.log(e);
+        }); 
+
+    }
+  }, 
+  created(){
+
+  }
 }
 </script> 
 <style scoped> 

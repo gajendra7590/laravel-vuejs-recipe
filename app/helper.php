@@ -15,7 +15,7 @@ if (! function_exists('emailSend')) {
     function emailSend($view,$email,$data) {
         if (view()->exists('emails.'.$view)) {
             $data['view'] = $view;
-            return Mail::to($email)
+            return Mail::to($email) 
                 ->send(new CommonEmail($data));
         }else{
             return false;

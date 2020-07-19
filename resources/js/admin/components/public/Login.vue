@@ -8,10 +8,14 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="" method="post">
+      <div class="alert" :class="alertClass" v-show="alertShow">
+        {{ alertMessage }}
+      </div> 
+      <form @submit.prevent="adminLogin" enctype="multipart/form-data" method="post">
         <div class="input-group mb-3">
           <input type="email" 
-                 name="email"                
+                 name="email"  
+                 v-model="loginData.email"              
                  class="form-control" 
                  placeholder="Your email..">
           <div class="input-group-append">
@@ -23,6 +27,7 @@
         <div class="input-group mb-3">
           <input type="password" 
                  name="password"
+                 v-model="loginData.password"   
                  class="form-control" 
                  placeholder="Your password">
           <div class="input-group-append">
@@ -37,6 +42,7 @@
               <input 
                   name="remember"
                   type="checkbox" 
+                  v-model="loginData.remeberMe"
                   id="remember"
                   >
               <label for="remember">
@@ -74,7 +80,51 @@
 
 <script>
 export default {
-  name: 'Login' 
+  name: 'Login',
+  data() {
+    return {
+      alertClass : 'alert-success',
+      alertShow : false,
+      alertMessage : '',
+      loginData : {
+        email : '',
+        password : '',
+        remeberMe : ''
+      }
+    }
+  },
+  methods: {
+    adminLogin(){ 
+       this.$store
+        .dispatch("adminLogin",this.loginData).then(res => {
+           if( typeof(res.status)!='undefined' && (res.status == true) ){ 
+             this.alertClass = 'alert-success';
+             this.alertShow = true; 
+             this.alertMessage = res.message
+             this.$toastr.s("You have been logged in", "SUCCESS!!");
+             localStorage.setItem('current_user',res.current_user);
+             localStorage.setItem('token',res.token.access_token);
+             setTimeout(function(){
+               window.location.href='/admin/dashboard';
+             },2000);
+           } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
+             this.alertClass = 'alert-danger';
+             this.alertShow = true;  
+             this.$toastr.e("Opps! error in logged in", "ERROR!!");
+             localStorage.setItem('current_user','');
+             localStorage.setItem('token','');
+             this.alertMessage = res.message
+           } 
+        })
+        .catch(e => {
+          console.log(e);
+        }); 
+    }
+
+  },
+  created(){
+    //this.adminLogin() 
+  } 
 }
 </script> 
 <style scoped> 

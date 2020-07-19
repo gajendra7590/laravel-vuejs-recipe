@@ -41,7 +41,35 @@
 
 <script>
 export default {
-  name: 'LogOut' 
+  name: 'LogOut',
+  data() {
+    return {
+      
+    }
+  }, 
+  methods:{
+      adminLogout(){ 
+       this.$store
+        .dispatch("adminLogout",this.loginData).then(res => { 
+           if( typeof(res.status)!='undefined' && (res.status == true) ){  
+             localStorage.removeItem('current_user');
+             localStorage.removeItem('token');
+             this.$toastr.s("You have been logged out", "SUCCESS!!");
+             setTimeout(function(){
+               window.location.href='/admin/login';
+             },500);
+           } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
+             this.$toastr.s("Error in logged out", "ERROR!!");
+           } 
+        })
+        .catch(e => {
+          this.$toastr.s("Error in logged out", "ERROR!!"); 
+        }); 
+     }
+  },
+  created(){
+    this.adminLogout();
+  }
 }
 </script> 
 <style scoped> 

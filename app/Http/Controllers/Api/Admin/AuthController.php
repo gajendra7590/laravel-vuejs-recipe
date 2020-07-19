@@ -19,11 +19,11 @@ use App\User;
 class AuthController extends Controller
 {
 
-    //Function for Common Login Fan/Artist
+    //Function for Common Login Admin
     public function login(Request $request){
-            $credentials = $request->only('email', 'password');
+            $credentials = $request->only('email', 'password'); 
             $post = $request->all();
-            $validator = Validator::make($request->all(),[
+            $validator = Validator::make($credentials,[
                 'email' => ['required','email'],
                 'password' => ['required'],
             ]);
@@ -32,7 +32,7 @@ class AuthController extends Controller
                 $result = errorArrayCreate($allMessages);
                 return response()->json([
                     'status'=>false,
-                    'message'=>'Please correct form values',
+                    'message'=>'Please fill proper form values',
                     'errors' => $result
                 ]);
             }else{ //If Validation success
@@ -244,11 +244,10 @@ class AuthController extends Controller
     }
 
     //Function For Common Logout & Delete Token
-    public function logout(Request $request){
+    public function logout(Request $request){ 
         if (Auth::check()) {
             $token = Auth::user()->token();
-            $token->delete();
-
+            $token->delete(); 
             return response()->json([
                 'status' => true,
                 'message' => 'You have been logged out successfully'

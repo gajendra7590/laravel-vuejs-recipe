@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
+import VueToastr from "vue-toastr";
+import config from '../config'
 //Import All component Here
 import Dashboard from './components/protected/Dashboard';
 //Categories
@@ -18,15 +20,16 @@ import LogOut from './components/protected/LogOut';
 import UpdateProfile from './components/protected/user-profile/UpdateProfile';
 import ChangePassword from './components/protected/user-profile/ChangePassword';
 
+//alert(config.URL_PREFIX_ADMIN)
 Vue.use(VueRouter)
 const router = new VueRouter({
-    base: '/admin',
+    base: config.URL_PREFIX_ADMIN,
     mode: "history",
     linkExactActiveClass: "active",
     routes: [
-        { name: "login-admin", path: "/login", component: Login, meta: { protectedURL: false } },
-        { name: "forgot-password-admin", path: "/forgot-password", component: ForgotPassword, meta: { protectedURL: false } },
-        { name: "forgot-password-new", path: "/set-new-password", component: SetNewPassword, meta: { protectedURL: false } },
+        { name: "login-admin", path: "/login", component: Login, meta: { visitorURL: true } },
+        { name: "forgot-password-admin", path: "/forgot-password", component: ForgotPassword, meta: { visitorURL: true } },
+        { name: "forgot-password-new", path: "/set-new-password", component: SetNewPassword, meta: { visitorURL: true } },
         { name: "loggedout-admin", path: "/logout", component: LogOut, meta: { protectedURL: true } },
         { name: "update-profile", path: "/update-profile", component: UpdateProfile, meta: { protectedURL: true } },
         { name: "change-password", path: "/change-password", component: ChangePassword, meta: { protectedURL: true } },
@@ -35,11 +38,29 @@ const router = new VueRouter({
         { name: "categories-list", path: "/categories", component: CategoriesList, meta: { protectedURL: true } },
         { name: "users-list", path: "/users", component: UsersList, meta: { protectedURL: true } },
         { name: "authors-list", path: "/authors", component: AuthorsList, meta: { protectedURL: true } },
-        { name: "users-list", path: "**", redirect: 'dashboard' }
+        { name: "404", path: "**", redirect: 'dashboard' }
     ],
-    // scrollBehavior(to, from, savedPosition) {
-    //     return { x: 0, y: 0 }
-    // }
+    scrollBehavior(to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
+});
+
+router.beforeResolve((to, from, next) => {
+    if (to.matched.some(record => record.meta.protectedURL)) {
+        if (!(!!localStorage.getItem('token'))) {
+            window.location.href = config.BASE_URL_ADMIN + 'login';
+        } else {
+            next()
+        }
+    } else if (to.matched.some(record => record.meta.visitorURL)) {
+        if ((!!localStorage.getItem('token'))) {
+            window.location.href = config.BASE_URL_ADMIN + 'dashboard';
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
 });
 
 export default router;
