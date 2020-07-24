@@ -1,0 +1,15 @@
+.VueTables__search-field label {
+    inline-size: fit-content !important;
+}
+
+.VueTables__search {
+    float: right !important;
+}
+
+.VueTables__limit {
+    float: left !important;
+}
+
+.VuePagination__pagination-item {
+    margin: 2px;
+}

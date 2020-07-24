@@ -29,11 +29,15 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <datatable
-                    class="table table-bordered table-striped"
-                   :columns="columns"                      
-                   :data="rows">
-                </datatable> 
+                 <v-server-table :url="API_URL" :columns="columns" :options="options">  
+                   <div slot="photo_url" slot-scope="{ row }">
+                      <img class="img-circle" width="100" height="100" v-lazy="row.photo_url" />
+                    </div>      
+                   <div slot="actions" slot-scope="{ row }"> 
+                      <router-link :to="'/admin/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">Edit</router-link> 
+                      <button @click="deleteCategory( row.id )" class="btn btn-sm bg-gradient-danger">Delete</button> 
+                    </div> 
+                 </v-server-table>  
 
               </div>
               <!-- /.card-body -->
@@ -51,32 +55,77 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+import config from '../../../../config';
 export default {
   name: 'CategoriesList',
   data() {
     return {
-       columns: [
-            { label: 'id', field: 'id' },
-            { label: 'Name', field: 'name' },
-            { label: 'Slug', field: 'slug' } ,
-            { label: 'Status', field: 'status' ,sortable : false } ,
-            { label: 'Created At', field: 'created_at',sortable : false} 
-        ] 
+        columns: [
+          'photo_url',
+          'name', 
+          'slug',
+          'created_at',
+          'actions'
+        ], 
+        API_URL : config.API_URL+'admin/getCategories',
+        tableData: [],
+        options: { 
+          headings: {
+            photo_url	: '',
+            name : 'Category Name',
+            slug : 'Category Slug',
+            created_at : 'Created Date'
+          },
+          perPage : 5, 
+          perPageValues:[5,10,25,50,100], 
+          requestAdapter(data) { 
+              return { 
+                sort: data.orderBy ? data.orderBy : 'created_at',
+                direction: data.ascending ? 'asc' : 'desc',
+                search : data.query,
+                limit : data.limit,
+                page : data.page
+              }
+            },
+            responseAdapter({data}) { 
+              return {
+                data : data.data,
+                count: data.total
+              }
+            },
+            pagination : {
+               nav: '',
+               edge : true
+            },    
+            filterable: true,  
+            sortable: [ 'name','slug','created_at'], 
+            sortIcon: {
+              base : 'fa',
+              is: 'fa-sort float-right',
+              up: 'fa-sort-alpha-up-alt float-right',
+              down: 'fa-sort-alpha-down-alt float-right'
+            },
+            templates: { 
+              created_at(h, row) {
+                return moment(row.created_at).format('DD MMM , YYYY');
+              } 
+            }
+        } 
     }
   }, 
   methods:{  
     getCategories(){
-      this.$store.dispatch("getCategories");
+      //this.$store.dispatch("getCategories");
     }
   },
    computed: mapState({
-    rows: state => state.data.getCategories, 
+    //rows: state => state.data.getCategories, 
   }),
   created(){ 
-    this.getCategories();
+     
   } 
 }
 </script> 
-<style scoped> 
+<style>   
 </style>

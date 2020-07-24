@@ -15,14 +15,18 @@ import Auth from './admin/Auth.vue';
 
 //Datatable
 import { VuejsDatatableFactory } from 'vuejs-datatable';
+import VueMoment from 'vue-moment';
+import moment from 'moment-timezone';
+import { ServerTable, ClientTable, Event } from 'vue-tables-2';
+
 
 
 require('./bootstrap');
 
 Vue.use(VueLazyload, {
     preLoad: 1,
-    error: config.BASE_URL + "images/default.png",
-    loading: config.BASE_URL + "images/lazy_default.gif",
+    error: config.BASE_URL + "images/default/default.jpg",
+    loading: config.BASE_URL + "images/default/lazy_default.gif",
     attempt: 1
 });
 Vue.use(CKEditor);
@@ -34,6 +38,10 @@ Vue.use(VueToastr, {
 });
 
 Vue.use(VuejsDatatableFactory);
+
+Vue.use(VueMoment, { moment });
+
+Vue.use(ServerTable);
 
 var path = window.location.pathname;
 var authReq = 1;

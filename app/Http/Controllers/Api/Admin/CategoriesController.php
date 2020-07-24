@@ -19,8 +19,32 @@ class CategoriesController extends Controller
 {
 
 
-    public function getCategories(Request $request){
-        return Categories::all();
+    public function getCategories(Request $request){ 
+        $params = $request->all();
+        $limit = (isset($params['limit']))?$params['limit']:5; 
+        $page =  ( isset($params['page']) )?$params['page']:1;
+        $offset = (( $page - 1 ) * $limit);
+        $result =  Categories::orderBy($params['sort'],$params['direction'])
+                ->offset($offset)
+                ->orWhere('name', 'LIKE', '%'.$params['search'].'%')
+                ->orWhere('slug', 'LIKE', '%'.$params['search'].'%') 
+                ->limit($limit)
+                ->get()
+                ->all(); 
+        $count = $this->getCategoriesCount($request);
+        return [
+            'data' => $result,
+            'total' => $count
+        ];
+    }
+
+    private function getCategoriesCount(Request $request){ 
+        $params = $request->all(); 
+        return Categories::orWhere('name', 'LIKE', '%'.$params['search'].'%')
+        ->orWhere('slug', 'LIKE', '%'.$params['search'].'%')  
+        ->get()
+        ->count();
+        echo $params;die;
     }
 
     public function getCategory(Request $request,$id){
