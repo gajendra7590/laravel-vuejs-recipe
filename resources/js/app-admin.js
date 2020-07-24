@@ -13,6 +13,10 @@ import config from './config';
 import App from './admin/App.vue';
 import Auth from './admin/Auth.vue';
 
+//Datatable
+import { VuejsDatatableFactory } from 'vuejs-datatable';
+
+
 require('./bootstrap');
 
 Vue.use(VueLazyload, {
@@ -28,6 +32,8 @@ Vue.use(VueToastr, {
     defaultProgressBarValue: 0,
     defaultType: "success",
 });
+
+Vue.use(VuejsDatatableFactory);
 
 var path = window.location.pathname;
 var authReq = 1;

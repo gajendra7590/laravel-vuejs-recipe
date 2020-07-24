@@ -42,9 +42,16 @@ const store = new Vuex.Store({
         baseURL: config.BASE_URL,
         ASSET_BURL: config.BASE_URL,
         data: {
-            ListResult: [],
-            EditData: [],
-            getAll: []
+            getClients: [],
+            editClients: [],
+            getAuthors: [],
+            editAuthors: [],
+            recipeList: [],
+            editRecipe: [],
+            getCategories: [],
+            editCategories: [],
+            userProfile: [],
+            dashboardData: []
         }
     },
     mutations,

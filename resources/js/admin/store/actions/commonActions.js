@@ -42,11 +42,61 @@ export default {
                 });
         });
     },
-    getRiverPageArts({ commit, state }, payload) {
+    getClients({ commit, state }, payload) {
         axios
-            .get(config.API_URL + "riverPageArts?category=" + payload)
+            .get(config.API_URL_ADMIN + "getClients", payload)
             .then(function(response) {
-                commit("getRiverPageArts", response);
+                commit("getClients", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editClients({ commit, state }, client_id) {
+        axios
+            .get(config.API_URL_ADMIN + "/editClients/" + client_id)
+            .then(function(response) {
+                commit("editClients", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    getAuthors({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getAuthors", payload)
+            .then(function(response) {
+                commit("getAuthors", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editAuthors({ commit, state }, author_id) {
+        axios
+            .get(config.API_URL_ADMIN + "editAuthors/" + author_id)
+            .then(function(response) {
+                commit("editAuthors", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    getCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getCategories", payload)
+            .then(function(response) {
+                commit("getCategories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editCategories({ commit, state }, category_id) {
+        axios
+            .get(config.API_URL_ADMIN + "getCategory/" + category_id)
+            .then(function(response) {
+                commit("editCategories", response.data);
             })
             .catch(function(error) {
                 console.log(error.response);

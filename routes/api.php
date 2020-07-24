@@ -47,21 +47,25 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('updateProfile', 'ProfileController@updateProfile');
             Route::post('changePassword', 'ProfileController@changePassword');
             Route::post('logout', 'AuthController@logout');
-            Route::post('logoutAll', 'AuthController@logoutAll');
-
+            Route::post('logoutAll', 'AuthController@logoutAll'); 
             //Manage Categories
             Route::get('getCategories', 'CategoriesController@getCategories');
             Route::get('getCategory/{id}','CategoriesController@getCategory');
             Route::post('createCategory', 'CategoriesController@createCategory');
             Route::post('updateCategory/{id}', 'CategoriesController@updateCategory');
-            Route::delete('deleteCategory/{id}', 'CategoriesController@deleteCategory');
-
+            Route::delete('deleteCategory/{id}', 'CategoriesController@deleteCategory'); 
             //Manage Recipes
             Route::get('getRecipes', 'RecipesController@getRecipes');
             Route::get('getRecipe/{id}','RecipesController@getRecipe');
             Route::post('createRecipe', 'RecipesController@createRecipe');
             Route::post('updateRecipe/{id}', 'RecipesController@updateRecipe');
-            Route::delete('deleteRecipe/{id}', 'RecipesController@deleteRecipe');
+            Route::delete('deleteRecipe/{id}', 'RecipesController@deleteRecipe'); 
+            //Manage Clients
+            Route::get('getClients', 'ClientsController@getClients');  
+            Route::get('editClients/{id}', 'ClientsController@editClients');
+            //Manage Authors
+            Route::get('getAuthors', 'AuthorsController@getAuthors'); 
+            Route::get('editAuthors/{id}', 'AuthorsController@editAuthors'); 
         });
 
     });  

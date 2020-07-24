@@ -29,35 +29,12 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr> 
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>U</td>
-                  </tr>
-                  </tbody> 
-                </table>
+                 <datatable
+                    class="table table-bordered table-striped"
+                   :columns="columns"                      
+                   :data="rows">
+                </datatable> 
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -74,8 +51,31 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Categories' 
+  name: 'CategoriesList',
+  data() {
+    return {
+       columns: [
+            { label: 'id', field: 'id' },
+            { label: 'Name', field: 'name' },
+            { label: 'Slug', field: 'slug' } ,
+            { label: 'Status', field: 'status' ,sortable : false } ,
+            { label: 'Created At', field: 'created_at',sortable : false} 
+        ] 
+    }
+  }, 
+  methods:{  
+    getCategories(){
+      this.$store.dispatch("getCategories");
+    }
+  },
+   computed: mapState({
+    rows: state => state.data.getCategories, 
+  }),
+  created(){ 
+    this.getCategories();
+  } 
 }
 </script> 
 <style scoped> 

@@ -29,35 +29,13 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr> 
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>U</td>
-                  </tr>
-                  </tbody> 
-                </table>
+
+                <datatable
+                    class="table table-bordered table-striped"
+                   :columns="columns" 
+                   :data="rows">
+                </datatable> 
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -74,8 +52,31 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'AuthorsList' 
+  name: 'AuthorsList',
+  data() {
+    return {
+       columns: [
+            {label: 'id', field: 'id'},
+            {label: 'Display Name', field: 'display_name'},
+            {label: 'First Name', field: 'first_name'},
+            {label: 'Last Name', field: 'last_name'},
+            {label: 'Email', field: 'email'} 
+        ] 
+    }
+  }, 
+  methods:{ 
+    getAuthors(){
+      this.$store.dispatch("getAuthors");
+    }
+  },
+   computed: mapState({
+    rows: state => state.data.getAuthors, 
+  }),
+  created(){ 
+    this.getAuthors();
+  } 
 }
 </script> 
 <style scoped> 
