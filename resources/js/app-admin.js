@@ -12,11 +12,10 @@ import config from './config';
 //Import Components
 import App from './admin/App.vue';
 import Auth from './admin/Auth.vue';
-
-//Datatable
-import { VuejsDatatableFactory } from 'vuejs-datatable';
+//TimeZone
 import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
+//Datatable
 import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 
 
@@ -36,8 +35,6 @@ Vue.use(VueToastr, {
     defaultProgressBarValue: 0,
     defaultType: "success",
 });
-
-Vue.use(VuejsDatatableFactory);
 
 Vue.use(VueMoment, { moment });
 

@@ -16,9 +16,10 @@ use App\models\Categories;
 
 
 class CategoriesController extends Controller
-{
-
-
+{ 
+    /**
+     * Categories List
+     */
     public function getCategories(Request $request){ 
         $params = $request->all();
         $limit = (isset($params['limit']))?$params['limit']:5; 
@@ -37,16 +38,21 @@ class CategoriesController extends Controller
             'total' => $count
         ];
     }
-
+   
+    /**
+     * Get Categories List Count
+     */
     private function getCategoriesCount(Request $request){ 
         $params = $request->all(); 
         return Categories::orWhere('name', 'LIKE', '%'.$params['search'].'%')
         ->orWhere('slug', 'LIKE', '%'.$params['search'].'%')  
         ->get()
-        ->count();
-        echo $params;die;
+        ->count(); 
     }
 
+    /**
+     * Edit Category
+     */
     public function getCategory(Request $request,$id){
         return Categories::where([
                 'id' => $id,

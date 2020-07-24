@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('/favicon.ico') }}" />
     <link rel="icon" href="{{ URL::asset('images/fav_icn.png') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/fontawesome-free/css/all.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="html/https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/jqvmap/jqvmap.min.css') }}" />

@@ -19,5 +19,19 @@ export default {
     },
     editCategories(state, data) {
         state.data.editCategories = data;
+    },
+    //Clients
+    getClients(state, data) {
+        state.data.getClients = data
+    },
+    getClients(state, data) {
+        state.data.getClients = data
+    },
+    //Authors
+    getAuthors(state, data) {
+        state.data.getAuthors = data
+    },
+    editAuthors(state, data) {
+        state.data.editAuthors = data
     }
 };

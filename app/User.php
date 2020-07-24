@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use Notifiable,HasRoles,HasApiTokens;
 
+    protected $appends = ['photo_url'];
 
     protected $table = 'recipe_users';
     protected $primaryKey = 'id';
@@ -70,6 +71,15 @@ class User extends Authenticatable
         }
 
     }
+
+    public function getPhotoUrlAttribute(){  
+        if($this->photo !=''){
+            return \url('/').'/images/'.$this->photo;
+        } else{
+            return \url('/').'/images/default/user_default.png';
+        }
+ 
+     }
 
 
 }

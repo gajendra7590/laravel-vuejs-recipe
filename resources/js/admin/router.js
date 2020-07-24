@@ -6,6 +6,7 @@ import config from '../config'
 import Dashboard from './components/protected/Dashboard';
 //Categories
 import CategoriesList from './components/protected/categories/CategoriesList';
+import CategoryForm from './components/protected/categories/CategoryForm.vue'
 //Users
 import UsersList from './components/protected/users/UsersList';
 //Authors
@@ -28,16 +29,25 @@ const router = new VueRouter({
     linkExactActiveClass: "active",
     routes: [
         { name: "login-admin", path: "/login", component: Login, meta: { visitorURL: true } },
+
         { name: "forgot-password-admin", path: "/forgot-password", component: ForgotPassword, meta: { visitorURL: true } },
         { name: "forgot-password-new", path: "/set-new-password", component: SetNewPassword, meta: { visitorURL: true } },
+
         { name: "loggedout-admin", path: "/logout", component: LogOut, meta: { protectedURL: true } },
+
         { name: "update-profile", path: "/update-profile", component: UpdateProfile, meta: { protectedURL: true } },
         { name: "change-password", path: "/change-password", component: ChangePassword, meta: { protectedURL: true } },
+
         { name: "index", path: "/", redirect: "/dashboard", meta: { protectedURL: true } },
         { name: "dashboard", path: "/dashboard", component: Dashboard, meta: { protectedURL: true } },
+        //Categories Route
         { name: "categories-list", path: "/categories", component: CategoriesList, meta: { protectedURL: true } },
+        { name: "edit-category", path: "/edit-category/:id", component: CategoryForm, meta: { protectedURL: true } },
+
         { name: "users-list", path: "/users", component: UsersList, meta: { protectedURL: true } },
+
         { name: "authors-list", path: "/authors", component: AuthorsList, meta: { protectedURL: true } },
+
         { name: "404", path: "**", redirect: 'dashboard' }
     ],
     scrollBehavior(to, from, savedPosition) {

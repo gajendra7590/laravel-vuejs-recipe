@@ -31,14 +31,13 @@
               <div class="card-body">
                  <v-server-table :url="API_URL" :columns="columns" :options="options">  
                    <div slot="photo_url" slot-scope="{ row }">
-                      <img class="img-circle" width="100" height="100" v-lazy="row.photo_url" />
+                      <img class="img-circle" width="50" height="50" v-lazy="row.photo_url" />
                     </div>      
                    <div slot="actions" slot-scope="{ row }"> 
-                      <router-link :to="'/admin/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">Edit</router-link> 
+                      <router-link :to="'/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">Edit</router-link> 
                       <button @click="deleteCategory( row.id )" class="btn btn-sm bg-gradient-danger">Delete</button> 
                     </div> 
-                 </v-server-table>  
-
+                 </v-server-table>   
               </div>
               <!-- /.card-body -->
             </div>
@@ -72,7 +71,7 @@ export default {
         tableData: [],
         options: { 
           headings: {
-            photo_url	: '',
+            photo_url	: 'Image',
             name : 'Category Name',
             slug : 'Category Slug',
             created_at : 'Created Date'
