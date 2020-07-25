@@ -39,8 +39,9 @@ class ProfileController extends Controller
             'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required','email','unique:recipe_users,email,'.$id],
-            'phone' => ['numeric','digits:10'],
-            'zip' => ['numeric','digits:5']
+            'status' => ['required'],
+            'phone' => ['numeric'],
+            'zip' => ['numeric']
         ]);
 
         if($validator->fails()) {

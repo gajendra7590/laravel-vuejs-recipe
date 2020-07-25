@@ -90,7 +90,8 @@ class ClientsController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:recipe_users',
-            'phone' => 'required',
+            'phone' => ['numeric'],
+            'zip' => ['numeric'],
             'password' => 'required',
             'status' => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png'
@@ -149,8 +150,8 @@ class ClientsController extends Controller
             'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required','email','unique:recipe_users,email,'.$id],
-            'phone' => ['required'],
-           // 'password' => ['required'],
+            'phone' => ['numeric'],
+            'zip' => ['numeric'],
             'status' => ['required'],
             'image' => ['image','mimes:jpg,jpeg,png']
         ));
