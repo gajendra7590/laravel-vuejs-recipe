@@ -76,7 +76,7 @@ class User extends Authenticatable
         if($this->photo !=''){
             return \url('/').'/images/'.$this->photo;
         } else{
-            return \url('/').'/images/default/user_default.png';
+            return \url('/').'/default_img/user_default.png';
         }
  
      }

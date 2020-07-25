@@ -122,7 +122,7 @@
               id: 0,
               name: "",
               description: "",
-              photo_url: config.ASSET_BASE_URL+'images/default/default.jpg', 
+              photo_url: config.ASSET_BASE_URL+'default_img/default.jpg', 
               status: "1",
           },
           errors : {},

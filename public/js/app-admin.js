@@ -2563,7 +2563,7 @@ __webpack_require__.r(__webpack_exports__);
         id: 0,
         name: "",
         description: "",
-        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'images/default/default.jpg',
+        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'default_img/default.jpg',
         status: "1"
       },
       errors: {}
@@ -3240,7 +3240,7 @@ __webpack_require__.r(__webpack_exports__);
         state: "",
         country: "",
         zip: "",
-        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'images/default/default.jpg',
+        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'default_img/default.jpg',
         status: "1"
       },
       errors: {}
@@ -3758,7 +3758,7 @@ __webpack_require__.r(__webpack_exports__);
         state: "",
         country: "",
         zip: "",
-        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'images/default/default.jpg',
+        photo_url: _config__WEBPACK_IMPORTED_MODULE_2___default.a.ASSET_BASE_URL + 'default_img/default.jpg',
         status: "1"
       },
       errors: {}
@@ -115253,8 +115253,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_2__["default"], {
   preLoad: 1,
-  error: _config__WEBPACK_IMPORTED_MODULE_7___default.a.BASE_URL + "images/default/default.jpg",
-  loading: _config__WEBPACK_IMPORTED_MODULE_7___default.a.BASE_URL + "images/default/lazy_default.gif",
+  error: _config__WEBPACK_IMPORTED_MODULE_7___default.a.BASE_URL + "default_img/default.jpg",
+  loading: _config__WEBPACK_IMPORTED_MODULE_7___default.a.BASE_URL + "default_img/lazy_default.gif",
   attempt: 1
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_3___default.a);
@@ -115362,7 +115362,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/laravel/laravel-vuejs-recipe/resources/js/app-admin.js */"./resources/js/app-admin.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\git\laravel-vuejs-recipe\resources\js\app-admin.js */"./resources/js/app-admin.js");
 
 
 /***/ })

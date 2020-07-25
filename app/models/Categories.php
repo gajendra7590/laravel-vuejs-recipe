@@ -21,7 +21,7 @@ class Categories extends Model
        if($this->photo !=''){
            return \url('/').'/images/'.$this->photo;
        } else{
-           return \url('/').'/images/default/default.jpg';
+           return \url('/').'/default_img/default.jpg';
        }
 
     }

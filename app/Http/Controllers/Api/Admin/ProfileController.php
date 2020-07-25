@@ -25,9 +25,7 @@ class ProfileController extends Controller
      * @return array
      */
     public function getProfile(Request $request){
-
         return User::find( Auth::user()->id);
-
     }
 
     /**

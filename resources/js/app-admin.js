@@ -30,8 +30,8 @@ require('./bootstrap');
 
 Vue.use(VueLazyload, {
     preLoad: 1,
-    error: config.BASE_URL + "images/default/default.jpg",
-    loading: config.BASE_URL + "images/default/lazy_default.gif",
+    error: config.BASE_URL + "default_img/default.jpg",
+    loading: config.BASE_URL + "default_img/lazy_default.gif",
     attempt: 1
 });
 
