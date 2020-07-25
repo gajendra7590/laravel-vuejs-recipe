@@ -17,6 +17,8 @@ import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
 //Datatable
 import { ServerTable, ClientTable, Event } from 'vue-tables-2';
+//Jquery
+import $ from 'jquery';
 
 
 
@@ -36,6 +38,7 @@ Vue.use(VueToastr, {
     defaultType: "success",
 });
 
+
 Vue.use(VueMoment, { moment });
 
 Vue.use(ServerTable);
@@ -45,6 +48,9 @@ var authReq = 1;
 if ((path == '/admin/login') || (path == '/admin/forgot-password') || (path == '/admin/set-new-password')) {
     authReq = 0;
 }
+
+//Set Dynamic Base URL
+config.ASSET_BASE_URL = $("input[name=asset_url]").val();
 
 export default new Vue({
     el: '#app',

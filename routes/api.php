@@ -63,9 +63,15 @@ Route::group(['namespace' => 'Api'], function () {
             //Manage Clients
             Route::get('getClients', 'ClientsController@getClients');  
             Route::get('editClients/{id}', 'ClientsController@editClients');
+            Route::post('createClients', 'ClientsController@createClients');
+            Route::post('updateClients/{id}', 'ClientsController@updateClients');
+            Route::delete('deleteClients/{id}', 'ClientsController@deleteClients');
             //Manage Authors
             Route::get('getAuthors', 'AuthorsController@getAuthors'); 
-            Route::get('editAuthors/{id}', 'AuthorsController@editAuthors'); 
+            Route::get('editAuthors/{id}', 'AuthorsController@editAuthors');
+            Route::post('createAuthors', 'AuthorsController@createAuthors');
+            Route::post('updateAuthors/{id}', 'AuthorsController@updateAuthors');
+            Route::delete('deleteAuthors/{id}', 'AuthorsController@deleteAuthors');
         });
 
     });  

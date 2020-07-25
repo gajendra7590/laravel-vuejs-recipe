@@ -30,15 +30,15 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="vueForm" name="vueForm" enctype="multipart/form-data"> 
+              <form id="vueForm" name="vueForm" enctype="multipart/form-data" @submit.prevent="submitForm(this)"> 
                     <div class="card-body">  
                         <div class="row logo-container card-footer">
-                            <div class="col-sm-12">
+                            <div class="col-sm-2 col-xs-12 profile_image_container">
                                 <div class="card-body box-profile">
                                     <div class="text-left">
                                        <img 
-                                            class="profile-user-img img-fluid img-circle" 
-                                            :src="(editData)?editData.photo_url:''" 
+                                            class="profile-user-img img-fluid img-circle _img_thumb_preview" 
+                                            :src="( editData.photo_url)?editData.photo_url:'/images/default/default.jpg'" 
                                             alt="User profile picture"
                                        >
                                     </div>   
@@ -48,11 +48,10 @@
                                         <i class="fa fa-cloud-upload-alt" aria-hidden="true"></i>
                                         Upload Category Image
                                     </label>
-                                    <input id="file-upload" name="image" type="file"/>
+                                    <input id="file-upload" class="_img_thumb_input" accept="image/*" name="image" type="file"/>
                                 </div>
-                            </div>
-                        </div>
-                        {{ editData }}
+                            </div> 
+                        </div> 
                         <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -70,7 +69,10 @@
                             <div class="col-sm-12"> 
                                 <div class="form-group">
                                     <label>Category Description</label>
-                                    <vue-editor v-model="editData.description"></vue-editor>
+                                    <vue-editor
+                                    name="description" 
+                                    v-model="editData.description">
+                                    </vue-editor>
                                 </div>
                             </div>
                         </div>  
@@ -78,7 +80,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Category Status</label>
-                                    <select class="form-control" v-model="(editData)?editData.status:''">
+                                    <select class="form-control" name="status" v-model="editData.status">
                                         <option value="0">In Active</option>
                                         <option value="1">Active</option>
                                         <option value="2">Archieved</option> 
@@ -86,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer"> 
                             <button type="submit" class="btn btn-success">Submit</button>
                             <router-link to="/categories" class="btn btn-danger">Back</router-link>
                         </div>
@@ -107,29 +109,80 @@
 <script>
     import { VueEditor } from "vue2-editor"; 
     import { mapState } from 'vuex';
+    import config from '../../../../config';
+    // config
     export default {
       name: 'CategoryForm',
       components: {
          VueEditor
       }, 
-      data () {
-          return {  
-              editData : []
-          }
+      data:function(){
+        return {
+          editData : {  
+              id: 0,
+              name: "",
+              description: "",
+              photo_url: config.ASSET_BASE_URL+'images/default/default.jpg', 
+              status: "1",
+          },
+          errors : {},
+        }
       },
       methods : {
           editCategories(id){
-              this.$store.dispatch('editCategories',id).then(function(result){
-                  console.log( result )
-
-              }); 
+            let _this = this;
+            this.$store.dispatch('editCategories',{id : id})
+            .then(function(result){
+                _this.editData = result;
+            }).catch(function(error){
+                console.log(error);
+            }); 
+          },
+          submitForm(){
+            var vueForm = new FormData( $('#vueForm')[0]);
+            vueForm.append('description',this.editData.description);
+            let _this = this;
+            if( this.editData.id > 0){
+               this.$store.dispatch('updateCategory',{ id : this.editData.id,data : vueForm})
+               .then(function(result){
+                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
+                    _this.$toastr.s('Data Saved Successfully','Success!');
+                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                  }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
+                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                  }else{
+                    _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
+                  }  
+                })
+               .catch(function(error){
+                 console.log(error);
+               });
+            } else {
+              this.$store.dispatch('createCategory',{ id : this.editData.id,data : vueForm})
+              .then(function(result){
+                  if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
+                    _this.$toastr.s('Data Saved Successfully','Success!');
+                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                  }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
+                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                  }else{
+                    _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
+                  } 
+                })
+               .catch(function(error){
+                   _this.$toastr.e(error,'Errors!'); 
+               });
+            }
+             
           }
       },
       computed: mapState({ 
          //editData: state => state.data.editCategories,
       }),
       created(){
-          this.editCategories(this.$route.params.id);          
+          if( typeof(this.$route.params.id)!='undefined' ){
+              this.editCategories(this.$route.params.id);    
+          }
       }
     }
 </script> 

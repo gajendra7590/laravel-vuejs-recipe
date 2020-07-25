@@ -31,6 +31,7 @@
     <strong></strong>
 </noscript>
 <div class="wrapper">
+    <input type="hidden" value="{{ URL::asset('/') }}" name="asset_url">
     <div id="app"></div>
     @yield('content')
 </div>
@@ -48,6 +49,8 @@
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('admin/html/dist/js/adminlte.js') }}"></script> 
+
+<script type="text/javascript" src="{{ URL::asset('myjs/common.js') }}"></script>
 </body>
 
 </html>

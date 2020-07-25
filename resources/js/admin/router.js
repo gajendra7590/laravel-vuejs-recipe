@@ -8,9 +8,11 @@ import Dashboard from './components/protected/Dashboard';
 import CategoriesList from './components/protected/categories/CategoriesList';
 import CategoryForm from './components/protected/categories/CategoryForm.vue'
 //Users
-import UsersList from './components/protected/users/UsersList';
+import ClientsList from './components/protected/users/ClientsList';
+import ClientsForm from './components/protected/users/ClientsForm'
 //Authors
 import AuthorsList from './components/protected/users/AuthorsList';
+import AuthorsForm from './components/protected/users/AuthorsForm';
 //Auth
 import Login from './components/public/Login';
 import ForgotPassword from './components/public/ForgotPassword';
@@ -43,11 +45,19 @@ const router = new VueRouter({
         //Categories Route
         { name: "categories-list", path: "/categories", component: CategoriesList, meta: { protectedURL: true } },
         { name: "edit-category", path: "/edit-category/:id", component: CategoryForm, meta: { protectedURL: true } },
+        { name: "add-category", path: "/add-category", component: CategoryForm, meta: { protectedURL: true } },
 
-        { name: "users-list", path: "/users", component: UsersList, meta: { protectedURL: true } },
+        //Users Route
+        { name: "clients-list", path: "/clients", component: ClientsList, meta: { protectedURL: true } },
+        { name: "edit-clients", path: "/edit-clients/:id", component: ClientsForm, meta: { protectedURL: true } },
+        { name: "add-clients", path: "/add-clients", component: ClientsForm, meta: { protectedURL: true } },
 
+        //Authors Route
         { name: "authors-list", path: "/authors", component: AuthorsList, meta: { protectedURL: true } },
+        { name: "edit-authors", path: "/edit-authors/:id", component: AuthorsForm, meta: { protectedURL: true } },
+        { name: "add-authors", path: "/add-authors", component: AuthorsForm, meta: { protectedURL: true } },
 
+        //404 no route redirect   
         { name: "404", path: "**", redirect: 'dashboard' }
     ],
     scrollBehavior(to, from, savedPosition) {

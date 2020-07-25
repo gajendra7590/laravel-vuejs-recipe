@@ -25,19 +25,33 @@
           <div class="col-12"> 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manage All Categories</h3>
+                <h3 class="card-title float-left">Manage All Categories</h3>
+                <h3 class="card-title float-right">
+                   <router-link to="/add-category" class="btn btn-sm btn-primary">
+                      <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New
+                   </router-link>
+                </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <v-server-table :url="API_URL" :columns="columns" :options="options">  
+                 <v-server-table :url="API_URL" :columns="columns" :options="options" ref="table">  
                    <div slot="photo_url" slot-scope="{ row }">
                       <img class="img-circle" width="50" height="50" v-lazy="row.photo_url" />
                     </div>      
-                   <div slot="actions" slot-scope="{ row }"> 
-                      <router-link :to="'/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">Edit</router-link> 
-                      <button @click="deleteCategory( row.id )" class="btn btn-sm bg-gradient-danger">Delete</button> 
-                    </div> 
-                 </v-server-table>   
+                     <div slot="status" slot-scope="{ row }"> 
+                       <span v-if="row.status == 1" class="badge badge-success">Active</span>   
+                       <span v-if="row.status == 0" class="badge badge-warning">In Active</span> 
+                       <span v-if="row.status == 2" class="badge badge-danger">Archieved</span>                  
+                     </div>
+                    <div slot="actions" slot-scope="{ row }"> 
+                      <router-link :to="'/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">
+                          <i class="fa fa-edit" aria-hidden="true"></i> Edit
+                      </router-link> 
+                      <button @click="deleteCategory( row.id )" class="btn btn-sm bg-gradient-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Archieve
+                      </button> 
+                    </div>                     
+                  </v-server-table>   
               </div>
               <!-- /.card-body -->
             </div>
@@ -64,6 +78,7 @@ export default {
           'photo_url',
           'name', 
           'slug',
+          'status',
           'created_at',
           'actions'
         ], 
@@ -74,14 +89,15 @@ export default {
             photo_url	: 'Image',
             name : 'Category Name',
             slug : 'Category Slug',
+            status : 'Status',
             created_at : 'Created Date'
           },
           perPage : 5, 
           perPageValues:[5,10,25,50,100], 
           requestAdapter(data) { 
-              return { 
+              return {                 
                 sort: data.orderBy ? data.orderBy : 'created_at',
-                direction: data.ascending ? 'asc' : 'desc',
+                direction: (data.ascending) ? 'asc' : 'desc',
                 search : data.query,
                 limit : data.limit,
                 page : data.page
@@ -98,7 +114,11 @@ export default {
                edge : true
             },    
             filterable: true,  
-            sortable: [ 'name','slug','created_at'], 
+            sortable: [ 'name','slug','status','created_at'],  
+            orderBy: {
+              column: 'created_at',
+              ascending: false
+            },
             sortIcon: {
               base : 'fa',
               is: 'fa-sort float-right',
@@ -113,13 +133,30 @@ export default {
         } 
     }
   }, 
-  methods:{  
-    getCategories(){
-      //this.$store.dispatch("getCategories");
+  methods:{   
+    deleteCategory(id){
+        let _this = this;
+        this.$store.dispatch('deleteCategory',{ id : id })
+          .then(function(result){
+              if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
+                _this.$toastr.s('Data Saved Successfully','Success!'); 
+                _this.tableRefresh()
+              }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
+                _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+              }else{
+                _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
+              } 
+            })
+            .catch(function(error){
+                _this.$toastr.e(error,'Errors!'); 
+            });
+    },
+    tableRefresh() {
+       this.$refs.table.refresh();
     }
+
   },
-   computed: mapState({
-    //rows: state => state.data.getCategories, 
+  computed: mapState({ 
   }),
   created(){ 
      

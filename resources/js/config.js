@@ -7,4 +7,5 @@ module.exports = {
     API_URL_ADMIN: BASE_URL + 'api/admin/',
     URL_PREFIX: URL_PREFIX,
     URL_PREFIX_ADMIN: URL_PREFIX + 'admin/',
+    ASSET_BASE_URL: '',
 }

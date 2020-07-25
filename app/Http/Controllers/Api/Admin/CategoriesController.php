@@ -25,7 +25,8 @@ class CategoriesController extends Controller
         $limit = (isset($params['limit']))?$params['limit']:5; 
         $page =  ( isset($params['page']) )?$params['page']:1;
         $offset = (( $page - 1 ) * $limit);
-        $result =  Categories::orderBy($params['sort'],$params['direction'])
+        $result =  Categories::select('*')
+                ->orderBy($params['sort'],$params['direction'])
                 ->offset($offset)
                 ->orWhere('name', 'LIKE', '%'.$params['search'].'%')
                 ->orWhere('slug', 'LIKE', '%'.$params['search'].'%') 
@@ -54,24 +55,23 @@ class CategoriesController extends Controller
      * Edit Category
      */
     public function getCategory(Request $request,$id){
-        return Categories::where([
-                'id' => $id,
-                'status'=>'1'
+        return Categories::select('id','name','slug','description','status','photo')
+            ->where([
+                'id' => $id 
             ])
             ->first();
     }
 
     public function createCategory(Request $request){
-        $post = $request->all();
+        $post = $request->all(); 
         $validator = Validator::make($post, array(
             'name' => 'required|unique:recipe_categories',
             'description' => 'required',
-            'image' => 'image|mimes:jpg,jpeg,png'
-        ));
-
+            'image' => 'required|image|mimes:jpg,jpeg,png'
+        )); 
         if ($validator->fails()) {
-            $errors = $validator->errors()->toArray();
-            return response()->json(['success'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
+            $errors = errorArrayCreate( $validator->errors() );
+            return response()->json(['status'=>false,'message'=>'Incorrect form data','errors'=>$errors]);
         }else{
 
             $slug = slugCreator($post['name']);
@@ -79,6 +79,7 @@ class CategoriesController extends Controller
             $category = new Categories();
             $category->name = $post['name'];
             $category->slug = $slug;
+            $category->status = $post['status'];
             $category->description = $post['description'];
 
             if ($request->hasFile('image')) {
@@ -91,7 +92,7 @@ class CategoriesController extends Controller
             $save = $category->save();
             if($save){
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message'=>'Category created successfully'
                 ]);
             }
@@ -107,9 +108,9 @@ class CategoriesController extends Controller
         ));
 
         if ($validator->fails()) {
-            $errors = $validator->errors()->toArray();
+            $errors = errorArrayCreate( $validator->errors() );
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Incorrect form data',
                 'errors' => $errors
             ]);
@@ -117,7 +118,7 @@ class CategoriesController extends Controller
             $category = Categories::find($id);
             if(!$category){
                 return response()->json([
-                    'success' => false,
+                    'status' => false,
                     'message' => 'Invalid category ID'
                 ]);
             }
@@ -126,6 +127,7 @@ class CategoriesController extends Controller
             $category->name = $post['name'];
             $category->slug = $slug;
             $category->description = $post['description'];
+            $category->status = $post['status'];
 
             if ($request->hasFile('image')) {
                 $imageName = gen_uuid().'.'.$request->image->getClientOriginalExtension();
@@ -139,7 +141,7 @@ class CategoriesController extends Controller
             $save = $category->save();
             if($save){
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message' => 'Category Updated Successfully'
                 ]);
             }
@@ -152,7 +154,7 @@ class CategoriesController extends Controller
         $category = Categories::find($id);
         if(!$category){
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Invalid category ID'
             ]);
         }
@@ -160,7 +162,7 @@ class CategoriesController extends Controller
         $isDelete =  $category->update(['status' => '2']);
         if($isDelete){
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'message' => 'Category Deleted Successfully'
             ]);
         }

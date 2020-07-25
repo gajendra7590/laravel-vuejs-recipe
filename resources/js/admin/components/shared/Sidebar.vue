@@ -34,9 +34,9 @@
           </li> 
 
           <li class="nav-item">
-            <router-link to="/users" title="View Users List" class="nav-link">
+            <router-link to="/clients" title="View Clients List" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Users</p>
+              <p>Clients</p>
             </router-link>
           </li> 
 

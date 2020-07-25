@@ -17,9 +17,6 @@ export default {
     getCategories(state, data) {
         state.data.getCategories = data;
     },
-    editCategories(state, data) {
-        state.data.editCategories = data;
-    },
     //Clients
     getClients(state, data) {
         state.data.getClients = data

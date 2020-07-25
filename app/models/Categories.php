@@ -11,15 +11,11 @@ class Categories extends Model
 
 
     protected $table = 'recipe_categories';
-    protected $primaryKey = 'id'; 
-
-
+    protected $primaryKey = 'id';  
 
     protected $fillable = [
         'name','slug','description', 'photo','status'
-    ];
-
-
+    ]; 
 
     public function getPhotoUrlAttribute(){  
        if($this->photo !=''){
