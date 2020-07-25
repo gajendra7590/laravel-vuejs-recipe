@@ -23,5 +23,5 @@ Homestead.json
 .phpunit.result.cache
 /.idea/laravel-vuejs-recipe.iml
 /.idea/workspace.xml
-/public/
+/public/images/
 
