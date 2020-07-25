@@ -140,20 +140,26 @@ export default {
   methods:{   
     deleteClients(id){
        let _this = this;
-        this.$store.dispatch('deleteClients',{ id : id })
-          .then(function(result){
-              if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
-                _this.$toastr.s('Data Saved Successfully','Success!'); 
-                _this.tableRefresh()
-              }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
-                _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
-              }else{
-                _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
-              } 
-            })
-            .catch(function(error){
-                _this.$toastr.e(error,'Errors!'); 
-            });
+       _this.$dialog.confirm('Are you sure want to archieved?')
+        .then(function(dialog) {
+          loader: true;  
+            //Delete Code Start
+            _this.$store.dispatch('deleteClients',{ id : id })
+            .then(function(result){
+                if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
+                  _this.$toastr.s('Data Saved Successfully','Success!'); 
+                  _this.tableRefresh()
+                }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
+                  _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                }else{
+                  _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
+                } 
+              })
+              .catch(function(error){
+                  _this.$toastr.e(error,'Errors!'); 
+              });
+              //Delete Code End
+        });
 
     },
     tableRefresh() {

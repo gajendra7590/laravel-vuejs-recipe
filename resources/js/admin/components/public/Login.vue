@@ -106,7 +106,7 @@ export default {
              localStorage.setItem('token',res.token.access_token);
              setTimeout(function(){
                window.location.href='/admin/dashboard';
-             },2000);
+             },500);
            } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
              this.alertClass = 'alert-danger';
              this.alertShow = true;  

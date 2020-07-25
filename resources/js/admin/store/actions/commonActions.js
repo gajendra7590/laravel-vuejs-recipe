@@ -42,6 +42,8 @@ export default {
                 });
         });
     },
+
+    //All Functions For clients Section
     getClients({ commit, state }, payload) {
         axios
             .get(config.API_URL_ADMIN + "getClients", payload)
@@ -102,6 +104,8 @@ export default {
                 });
         });
     },
+
+    //All Functions For Author Section
     getAuthors({ commit, state }, payload) {
         axios
             .get(config.API_URL_ADMIN + "getAuthors", payload)
@@ -162,6 +166,7 @@ export default {
                 });
         });
     },
+    //All Functions for Category Section
     getCategories({ commit, state }, payload) {
         axios
             .get(config.API_URL_ADMIN + "getCategories", payload)
@@ -221,5 +226,45 @@ export default {
                     return reject(error.response);
                 });
         });
-    }
+    },
+
+    //All Functions for Profile Section
+    changePassword({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .post(config.API_URL_ADMIN + "changePassword", payload.data)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateProfile({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .post(config.API_URL_ADMIN + "updateProfile", payload.data)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    getProfile({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getProfile")
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+
+
 };

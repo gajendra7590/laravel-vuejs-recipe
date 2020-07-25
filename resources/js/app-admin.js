@@ -20,9 +20,13 @@ import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 //Jquery
 import $ from 'jquery';
 
-
+//Confirm dialog 
+import VuejsDialog from 'vuejs-dialog';
+import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
 require('./bootstrap');
+
 
 Vue.use(VueLazyload, {
     preLoad: 1,
@@ -30,7 +34,9 @@ Vue.use(VueLazyload, {
     loading: config.BASE_URL + "images/default/lazy_default.gif",
     attempt: 1
 });
+
 Vue.use(CKEditor);
+
 Vue.use(VueToastr, {
     defaultTimeout: 3000,
     defaultProgressBar: false,
@@ -38,10 +44,11 @@ Vue.use(VueToastr, {
     defaultType: "success",
 });
 
-
 Vue.use(VueMoment, { moment });
 
 Vue.use(ServerTable);
+
+Vue.use(VuejsDialog);
 
 var path = window.location.pathname;
 var authReq = 1;

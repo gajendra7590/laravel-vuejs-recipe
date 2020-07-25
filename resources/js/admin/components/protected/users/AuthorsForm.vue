@@ -105,7 +105,7 @@
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input 
-                                        type="text" 
+                                        type="password" 
                                         name="password"
                                         v-model="editData.password"
                                         class="form-control"  
