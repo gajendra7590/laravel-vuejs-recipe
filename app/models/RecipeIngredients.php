@@ -16,7 +16,7 @@ class RecipeIngredients extends Model
 
 
     protected $fillable = [
-        'recipe_id','ingredient_name','ingredient_value', 'status'
+        'recipe_id','name', 'status'
     ];
 
 }

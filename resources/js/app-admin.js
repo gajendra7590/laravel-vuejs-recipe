@@ -24,6 +24,12 @@ import $ from 'jquery';
 import VuejsDialog from 'vuejs-dialog';
 import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+//Vue Validate
+import Vuelidate from 'vuelidate';
+//Loading Overlay
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 
 require('./bootstrap');
 
@@ -34,21 +40,20 @@ Vue.use(VueLazyload, {
     loading: config.BASE_URL + "default_img/lazy_default.gif",
     attempt: 1
 });
-
 Vue.use(CKEditor);
-
 Vue.use(VueToastr, {
     defaultTimeout: 3000,
     defaultProgressBar: false,
     defaultProgressBarValue: 0,
     defaultType: "success",
+    maxOpened: 1,
 });
-
 Vue.use(VueMoment, { moment });
-
 Vue.use(ServerTable);
-
 Vue.use(VuejsDialog);
+Vue.use(Vuelidate);
+Vue.use(Loading);
+
 
 var path = window.location.pathname;
 var authReq = 1;

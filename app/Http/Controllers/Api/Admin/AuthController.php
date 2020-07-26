@@ -142,7 +142,6 @@ class AuthController extends Controller
             $email = emailSend('reset-password-admin',$user->email,[
                 'subject' => 'Recipe - Reset Account Password',
                 'display_name' => ucwords($user->display_name),
-                'membershipcode' => $user->membershipcode,
                 'email' => $user->email,
                 'message' => 'Reset Account Password',
                 'token' => $token

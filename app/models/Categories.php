@@ -22,8 +22,7 @@ class Categories extends Model
            return \url('/').'/images/'.$this->photo;
        } else{
            return \url('/').'/default_img/default.jpg';
-       }
-
+       } 
     }
 
 

@@ -28,6 +28,23 @@ class ProfileController extends Controller
         return User::find( Auth::user()->id);
     }
 
+     /**
+     * @param Request $request
+     * @return array
+     */
+    public function loggedProfile(Request $request){
+        return array(
+            'id' => auth()->user()->id,
+            'first_name' => auth()->user()->first_name,
+            'last_name' => auth()->user()->last_name, 
+            'display_name' => auth()->user()->display_name,
+            'email' => auth()->user()->email,
+            'photo_url' => auth()->user()->photo_url,
+            'photo' => auth()->user()->photo,
+            'role' => auth()->user()->userRoleName
+        );
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -44,9 +61,8 @@ class ProfileController extends Controller
             'zip' => ['numeric']
         ]);
 
-        if($validator->fails()) {
-            $allMessages = $validator->messages();
-            $result = errorArrayCreate($allMessages);
+        if($validator->fails()) { 
+            $result = errorArrayCreate( $validator->messages() );
             return response()->json([
                 'status' => false,
                 'message' => 'Please fill correct form value',

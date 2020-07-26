@@ -41,14 +41,14 @@
                      <div slot="status" slot-scope="{ row }"> 
                        <span v-if="row.status == 1" class="badge badge-success">Active</span>   
                        <span v-if="row.status == 0" class="badge badge-warning">In Active</span> 
-                       <span v-if="row.status == 2" class="badge badge-danger">Archieved</span>                  
+                       <span v-if="row.status == 2" class="badge badge-danger">Archive</span>                  
                      </div>
                     <div slot="actions" slot-scope="{ row }"> 
-                      <router-link :to="'/edit-clients/'+row.id" class="btn btn-sm bg-gradient-success">
-                          <i class="fa fa-edit" aria-hidden="true"></i> Edit
+                      <router-link :to="'/edit-clients/'+row.id" title="Edit Item" class="btn btn-sm bg-gradient-success">
+                          <i class="fa fa-edit" aria-hidden="true"></i>
                       </router-link> 
-                      <button @click="deleteClients( row.id )" class="btn btn-sm bg-gradient-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Archieve
+                      <button @click="deleteClients( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
                       </button> 
                     </div>                     
                   </v-server-table>   

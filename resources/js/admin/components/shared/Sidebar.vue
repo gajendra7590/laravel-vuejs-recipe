@@ -2,9 +2,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <router-link to="/dshboard" class="brand-link">
-      <img src="/admin/html/dist/img/AdminLTELogo.png" alt="Admin" class="brand-image img-circle elevation-3"
+      <img  v-lazy="userProfile.photo_url" alt="Admin" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Admin Panel</span>
+      <span class="brand-text font-weight-light">Recipe Dashboard</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -12,16 +12,20 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/admin/html/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <!-- <img 
+           v-lazy="userProfile.photo_url"
+           class="img-circle elevation-2" 
+           alt="User Image"> -->
         </div>
         <div class="info">
           <router-link to="/update-profile" title="Edit Profile" class="d-block">
-                Gajednra Pawar
+               {{ (userProfile.display_name)?userProfile.display_name:'User Name' }}
             </router-link>
-            <span style="color:#fff;">( Admin )</span>
+            <span style="color:#fff;">
+               ( {{ (userProfile.role)?userProfile.role:' ROLE ' }} }
+            </span>
         </div>
-      </div>
-
+      </div> 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -54,6 +58,13 @@
             </router-link>
           </li> 
 
+           <li class="nav-item">
+              <router-link to="/recipes" title="View Recipes List" class="nav-link">
+                <i class="nav-icon fas fa-hamburger"></i>
+                <p>Recipes</p>
+              </router-link>
+           </li> 
+
           <li class="nav-item">
             <router-link to="/change-password" title="Change Your Password" class="nav-link">
               <i class="nav-icon fas fa-key"></i>
@@ -85,7 +96,27 @@
 
 <script>
 export default {
-  name: 'Sidebar' 
+  name: 'Sidebar',
+  data : function(){
+    return {
+      userProfile : {}
+    }
+  },
+  methods :{
+    getProfile(){
+      let _this = this;
+      _this.$store.dispatch('loggedProfile')
+      .then(function(result){
+         _this.userProfile = result;
+       }) 
+
+    }
+  },
+  created(){
+    this.getProfile();
+    //this.$loading.show({color: '#fff',backgroundColor: '#343a40',opacity: 0.9, zIndex: 999,});
+  }   
+
 }
 </script> 
 <style scoped> 

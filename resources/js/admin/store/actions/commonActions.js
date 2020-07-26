@@ -42,7 +42,19 @@ export default {
                 });
         });
     },
-
+    //Dasboard Get Data
+    getDashboardData({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getDashboardData")
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
     //All Functions For clients Section
     getClients({ commit, state }, payload) {
         axios
@@ -167,6 +179,16 @@ export default {
         });
     },
     //All Functions for Category Section
+    categories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "categories", payload)
+            .then(function(response) {
+                commit("categories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
     getCategories({ commit, state }, payload) {
         axios
             .get(config.API_URL_ADMIN + "getCategories", payload)
@@ -227,6 +249,67 @@ export default {
                 });
         });
     },
+    //All Functions For Recipes Section
+    getRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getRecipes", payload)
+            .then(function(response) {
+                commit("getRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "editRecipes/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    createRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "createRecipes", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateRecipes/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL_ADMIN + "deleteRecipes/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
 
     //All Functions for Profile Section
     changePassword({ commit, state }, payload) {
@@ -265,6 +348,18 @@ export default {
                 });
         });
     },
+    loggedProfile({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "loggedProfile")
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    }
 
 
 };

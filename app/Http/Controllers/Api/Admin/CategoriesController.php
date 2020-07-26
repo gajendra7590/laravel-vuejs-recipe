@@ -39,6 +39,14 @@ class CategoriesController extends Controller
             'total' => $count
         ];
     }
+    
+    //Get Categories List For Shows List
+    public function categories(Request $request){  
+        return Categories::select('id','name','slug','photo')
+        ->where(['status' => '1'])
+        ->get()
+        ->all(); 
+    }
    
     /**
      * Get Categories List Count

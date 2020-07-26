@@ -9,8 +9,10 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item">
+                <router-link to="/dashboard">Home</router-link>
+               </li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,14 +29,15 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
+                <h3 v-html="(dashboardData.recipes)?dashboardData.recipes:'0'"></h3> 
+                <p>Total Recipes</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="recipes" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </router-link>
             </div>
           </div>
           <!-- ./col -->
@@ -42,14 +45,15 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
+                <h3 v-html="(dashboardData.authors)?dashboardData.authors:'0'"></h3> 
+                <p>Total Authors</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="authors" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </router-link>
             </div>
           </div>
           <!-- ./col -->
@@ -57,14 +61,15 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
+                <h3 v-html="(dashboardData.clients)?dashboardData.clients:'0'"></h3> 
+                <p>Total Clients</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="clients" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+               </router-link>
             </div>
           </div>
           <!-- ./col -->
@@ -72,14 +77,13 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
+                <h3 v-html="(dashboardData.categories)?dashboardData.categories:'0'"></h3> 
+                <p>Total Categories</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="categories" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
             </div>
           </div>
           <!-- ./col -->
@@ -94,7 +98,25 @@
 
 <script>
 export default {
-  name: 'Dashboard' 
+  name: 'Dashboard',
+  data : function(){
+    return {
+      dashboardData : {}
+    }
+  },
+  methods :{
+    getDashboardData(){
+      let _this = this;
+      _this.$store.dispatch('getDashboardData')
+      .then(function(result){
+         _this.dashboardData = result;
+       }) 
+
+    }
+  },
+  created(){
+    this.getDashboardData();
+  }    
 }
 </script> 
 <style scoped> 

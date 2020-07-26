@@ -16,11 +16,6 @@
 
 .dg-content {
     font-size: 21px !important;
-    min-height: 90px !important;
-}
-
-.dg-content-body {
-    min-height: 100px !important;
 }
 
 .customInput input[type="file"] {
@@ -35,8 +30,8 @@
 }
 
 .profile-user-img {
-    height: 140px !important;
-    width: auto !important;
+    height: 60px !important;
+    width: 60px !important;
 }
 
 .profile_image_container {

@@ -42,7 +42,7 @@ export default {
   methods:{
       adminLogout(){  
         let _this = this; 
-       _this.$dialog.confirm('Are sure to signout your account?')
+       _this.$dialog.confirm('Are you sure to signout your account?')
         .then(function(dialog) {
           loader: true;  
             //Delete Code start

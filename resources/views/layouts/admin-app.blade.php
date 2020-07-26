@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/daterangepicker/daterangepicker.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/summernote/summernote-bs4.css') }}" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{ URL::asset('css/vue_dt.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('css/app-custom.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <noscript>

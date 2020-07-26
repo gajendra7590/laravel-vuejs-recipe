@@ -35,7 +35,7 @@
                         <div class="row logo-container card-footer">
                             <div class="col-sm-2 col-xs-12 profile_image_container">
                                 <div class="card-body box-profile">
-                                    <div class="text-left">
+                                    <div class="text-center">
                                        <img 
                                             class="profile-user-img img-fluid img-circle _img_thumb_preview" 
                                             :src="( editData.photo_url)?editData.photo_url:'/images/default/default.jpg'" 
@@ -196,8 +196,8 @@
                             </div>
                         </div>
                         <div class="card-footer"> 
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <router-link to="/users" class="btn btn-danger">Back</router-link>
+                            <button type="submit" class="btn btn-success">Update Profile</button>
+                            <router-link to="dashboard" class="btn btn-danger">Back</router-link>
                         </div>
                     </div>
               </form>
@@ -290,7 +290,7 @@ export default {
       }, 
       created(){ 
           this.getProfile();  
-      } 
+      }, 
 }
 </script> 
 <style scoped> 

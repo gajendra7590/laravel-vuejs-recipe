@@ -44,11 +44,15 @@ Route::group(['namespace' => 'Api'], function () {
 
             //Admin Profile
             Route::get('getProfile', 'ProfileController@getProfile');
+            Route::get('loggedProfile', 'ProfileController@loggedProfile');
             Route::post('updateProfile', 'ProfileController@updateProfile');
             Route::post('changePassword', 'ProfileController@changePassword');
             Route::post('logout', 'AuthController@logout');
             Route::post('logoutAll', 'AuthController@logoutAll'); 
+            Route::get('getDashboardData', 'CommonController@index');  
+            
             //Manage Categories
+            Route::get('categories', 'CategoriesController@categories');
             Route::get('getCategories', 'CategoriesController@getCategories');
             Route::get('getCategory/{id}','CategoriesController@getCategory');
             Route::post('createCategory', 'CategoriesController@createCategory');
@@ -72,6 +76,12 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('createAuthors', 'AuthorsController@createAuthors');
             Route::post('updateAuthors/{id}', 'AuthorsController@updateAuthors');
             Route::delete('deleteAuthors/{id}', 'AuthorsController@deleteAuthors');
+             //Manage Recipes
+             Route::get('getRecipes', 'RecipesController@getRecipes'); 
+             Route::get('editRecipes/{id}', 'RecipesController@editRecipes');
+             Route::post('createRecipes', 'RecipesController@createRecipes');
+             Route::post('updateRecipes/{id}', 'RecipesController@updateRecipes');
+             Route::delete('deleteRecipes/{id}', 'RecipesController@deleteRecipes');
         });
 
     });  

@@ -44,11 +44,11 @@
                        <span v-if="row.status == 2" class="badge badge-danger">Archieved</span>                  
                      </div>
                     <div slot="actions" slot-scope="{ row }"> 
-                      <router-link :to="'/edit-category/'+row.id" class="btn btn-sm bg-gradient-success">
-                          <i class="fa fa-edit" aria-hidden="true"></i> Edit
+                      <router-link :to="'/edit-category/'+row.id" title="Edit Item" class="btn btn-sm bg-gradient-success">
+                          <i class="fa fa-edit" aria-hidden="true"></i>
                       </router-link> 
-                      <button @click="deleteCategory( row.id )" class="btn btn-sm bg-gradient-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Archieve
+                      <button @click="deleteCategory( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
                       </button> 
                     </div>                     
                   </v-server-table>   

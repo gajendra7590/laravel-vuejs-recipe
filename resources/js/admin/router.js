@@ -6,10 +6,13 @@ import config from '../config'
 import Dashboard from './components/protected/Dashboard';
 //Categories
 import CategoriesList from './components/protected/categories/CategoriesList';
-import CategoryForm from './components/protected/categories/CategoryForm.vue'
+import CategoryForm from './components/protected/categories/CategoryForm';
+//Recipes
+import RecipesList from './components/protected/recipes/RecipesList';
+import RecipesForm from './components/protected/recipes/RecipesForm'
 //Users
 import ClientsList from './components/protected/users/ClientsList';
-import ClientsForm from './components/protected/users/ClientsForm'
+import ClientsForm from './components/protected/users/ClientsForm';
 //Authors
 import AuthorsList from './components/protected/users/AuthorsList';
 import AuthorsForm from './components/protected/users/AuthorsForm';
@@ -30,33 +33,33 @@ const router = new VueRouter({
     mode: "history",
     linkExactActiveClass: "active",
     routes: [
+        //Auth Routes
         { name: "login-admin", path: "/login", component: Login, meta: { visitorURL: true } },
-
         { name: "forgot-password-admin", path: "/forgot-password", component: ForgotPassword, meta: { visitorURL: true } },
         { name: "forgot-password-new", path: "/set-new-password", component: SetNewPassword, meta: { visitorURL: true } },
-
+        //Profile Routes
         { name: "loggedout-admin", path: "/logout", component: LogOut, meta: { protectedURL: true } },
-
         { name: "update-profile", path: "/update-profile", component: UpdateProfile, meta: { protectedURL: true } },
         { name: "change-password", path: "/change-password", component: ChangePassword, meta: { protectedURL: true } },
-
+        //Dashboard Routes
         { name: "index", path: "/", redirect: "/dashboard", meta: { protectedURL: true } },
         { name: "dashboard", path: "/dashboard", component: Dashboard, meta: { protectedURL: true } },
-        //Categories Route
+        //Categories Routes
         { name: "categories-list", path: "/categories", component: CategoriesList, meta: { protectedURL: true } },
         { name: "edit-category", path: "/edit-category/:id", component: CategoryForm, meta: { protectedURL: true } },
         { name: "add-category", path: "/add-category", component: CategoryForm, meta: { protectedURL: true } },
-
-        //Users Route
+        //Reipes Routes
+        { name: "recipes-list", path: "/recipes", component: RecipesList, meta: { protectedURL: true } },
+        { name: "edit-recipe", path: "/edit-recipe/:id", component: RecipesForm, meta: { protectedURL: true } },
+        { name: "add-recipe", path: "/add-recipe", component: RecipesForm, meta: { protectedURL: true } },
+        //Users Routes
         { name: "clients-list", path: "/clients", component: ClientsList, meta: { protectedURL: true } },
         { name: "edit-clients", path: "/edit-clients/:id", component: ClientsForm, meta: { protectedURL: true } },
         { name: "add-clients", path: "/add-clients", component: ClientsForm, meta: { protectedURL: true } },
-
-        //Authors Route
+        //Authors Routes
         { name: "authors-list", path: "/authors", component: AuthorsList, meta: { protectedURL: true } },
         { name: "edit-authors", path: "/edit-authors/:id", component: AuthorsForm, meta: { protectedURL: true } },
         { name: "add-authors", path: "/add-authors", component: AuthorsForm, meta: { protectedURL: true } },
-
         //404 no route redirect   
         { name: "404", path: "**", redirect: 'dashboard' }
     ],

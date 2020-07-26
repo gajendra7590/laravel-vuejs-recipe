@@ -59,7 +59,8 @@
                 </div>
                 <!-- /.card-body --> 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update Password</button>
+                  <button type="submit" class="btn btn-success">Update Password</button>
+                  <router-link to="dashboard" class="btn btn-danger">Back</router-link>
                 </div>
               </form>
             </div>

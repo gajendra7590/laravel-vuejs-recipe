@@ -19,26 +19,60 @@ use App\models\RecipeImages;
 class RecipesController extends Controller
 {
 
+    /**
+     * Function For Get All Recipes
+     */
     public function getRecipes(Request $request)
     {
-        return Recipes::with([
-            'user' => function($model){ $model->select('id','first_name','last_name','display_name','email','photo'); },
-            'category' => function($model){ $model->select('id','name','slug','description','photo'); },
-        ])->get()->all();
+        $params = $request->all();
+        $limit = (isset($params['limit']))?$params['limit']:5; 
+        $page =  ( isset($params['page']) )?$params['page']:1;
+        $offset = (( $page - 1 ) * $limit);
+
+        $sort = (isset($params['sort']))?$params['sort']:'created_at';
+        $direction = (isset($params['direction']))?$params['direction']:'desc';
+
+        $search = (isset($params['search']))?$params['search']:'';
+
+        $recipes = Recipes::with([
+            'user' => function($model){ $model->select('id','display_name'); },
+            'category' => function($model){ $model->select('id','name'); },
+        ])
+        ->select('id','category_id','user_id','title','photo','prepairation_time','cooking_time','serving_peoples','status')
+        ->orderBy($sort,$direction)
+        ->offset($offset)
+        ->orWhere('title', 'LIKE', '%'.$search.'%') 
+        ->limit($limit)
+        ->get()
+        ->all(); 
+
+        return [
+            'total' => $this->getRecipesCount($request),            
+            'data' => $recipes
+        ];
     }
 
-    public function getRecipe(Request $request,$id)
+    private function getRecipesCount(Request $request) {
+        $params = $request->all();
+        $search = (isset($params['search']))?$params['search']:'';
+        return Recipes::select('*')
+                ->orWhere('title', 'LIKE', '%'.$search.'%') 
+                ->count();
+    }
+
+    public function editRecipes(Request $request,$id)
     {
-        return Recipes::with([
-            'user' => function($model){ $model->select('id','first_name','last_name','display_name','email','photo'); },
-            'category' => function($model){ $model->select('id','name','slug','description','photo'); },
-            'nutritions',
-            'ingredients'
-        ])->where(['id' => $id])->get()->all();
+        return Recipes::with([  
+            'nutritions'=> function($model){ $model->select('id','recipe_id','nutrition_name','nutrition_value'); },
+            'ingredients' => function($model){ $model->select('id','recipe_id','name'); },
+        ])
+        ->where(['id' => $id])
+        ->get()
+        ->first();
     }
 
 
-    public function createRecipe(Request $request)
+    public function createRecipes(Request $request)
     {
         $post = $request->all();
         $validator = Validator::make($post, array(
@@ -46,31 +80,27 @@ class RecipesController extends Controller
             'title' => 'required|unique:recipes',
             'description' => 'required',
             'prepairation_time' => 'required',
-            'recipe_image' => 'required|image|mimes:jpg,jpeg,png',
+            'image' => 'required|image|mimes:jpg,jpeg,png',
             'cooking_time' => 'required',
             'serving_peoples' => 'required',
-            'recipe_nutritions' => 'required|array|min:1',
-            'recipe_nutritions.*.name' => 'required',
-            'recipe_nutritions.*.value' => 'required',
             'recipe_ingredients' => 'required|array|min:1',
             'recipe_ingredients.*.name' => 'required',
-            'recipe_ingredients.*.value' => 'required'
-        ));
-
-        //echo '<pre>';print_r($post);die;
+            'recipe_nutritions' => 'required|array|min:1',
+            'recipe_nutritions.*.nutrition_name' => 'required',
+            'recipe_nutritions.*.nutrition_value' => 'required'
+        )); 
 
         if ($validator->fails()) {
-            $errors = $validator->errors()->toArray();
+            $result = errorArrayCreate( $validator->messages() );
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Incorrect form data',
-                'errors' => $errors
+                'errors' => $result
             ]);
-        }else{
+        }else{ 
 
             $recipe = new Recipes();
-            $slug = slugCreator($post['title']);
-
+            $slug = slugCreator($post['title']); 
             $recipe->category_id = $post['category_id'];
             $recipe->user_id = Auth::user()->id;
             $recipe->title = $post['title'];
@@ -79,12 +109,12 @@ class RecipesController extends Controller
             $recipe->prepairation_time = $post['prepairation_time'];
             $recipe->cooking_time = $post['cooking_time'];
             $recipe->serving_peoples = $post['serving_peoples'];
-            $recipe->photo = NULL;
-
+            $recipe->photo = NULL; 
+            $recipe->status = $post['status'];
             //Upload Images
-            if ($request->hasFile('recipe_image')) {
-                $imageName = Uuid::generate().'.'.$request->recipe_image->getClientOriginalExtension();
-                $is_uploaded = $request->recipe_image->move(public_path('images'), $imageName);
+            if ($request->hasFile('image')) {
+                $imageName = Uuid::generate().'.'.$request->image->getClientOriginalExtension();
+                $is_uploaded = $request->image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
                     $recipe->photo = $imageName;
                 }
@@ -98,8 +128,7 @@ class RecipesController extends Controller
                     foreach ($post['recipe_ingredients'] as $ingredient){
                         $IngModel = new RecipeIngredients();
                         $IngModel->recipe_id = $last_id;
-                        $IngModel->ingredient_name =  $ingredient['name'];
-                        $IngModel->ingredient_value =  $ingredient['value'];
+                        $IngModel->name =  $ingredient['name'];
                         $IngModel->save();
                     }
                 }
@@ -109,30 +138,30 @@ class RecipesController extends Controller
                     foreach ($post['recipe_nutritions'] as $nutrition){
                         $NutModel = new RecipeNutritions();
                         $NutModel->recipe_id = $last_id;
-                        $NutModel->nutrition_name =  $nutrition['name'];
-                        $NutModel->nutrition_value =  $nutrition['value'];
+                        $NutModel->nutrition_name =  $nutrition['nutrition_name'];
+                        $NutModel->nutrition_value =  $nutrition['nutrition_value'];
                         $NutModel->save();
                     }
                 }
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message' => 'Recipe added successfully'
                 ]);
             }
         }
     }
 
-    public function updateRecipe(Request $request,$id){
+    public function updateRecipes(Request $request,$id){
         $recipeModel = Recipes::find($id);
         if(!$recipeModel){
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Invalid Recipe ID'
             ]);
         }
 
-
-        $post = $request->all();
+        $post = $request->all(); 
+       // echo '<pre>';print_r($post);die;
         $validator = Validator::make($post, array(
             'category_id' => 'required',
             'title' => "required|unique:recipes,title,{$id}",
@@ -140,25 +169,23 @@ class RecipesController extends Controller
             'prepairation_time' => 'required',
             'cooking_time' => 'required',
             'serving_peoples' => 'required',
-            'recipe_image' => 'image|mimes:jpg,jpeg,png',
-            'recipe_nutritions' => 'required|array|min:1',
-            'recipe_nutritions.*.name' => 'required',
-            'recipe_nutritions.*.value' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png',
             'recipe_ingredients' => 'required|array|min:1',
-            'recipe_ingredients.*.name' => 'required',
-            'recipe_ingredients.*.value' => 'required'
+            'recipe_ingredients.*.name' => 'required', 
+            'recipe_nutritions' => 'required|array|min:1',
+            'recipe_nutritions.*.nutrition_name' => 'required',
+            'recipe_nutritions.*.nutrition_value' => 'required'
         ));
 
         if ($validator->fails()) {
-            $errors = $validator->errors()->toArray();
+            $result = errorArrayCreate( $validator->messages() );
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message '=> 'Incorrect form data',
-                'errors' => $errors
+                'errors' => $result
             ]);
         }else{
-            $slug = strtolower($post['title']);
-            $slug = preg_replace('/\s+/', '-',$slug);
+            $slug = slugCreator($post['title']); 
             $recipeModel->category_id = $post['category_id'];
             $recipeModel->title = $post['title'];
             $recipeModel->slug = $slug;
@@ -166,18 +193,18 @@ class RecipesController extends Controller
             $recipeModel->prepairation_time = $post['prepairation_time'];
             $recipeModel->cooking_time = $post['cooking_time'];
             $recipeModel->serving_peoples = $post['serving_peoples'];
+            $recipeModel->status = $post['status'];
 
             //Upload Images
-            if ($request->hasFile('recipe_image')) {
-                $imageName = Uuid::generate().'.'.$request->recipe_image->getClientOriginalExtension();
-                $is_uploaded = $request->recipe_image->move(public_path('images'), $imageName);
+            if ($request->hasFile('image')) {
+                $imageName = Uuid::generate().'.'.$request->image->getClientOriginalExtension();
+                $is_uploaded = $request->image->move(public_path('images'), $imageName);
                 if( $is_uploaded){
                     $recipeModel->photo = $imageName;
                 }
             }
             $save = $recipeModel->save();
             if($save){
-
                 $last_id = $recipeModel->id;
                 //Save Ingredients
                 if( isset($post['recipe_ingredients']) && count($post['recipe_ingredients']) > 0){
@@ -185,48 +212,45 @@ class RecipesController extends Controller
 
                         if( isset($ingredient['id']) && ($ingredient['id'] > 0)){ //Update & Delete Case
                             $ingredientModel = RecipeIngredients::find($ingredient['id']);
-                            if( isset($ingredient['is_deleted']) && ($ingredient['is_deleted'] =='1') ){
+                            if( isset($ingredient['is_deleted']) && ($ingredient['is_deleted'] == '1') ){
                                 $ingredientModel->delete();
                             }else{
-                                $ingredientModel->ingredient_name =  $ingredient['name'];
-                                $ingredientModel->ingredient_value =  $ingredient['value'];
+                                $ingredientModel->name =  $ingredient['name'];
                                 $ingredientModel->save();
                             }
                         }else{  //Insert New Case
                             $IngModel = new RecipeIngredients();
                             $IngModel->recipe_id = $last_id;
-                            $IngModel->ingredient_name =  $ingredient['name'];
-                            $IngModel->ingredient_value =  $ingredient['value'];
+                            $IngModel->name =  $ingredient['name'];
                             $IngModel->save();
-                        }
-
+                        } 
                     }
                 }
 
                 //Save Nutritions
                 if( isset($post['recipe_nutritions']) && count($post['recipe_nutritions']) > 0){
-                    foreach ($post['recipe_nutritions'] as $nutrition){
+                    foreach ($post['recipe_nutritions'] as $nutrition){ 
 
-                        if( isset($ingredient['id']) && ($ingredient['id'] > 0)){ //Update & Delete Case
-                            $nutModel = RecipeNutritions::find($ingredient['id']);
-                            if( isset($ingredient['is_deleted']) && ($ingredient['is_deleted'] =='1') ){
+                        if( isset($nutrition['id']) && ($nutrition['id'] > 0)){ //Update & Delete Case
+                            $nutModel = RecipeNutritions::find($nutrition['id']);
+                            if( (isset($nutrition['is_deleted'])) && ($nutrition['is_deleted'] == '1') ){
                                 $nutModel->delete();
                             }else{
-                                $nutModel->nutrition_name =  $ingredient['name'];
-                                $nutModel->nutrition_value =  $ingredient['value'];
+                                $nutModel->nutrition_name =  $nutrition['nutrition_name'];
+                                $nutModel->nutrition_value = $nutrition['nutrition_value'];
                                 $nutModel->save();
                             }
                         }else{  //Insert New Case
-                            $nutModel = new RecipeNutritions();
-                            $nutModel->recipe_id = $last_id;
-                            $nutModel->nutrition_name =  $nutrition['name'];
-                            $nutModel->nutrition_value =  $nutrition['value'];
-                            $nutModel->save();
+                                $nutModel = new RecipeNutritions();
+                                $nutModel->recipe_id = $last_id;
+                                $nutModel->nutrition_name =  $nutrition['nutrition_name'];
+                                $nutModel->nutrition_value =  $nutrition['nutrition_value'];
+                                $nutModel->save();
                         }
                     }
                 }
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message' => 'Recipe detail updated successfully'
                 ]);
             }
@@ -234,11 +258,11 @@ class RecipesController extends Controller
 
     }
 
-    public function deleteRecipe($id){
+    public function deleteRecipes($id){
         $recipeModel = Recipes::find($id);
         if(!$recipeModel){
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Opps! this recipe not found( Invalid ID )'
             ]);
         }
@@ -246,12 +270,12 @@ class RecipesController extends Controller
         $update = $recipeModel->update(['status' => '2']);
         if($update){
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'message' => 'Recipe deleted successfully'
             ]);
         }else{
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Opps! error in delete this recipe.'
             ]);
         }

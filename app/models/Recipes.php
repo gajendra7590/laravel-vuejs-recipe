@@ -18,6 +18,7 @@ class Recipes extends Model
      *
      * @var string
      */
+    protected $appends = ['photo_url'];
     protected $table = 'recipes';
     protected $primaryKey = 'id';
 
@@ -52,6 +53,14 @@ class Recipes extends Model
     {
         return $this->hasMany(RecipeIngredients::class, 'recipe_id','id');
     }
+
+    public function getPhotoUrlAttribute(){  
+        if($this->photo !=''){
+            return \url('/').'/images/'.$this->photo;
+        } else{
+            return \url('/').'/default_img/default.jpg';
+        } 
+     }
 
 
 }

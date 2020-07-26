@@ -48,6 +48,7 @@ const store = new Vuex.Store({
             editAuthors: [],
             recipeList: [],
             editRecipe: [],
+            categories: [],
             getCategories: [],
             editCategories: [],
             userProfile: [],
