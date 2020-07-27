@@ -12,8 +12,8 @@ use Illuminate\Support\Str;
 
 //models
 use App\User;
-use App\Models\Categories;
-use App\Models\Recipes; 
+use App\models\Categories;
+use App\models\Recipes; 
 
 class CommonController extends Controller
 {

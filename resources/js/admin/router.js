@@ -11,11 +11,11 @@ import CategoryForm from './components/protected/categories/CategoryForm';
 import RecipesList from './components/protected/recipes/RecipesList';
 import RecipesForm from './components/protected/recipes/RecipesForm'
 //Users
-import ClientsList from './components/protected/users/ClientsList';
-import ClientsForm from './components/protected/users/ClientsForm';
+import ClientsList from './components/protected/clients/ClientsList';
+import ClientsForm from './components/protected/clients/ClientsForm';
 //Authors
-import AuthorsList from './components/protected/users/AuthorsList';
-import AuthorsForm from './components/protected/users/AuthorsForm';
+import AuthorsList from './components/protected/authors/AuthorsList';
+import AuthorsForm from './components/protected/authors/AuthorsForm';
 //Auth
 import Login from './components/public/Login';
 import ForgotPassword from './components/public/ForgotPassword';

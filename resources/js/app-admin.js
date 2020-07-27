@@ -19,7 +19,6 @@ import moment from 'moment-timezone';
 import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 //Jquery
 import $ from 'jquery';
-
 //Confirm dialog 
 import VuejsDialog from 'vuejs-dialog';
 import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
@@ -29,6 +28,8 @@ import Vuelidate from 'vuelidate';
 //Loading Overlay
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+//Vee Valdiate Client Side
+import { ValidationProvider, extend } from 'vee-validate';
 
 
 require('./bootstrap');
@@ -53,6 +54,8 @@ Vue.use(ServerTable);
 Vue.use(VuejsDialog);
 Vue.use(Vuelidate);
 Vue.use(Loading);
+Vue.component('ValidationProvider', ValidationProvider);
+
 
 
 var path = window.location.pathname;
