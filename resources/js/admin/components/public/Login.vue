@@ -17,25 +17,27 @@
                  name="email"  
                  v-model="loginData.email"              
                  class="form-control" 
-                 placeholder="Your email..">
+                 placeholder="Your email.."> 
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
+        <p class="text-danger validation_errors" v-if="errorsList.email">{{ errorsList.email }} </p>
         <div class="input-group mb-3">
           <input type="password" 
                  name="password"
                  v-model="loginData.password"   
                  class="form-control" 
-                 placeholder="Your password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
+                 placeholder="Your password"> 
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div> 
         </div>
+        <p class="text-danger validation_errors" v-if="errorsList.password">{{ errorsList.password }} </p>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -43,8 +45,7 @@
                   name="remember"
                   type="checkbox" 
                   v-model="loginData.remeberMe"
-                  id="remember"
-                  >
+                  id="remember">
               <label for="remember">
                 Remember Me
               </label>
@@ -83,6 +84,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      errorsList : [],
       alertClass : 'alert-success',
       alertShow : false,
       alertMessage : '',
@@ -95,25 +97,27 @@ export default {
   },
   methods: {
     adminLogin(){ 
+       let _this = this;
        this.$store
-        .dispatch("adminLogin",this.loginData).then(res => {
+        .dispatch("adminLogin",_this.loginData).then(res => {
            if( typeof(res.status)!='undefined' && (res.status == true) ){ 
-             this.alertClass = 'alert-success';
-             this.alertShow = true; 
-             this.alertMessage = res.message
-             this.$toastr.s("You have been logged in", "SUCCESS!!");
+             _this.alertClass = 'alert-success';
+             _this.alertShow = true; 
+             _this.alertMessage = res.message
+             _this.$toastr.s("You have been logged in", "SUCCESS!!");
              localStorage.setItem('current_user',res.current_user);
              localStorage.setItem('token',res.token.access_token);
              setTimeout(function(){
                window.location.href='/admin/dashboard';
              },500);
            } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
-             this.alertClass = 'alert-danger';
-             this.alertShow = true;  
-             this.$toastr.e("Opps! error in logged in", "ERROR!!");
+             _this.errorsList = res.errors;  
+             _this.alertClass = 'alert-danger';
+             _this.alertShow = true;  
+             _this.$toastr.e("Opps! error in logged in", "ERROR!!");
              localStorage.setItem('current_user','');
              localStorage.setItem('token','');
-             this.alertMessage = res.message
+             _this.alertMessage = res.message
            } 
         })
         .catch(e => {

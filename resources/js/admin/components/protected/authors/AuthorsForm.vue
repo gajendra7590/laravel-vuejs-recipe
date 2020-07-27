@@ -52,6 +52,7 @@
                                 </div>
                             </div> 
                         </div> 
+                        <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p>
                         <div class="row"> 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -62,6 +63,7 @@
                                         v-model="editData.first_name"
                                         class="form-control"  
                                         placeholder="Enter first name...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.first_name">{{ errorsList.first_name }} </p>
                                 </div>
                             </div>
                              <div class="col-sm-6">
@@ -73,6 +75,7 @@
                                         v-model="editData.last_name"
                                         class="form-control"  
                                         placeholder="Enter last name...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.last_name">{{ errorsList.last_name }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -86,6 +89,7 @@
                                         v-model="editData.display_name"
                                         class="form-control"  
                                         placeholder="Enter display name...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.display_name">{{ errorsList.display_name }} </p>
                                 </div> 
                             </div>
                             <div class="col-sm-6"> 
@@ -97,6 +101,7 @@
                                           v-model="editData.email"
                                           class="form-control"  
                                           placeholder="Enter email address...">
+                                          <p class="text-danger validation_errors" v-if="errorsList.email">{{ errorsList.email }} </p>
                                  </div>
                              </div>
                         </div>
@@ -110,6 +115,7 @@
                                         v-model="editData.password"
                                         class="form-control"  
                                         placeholder="Enter password...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.password">{{ errorsList.password }} </p>
                                 </div> 
                             </div>
                             <div class="col-sm-6"> 
@@ -121,6 +127,7 @@
                                           v-model="editData.phone"
                                           class="form-control"  
                                           placeholder="Enter phone...">
+                                      <p class="text-danger validation_errors" v-if="errorsList.phone">{{ errorsList.phone }} </p>
                                  </div>
                              </div>
                         </div>
@@ -134,6 +141,7 @@
                                         v-model="editData.address_line_one"
                                         class="form-control"  
                                         placeholder="Address Line One...">
+                                     <p class="text-danger validation_errors" v-if="errorsList.address_line_one">{{ errorsList.address_line_one }} </p>
                                 </div> 
                             </div>
                             <div class="col-sm-6"> 
@@ -145,6 +153,7 @@
                                           v-model="editData.address_line_two"
                                           class="form-control"  
                                           placeholder="Address Line Two...">
+                                      <p class="text-danger validation_errors" v-if="errorsList.address_line_two">{{ errorsList.address_line_two }} </p>
                                  </div>
                              </div>
                         </div>
@@ -158,6 +167,7 @@
                                           v-model="editData.country"
                                           class="form-control"  
                                           placeholder="Enter countru...">
+                                      <p class="text-danger validation_errors" v-if="errorsList.country">{{ errorsList.country }} </p>
                                  </div>
                            </div>
                             <div class="col-sm-3">
@@ -169,6 +179,7 @@
                                         v-model="editData.state"
                                         class="form-control"  
                                         placeholder="Enter state...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.state">{{ errorsList.state }} </p>
                                 </div> 
                             </div> 
                             <div class="col-sm-3">
@@ -180,6 +191,7 @@
                                         v-model="editData.city"
                                         class="form-control"  
                                         placeholder="Enter city...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.city">{{ errorsList.city }} </p>
                                 </div> 
                             </div> 
                             <div class="col-sm-3">
@@ -191,6 +203,7 @@
                                         v-model="editData.zip"
                                         class="form-control"  
                                         placeholder="Enter zip...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.zip">{{ errorsList.zip }} </p>
                                 </div> 
                             </div> 
                         </div>                         
@@ -203,6 +216,7 @@
                                         <option value="1">Active</option>
                                         <option value="2">Archive</option> 
                                     </select>   
+                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +250,8 @@
       }, 
       data:function(){
         return {
+          errorsList : [],
+          loader : '',
           editData : {  
               id: 0,
               first_name: "",
@@ -269,14 +285,17 @@
           submitForm(){
             var vueForm = new FormData( $('#vueForm')[0]);
             let _this = this;
+            _this.loader =  _this.$loading.show();
             if( this.editData.id > 0){
                this.$store.dispatch('updateAuthors',{ id : this.editData.id,data : vueForm})
                .then(function(result){
+                   _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/authors'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                     _this.errorsList = result.errors;  
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   }  
@@ -287,11 +306,13 @@
             } else {
               this.$store.dispatch('createAuthors',{ id : this.editData.id,data : vueForm})
               .then(function(result){
+                 _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/authors'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                    _this.errorsList = result.errors;  
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   } 

@@ -75,7 +75,7 @@ class RecipesController extends Controller
     public function createRecipes(Request $request)
     {
         $post = $request->all();
-        $validator = Validator::make($post, array(
+        $validator = Validator::make($post,[
             'category_id' => 'required',
             'title' => 'required|unique:recipes',
             'description' => 'required',
@@ -88,7 +88,11 @@ class RecipesController extends Controller
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
             'recipe_nutritions.*.nutrition_value' => 'required'
-        )); 
+        ],[
+            'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
+            'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
+            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
+        ]); 
 
         if ($validator->fails()) {
             $result = errorArrayCreate( $validator->messages() );
@@ -161,21 +165,24 @@ class RecipesController extends Controller
         }
 
         $post = $request->all(); 
-       // echo '<pre>';print_r($post);die;
-        $validator = Validator::make($post, array(
+        $validator = Validator::make($post,[
             'category_id' => 'required',
             'title' => "required|unique:recipes,title,{$id}",
             'description' => 'required',
             'prepairation_time' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png',
             'cooking_time' => 'required',
             'serving_peoples' => 'required',
-            'image' => 'image|mimes:jpg,jpeg,png',
             'recipe_ingredients' => 'required|array|min:1',
-            'recipe_ingredients.*.name' => 'required', 
+            'recipe_ingredients.*.name' => 'required',
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
             'recipe_nutritions.*.nutrition_value' => 'required'
-        ));
+        ],[
+            'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
+            'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
+            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
+        ]); 
 
         if ($validator->fails()) {
             $result = errorArrayCreate( $validator->messages() );

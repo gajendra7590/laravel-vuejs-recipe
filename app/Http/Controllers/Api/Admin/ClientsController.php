@@ -90,8 +90,8 @@ class ClientsController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:recipe_users',
-            'phone' => ['numeric'],
-            'zip' => ['numeric'],
+            'phone' => 'nullable|numeric|digits:10',
+            'zip' => 'nullable|numeric|digits:5',
             'password' => 'required',
             'status' => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png'
@@ -147,13 +147,13 @@ class ClientsController extends Controller
 
         $post = $request->all();
         $validator = Validator::make($post, array(
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => ['required','email','unique:recipe_users,email,'.$id],
-            'phone' => ['numeric'],
-            'zip' => ['numeric'],
-            'status' => ['required'],
-            'image' => ['image','mimes:jpg,jpeg,png']
+            'phone' => 'nullable|numeric|digits:10',
+            'zip' => 'nullable|numeric|digits:5',
+            'status' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png'
         ));
         if ($validator->fails()) {
             $errors = errorArrayCreate( $validator->errors() );

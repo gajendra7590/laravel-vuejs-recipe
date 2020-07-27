@@ -113,8 +113,9 @@ export default {
     }
   },
   created(){
-    this.getProfile();
-    //this.$loading.show({color: '#fff',backgroundColor: '#343a40',opacity: 0.9, zIndex: 999,});
+    if( !!localStorage.getItem('token')) {
+       this.getProfile(); 
+    }
   }   
 
 }

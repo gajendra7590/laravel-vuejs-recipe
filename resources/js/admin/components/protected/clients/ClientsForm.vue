@@ -219,8 +219,7 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>   
                                 </div>
                             </div>
-                        </div>
-                        {{ errorsList }}
+                        </div> 
                         <div class="card-footer"> 
                             <button type="submit" class="btn btn-success">Submit</button>
                             <router-link to="/clients" class="btn btn-danger">Back</router-link>
@@ -252,6 +251,7 @@
       data:function(){
         return {
           errorsList : [],
+          loader : null,
           editData : {  
               id: 0,
               first_name: "",
@@ -285,9 +285,11 @@
           submitForm(){
             var vueForm = new FormData( $('#vueForm')[0]);
             let _this = this;
+            _this.loader = _this.$loading.show();
             if( this.editData.id > 0){
                this.$store.dispatch('updateClients',{ id : this.editData.id,data : vueForm})
                .then(function(result){
+                  _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/clients'); },500);
@@ -304,6 +306,7 @@
             } else {
               this.$store.dispatch('createClients',{ id : this.editData.id,data : vueForm})
               .then(function(result){
+                 _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/clients'); },500);

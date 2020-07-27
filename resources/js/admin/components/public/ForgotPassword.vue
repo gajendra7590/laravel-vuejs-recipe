@@ -24,6 +24,7 @@
                     </div>
                   </div>
                 </div>
+                <p class="text-danger validation_errors" v-if="errorsList.email">{{ errorsList.email }} </p>
                 <div class="row">
                   <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
@@ -45,6 +46,7 @@ export default {
   name: 'ForgotPassword',
   data() {
     return {
+      errorsList : [],
       alertClass : 'alert-success',
       alertShow : false,
       alertMessage : '',
@@ -63,6 +65,7 @@ export default {
              this.alertShow = true; 
              this.alertMessage = res.message 
            } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
+             this.errorsList = res.errors;  
              this.alertClass = 'alert-danger';
              this.alertShow = true;   
              this.alertMessage = res.message

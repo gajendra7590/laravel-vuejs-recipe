@@ -39,6 +39,7 @@
                            v-model="formData.old_password"
                            class="form-control"  
                            placeholder="******">
+                    <p class="text-danger validation_errors" v-if="errorsList.old_password">{{ errorsList.old_password }} </p>
                   </div>
                   <div class="form-group">
                     <label>New Password</label>
@@ -47,6 +48,7 @@
                            v-model="formData.new_password"
                            class="form-control"  
                            placeholder="******">
+                    <p class="text-danger validation_errors" v-if="errorsList.new_password">{{ errorsList.new_password }} </p>
                   </div> 
                   <div class="form-group">
                     <label>Confirm New Password</label>
@@ -55,6 +57,7 @@
                            v-model="formData.new_password_confirmation"
                            class="form-control"  
                            placeholder="******">
+                    <p class="text-danger validation_errors" v-if="errorsList.new_password_confirmation">{{ errorsList.new_password_confirmation }} </p>
                   </div>
                 </div>
                 <!-- /.card-body --> 
@@ -80,6 +83,8 @@ export default {
   name: 'ChangePassword',
   data : function(){
     return { 
+        loader : null,
+        errorsList:[],
         formData : {
           old_password : '',
           new_password : '',
@@ -90,13 +95,16 @@ export default {
   methods : {
       submitForm(){
         let _this = this;
+        _this.loader = _this.$loading.show();
          _this.$store.dispatch('changePassword',{data : _this.formData})
          .then(function(result){
+            _this.loader.hide();
             if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
               _this.$toastr.s('Password Changed Successfully','Success!');
               _this.resetForm(); 
             }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
               _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+              _this.errorsList = result.errors;
             }else{
               _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
             }  

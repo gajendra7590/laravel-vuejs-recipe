@@ -52,6 +52,7 @@
                                 </div>
                             </div> 
                         </div> 
+                        <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p> 
                         <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -62,6 +63,7 @@
                                         v-model="editData.name"
                                         class="form-control"  
                                         placeholder="Enter category name...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.name">{{ errorsList.name }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -73,6 +75,7 @@
                                     name="description" 
                                     v-model="editData.description">
                                     </vue-editor>
+                                    <p class="text-danger validation_errors" v-if="errorsList.description">{{ errorsList.description }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -85,6 +88,7 @@
                                         <option value="1">Active</option>
                                         <option value="2">Archive</option> 
                                     </select>   
+                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>
                                 </div>
                             </div>
                         </div>
@@ -118,6 +122,8 @@
       }, 
       data:function(){
         return {
+          loader:null,
+          errorsList : [],
           editData : {  
               id: 0,
               name: "",
@@ -142,14 +148,17 @@
             var vueForm = new FormData( $('#vueForm')[0]);
             vueForm.append('description',this.editData.description);
             let _this = this;
+            _this.loader = _this.$loading.show();
             if( this.editData.id > 0){
                this.$store.dispatch('updateCategory',{ id : this.editData.id,data : vueForm})
                .then(function(result){
+                  _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/categories'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
-                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!'); 
+                     _this.errorsList = result.errors;   
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   }  
@@ -160,11 +169,13 @@
             } else {
               this.$store.dispatch('createCategory',{ id : this.editData.id,data : vueForm})
               .then(function(result){
+                 _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/categories'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                     _this.errorsList = result.errors;  
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   } 

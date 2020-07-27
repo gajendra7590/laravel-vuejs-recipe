@@ -53,7 +53,14 @@ Vue.use(VueMoment, { moment });
 Vue.use(ServerTable);
 Vue.use(VuejsDialog);
 Vue.use(Vuelidate);
-Vue.use(Loading);
+Vue.use(Loading, {
+    color: 'blue',
+    backgroundColor: '#fffff',
+    height: 40,
+    width: 40,
+    transition: 'slide-fade',
+    opacity: 0.9
+});
 Vue.component('ValidationProvider', ValidationProvider);
 
 

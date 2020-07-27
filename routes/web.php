@@ -12,10 +12,13 @@
 */
 
 //Load Admin Vue
-Route::get('/admin/{any}', 'HomeController@vueAdmin')->where('any', '.*');
+Route::get('admin/{any}', 'HomeController@vueAdmin')->where('any', '.*');
+Route::get('login', function () {
+    return redirect('admin/login');
+});
 
 //VueJS Load Main Page
-Route::get('/', 'HomeController@vueFrontEnd');
-Route::get('/{any}', 'HomeController@vueFrontEnd')->where('any', '.*');
+//Route::get('/', 'HomeController@vueFrontEnd');
+//Route::get('/{any}', 'HomeController@vueFrontEnd')->where('any', '.*');
 
 

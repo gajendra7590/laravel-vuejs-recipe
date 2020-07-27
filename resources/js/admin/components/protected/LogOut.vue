@@ -36,7 +36,7 @@ export default {
   name: 'LogOut',
   data() {
     return {
-      
+       loader : null
     }
   }, 
   methods:{
@@ -46,6 +46,7 @@ export default {
         .then(function(dialog) {
           loader: true;  
             //Delete Code start
+            _this.$loading.show();
             _this.$store
               .dispatch("adminLogout",_this.loginData).then(res => { 
                 if( typeof(res.status)!='undefined' && (res.status == true) ){  

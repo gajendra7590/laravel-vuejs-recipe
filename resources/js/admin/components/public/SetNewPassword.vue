@@ -20,6 +20,7 @@
                     </div>
                   </div>
                 </div>
+                <p class="text-danger validation_errors" v-if="errorsList.new_password">{{ errorsList.new_password }} </p>
                 <div class="row">
                   <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">Save New Password</button>
@@ -41,7 +42,10 @@
 </template> 
 <script>
     export default {
-       name: 'SetNewPassword' 
+       name: 'SetNewPassword' ,
+       data : function(){
+          errorsList : []
+       }
     }
 </script> 
 <style scoped> 

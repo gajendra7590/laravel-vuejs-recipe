@@ -52,6 +52,7 @@
                                 </div>
                             </div> 
                         </div> 
+                        <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p> 
                         <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -62,6 +63,7 @@
                                         v-model="editData.title"
                                         class="form-control"  
                                         placeholder="Enter title...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -75,6 +77,7 @@
                                           {{ category.name }}
                                         </option>
                                     </select>   
+                                    <p class="text-danger validation_errors" v-if="errorsList.category_id">{{ errorsList.category_id }} </p>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +90,7 @@
                                     placeholder='Full article note..'
                                     v-model="editData.description">
                                     </vue-editor>
+                                    <p class="text-danger validation_errors" v-if="errorsList.description">{{ errorsList.description }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -100,6 +104,7 @@
                                         v-model="editData.prepairation_time"
                                         class="form-control"  
                                         placeholder="Ex. : 5 Min">
+                                    <p class="text-danger validation_errors" v-if="errorsList.prepairation_time">{{ errorsList.prepairation_time }} </p>    
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -111,6 +116,7 @@
                                         v-model="editData.cooking_time"
                                         class="form-control"  
                                         placeholder="Ex. : 10 Min">
+                                      <p class="text-danger validation_errors" v-if="errorsList.cooking_time">{{ errorsList.cooking_time }} </p>  
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -122,6 +128,7 @@
                                         v-model="editData.serving_peoples"
                                         class="form-control"  
                                         placeholder="Ex : number of peoples">
+                                    <p class="text-danger validation_errors" v-if="errorsList.serving_peoples">{{ errorsList.serving_peoples }} </p>    
                                 </div>
                             </div>
                         </div>  
@@ -136,7 +143,7 @@
                                            </a>
                                         </div>  
                                         <div v-for="(ig,index) in editData.ingredients" :key="index" class="col-sm-12" :class="(ig.is_deleted == '1')?'hideContainer':''"> 
-                                          <div class="form-group additional-input-box icon-right">
+                                           <div class="form-group additional-input-box icon-right">
                                                 <input 
                                                     type="text"
                                                     placeholder="Ex: 1 Cup Hari Dhaniya" 
@@ -147,7 +154,10 @@
                                                 <input type="hidden" :name="`recipe_ingredients[${index}][id]`" v-model="editData.ingredients[index].id">
                                                 <input type="hidden" :name="`recipe_ingredients[${index}][is_deleted]`" v-model="editData.ingredients[index].is_deleted">
                                             </div> 
-                                          </div>  
+                                            <p class="text-danger validation_errors" v-if="errorsList['recipe_ingredients.'+index+'.name']">
+                                              {{ errorsList['recipe_ingredients.'+index+'.name'] }} 
+                                            </p> 
+                                          </div>   
                                     </div>                                     
                                 </div>
                             </div>
@@ -168,11 +178,15 @@
                                                 <div class="col-sm-5">
                                                   <label>Nutrition Name</label>
                                                   <input 
-                                                    type="text"
-                                                    placeholder="Ex: Protein" 
-                                                    class="form-control" 
-                                                    :name="`recipe_nutritions[${index}][nutrition_name]`"
-                                                    v-model="editData.nutritions[index].nutrition_name"> 
+                                                      type="text"
+                                                      placeholder="Ex: Protein" 
+                                                      class="form-control" 
+                                                      :name="`recipe_nutritions[${index}][nutrition_name]`"
+                                                      v-model="editData.nutritions[index].nutrition_name"> 
+                                                   <p class="text-danger validation_errors" 
+                                                    v-if="errorsList['recipe_nutritions.'+index+'.nutrition_name']">
+                                                      {{ errorsList['recipe_nutritions.'+index+'.nutrition_name'] }} 
+                                                   </p>  
                                                 </div>
                                                 <div class="col-sm-5"> 
                                                   <label>Nutrition Value</label>
@@ -182,6 +196,10 @@
                                                       class="form-control" 
                                                       :name="`recipe_nutritions[${index}][nutrition_value]`"
                                                       v-model="editData.nutritions[index].nutrition_value">
+                                                  <p class="text-danger validation_errors" 
+                                                    v-if="errorsList['recipe_nutritions.'+index+'.nutrition_value']">
+                                                      {{ errorsList['recipe_nutritions.'+index+'.nutrition_value'] }} 
+                                                   </p>     
                                                  </div>   
                                                  <div class="col-sm-2" style="margin-top: 31px;">
                                                     <i class="fas fa-times" @click.prevent="removeNutrition(index)"></i>
@@ -202,7 +220,8 @@
                                         <option value="0">In Active</option>
                                         <option value="1">Active</option>
                                         <option value="2">Archive</option> 
-                                    </select>   
+                                    </select> 
+                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>    
                                 </div>
                             </div>
                         </div>
@@ -236,6 +255,8 @@
       }, 
       data:function(){
         return {
+          loader : null,
+          errorsList : [],
           editData : {  
               id: 0,
               category_id : '',
@@ -346,14 +367,17 @@
             var vueForm = new FormData( $('#vueForm')[0]);
             vueForm.append('description',this.editData.description);
             let _this = this;
+            _this.loader = _this.$loading.show();
             if( this.editData.id > 0){
                this.$store.dispatch('updateRecipes',{ id : this.editData.id,data : vueForm})
                .then(function(result){
+                  _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/recipes'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                    _this.errorsList = result.errors;
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   }  
@@ -364,11 +388,13 @@
             } else {
               this.$store.dispatch('createRecipes',{ id : this.editData.id,data : vueForm})
               .then(function(result){
+                 _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
                     setTimeout(function(){ _this.$router.push('/recipes'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                    _this.errorsList = result.errors;
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   } 

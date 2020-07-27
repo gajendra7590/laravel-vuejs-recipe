@@ -101,20 +101,23 @@ export default {
   name: 'Dashboard',
   data : function(){
     return {
+      loader : null,
       dashboardData : {}
     }
   },
-  methods :{
+  methods : {
     getDashboardData(){
       let _this = this;
       _this.$store.dispatch('getDashboardData')
       .then(function(result){
          _this.dashboardData = result;
+         _this.loader.hide();
        }) 
 
     }
   },
-  created(){
+  created(){ 
+    this.loader = this.$loading.show(); 
     this.getDashboardData();
   }    
 }
