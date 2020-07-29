@@ -18,7 +18,7 @@ Route::get('login', function () {
 });
 
 //VueJS Load Main Page
-//Route::get('/', 'HomeController@vueFrontEnd');
-//Route::get('/{any}', 'HomeController@vueFrontEnd')->where('any', '.*');
+Route::get('/', 'HomeController@vueFrontEnd');
+Route::get('/{any}', 'HomeController@vueFrontEnd')->where('any', '.*');
 
 

@@ -80,10 +80,13 @@
           </li>     
 
           <li class="nav-item">
-            <router-link to="/logout" title="SignOut Your Account" class="nav-link">
+            <a href="javascript:void(0);" 
+               @click.prevent="signOutAccount" 
+               title="SignOut Your Account" 
+               class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Sign Out</p>
-            </router-link>
+            </a>
           </li>   
 
         </ul>
@@ -108,8 +111,32 @@ export default {
       _this.$store.dispatch('loggedProfile')
       .then(function(result){
          _this.userProfile = result;
-       }) 
-
+       })  
+    },
+    signOutAccount(){
+        
+        let _this = this; 
+       _this.$dialog.confirm('Are you sure to signout your account?')
+        .then(function(dialog) {
+          loader: true;  
+            //Delete Code start
+            _this.$loading.show();
+            _this.$store.dispatch("adminLogout",_this.loginData).then(res => { 
+                if( typeof(res.status)!='undefined' && (res.status == true) ) {  
+                  localStorage.removeItem('current_user');
+                  localStorage.removeItem('token');
+                  _this.$toastr.s("You have been logged out", "SUCCESS!!");
+                  setTimeout(function(){
+                    window.location.href='/admin/login';
+                  },500);
+                } else if( typeof(res.status)!='undefined' && (res.status == false) ){ 
+                  _this.$toastr.s("Error in logged out", "ERROR!!");
+                } 
+              })
+              .catch(e => {
+                _this.$toastr.s("Error in logged out", "ERROR!!"); 
+              }); 
+        });
     }
   },
   created(){

@@ -20,8 +20,6 @@ import AuthorsForm from './components/protected/authors/AuthorsForm';
 import Login from './components/public/Login';
 import ForgotPassword from './components/public/ForgotPassword';
 import SetNewPassword from './components/public/SetNewPassword';
-//Logout
-import LogOut from './components/protected/LogOut';
 //Admin Profile
 import UpdateProfile from './components/protected/user-profile/UpdateProfile';
 import ChangePassword from './components/protected/user-profile/ChangePassword';
@@ -38,7 +36,6 @@ const router = new VueRouter({
         { name: "forgot-password-admin", path: "/forgot-password", component: ForgotPassword, meta: { visitorURL: true } },
         { name: "forgot-password-new", path: "/set-new-password", component: SetNewPassword, meta: { visitorURL: true } },
         //Profile Routes
-        { name: "loggedout-admin", path: "/logout", component: LogOut, meta: { protectedURL: true } },
         { name: "update-profile", path: "/update-profile", component: UpdateProfile, meta: { protectedURL: true } },
         { name: "change-password", path: "/change-password", component: ChangePassword, meta: { protectedURL: true } },
         //Dashboard Routes

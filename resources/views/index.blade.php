@@ -1,7 +1,5 @@
-@extends('layouts.admin-app')
+@extends('layouts.front-app')
 
-@section('content')
-    <div class="main_container">
-        <app-component></app-component>  
-    </div>
+@section('content') 
+    <app-component></app-component>   
 @endsection
