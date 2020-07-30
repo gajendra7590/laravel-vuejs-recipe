@@ -27,7 +27,7 @@ class User extends Authenticatable
         'first_name','last_name','display_name', 'email', 'password',
         'phone','photo','address_line_one','address_line_two','city',
         'state','country','zip','last_login','ip_address','reset_token',
-        'reset_token_at','status','email_verified_at'
+        'reset_token_at','status','about_me','email_verified_at'
     ];
 
     /**

@@ -4,10 +4,10 @@ import axios from "axios";
 Vue.use(axios);
 
 axios.interceptors.response.use(
-    function (response) {
+    function(response) {
         return response;
     },
-    function (err) {
+    function(err) {
         if (typeof err.response !== "undefined") {
             if (
                 typeof err.response.status !== "undefined" &&
@@ -40,33 +40,12 @@ const store = new Vuex.Store({
         baseURL: BASEURL,
         ASSET_BURL: ASSET_BURL,
         data: {
-            // River
-            riverArts: [],
-            //Header
-            categoriesList: [],
-            // countryList: [],
-            // Home
-            top5ArtsList: [],
-            categoriesWithSubCat: [],
-            homeFeaturedArtist: [],
-            clientFeedback: [],
-            // Artist detail
-            artistDetail: "",
-            artsByArtist: "",
-            artistFollowers: "",
-            artsByArtistNine: "",
-            // Plan Detail
-            planDetail: "",
-            // Detail page categories
-            categoriesDetail: "",
-            subCategoriesList: [],
-            filterDataCategories: [],
-            // Detail single product
-            // singleProductDetail: "",
-            commentsList: [],
-            footerData: "",
-            faqData: [],
-            faqDataFilter: []
+            getHomeSlider: [],
+            homeTrendingRecipe: [],
+            homeSection3In1: [],
+            homeSidebarSection3In1: [],
+            followOnInstagram: [],
+
         }
     },
     mutations,

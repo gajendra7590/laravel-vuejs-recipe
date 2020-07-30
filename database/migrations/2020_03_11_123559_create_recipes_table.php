@@ -19,6 +19,7 @@ class CreateRecipesTable extends Migration
             $table->integer('user_id');
             $table->string('title')->unique();
             $table->string('slug','100')->unique();
+            $table->longText('short_desc')->nullable();
             $table->longText('description')->nullable();
             $table->string('photo',100)->nullable();
             $table->string('prepairation_time',50)->nullable();

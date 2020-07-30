@@ -118,7 +118,7 @@ class HomeController extends Controller
         ])
         ->where(['status' => '1'])
         ->orderByRaw('RAND()')
-        ->limit(3)
+        ->limit(4)
         ->get()
         ->all();
     }
@@ -150,7 +150,7 @@ class HomeController extends Controller
 
 
     private function categories(){
-        return Recipes::where(['status' => '1'])->limit(6)->get()->all();
+        return Categories::where(['status' => '1'])->limit(6)->get()->all();
     }
 
 

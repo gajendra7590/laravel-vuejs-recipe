@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="814045b9-a76b-4148-bf97-94bfe2538d85" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/CommonController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/HomeController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/RecipeController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/RecipeTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_07_30_102223_create_tags_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/frontend/components/shared/Footer.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/frontend/components/shared/Header.vue" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/js/frontend/components/shared/footer.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/js/frontend/components/shared/header.vue" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.php" afterPath="$PROJECT_DIR$/routes/api.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/app.js" afterPath="$PROJECT_DIR$/resources/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/store/actions/commonActions.js" afterPath="$PROJECT_DIR$/resources/js/frontend/store/actions/commonActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/store/mutations/commonMutations.js" afterPath="$PROJECT_DIR$/resources/js/frontend/store/mutations/commonMutations.js" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path=".idea/vcs.xml" />
@@ -277,7 +270,7 @@
       <workItem from="1595737652081" duration="724000" />
       <workItem from="1595950783568" duration="217000" />
       <workItem from="1596041991380" duration="349000" />
-      <workItem from="1596100492838" duration="7263000" />
+      <workItem from="1596100492838" duration="7434000" />
     </task>
     <task id="LOCAL-00001" summary="fsdf">
       <created>1583932373061</created>
@@ -328,11 +321,18 @@
       <option name="project" value="LOCAL" />
       <updated>1596100805641</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="forntend apis created">
+      <created>1596107921022</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596107921022</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41039000" />
+    <option name="totallyTimeSpent" value="41210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="59" y="25" width="1861" height="1055" extended-state="6" />
@@ -341,11 +341,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5041322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44875944" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44875944" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38511327" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38511327" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -395,7 +395,8 @@
     <MESSAGE value="dasda" />
     <MESSAGE value="changes" />
     <MESSAGE value="update git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update git ignore" />
+    <MESSAGE value="forntend apis created" />
+    <option name="LAST_COMMIT_MESSAGE" value="forntend apis created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

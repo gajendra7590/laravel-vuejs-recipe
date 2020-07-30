@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('reset_token',100)->nullable();
             $table->string('reset_token_at',100)->nullable();
+            $table->longText('about_me')->nullable();
             $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
         });
