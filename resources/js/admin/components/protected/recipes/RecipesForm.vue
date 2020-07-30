@@ -81,6 +81,22 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="row">
+                            <div class="col-sm-12"> 
+                                <div class="form-group">
+                                    <label>Recipe Short Description</label>
+                                    <textarea 
+                                        class="form-control"
+                                        name="short_desc" 
+                                        placeholder='Short Desc..'
+                                        v-model="editData.short_desc">
+                                    </textarea>
+                                    <p class="text-danger validation_errors" 
+                                       v-if="errorsList.short_desc">{{ errorsList.short_desc }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="row">
                             <div class="col-sm-12"> 
                                 <div class="form-group">
@@ -93,7 +109,7 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.description">{{ errorsList.description }} </p>
                                 </div>
                             </div>
-                        </div>  
+                        </div>   
                         <div class="row"> 
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -213,7 +229,7 @@
                             </div>
                         </div> 
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Category Status</label>
                                     <select class="form-control" name="status" v-model="editData.status">
@@ -222,6 +238,16 @@
                                         <option value="2">Archive</option> 
                                     </select> 
                                     <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>    
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Is Slider Image</label>
+                                    <select class="form-control" name="is_slider" v-model="editData.is_slider">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option> 
+                                    </select> 
+                                    <p class="text-danger validation_errors" v-if="errorsList.is_slider">{{ errorsList.is_slider }} </p>    
                                 </div>
                             </div>
                         </div>
@@ -261,6 +287,7 @@
               id: 0,
               category_id : '',
               title: "",
+              short_desc:"",
               description: "",
               prepairation_time : '',
               cooking_time : '',
@@ -283,6 +310,7 @@
                 }
               ],
               photo_url: config.ASSET_BASE_URL+'default_img/default.jpg', 
+              is_slider: "0",
               status: "1",
           },
           errors : {},

@@ -25,6 +25,7 @@ class CreateRecipesTable extends Migration
             $table->string('prepairation_time',50)->nullable();
             $table->string('cooking_time',50)->nullable();
             $table->string('serving_peoples',50)->nullable();
+            $table->enum('is_slider',array('0','1'))->default(0);
             $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
 

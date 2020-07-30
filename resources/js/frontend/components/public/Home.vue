@@ -12,7 +12,11 @@
                     data-r-large-dots="false" data-r-extra-large="1" data-r-extra-large-nav="true"
                     data-r-extra-large-dots="false"> 
                     <div v-for="(sld,index) in homeSlider.slider" :key="index" class="ranna-slider-content-layout1">
-                        <figure class="item-figure"><a href="single-recipe1.html"><img src="/app/img/slider/slide1-3.jpg" alt="Product"></a></figure>
+                        <figure class="item-figure">
+                            <router-link :to="'recipe'">
+                                <img v-lazy="sld.photo_url" alt="Product">
+                            </router-link>
+                        </figure>
                         <div class="item-content">
                             <span class="sub-title">{{ sld.category.name }}</span>
                             <h2 class="item-title"><a href="single-recipe1.html">{{ sld.title }}</a></h2>
@@ -42,8 +46,11 @@
                 <div class="row" v-if="trending">                     
                     <div v-for="(rec,index) in homeSlider.padbottom18" :key="index" class="col-lg-4 d-block d-md-none d-lg-block col-sm-12">
                         <div class="product-box-layout1">
-                            <figure class="item-figure"><a href="single-recipe1.html"><img src="/app/img/product/product3.jpg"
-                                        alt="Product"></a></figure>
+                            <figure class="item-figure">
+                                <a href="single-recipe1.html">
+                                    <img v-lazy="rec.photo_url" alt="Product">
+                                </a>
+                           </figure>
                             <div class="item-content">
                                 <span class="sub-title">{{ rec.category.name }}</span>
                                 <h3 class="item-title">
@@ -80,8 +87,11 @@
                         <div class="row" v-if="trending"> 
                             <div v-for="(rec,index) in trending" :key="index" :class=" (index == 0)?'col-12':'col-md-6 col-sm-6'">
                                 <div class="product-box-layout1">
-                                    <figure class="item-figure"><a href="single-recipe1.html"><img src="/app/img/product/product4.jpg"
-                                                alt="Product"></a></figure>
+                                    <figure class="item-figure">
+                                        <a href="single-recipe1.html">
+                                            <img v-lazy="rec.photo_url" alt="Product">
+                                        </a>
+                                    </figure>
                                     <div class="item-content">
                                         <span class="sub-title">{{ rec.category.name }}</span>
                                         <h2 class="item-title">
@@ -144,7 +154,9 @@
                                 <ul class="block-list" v-if="homeSiderbar">
                                     <li v-for="(lr ,index) in homeSiderbar.latest_recipes" :key="index" class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest1.jpg" alt="Post"></a>
+                                            <a href="#">
+                                                <img v-lazy="lr.photo_url" alt="Post">
+                                            </a>
                                             <div class="count-number">1</div>
                                         </div>
                                         <div class="item-content">
@@ -212,11 +224,18 @@
                     
                     <div v-for="(ec,index) in homeSection3InOne.editorsChoice" :key="index" class="col-lg-4 d-block d-md-none d-lg-block col-sm-12 col-12">
                         <div class="product-box-layout2">
-                            <figure class="item-figure"><a href="single-recipe1.html"><img src="/app/img/product/product13.jpg"
-                                        alt="Product"></a></figure>
+                            <figure class="item-figure">
+                                <a href="single-recipe1.html">
+                                    <img v-lazy="ec.photo_url" alt="Product">
+                                </a>
+                            </figure>
                             <div class="item-content">
-                                <span class="sub-title">JUICE</span>
-                                <h3 class="item-title"><a href="single-recipe1.html">Blueberry Juice with Lemon Crema</a></h3>
+                                <span class="sub-title">{{ ec.title }}</span>
+                                <h3 class="item-title">
+                                    <a href="single-recipe1.html">
+                                        {{ ec.short_desc }}
+                                    </a>
+                                </h3>
                                 <ul class="item-rating">
                                     <li class="star-fill"><i class="fas fa-star"></i></li>
                                     <li class="star-fill"><i class="fas fa-star"></i></li>
@@ -226,8 +245,8 @@
                                     <li><span>9<span> / 10</span></span> </li>
                                 </ul>
                                 <ul class="entry-meta">
-                                    <li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-                                    <li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
+                                   <li><a href="#"><i class="fas fa-clock"></i>{{ ec.cooking_time }}</a></li>
+                                    <li><a href="#"><i class="fas fa-user"></i>by <span>{{ ec.user.display_name }}</span></a></li>
                                     <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
                                 </ul>
                             </div>
@@ -249,11 +268,16 @@
                         <div class="row" v-if="homeSection3InOne">
                             <div v-for="(pr,index) in homeSection3InOne.popular" :key="index" class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="product-box-layout3">
-                                    <figure class="item-figure"><a href="single-recipe1.html"><img src="/app/img/product/product14.jpg"
-                                                alt="Product"></a></figure>
+                                    <figure class="item-figure">
+                                        <a href="single-recipe1.html">
+                                            <img v-lazy="pr.photo_url" alt="Product">
+                                        </a>
+                                    </figure>
                                     <div class="item-content">
-                                        <span class="sub-title">BREAKFAST</span>
-                                        <h3 class="item-title"><a href="single-recipe1.html">Asian Chicken Noodles</a></h3>
+                                        <span class="sub-title">{{ pr.category.name }}</span>
+                                        <h3 class="item-title">
+                                            <a href="single-recipe1.html">{{ pr.title }}</a>
+                                        </h3>
                                         <ul class="item-rating">
                                             <li class="star-fill"><i class="fas fa-star"></i></li>
                                             <li class="star-fill"><i class="fas fa-star"></i></li>
@@ -267,8 +291,8 @@
                                             cibus orci luctus et ultrices posuere cubilia Curae; Nunc
                                             mattis turpis id aliquet.</p>
                                         <ul class="entry-meta">
-                                            <li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-                                            <li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
+                                            <li><a href="#"><i class="fas fa-clock"></i>{{ pr.cooking_time }}</a></li>
+                                            <li><a href="#"><i class="fas fa-user"></i>by <span>{{ pr.user.display_name }}</span></a></li>
                                             <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
                                         </ul>
                                     </div>
@@ -293,14 +317,14 @@
                                     data-r-extra-large-nav="true" data-r-extra-large-dots="false">
                                     <div v-for="(fa,index) in homeSection3InOne.featured" :key="index" class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="/app/img/product/product17.jpg" alt="Brand" class="img-fluid">
+                                            <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
-                                            <span class="ctg-name">BREAKFAST</span>
-                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
-                                            <p>Definitiones noel ei verear intelle
-                                                gatpri civibus consequat area
-                                                refund efficiantue.</p>
+                                            <span class="ctg-name">{{ fa.category.name }}</span>
+                                            <h4 class="item-title">
+                                                <a href="single-recipe1.html">{{ fa.title }}</a>
+                                            </h4>
+                                            <p>{{ fa.short_desc }}</p>
                                         </div>
                                     </div> 
                                 </div>
@@ -325,10 +349,13 @@
         <!-- Popular Recipe End Here -->
         <!-- Instagram Start Here -->
         <section class="instagram-feed-wrap">
-            <div class="instagram-feed-title"><a href="#"><i class="fab fa-instagram"></i>Follow On Instagram</a></div>
+            <div class="instagram-feed-title">
+                <a href="#"><i class="fab fa-instagram"></i>Follow On Instagram</a></div>
             <ul class="instagram-feed-figure" v-if="followOnInsta">
                 <li v-for="(insta,index) in followOnInsta" :key="index">
-                    <a href="single-recipe1.html"><img src="/app/img/social-figure/social-figure1.jpg" alt="Social"></a>
+                    <a href="single-recipe1.html">
+                        <img v-lazy="insta.photo_url" alt="Social">
+                    </a>
                 </li> 
             </ul>
         </section>

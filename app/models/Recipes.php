@@ -29,7 +29,7 @@ class Recipes extends Model
      */
     protected $fillable = [
         'category_id','user_id','title', 'slug', 'short_desc', 'description',
-        'photo','prepairation_time','cooking_time','serving_peoples','status'
+        'photo','prepairation_time','cooking_time','serving_peoples','is_slider','status'
     ];
 
 

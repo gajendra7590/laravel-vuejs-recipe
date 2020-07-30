@@ -37,7 +37,11 @@
                  <v-server-table :url="API_URL" :columns="columns" :options="options" ref="table">  
                    <div slot="photo_url" slot-scope="{ row }">
                       <img class="img-circle" width="50" height="50" v-lazy="row.photo_url" />
-                    </div>      
+                    </div>   
+                     <div slot="is_slider" slot-scope="{ row }"> 
+                       <span v-if="row.is_slider == 1" class="badge badge-success">Yes</span>   
+                       <span v-if="row.is_slider == 0" class="badge badge-danger">No</span> 
+                     </div>    
                      <div slot="status" slot-scope="{ row }"> 
                        <span v-if="row.status == 1" class="badge badge-success">Active</span>   
                        <span v-if="row.status == 0" class="badge badge-warning">In Active</span> 
@@ -79,6 +83,7 @@ export default {
           'user',
           'category',          
           'title',
+          'is_slider',
           'status',
           'created_at',
           'actions'
@@ -90,7 +95,8 @@ export default {
             photo_url	: 'Image',
             category : 'Category',
             user : 'Author', 
-            title : 'Title',            
+            title : 'Title',   
+            is_slider : 'Slider Image',         
             status : 'Status',
             created_at : 'Created Date'
           },

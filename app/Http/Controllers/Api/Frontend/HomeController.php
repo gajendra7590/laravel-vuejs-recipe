@@ -81,7 +81,7 @@ class HomeController extends Controller
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])
         ->where(['status' => '1'])
-        ->orderByRaw('RAND()')
+        ->orderBy('is_slider','DESC')
         ->limit(3)
         ->get()
         ->all();

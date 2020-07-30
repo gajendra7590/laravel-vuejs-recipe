@@ -38,7 +38,7 @@ class RecipesController extends Controller
             'user' => function($model){ $model->select('id','display_name'); },
             'category' => function($model){ $model->select('id','name'); },
         ])
-        ->select('id','category_id','user_id','title','photo','prepairation_time','cooking_time','serving_peoples','status')
+        ->select('id','category_id','user_id','title','photo','prepairation_time','cooking_time','serving_peoples','is_slider','status')
         ->orderBy($sort,$direction)
         ->offset($offset)
         ->orWhere('title', 'LIKE', '%'.$search.'%') 
@@ -78,6 +78,7 @@ class RecipesController extends Controller
         $validator = Validator::make($post,[
             'category_id' => 'required',
             'title' => 'required|unique:recipes',
+            'short_desc' => 'required',
             'description' => 'required',
             'prepairation_time' => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png',
@@ -108,12 +109,14 @@ class RecipesController extends Controller
             $recipe->category_id = $post['category_id'];
             $recipe->user_id = Auth::user()->id;
             $recipe->title = $post['title'];
+            $recipe->short_desc = $post['short_desc'];
             $recipe->slug = $slug;
             $recipe->description = $post['description'];
             $recipe->prepairation_time = $post['prepairation_time'];
             $recipe->cooking_time = $post['cooking_time'];
             $recipe->serving_peoples = $post['serving_peoples'];
             $recipe->photo = NULL; 
+            $recipe->is_slider = isset($post['is_slider'])?$post['is_slider']:0;
             $recipe->status = $post['status'];
             //Upload Images
             if ($request->hasFile('image')) {
@@ -168,6 +171,7 @@ class RecipesController extends Controller
         $validator = Validator::make($post,[
             'category_id' => 'required',
             'title' => "required|unique:recipes,title,{$id}",
+            'short_desc' => 'required',
             'description' => 'required',
             'prepairation_time' => 'required',
             'image' => 'image|mimes:jpg,jpeg,png',
@@ -195,11 +199,13 @@ class RecipesController extends Controller
             $slug = slugCreator($post['title']); 
             $recipeModel->category_id = $post['category_id'];
             $recipeModel->title = $post['title'];
+            $recipeModel->short_desc = $post['short_desc'];
             $recipeModel->slug = $slug;
             $recipeModel->description = $post['description'];
             $recipeModel->prepairation_time = $post['prepairation_time'];
             $recipeModel->cooking_time = $post['cooking_time'];
             $recipeModel->serving_peoples = $post['serving_peoples'];
+            $recipeModel->is_slider = isset($post['is_slider'])?$post['is_slider']:0;
             $recipeModel->status = $post['status'];
 
             //Upload Images
