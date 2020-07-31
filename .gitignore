@@ -24,7 +24,6 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-/.idea/laravel-vuejs-recipe.iml
-/.idea/workspace.xml
+/.idea/
 /public/images/
 
