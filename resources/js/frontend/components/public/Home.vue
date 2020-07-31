@@ -147,8 +147,8 @@
                                 <h3 class="item-heading">LATEST RECIPES</h3>
                             </div>
                             <div class="widget-latest">
-                                <ul class="block-list" v-if="homeSiderbar">
-                                    <li v-for="(lr ,index) in homeSiderbar.latest_recipes" :key="index" class="single-item">
+                                <ul class="block-list" v-if="latestsRecipes">
+                                    <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
                                         <div class="item-img latest-item-img">
                                             <a href="#">
                                                 <img v-lazy="lr.photo_url" alt="Post">
@@ -301,9 +301,9 @@
                             <div class="section-heading heading-dark">
                                 <h3 class="item-heading">FEATURED ARTICLE</h3>
                             </div>
-                            <div class="widget-featured-feed" v-if="homeSection3InOne">
+                            <div class="widget-featured-feed" v-if="featuredRecipes">
                                 <vueper-slides :autoplay="true" :duration="3000" class="" fixed-height="418px">                         
-                                    <vueper-slide v-for="(fa,index) in homeSection3InOne.featured" :key="index" class="featured-box-layout1 owl-stage-outer">  
+                                    <vueper-slide v-for="(fa,index) in featuredRecipes" :key="index" class="featured-box-layout1 owl-stage-outer">  
                                         <template v-slot:content>
                                             <div class="item-img">
                                                 <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
@@ -383,7 +383,16 @@
             },
             followOnInstagram() {
                 this.$store.dispatch('followOnInstagram'); 
-            }               
+            },
+            getLatestsRecipes() { 
+                this.$store.dispatch('latestsRecipes',5); 
+            },
+            getFeaturedRecipes() { 
+                this.$store.dispatch('featuredRecipes',3); 
+            },
+            getRandomRecipes() { 
+                this.$store.dispatch('randomRecipes',3); 
+            },               
         },
         created(){
             this.getHomeSlider();
@@ -391,6 +400,9 @@
             this.homeSection3In1();
             this.homeSidebarSection3In1();
             this.followOnInstagram();
+            this.getLatestsRecipes(); 
+            this.getFeaturedRecipes(); 
+            this.getRandomRecipes(); 
         },
         computed:mapState({ 
             homeSlider : state => state.data.getHomeSlider,
@@ -398,6 +410,9 @@
             homeSection3InOne : state => state.data.homeSection3In1,
             homeSiderbar : state => state.data.homeSidebarSection3In1,
             followOnInsta : state => state.data.followOnInstagram,
+            latestsRecipes : state => state.data.latestsRecipes,
+            featuredRecipes : state => state.data.featuredRecipes,
+            randomRecipes : state => state.data.randomRecipes, 
         })
     }
 </script>

@@ -45,8 +45,7 @@ class HomeController extends Controller
     public function homeSection3In1(Request $request){
         return [
             'editorsChoice' => $this->editorsChoice(),
-            'popular' => $this->popular(),
-            'featured' => $this->featured(),
+            'popular' => $this->popular()
         ];
     }
 
@@ -55,24 +54,11 @@ class HomeController extends Controller
      */
     public function homeSidebarSection3In1(Request $request){
         return [
-            'latest_recipes' => $this->latestRecipes(),
             'categories' => $this->categories(),
             'popuplar_tags' => $this->popuplarTags(),
             'about_me' => $this->aboutMe(),
         ];
-    }
-
-    /*
-     * followOnInstagram
-     */
-    public function followOnInstagram(Request $request){
-        return Recipes::where(['status' => '1'])
-        ->select('id','title','photo')
-        ->orderByRaw('RAND()')
-        ->limit(8)
-        ->get()
-        ->all();
-    }
+    } 
 
     //Below functions are callback
     private function homeSliderArea(){
@@ -122,32 +108,6 @@ class HomeController extends Controller
         ->get()
         ->all();
     }
-
-    private function featured(){
-        return Recipes::with([
-            'category' => function($m){ $m->select('id','name','slug'); },
-            'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
-        ])
-        ->where(['status' => '1'])
-        ->orderByRaw('RAND()')
-        ->limit(3)
-        ->get()
-        ->all();
-    }
-
-    private function latestRecipes(){
-        return Recipes::with([
-            'category' => function($m){ $m->select('id','name','slug'); },
-            'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
-        ])
-        ->where(['status' => '1'])
-        ->orderByRaw('RAND()')
-        ->limit(5)
-        ->get()
-        ->all();
-
-    }
-
 
     private function categories(){
         return Categories::where(['status' => '1'])->limit(6)->get()->all();

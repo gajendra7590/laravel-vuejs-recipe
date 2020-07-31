@@ -5,7 +5,7 @@ Vue.use(axios);
 import config from "../../../config";
 
 export default {
-    // River
+    //Home Start
     getHomeSlider({ commit, state }, payload) {
         axios
             .get(config.API_URL + "getHomeSlider")
@@ -46,9 +46,11 @@ export default {
                 console.log(error.response);
             });
     },
+    //Home End
+    //Common Start
     followOnInstagram({ commit, state }, payload) {
         axios
-            .get(config.API_URL + "followOnInstagram")
+            .get(config.API_URL + "followOnInstagram?limit=" + ((payload) ? payload : 8))
             .then(function(response) {
                 commit("followOnInstagram", response.data);
             })
@@ -56,6 +58,48 @@ export default {
                 console.log(error.response);
             });
     },
+    latestsRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "latestsRecipes?limit=" + ((payload) ? payload : 3))
+            .then(function(response) {
+                commit("latestsRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    featuredRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "featuredRecipes?limit=" + ((payload) ? payload : 3))
+            .then(function(response) {
+                commit("featuredRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    randomRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "randomRecipes?limit=" + ((payload) ? payload : 3))
+            .then(function(response) {
+                commit("randomRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    popularTags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "popularTags?limit=" + ((payload) ? payload : 3))
+            .then(function(response) {
+                commit("popularTags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    //Common End
+    //Category Start
     getCategories({ commit, state }, payload) {
         axios
             .get(config.API_URL + "getCategories")
@@ -66,6 +110,8 @@ export default {
                 console.log(error.response);
             });
     },
+    //Category End
+    //Authors Start
     authorsList({ commit, state }, payload) {
         axios
             .get(config.API_URL + "authorsList")
@@ -76,14 +122,17 @@ export default {
                 console.log(error.response);
             });
     },
-    latestsRecipes({ commit, state }, payload) {
+    //Authors End
+    //Recipes Start
+    recipesList({ commit, state }, payload) {
         axios
-            .get(config.API_URL + "latestsRecipes")
+            .get(config.API_URL + "recipesList")
             .then(function(response) {
-                commit("latestsRecipes", response.data);
+                commit("recipesList", response.data);
             })
             .catch(function(error) {
                 console.log(error.response);
             });
     },
+    //Recipes End
 };

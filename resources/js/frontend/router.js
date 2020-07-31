@@ -4,25 +4,28 @@ import VueToastr from "vue-toastr";
 import config from './../config'
 
 //Import All component Here
-import Home from './components/public/Home.vue';
+import Home from './components/public/Home';
 
-import RecipeSearch from './components/public/RecipeSearch.vue';
-import RecipeDetail from './components/public/RecipeDetail.vue';
-import CategoryRecipes from './components/public/CategoryRecipes.vue';
+import Recipe from './components/public/Recipe';
+import RecipesByCategory from './components/public/RecipesByCategory';
+import RecipesByAuthor from './components/public/RecipesByAuthor';
+import RecipesByTag from './components/public/RecipesByTag';
+import RecipeDetail from './components/public/RecipeDetail';
 
-import Categories from './components/public/Categories.vue';
 
-import About from './components/public/About.vue';
-import ContactUs from './components/public/ContactUs.vue';
+import Categories from './components/public/Categories';
 
-import Authors from './components/public/Authors.vue';
-import AuthorDetail from './components/public/AuthorDetail.vue';
+import About from './components/public/About';
+import ContactUs from './components/public/ContactUs';
 
-import Shop from './components/public/Shop.vue';
-import ShopDetail from './components/public/ShopDetail.vue';
+import Authors from './components/public/Authors';
+import AuthorDetail from './components/public/AuthorDetail';
 
-import Blog from './components/public/Blog.vue';
-import BlogDetail from './components/public/BlogDetail.vue';
+import Shop from './components/public/Shop';
+import ShopDetail from './components/public/ShopDetail';
+
+import Blog from './components/public/Blog';
+import BlogDetail from './components/public/BlogDetail';
 
 
 //alert(config.URL_PREFIX_ADMIN)
@@ -36,8 +39,10 @@ const router = new VueRouter({
         { name: "about-us", path: "/about-us", component: About },
         { name: "contact-us", path: "/contact-us", component: ContactUs },
         { name: "recipe-categories", path: "/categories", component: Categories },
-        { name: "recipes", path: "/recipes", component: RecipeSearch },
-        { name: "recipesWithCategory", path: "/recipes/category/:slug", component: CategoryRecipes },
+        { name: "recipes", path: "/recipes", component: Recipe },
+        { name: "recipesByCategory", path: "/recipes/category/:slug", component: RecipesByCategory },
+        { name: "recipesByAuthor", path: "/recipes/author/:slug", component: RecipesByAuthor },
+        { name: "recipesByTag", path: "/recipes/tag/:slug", component: RecipesByTag },
         { name: "recipeDetail", path: "/recipe/:slug", component: RecipeDetail },
         { name: "authors", path: "/authors", component: Authors },
         { name: "authorsDetail", path: "/authors/:slug", component: AuthorDetail },

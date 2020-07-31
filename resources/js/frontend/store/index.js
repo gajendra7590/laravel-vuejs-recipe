@@ -44,11 +44,18 @@ const store = new Vuex.Store({
             homeTrendingRecipe: [],
             homeSection3In1: [],
             homeSidebarSection3In1: [],
-            followOnInstagram: [],
-            categoriesList: [],
-            authorsList: [],
-            latestsRecipes: [],
 
+            followOnInstagram: [],
+            latestsRecipes: [],
+            featuredRecipes: [],
+            randomRecipes: [],
+            popularTags: [],
+
+            categoriesList: [],
+
+            authorsList: [],
+
+            recipesList: []
         }
     },
     mutations,

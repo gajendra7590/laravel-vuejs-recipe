@@ -59,7 +59,7 @@
                                                         <li>
                                                             <div>
                                                                 <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">15</span>
+                                                                <span class="item-number">{{ author.recipes_count }}</span>
                                                             </div>
                                                         </li>
                                                         <li>
@@ -129,46 +129,30 @@
                                 <h3 class="item-heading">LATEST RECIPES</h3>
                             </div>
                             <div class="widget-latest">
-                                <ul class="block-list">
-                                    <li class="single-item">
+                                <ul class="block-list" v-if="latestsRecipes">
+                                    <li class="single-item" v-for="(lr,index) in latestsRecipes" :key="index">
                                         <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest1.jpg" alt="Post"></a>
+                                            <a href="#">
+                                                <img :src="lr.photo_url" alt="Post" style="width:90px;height:70px;">
+                                            </a>
                                             <div class="count-number">1</div>
                                         </div>
                                         <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
+                                            <div class="item-ctg">{{ lr.category.name }}</div>
+                                            <h4 class="item-title">
+                                                <a href="#">
+                                                    {{ lr.title }}
+                                                </a>
+                                            </h4>
+                                            <div class="item-post-by">
+                                                <a href="single-blog.html">
+                                                    <i class="fas fa-user"></i>
+                                                    <span>by</span>
+                                                    {{ lr.user.display_name }}
+                                                </a>
+                                           </div>
                                         </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest2.jpg" alt="Post"></a>
-                                            <div class="count-number">2</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest3.jpg" alt="Post"></a>
-                                            <div class="count-number">3</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
+                                    </li> 
                                 </ul>
                             </div>
                         </div>
