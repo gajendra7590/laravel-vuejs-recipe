@@ -34,7 +34,7 @@ class HomeController extends Controller
         ])
         ->where(['status' => '1'])
         ->orderByRaw('RAND()')
-        ->limit(7)
+        ->limit(5)
         ->get()
         ->all();
     }
@@ -118,7 +118,7 @@ class HomeController extends Controller
         ])
         ->where(['status' => '1'])
         ->orderByRaw('RAND()')
-        ->limit(4)
+        ->limit(2)
         ->get()
         ->all();
     }

@@ -1,42 +1,38 @@
 <template>
-    <div id="wrapper" class="wrapper"> 
+    <div id="wrapper" class="wrapper">  
+
         <!-- Slider Area Start Here --> 
         <section class="ranna-slider-area">
-            <div class="container">
-                <div v-if="homeSlider" class="rc-carousel nav-control-layout2" data-loop="true" data-items="30" data-margin="5"
-                    data-autoplay="false" data-autoplay-timeout="5000" data-smart-speed="700" data-dots="false"
-                    data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true"
-                    data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false"
-                    data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1"
-                    data-r-medium-nav="true" data-r-medium-dots="false" data-r-large="1" data-r-large-nav="true"
-                    data-r-large-dots="false" data-r-extra-large="1" data-r-extra-large-nav="true"
-                    data-r-extra-large-dots="false"> 
-                    <div v-for="(sld,index) in homeSlider.slider" :key="index" class="ranna-slider-content-layout1">
-                        <figure class="item-figure">
-                            <router-link :to="'recipe'">
-                                <img v-lazy="sld.photo_url" alt="Product">
-                            </router-link>
-                        </figure>
-                        <div class="item-content">
-                            <span class="sub-title">{{ sld.category.name }}</span>
-                            <h2 class="item-title"><a href="single-recipe1.html">{{ sld.title }}</a></h2>
-                            <ul class="item-rating">
-                                <li class="star-fill"><i class="fas fa-star"></i></li>
-                                <li class="star-fill"><i class="fas fa-star"></i></li>
-                                <li class="star-fill"><i class="fas fa-star"></i></li>
-                                <li class="star-fill"><i class="fas fa-star"></i></li>
-                                <li class="star-empty"><i class="fas fa-star"></i></li>
-                                <li><span>9<span> / 10</span></span> </li>
-                            </ul>
-                            <p v-html="sld.short_desc"></p>
-                            <ul class="entry-meta">
-                                <li><a href="javascript:void(0);"><i class="fas fa-clock"></i>{{ sld.cooking_time }}</a></li>
-                                <li><a href="javascript:void(0);"><i class="fas fa-user"></i>by <span>{{ sld.user.display_name }}</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                            </ul>
-                        </div>
-                    </div>                    
-                </div>
+            <div class="container"> 
+                 <vueper-slides :autoplay="true" :duration="3000" class="rc-carousel nav-control-layout2 owl-carousel owl-loaded owl-drag">                         
+                        <vueper-slide v-for="(sld,index) in homeSlider.slider" :key="index" class="ranna-slider-content-layout1"> 
+                            <template v-slot:content>
+                                <figure class="item-figure">
+                                    <router-link :to="'recipe'">
+                                        <img v-lazy="sld.photo_url" alt="Product">
+                                    </router-link>
+                                </figure>
+                                <div class="item-content">
+                                    <span class="sub-title">{{ sld.category.name }}</span>
+                                    <h2 class="item-title"><a href="single-recipe1.html">{{ sld.title }}</a></h2>
+                                    <ul class="item-rating">
+                                        <li class="star-fill"><i class="fas fa-star"></i></li>
+                                        <li class="star-fill"><i class="fas fa-star"></i></li>
+                                        <li class="star-fill"><i class="fas fa-star"></i></li>
+                                        <li class="star-fill"><i class="fas fa-star"></i></li>
+                                        <li class="star-empty"><i class="fas fa-star"></i></li>
+                                        <li><span>9<span> / 10</span></span> </li>
+                                    </ul>
+                                    <p v-html="sld.short_desc"></p>
+                                    <ul class="entry-meta">
+                                        <li><a href="javascript:void(0);"><i class="fas fa-clock"></i>{{ sld.cooking_time }}</a></li>
+                                        <li><a href="javascript:void(0);"><i class="fas fa-user"></i>by <span>{{ sld.user.display_name }}</span></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
+                                    </ul>
+                                </div>
+                            </template>  
+                        </vueper-slide>    
+                    </vueper-slides>
             </div>
         </section>
         <!-- Slider Area End Here --> 
@@ -86,7 +82,7 @@
                         </div>
                         <div class="row" v-if="trending"> 
                             <div v-for="(rec,index) in trending" :key="index" :class=" (index == 0)?'col-12':'col-md-6 col-sm-6'">
-                                <div class="product-box-layout1">
+                                <div class="product-box-layout1" :class=" (index == 0)?'trending_home_first':'trending_home'">
                                     <figure class="item-figure">
                                         <a href="single-recipe1.html">
                                             <img v-lazy="rec.photo_url" alt="Product">
@@ -153,11 +149,11 @@
                             <div class="widget-latest">
                                 <ul class="block-list" v-if="homeSiderbar">
                                     <li v-for="(lr ,index) in homeSiderbar.latest_recipes" :key="index" class="single-item">
-                                        <div class="item-img">
+                                        <div class="item-img latest-item-img">
                                             <a href="#">
                                                 <img v-lazy="lr.photo_url" alt="Post">
                                             </a>
-                                            <div class="count-number">1</div>
+                                            <div class="count-number">{{ index }}</div>
                                         </div>
                                         <div class="item-content">
                                             <div class="item-ctg">{{ lr.category.name }}</div>
@@ -223,7 +219,7 @@
                 <div class="row" v-if="homeSection3InOne"> 
                     
                     <div v-for="(ec,index) in homeSection3InOne.editorsChoice" :key="index" class="col-lg-4 d-block d-md-none d-lg-block col-sm-12 col-12">
-                        <div class="product-box-layout2">
+                        <div class="product-box-layout2 editors-choice">
                             <figure class="item-figure">
                                 <a href="single-recipe1.html">
                                     <img v-lazy="ec.photo_url" alt="Product">
@@ -267,7 +263,7 @@
                         </div>
                         <div class="row" v-if="homeSection3InOne">
                             <div v-for="(pr,index) in homeSection3InOne.popular" :key="index" class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="product-box-layout3">
+                                <div class="product-box-layout3 popular-recipes">
                                     <figure class="item-figure">
                                         <a href="single-recipe1.html">
                                             <img v-lazy="pr.photo_url" alt="Product">
@@ -306,28 +302,22 @@
                                 <h3 class="item-heading">FEATURED ARTICLE</h3>
                             </div>
                             <div class="widget-featured-feed" v-if="homeSection3InOne">
-                                <div class="rc-carousel nav-control-layout1" data-loop="true" data-items="3"
-                                    data-margin="5" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="700"
-                                    data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1"
-                                    data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1"
-                                    data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1"
-                                    data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1"
-                                    data-r-medium-nav="true" data-r-medium-dots="false" data-r-large="1"
-                                    data-r-large-nav="true" data-r-large-dots="false" data-r-extra-large="1"
-                                    data-r-extra-large-nav="true" data-r-extra-large-dots="false">
-                                    <div v-for="(fa,index) in homeSection3InOne.featured" :key="index" class="featured-box-layout1">
-                                        <div class="item-img">
-                                            <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
-                                        </div>
-                                        <div class="item-content">
-                                            <span class="ctg-name">{{ fa.category.name }}</span>
-                                            <h4 class="item-title">
-                                                <a href="single-recipe1.html">{{ fa.title }}</a>
-                                            </h4>
-                                            <p>{{ fa.short_desc }}</p>
-                                        </div>
-                                    </div> 
-                                </div>
+                                <vueper-slides :autoplay="true" :duration="3000" class="" fixed-height="418px">                         
+                                    <vueper-slide v-for="(fa,index) in homeSection3InOne.featured" :key="index" class="featured-box-layout1 owl-stage-outer">  
+                                        <template v-slot:content>
+                                            <div class="item-img">
+                                                <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
+                                            </div>
+                                            <div class="item-content">
+                                                <span class="ctg-name">{{ fa.category.name }}</span>
+                                                <h4 class="item-title">
+                                                    <a href="single-recipe1.html">{{ fa.title }}</a>
+                                                </h4>
+                                                <p>{{ fa.short_desc }}</p>
+                                            </div>
+                                        </template>   
+                                    </vueper-slide> 
+                                </vueper-slides>
                             </div>
                         </div>
                         <div class="widget">
@@ -349,15 +339,16 @@
         <!-- Popular Recipe End Here -->
         <!-- Instagram Start Here -->
         <section class="instagram-feed-wrap">
-            <div class="instagram-feed-title">
-                <a href="#"><i class="fab fa-instagram"></i>Follow On Instagram</a></div>
-            <ul class="instagram-feed-figure" v-if="followOnInsta">
-                <li v-for="(insta,index) in followOnInsta" :key="index">
-                    <a href="single-recipe1.html">
-                        <img v-lazy="insta.photo_url" alt="Social">
-                    </a>
-                </li> 
-            </ul>
+                <div class="instagram-feed-title">
+                  <a href="#"><i class="fab fa-instagram"></i>Follow On Instagram</a>
+                </div>
+                <ul class="instagram-feed-figure" v-if="followOnInsta">
+                    <li v-for="(insta,index) in followOnInsta" :key="index">
+                        <a href="single-recipe1.html">
+                            <img v-lazy="insta.photo_url" alt="Social">
+                        </a>
+                    </li> 
+                </ul>
         </section>
         <!-- Instagram End Here --> 
     </div>
@@ -365,11 +356,16 @@
 
 <script>
     import { mapState } from 'vuex';
+    //In your Vue.js component.
+    import { VueperSlides, VueperSlide } from 'vueperslides'
+    import 'vueperslides/dist/vueperslides.css';
+
     export default {
         name : "home",
+        components: { VueperSlides, VueperSlide },
         data() {
             return { 
-
+                  
              };
         },
         methods: {
@@ -406,6 +402,47 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style>
+    .vueperslides {
+        margin-bottom: 17px !important;
+    } 
 
+    .ranna-slider-content-layout1 { 
+        margin-bottom: 0px !important; 
+    }
+    .vueperslides__bullets { 
+        bottom: -18px !important; 
+    }
+
+    .item-img.latest-item-img img {
+        height: 97px;
+        width: 106px;
+    }
+    .item-img.latest-item-img {
+        max-width: 128px;
+        min-height: 70px;
+    }
+    .instagram-feed-figure img {
+        width: 230px;
+        height: 230px;
+    }
+
+    .padding-bottom-18 img,.trending_home img,.editors-choice img {
+        min-height: 273px;
+        max-height: 273px;
+        max-width: 365px;
+        min-width: 365px;
+    }
+    .popular-recipes img {
+        max-width: 425px;
+        min-width: 425px;
+        max-height: 271px;
+        min-height: 271px;
+    }
+    .trending_home_first img {
+        min-width: 780px;
+        max-width: 780px;
+        max-height: 400px;
+        min-height: 400px;
+    } 
 </style>

@@ -4,6 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\models\Recipes;
+
 class Categories extends Model
 {
 
@@ -15,7 +17,14 @@ class Categories extends Model
 
     protected $fillable = [
         'name','slug','description', 'photo','status'
-    ]; 
+    ];
+
+
+    public function recipes()
+    {
+        return $this->hasMany(Recipes::class, 'category_id','id');
+    }
+
 
     public function getPhotoUrlAttribute(){  
        if($this->photo !=''){

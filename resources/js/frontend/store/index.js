@@ -45,6 +45,9 @@ const store = new Vuex.Store({
             homeSection3In1: [],
             homeSidebarSection3In1: [],
             followOnInstagram: [],
+            categoriesList: [],
+            authorsList: [],
+            latestsRecipes: [],
 
         }
     },

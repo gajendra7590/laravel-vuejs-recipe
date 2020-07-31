@@ -56,4 +56,34 @@ export default {
                 console.log(error.response);
             });
     },
+    getCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getCategories")
+            .then(function(response) {
+                commit("categoriesList", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    authorsList({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "authorsList")
+            .then(function(response) {
+                commit("authorsList", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    latestsRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "latestsRecipes")
+            .then(function(response) {
+                commit("latestsRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
 };

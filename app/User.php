@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+//Models
+use App\models\Recipes;
 
 class User extends Authenticatable
 {
@@ -49,6 +51,12 @@ class User extends Authenticatable
         'reset_token_at' => 'datetime',
         'last_login' => 'datetime',
     ];
+
+
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipes::class, 'id','user_id');
+    }
 
 
     public function getUserRoleNameAttribute(){

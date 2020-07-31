@@ -9,9 +9,9 @@
                             <h1>Our All Author</h1>
                             <ul>
                                 <li>
-                                    <a href="index-2.html">Home</a>
+                                    <router-link to="/">Home</router-link>
                                 </li>
-                                <li>Author Page</li>
+                                <li>Authors</li>
                             </ul>
                         </div>
                     </div>
@@ -35,16 +35,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="author-section-title">Total 1,050 Authors</h3>
+                            <h3 class="author-section-title">Total {{ authorsList.length }} Authors</h3>
                             <div class="table-responsive">
                                 <table class="table table-striped">
-                                    <tbody>
-                                        <tr>
+                                    <tbody v-if="authorsList">
+                                        <tr v-for="(author,index) in authorsList" :key="index">
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="javascript:void(0);" class="item-figure">
+                                                        <img :src="author.photo_url" alt="Author" style="height:60px;width:60px;">
+                                                    </a>
                                                     <div class="item-content">
-                                                        <div class="item-title"><a href="#">Mark Willy</a></div>
+                                                        <div class="item-title">
+                                                            <a href="javascript:void(0);">{{ author.display_name }}</a>
+                                                        </div>
                                                         <div class="item-designation">Dessert Specialist</div>
                                                     </div>
                                                 </div>
@@ -73,256 +77,11 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author3.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Abul Hassan</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">16</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">41</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">17+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author4.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Liza Zaman</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">10</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">25</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">19+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author5.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Mark Willy</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">14</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">25</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">28+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author6.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Liza Zaman</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">9</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">21</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">40+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author7.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Mark Willy</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">9</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">26</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">17+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author8.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Mark Willy</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">13</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">40</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">23+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="/app/img/blog/author3.jpg" alt="Author"></a>
-                                                    <div class="item-content">
-                                                        <div class="item-title"><a href="#">Mark Willy</a></div>
-                                                        <div class="item-designation">Dessert Specialist</div>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <div class="author-social-info">
-                                                    <ul>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Recipes</h4>
-                                                                <span class="item-number">18</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Reviews</h4>
-                                                                <span class="item-number">28</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <h4 class="item-title">Favourite</h4>
-                                                                <span class="item-number">10+</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        </tr> 
                                     </tbody>
                                 </table>
                             </div>
-                            <ul class="pagination-layout1">
+                            <!-- <ul class="pagination-layout1">
                                 <li class="active">
                                     <a href="#">1</a>
                                 </li>
@@ -335,7 +94,7 @@
                                 <li>
                                     <a href="#">4</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
@@ -422,13 +181,31 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
         name : 'authorsList',
         data() {
             return {
                 
             }
-        }, 
+        },
+        methods : {
+            getAuthorsList() {
+                this.$store.dispatch('authorsList'); 
+            },
+            getLatestsRecipes() {
+                this.$store.dispatch('latestsRecipes'); 
+            },
+        },
+        created(){
+            this.getAuthorsList(); 
+            this.getLatestsRecipes(); 
+        },
+        computed:mapState({ 
+            authorsList : state => state.data.authorsList, 
+            latestsRecipes : state => state.data.latestsRecipes, 
+        })
+        
     }
 </script>
 

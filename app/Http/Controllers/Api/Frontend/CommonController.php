@@ -14,7 +14,7 @@ class CommonController extends Controller
 {
 
     public function getCategories(Request $request){
-        return Categories::where([
+        return Categories::withCount('recipes')->where([
             'status' => '1'
         ])->get()->all();
     }
@@ -25,6 +25,8 @@ class CommonController extends Controller
         return User::whereHas('roles', function ($q) {
             $q->where('roles.name', '=', 'author');
         })
+        ->withCount(['recipes'])
+        ->select()
         ->where(['status' => '1'])
         ->orderBy('id','DESC')
         ->get()
