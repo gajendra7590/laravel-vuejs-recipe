@@ -213,9 +213,7 @@
                   <div class="item-content">
                     <span class="sub-title">{{ recipe.category.name }}</span>
                     <h3 class="item-title">
-                      <router-link :to="'recipe/'+recipe.slug">
-                        {{ recipe.title }}
-                      </router-link>
+                      <router-link :to="'recipe/'+recipe.slug">{{ recipe.title }}</router-link>
                     </h3>
                     <ul class="item-rating">
                       <li class="star-fill">
@@ -240,9 +238,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p>
-                      {{ recipe.short_desc }}
-                    </p>
+                    <p>{{ recipe.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
                         <a href="javascript:void(0);" title="Cooking Time">
@@ -275,25 +271,27 @@
               </div>
               <div class="widget-latest">
                 <ul class="block-list" v-if="latestsRecipes">
-                    <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
-                        <div class="item-img latest-item-img">
-                            <a href="#">
-                                <img v-lazy="lr.photo_url" alt="Post">
-                            </a>
-                            <div class="count-number">{{ index }}</div>
-                        </div>
-                        <div class="item-content">
-                            <div class="item-ctg">{{ lr.category.name }}</div>
-                            <h4 class="item-title">
-                                <a href="#">{{ lr.title }}</a>
-                            </h4>
-                            <div class="item-post-by">
-                                <a href="single-blog.html">
-                                    <i class="fas fa-user"></i><span>by</span> {{ lr.user.display_name }}
-                                </a>
-                            </div>
-                        </div>
-                    </li> 
+                  <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
+                    <div class="item-img latest-item-img">
+                      <a href="#">
+                        <img v-lazy="lr.photo_url" alt="Post" />
+                      </a>
+                      <div class="count-number">{{ index }}</div>
+                    </div>
+                    <div class="item-content">
+                      <div class="item-ctg">{{ lr.category.name }}</div>
+                      <h4 class="item-title">
+                        <a href="#">{{ lr.title }}</a>
+                      </h4>
+                      <div class="item-post-by">
+                        <a href="single-blog.html">
+                          <i class="fas fa-user"></i>
+                          <span>by</span>
+                          {{ lr.user.display_name }}
+                        </a>
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -347,24 +345,28 @@
               <div class="section-heading heading-dark">
                 <h3 class="item-heading">FEATURED ARTICLE</h3>
               </div>
-                <div class="widget-featured-feed" v-if="featuredRecipes">
-                    <vueper-slides :autoplay="true" :duration="3000" class="" fixed-height="418px">                         
-                        <vueper-slide v-for="(fa,index) in featuredRecipes" :key="index" class="featured-box-layout1 owl-stage-outer">  
-                            <template v-slot:content>
-                                <div class="item-img">
-                                    <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
-                                </div>
-                                <div class="item-content">
-                                    <span class="ctg-name">{{ fa.category.name }}</span>
-                                    <h4 class="item-title">
-                                        <a href="single-recipe1.html">{{ fa.title }}</a>
-                                    </h4>
-                                    <p>{{ fa.short_desc }}</p>
-                                </div>
-                            </template>   
-                        </vueper-slide> 
-                    </vueper-slides>
-                </div>
+              <div class="widget-featured-feed" v-if="featuredRecipes">
+                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
+                  <vueper-slide
+                    v-for="(fa,index) in featuredRecipes"
+                    :key="index"
+                    class="featured-box-layout1 owl-stage-outer"
+                  >
+                    <template v-slot:content>
+                      <div class="item-img">
+                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
+                      </div>
+                      <div class="item-content">
+                        <span class="ctg-name">{{ fa.category.name }}</span>
+                        <h4 class="item-title">
+                          <a href="single-recipe1.html">{{ fa.title }}</a>
+                        </h4>
+                        <p>{{ fa.short_desc }}</p>
+                      </div>
+                    </template>
+                  </vueper-slide>
+                </vueper-slides>
+              </div>
             </div>
             <div class="widget">
               <div class="widget-newsletter-subscribe">
@@ -396,17 +398,12 @@
                 <ul v-if="followOnInsta">
                   <li v-for="(inst,index) in followOnInsta" :key="index">
                     <div class="item-box">
-                      <img
-                        :src="inst.photo_url"
-                        alt="Social Figure"
-                        class="img-fluid insta-img"
-                      />
+                      <img :src="inst.photo_url" alt="Social Figure" class="img-fluid insta-img" />
                       <a href="javascript:void(0);" class="item-icon">
                         <i class="fab fa-instagram"></i>
                       </a>
                     </div>
                   </li>
-                   
                 </ul>
               </div>
             </div>
@@ -418,7 +415,7 @@
                 <ul v-if="popularTags">
                   <li v-for="(tag,index) in popularTags" :key="index">
                     <a href="#">{{ tag.name }}</a>
-                  </li> 
+                  </li>
                 </ul>
               </div>
             </div>
@@ -445,47 +442,47 @@ export default {
     getRecipesList() {
       this.$store.dispatch("recipesList");
     },
-    getFeaturedRecipes() { 
-        this.$store.dispatch('featuredRecipes',3); 
+    getFeaturedRecipes() {
+      this.$store.dispatch("featuredRecipes", 3);
     },
-    getLatestsRecipes() { 
-        this.$store.dispatch('latestsRecipes',4); 
+    getLatestsRecipes() {
+      this.$store.dispatch("latestsRecipes", 4);
     },
     followOnInstagram() {
-        this.$store.dispatch('followOnInstagram',9); 
+      this.$store.dispatch("followOnInstagram", 9);
     },
     getPopularTags() {
-        this.$store.dispatch('popularTags',10); 
+      this.$store.dispatch("popularTags", 10);
     },
   },
   created() {
     this.getRecipesList();
     this.getFeaturedRecipes();
-    this.getLatestsRecipes();    
-    this.followOnInstagram(); 
+    this.getLatestsRecipes();
+    this.followOnInstagram();
     this.getPopularTags();
   },
   computed: mapState({
     recipesList: (state) => state.data.recipesList,
     featuredRecipes: (state) => state.data.featuredRecipes,
-    latestsRecipes : state => state.data.latestsRecipes,
-    followOnInsta : state => state.data.followOnInstagram,
-    popularTags : state => state.data.popularTags,
+    latestsRecipes: (state) => state.data.latestsRecipes,
+    followOnInsta: (state) => state.data.followOnInstagram,
+    popularTags: (state) => state.data.popularTags,
   }),
 };
 </script> 
 <style scoped>
-    img.insta-img {
-        min-height: 100px;
-        max-height: 100px;
-        min-width: 114px;
-        max-width: 114px;
-    }
+img.insta-img {
+  min-height: 100px;
+  max-height: 100px;
+  min-width: 114px;
+  max-width: 114px;
+}
 
-    .recipes-list-container img {
-        min-height: 270px;
-        max-height: 270px;
-        min-width: 365px;
-        max-width: 365px; 
-    }
+.recipes-list-container img {
+  min-height: 270px;
+  max-height: 270px;
+  min-width: 365px;
+  max-width: 365px;
+}
 </style>

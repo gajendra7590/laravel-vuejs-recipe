@@ -32,6 +32,24 @@ class CommonController extends Controller
         ->all();
     }
 
+    public function authorsDetail(Request $request,$id){
+        return User::select('id','first_name','last_name','display_name','photo','about_me')
+        ->where(['id' => $id,'status' => '1'])->get()->first();
+    }
+
+    public function authorsRecipe(Request $request,$id){
+        return Recipes::with([
+            'category' => function($m){
+                    $m->select('id','name','slug');
+             },
+            'user' => function($m){
+                $m->select('id','first_name','last_name','display_name','photo');
+            },
+        ])
+        ->where(['user_id' => $id,'status' => '1'])
+        ->orderBy('id','DESC')
+        ->get()->all();
+    } 
 
     /*
     * followOnInstagram
@@ -40,7 +58,7 @@ class CommonController extends Controller
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:8; 
         return Recipes::where(['status' => '1'])
-            ->select('id','title','photo')
+            ->select('id','title','photo','slug')
             ->orderByRaw('RAND()')
             ->limit($limit)
             ->get()

@@ -122,6 +122,28 @@ export default {
                 console.log(error.response);
             });
     },
+    authorsDetail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "authorsDetail/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    authorsRecipe({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "authorsRecipe/" + payload.id)
+            .then(function(response) {
+                commit("authorsRecipe", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
     //Authors End
     //Recipes Start
     recipesList({ commit, state }, payload) {

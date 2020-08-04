@@ -39,6 +39,12 @@ export default {
     authorsList(state, data) {
         state.data.authorsList = data;
     },
+    authorsDetail(state, data) {
+        state.data.authorsDetail = data;
+    },
+    authorsRecipe(state, data) {
+        state.data.authorsRecipe = data;
+    },
     //Authors end
     //Recipes Start
     recipesList(state, data) {

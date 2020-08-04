@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ URL::asset('app/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('app/css/owl.theme.default.min.css') }}"> 
     <link rel="stylesheet" href="{{ URL::asset('app/style.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('css/front-custom.css') }}"> 
     <script src="{{ URL::asset('app/js/modernizr-3.6.0.min.js') }}"></script>
 </head> 
 <body>

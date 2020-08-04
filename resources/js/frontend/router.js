@@ -35,13 +35,13 @@ const router = new VueRouter({
     mode: "history",
     linkExactActiveClass: "active",
     routes: [
-        { name: "index", path: "/", component: Home },
+        { name: "home", path: "/home", component: Home },
         { name: "about-us", path: "/about-us", component: About },
         { name: "contact-us", path: "/contact-us", component: ContactUs },
         { name: "recipe-categories", path: "/categories", component: Categories },
         { name: "recipes", path: "/recipes", component: Recipe },
         { name: "recipesByCategory", path: "/recipes/category/:slug", component: RecipesByCategory },
-        { name: "recipesByAuthor", path: "/recipes/author/:slug", component: RecipesByAuthor },
+        { name: "authorDetail", path: "/author/:slug", component: AuthorDetail },
         { name: "recipesByTag", path: "/recipes/tag/:slug", component: RecipesByTag },
         { name: "recipeDetail", path: "/recipe/:slug", component: RecipeDetail },
         { name: "authors", path: "/authors", component: Authors },
@@ -51,7 +51,7 @@ const router = new VueRouter({
         { name: "blog", path: "/blog", component: Blog },
         { name: "blogDetail", path: "/blog/:slug", component: BlogDetail },
         //404 no route redirect   
-        { name: "404", path: "**", redirect: '/' }
+        { name: "404", path: "**", redirect: '/home' }
     ],
     scrollBehavior(to, from, savedPosition) {
         return { x: 0, y: 0 }

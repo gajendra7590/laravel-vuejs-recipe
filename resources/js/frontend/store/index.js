@@ -54,6 +54,8 @@ const store = new Vuex.Store({
             categoriesList: [],
 
             authorsList: [],
+            authorsDetai: [],
+            authorsRecipe: [],
 
             recipesList: []
         }

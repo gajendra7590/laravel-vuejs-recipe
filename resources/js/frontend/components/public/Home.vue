@@ -1,463 +1,683 @@
 <template>
-    <div id="wrapper" class="wrapper">  
-
-        <!-- Slider Area Start Here --> 
-        <section class="ranna-slider-area">
-            <div class="container"> 
-                 <vueper-slides :autoplay="true" :duration="3000" class="rc-carousel nav-control-layout2 owl-carousel owl-loaded owl-drag">                         
-                        <vueper-slide v-for="(sld,index) in homeSlider.slider" :key="index" class="ranna-slider-content-layout1"> 
-                            <template v-slot:content>
-                                <figure class="item-figure">
-                                    <router-link :to="'recipe'">
-                                        <img v-lazy="sld.photo_url" alt="Product">
-                                    </router-link>
-                                </figure>
-                                <div class="item-content">
-                                    <span class="sub-title">{{ sld.category.name }}</span>
-                                    <h2 class="item-title"><a href="single-recipe1.html">{{ sld.title }}</a></h2>
-                                    <ul class="item-rating">
-                                        <li class="star-fill"><i class="fas fa-star"></i></li>
-                                        <li class="star-fill"><i class="fas fa-star"></i></li>
-                                        <li class="star-fill"><i class="fas fa-star"></i></li>
-                                        <li class="star-fill"><i class="fas fa-star"></i></li>
-                                        <li class="star-empty"><i class="fas fa-star"></i></li>
-                                        <li><span>9<span> / 10</span></span> </li>
-                                    </ul>
-                                    <p v-html="sld.short_desc"></p>
-                                    <ul class="entry-meta">
-                                        <li><a href="javascript:void(0);"><i class="fas fa-clock"></i>{{ sld.cooking_time }}</a></li>
-                                        <li><a href="javascript:void(0);"><i class="fas fa-user"></i>by <span>{{ sld.user.display_name }}</span></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                                    </ul>
-                                </div>
-                            </template>  
-                        </vueper-slide>    
-                    </vueper-slides>
-            </div>
-        </section>
-        <!-- Slider Area End Here --> 
-        <!-- Random Recipe Start Here -->
-        <section class="padding-bottom-18">
-            <div class="container">
-                <div class="row" v-if="trending">                     
-                    <div v-for="(rec,index) in homeSlider.padbottom18" :key="index" class="col-lg-4 d-block d-md-none d-lg-block col-sm-12">
-                        <div class="product-box-layout1">
-                            <figure class="item-figure">
-                                <a href="single-recipe1.html">
-                                    <img v-lazy="rec.photo_url" alt="Product">
-                                </a>
-                           </figure>
-                            <div class="item-content">
-                                <span class="sub-title">{{ rec.category.name }}</span>
-                                <h3 class="item-title">
-                                    <a href="single-recipe1.html">{{ rec.title }}</a>
-                                </h3>
-                                <ul class="item-rating">
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-empty"><i class="fas fa-star"></i></li>
-                                    <li><span>9<span> / 10</span></span> </li>
-                                </ul>
-                                <ul class="entry-meta">
-                                    <li><a href="#"><i class="fas fa-clock"></i>{{ rec.cooking_time }}</a></li>
-                                    <li><a href="#"><i class="fas fa-user"></i>by <span>{{ rec.user.display_name }}</span></a></li>
-                                    <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Random Recipe End Here -->
-        <!-- Trending Recipe Start Here -->
-        <section class="padding-bottom-45">
-            <div class="container">
-                <div class="row gutters-60">
-                    <div class="col-lg-8">
-                        <div class="section-heading heading-dark">
-                            <h2 class="item-heading">TRENDING RECIPES</h2>
-                        </div>
-                        <div class="row" v-if="trending"> 
-                            <div v-for="(rec,index) in trending" :key="index" :class=" (index == 0)?'col-12':'col-md-6 col-sm-6'">
-                                <div class="product-box-layout1" :class=" (index == 0)?'trending_home_first':'trending_home'">
-                                    <figure class="item-figure">
-                                        <a href="single-recipe1.html">
-                                            <img v-lazy="rec.photo_url" alt="Product">
-                                        </a>
-                                    </figure>
-                                    <div class="item-content">
-                                        <span class="sub-title">{{ rec.category.name }}</span>
-                                        <h2 class="item-title">
-                                            <a href="single-recipe1.html">{{ rec.title }}</a>
-                                        </h2>
-                                        <ul class="item-rating">
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-empty"><i class="fas fa-star"></i></li>
-                                            <li><span>9<span> / 10</span></span> </li>
-                                        </ul>
-                                        <p>{{ rec.short_desc }}</p>
-                                        <ul class="entry-meta">
-                                    <li><a href="#"><i class="fas fa-clock"></i>{{ rec.cooking_time }}</a></li>
-                                    <li><a href="#"><i class="fas fa-user"></i>by <span>{{ rec.user.display_name }}</span></a></li>
-                                    <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                                </ul>
-                                    </div>
-                                </div>
-                            </div>                              
-                        </div>
-                        <div class="ranna-ad-box">
-                            <a href="#"><img src="/app/img/figure/figure1.jpg" alt="ad"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">ABOUT ME</h3>
-                            </div>
-                            <div class="widget-about">
-                                <figure class="author-figure"><img src="/app/img/figure/about.jpg" alt="about"></figure>
-                                <figure class="author-signature"><img src="/app/img/figure/signature.png" alt="about"></figure>
-                                <p>Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
-                                    doloer.</p>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-                            </div>
-                            <div class="widget-follow-us">
-                                <ul>
-                                    <li class="single-item"><a href="#"><i class="fab fa-facebook-f"></i>LIKE ME ON</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-twitter"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-linkedin-in"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-pinterest-p"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-instagram"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-youtube"></i>Subscribe</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">LATEST RECIPES</h3>
-                            </div>
-                            <div class="widget-latest">
-                                <ul class="block-list" v-if="latestsRecipes">
-                                    <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
-                                        <div class="item-img latest-item-img">
-                                            <a href="#">
-                                                <img v-lazy="lr.photo_url" alt="Post">
-                                            </a>
-                                            <div class="count-number">{{ index }}</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">{{ lr.category.name }}</div>
-                                            <h4 class="item-title">
-                                                <a href="#">{{ lr.title }}</a>
-                                            </h4>
-                                            <div class="item-post-by">
-                                                <a href="single-blog.html">
-                                                    <i class="fas fa-user"></i><span>by</span> {{ lr.user.display_name }}
-                                               </a>
-                                            </div>
-                                        </div>
-                                    </li> 
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="widget-ad">
-                                <a href="#"><img src="/app/img/figure/figure2.jpg" alt="Ad" class="img-fluid"></a>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">CATEGORIES</h3>
-                            </div>
-                            <div class="widget-categories">
-                                <ul v-if="homeSiderbar">
-                                    <li v-for="(cat,index) in homeSiderbar.categories" :key="index">
-                                        <a href="#">{{ cat.name }}
-                                            <span>25</span>
-                                        </a>
-                                    </li> 
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="widget-newsletter-subscribe">
-                                <h3>GET LATEST UPDATES</h3>
-                                <p>Newsletter Subscribe</p>
-                                <form class="newsletter-subscribe-form">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="your e-mail address" class="form-control" name="email"
-                                            data-error="E-mail field is required" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group mb-none">
-                                        <button type="submit" class="item-btn">SUBSCRIBE</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Trending Recipe End Here -->
-        <!-- Editor’s Choice Start Here -->
-        <section class="padding-bottom-45">
-            <div class="container">
-                <div class="section-heading heading-dark">
-                    <h2 class="item-heading">EDITOR'S CHOICE</h2>
-                </div>
-                <div class="row" v-if="homeSection3InOne"> 
-                    
-                    <div v-for="(ec,index) in homeSection3InOne.editorsChoice" :key="index" class="col-lg-4 d-block d-md-none d-lg-block col-sm-12 col-12">
-                        <div class="product-box-layout2 editors-choice">
-                            <figure class="item-figure">
-                                <a href="single-recipe1.html">
-                                    <img v-lazy="ec.photo_url" alt="Product">
-                                </a>
-                            </figure>
-                            <div class="item-content">
-                                <span class="sub-title">{{ ec.title }}</span>
-                                <h3 class="item-title">
-                                    <a href="single-recipe1.html">
-                                        {{ ec.short_desc }}
-                                    </a>
-                                </h3>
-                                <ul class="item-rating">
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-fill"><i class="fas fa-star"></i></li>
-                                    <li class="star-empty"><i class="fas fa-star"></i></li>
-                                    <li><span>9<span> / 10</span></span> </li>
-                                </ul>
-                                <ul class="entry-meta">
-                                   <li><a href="#"><i class="fas fa-clock"></i>{{ ec.cooking_time }}</a></li>
-                                    <li><a href="#"><i class="fas fa-user"></i>by <span>{{ ec.user.display_name }}</span></a></li>
-                                    <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        <!-- Editor’s Choice End Here -->
-        <!-- Popular Recipe Start Here -->
-        <section class="padding-bottom-45">
-            <div class="container">
-                <div class="row gutters-60">
-                    <div class="col-lg-8">
-                        <div class="section-heading heading-dark">
-                            <h2 class="item-heading">POPULAR RECIPES</h2>
-                        </div>
-                        <div class="row" v-if="homeSection3InOne">
-                            <div v-for="(pr,index) in homeSection3InOne.popular" :key="index" class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="product-box-layout3 popular-recipes">
-                                    <figure class="item-figure">
-                                        <a href="single-recipe1.html">
-                                            <img v-lazy="pr.photo_url" alt="Product">
-                                        </a>
-                                    </figure>
-                                    <div class="item-content">
-                                        <span class="sub-title">{{ pr.category.name }}</span>
-                                        <h3 class="item-title">
-                                            <a href="single-recipe1.html">{{ pr.title }}</a>
-                                        </h3>
-                                        <ul class="item-rating">
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-fill"><i class="fas fa-star"></i></li>
-                                            <li class="star-empty"><i class="fas fa-star"></i></li>
-                                            <li><span>9<span> / 10</span></span> </li>
-                                        </ul>
-                                        <p>Pro sint falli definitiones noel ei verear intellegatpri civibus
-                                            consequat efficiantue.Vestibulum ante ipsum primis in fau
-                                            cibus orci luctus et ultrices posuere cubilia Curae; Nunc
-                                            mattis turpis id aliquet.</p>
-                                        <ul class="entry-meta">
-                                            <li><a href="#"><i class="fas fa-clock"></i>{{ pr.cooking_time }}</a></li>
-                                            <li><a href="#"><i class="fas fa-user"></i>by <span>{{ pr.user.display_name }}</span></a></li>
-                                            <li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">FEATURED ARTICLE</h3>
-                            </div>
-                            <div class="widget-featured-feed" v-if="featuredRecipes">
-                                <vueper-slides :autoplay="true" :duration="3000" class="" fixed-height="418px">                         
-                                    <vueper-slide v-for="(fa,index) in featuredRecipes" :key="index" class="featured-box-layout1 owl-stage-outer">  
-                                        <template v-slot:content>
-                                            <div class="item-img">
-                                                <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid">
-                                            </div>
-                                            <div class="item-content">
-                                                <span class="ctg-name">{{ fa.category.name }}</span>
-                                                <h4 class="item-title">
-                                                    <a href="single-recipe1.html">{{ fa.title }}</a>
-                                                </h4>
-                                                <p>{{ fa.short_desc }}</p>
-                                            </div>
-                                        </template>   
-                                    </vueper-slide> 
-                                </vueper-slides>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">POPULAR TAGS</h3>
-                            </div>
-                            <div class="widget-tag">
-                                <ul v-if="homeSiderbar">
-                                    <li v-for="(tag,index) in homeSiderbar.popuplar_tags" :key="index">
-                                        <a href="javascript:void(0);">{{ tag.name }}</a>
-                                    </li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Popular Recipe End Here -->
-        <!-- Instagram Start Here -->
-        <section class="instagram-feed-wrap">
-                <div class="instagram-feed-title">
-                  <a href="#"><i class="fab fa-instagram"></i>Follow On Instagram</a>
-                </div>
-                <ul class="instagram-feed-figure" v-if="followOnInsta">
-                    <li v-for="(insta,index) in followOnInsta" :key="index">
-                        <a href="single-recipe1.html">
-                            <img v-lazy="insta.photo_url" alt="Social">
-                        </a>
-                    </li> 
+  <div id="wrapper" class="wrapper">
+    <!-- Slider Area Start Here -->
+    <section class="ranna-slider-area">
+      <div class="container">
+        <vueper-slides
+          :autoplay="true"
+          :duration="3000"
+          class="rc-carousel nav-control-layout2 owl-carousel owl-loaded owl-drag"
+        >
+          <vueper-slide
+            v-for="(sld,index) in homeSlider.slider"
+            :key="index"
+            class="ranna-slider-content-layout1"
+          >
+            <template v-slot:content>
+              <figure class="item-figure">
+                <router-link :to="'/recipe/'+sld.slug">
+                  <img v-lazy="sld.photo_url" alt="Product" />
+                </router-link>
+              </figure>
+              <div class="item-content">
+                <span class="sub-title">{{ sld.category.name }}</span>
+                <h2 class="item-title">
+                  <router-link :to="'/recipe/'+sld.slug">{{ sld.title }}</router-link>
+                </h2>
+                <ul class="item-rating">
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-empty">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <span>
+                      9
+                      <span>/ 10</span>
+                    </span>
+                  </li>
                 </ul>
-        </section>
-        <!-- Instagram End Here --> 
-    </div>
+                <p v-html="sld.short_desc"></p>
+                <ul class="entry-meta">
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-clock"></i>
+                      {{ sld.cooking_time }}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-user"></i>by
+                      <span>{{ sld.user.first_name }}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-heart"></i>
+                      <span>02</span> Likes
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </vueper-slide>
+        </vueper-slides>
+      </div>
+    </section>
+    <!-- Slider Area End Here -->
+    <!-- Random Recipe Start Here -->
+    <section class="padding-bottom-18">
+      <div class="container">
+        <div class="row" v-if="trending">
+          <div
+            v-for="(rec,index) in homeSlider.padbottom18"
+            :key="index"
+            class="col-lg-4 d-block d-md-none d-lg-block col-sm-12"
+          >
+            <div class="product-box-layout1">
+              <figure class="item-figure">
+                <router-link :to="'/recipe/'+rec.slug">
+                  <img v-lazy="rec.photo_url" alt="Product" />
+                </router-link>
+              </figure>
+              <div class="item-content">
+                <span class="sub-title">{{ rec.category.name }}</span>
+                <h3 class="item-title">
+                  <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
+                </h3>
+                <ul class="item-rating">
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-empty">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <span>
+                      9
+                      <span>/ 10</span>
+                    </span>
+                  </li>
+                </ul>
+                <ul class="entry-meta">
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-clock"></i>
+                      {{ rec.cooking_time }}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-user"></i>by
+                      <span>{{ rec.user.first_name }}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-heart"></i>
+                      <span>02</span> Likes
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Random Recipe End Here -->
+    <!-- Trending Recipe Start Here -->
+    <section class="padding-bottom-45">
+      <div class="container">
+        <div class="row gutters-60">
+          <div class="col-lg-8">
+            <div class="section-heading heading-dark">
+              <h2 class="item-heading">TRENDING RECIPES</h2>
+            </div>
+            <div class="row" v-if="trending">
+              <div
+                v-for="(rec,index) in trending"
+                :key="index"
+                :class=" (index == 0)?'col-12':'col-md-6 col-sm-6'"
+              >
+                <div
+                  class="product-box-layout1"
+                  :class=" (index == 0)?'trending_home_first':'trending_home'"
+                >
+                  <figure class="item-figure">
+                    <router-link :to="'/recipe/'+rec.slug">
+                      <img v-lazy="rec.photo_url" alt="Product" />
+                    </router-link>
+                  </figure>
+                  <div class="item-content">
+                    <span class="sub-title">{{ rec.category.name }}</span>
+                    <h2 class="item-title">
+                      <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
+                    </h2>
+                    <ul class="item-rating">
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-empty">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li>
+                        <span>
+                          9
+                          <span>/ 10</span>
+                        </span>
+                      </li>
+                    </ul>
+                    <p>{{ rec.short_desc }}</p>
+                    <ul class="entry-meta">
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-clock"></i>
+                          {{ rec.cooking_time }}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-user"></i>by
+                          <span>{{ rec.user.first_name }}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-heart"></i>
+                          <span>02</span> Likes
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ranna-ad-box">
+              <a href="javascript:void(0);">
+                <img src="/app/img/figure/figure1.jpg" alt="ad" />
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">ABOUT ME</h3>
+              </div>
+              <div class="widget-about">
+                <figure class="author-figure">
+                  <img src="/app/img/figure/about.jpg" alt="about" />
+                </figure>
+                <figure class="author-signature">
+                  <img src="/app/img/figure/signature.png" alt="about" />
+                </figure>
+                <p>
+                  Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
+                  doloer.
+                </p>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
+              </div>
+              <div class="widget-follow-us">
+                <ul>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-facebook-f"></i>LIKE ME ON
+                    </a>
+                  </li>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-twitter"></i>LIKE ME
+                    </a>
+                  </li>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-linkedin-in"></i>LIKE ME
+                    </a>
+                  </li>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-pinterest-p"></i>LIKE ME
+                    </a>
+                  </li>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-instagram"></i>LIKE ME
+                    </a>
+                  </li>
+                  <li class="single-item">
+                    <a href="javascript:void(0);">
+                      <i class="fab fa-youtube"></i>Subscribe
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">LATEST RECIPES</h3>
+              </div>
+              <div class="widget-latest">
+                <ul class="block-list" v-if="latestsRecipes">
+                  <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
+                    <div class="item-img latest-item-img">
+                      <router-link :to="'/recipe/'+lr.slug">
+                        <img v-lazy="lr.photo_url" alt="Post" />
+                      </router-link>
+                      <div class="count-number">{{ index }}</div>
+                    </div>
+                    <div class="item-content">
+                      <div class="item-ctg">{{ lr.category.name }}</div>
+                      <h4 class="item-title">
+                        <router-link :to="'/recipe/'+lr.slug">{{ lr.title }}</router-link>
+                      </h4>
+                      <div class="item-post-by">
+                        <router-link :to="'/recipe/'+lr.slug">
+                          <i class="fas fa-user"></i>
+                          <span>by</span>
+                          {{ lr.user.first_name }}
+                        </router-link>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="widget-ad">
+                <a href="javascript:void(0);">
+                  <img src="/app/img/figure/figure2.jpg" alt="Ad" class="img-fluid" />
+                </a>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">CATEGORIES</h3>
+              </div>
+              <div class="widget-categories">
+                <ul v-if="homeSiderbar">
+                  <li v-for="(cat,index) in homeSiderbar.categories" :key="index">
+                    <router-link :to="'/recipes/category/'+cat.slug">
+                      {{ cat.name }}
+                      <span>25</span>
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="widget-newsletter-subscribe">
+                <h3>GET LATEST UPDATES</h3>
+                <p>Newsletter Subscribe</p>
+                <form class="newsletter-subscribe-form">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      placeholder="your e-mail address"
+                      class="form-control"
+                      name="email"
+                      data-error="E-mail field is required"
+                      required
+                    />
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group mb-none">
+                    <button type="submit" class="item-btn">SUBSCRIBE</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Trending Recipe End Here -->
+    <!-- Editor’s Choice Start Here -->
+    <section class="padding-bottom-45">
+      <div class="container">
+        <div class="section-heading heading-dark">
+          <h2 class="item-heading">EDITOR'S CHOICE</h2>
+        </div>
+        <div class="row" v-if="homeSection3InOne">
+          <div
+            v-for="(ec,index) in homeSection3InOne.editorsChoice"
+            :key="index"
+            class="col-lg-4 d-block d-md-none d-lg-block col-sm-12 col-12"
+          >
+            <div class="product-box-layout2 editors-choice">
+              <figure class="item-figure">
+                <router-link :to="'/recipe/'+ec.slug">
+                  <img v-lazy="ec.photo_url" alt="Product" />
+                </router-link>
+              </figure>
+              <div class="item-content">
+                <span class="sub-title">{{ ec.title }}</span>
+                <h3 class="item-title">
+                  <router-link :to="'/recipe/'+ec.slug">{{ ec.short_desc }}</router-link>
+                </h3>
+                <ul class="item-rating">
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-fill">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li class="star-empty">
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <span>
+                      9
+                      <span>/ 10</span>
+                    </span>
+                  </li>
+                </ul>
+                <ul class="entry-meta">
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-clock"></i>
+                      {{ ec.cooking_time }}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-user"></i>by
+                      <span>{{ ec.user.first_name }}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);">
+                      <i class="fas fa-heart"></i>
+                      <span>02</span> Likes
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Editor’s Choice End Here -->
+    <!-- Popular Recipe Start Here -->
+    <section class="padding-bottom-45">
+      <div class="container">
+        <div class="row gutters-60">
+          <div class="col-lg-8">
+            <div class="section-heading heading-dark">
+              <h2 class="item-heading">POPULAR RECIPES</h2>
+            </div>
+            <div class="row" v-if="homeSection3InOne">
+              <div
+                v-for="(pr,index) in homeSection3InOne.popular"
+                :key="index"
+                class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12"
+              >
+                <div class="product-box-layout3 popular-recipes">
+                  <figure class="item-figure">
+                    <router-link :to="'/recipe/'+pr.slug">
+                      <img v-lazy="pr.photo_url" alt="Product" />
+                    </router-link>
+                  </figure>
+                  <div class="item-content">
+                    <span class="sub-title">{{ pr.category.name }}</span>
+                    <h3 class="item-title">
+                      <router-link :to="'/recipe/'+pr.slug">{{ pr.title }}</router-link>
+                    </h3>
+                    <ul class="item-rating">
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-fill">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li class="star-empty">
+                        <i class="fas fa-star"></i>
+                      </li>
+                      <li>
+                        <span>
+                          9
+                          <span>/ 10</span>
+                        </span>
+                      </li>
+                    </ul>
+                    <p>{{ pr.short_desc }}</p>
+                    <ul class="entry-meta">
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-clock"></i>
+                          {{ pr.cooking_time }}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-user"></i>by
+                          <span>{{ pr.user.first_name }}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);">
+                          <i class="fas fa-heart"></i>
+                          <span>02</span> Likes
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">FEATURED ARTICLE</h3>
+              </div>
+              <div class="widget-featured-feed" v-if="featuredRecipes">
+                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
+                  <vueper-slide
+                    v-for="(fa,index) in featuredRecipes"
+                    :key="index"
+                    class="featured-box-layout1 owl-stage-outer"
+                  >
+                    <template v-slot:content>
+                      <div class="item-img">
+                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
+                      </div>
+                      <div class="item-content">
+                        <span class="ctg-name">{{ fa.category.name }}</span>
+                        <h4 class="item-title">
+                          <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
+                        </h4>
+                        <p>{{ fa.short_desc }}</p>
+                      </div>
+                    </template>
+                  </vueper-slide>
+                </vueper-slides>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="section-heading heading-dark">
+                <h3 class="item-heading">POPULAR TAGS</h3>
+              </div>
+              <div class="widget-tag">
+                <ul v-if="homeSiderbar">
+                  <li v-for="(tag,index) in homeSiderbar.popuplar_tags" :key="index">
+                    <router-link :to="'/recipe/tag/'+tag.name">{{ tag.name }}</router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Popular Recipe End Here -->
+    <!-- Instagram Start Here -->
+    <section class="instagram-feed-wrap">
+      <div class="instagram-feed-title">
+        <a href="javascript:void(0);">
+          <i class="fab fa-instagram"></i>Follow On Instagram
+        </a>
+      </div>
+      <ul class="instagram-feed-figure" v-if="followOnInsta">
+        <li v-for="(insta,index) in followOnInsta" :key="index">
+          <router-link :to="'/recipe/'+insta.slug">
+            <img v-lazy="insta.photo_url" alt="Social" />
+          </router-link>
+        </li>
+      </ul>
+    </section>
+    <!-- Instagram End Here -->
+  </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    //In your Vue.js component.
-    import { VueperSlides, VueperSlide } from 'vueperslides'
-    import 'vueperslides/dist/vueperslides.css';
+import { mapState } from "vuex";
+//In your Vue.js component.
+import { VueperSlides, VueperSlide } from "vueperslides";
+import "vueperslides/dist/vueperslides.css";
 
-    export default {
-        name : "home",
-        components: { VueperSlides, VueperSlide },
-        data() {
-            return { 
-                  
-             };
-        },
-        methods: {
-            getHomeSlider() {
-                this.$store.dispatch('getHomeSlider'); 
-            },
-            homeTrendingRecipe() {
-                this.$store.dispatch('homeTrendingRecipe'); 
-            },
-            homeSection3In1() {
-                this.$store.dispatch('homeSection3In1'); 
-            },
-            homeSidebarSection3In1() {
-                this.$store.dispatch('homeSidebarSection3In1'); 
-            },
-            followOnInstagram() {
-                this.$store.dispatch('followOnInstagram'); 
-            },
-            getLatestsRecipes() { 
-                this.$store.dispatch('latestsRecipes',5); 
-            },
-            getFeaturedRecipes() { 
-                this.$store.dispatch('featuredRecipes',3); 
-            },
-            getRandomRecipes() { 
-                this.$store.dispatch('randomRecipes',3); 
-            },               
-        },
-        created(){
-            this.getHomeSlider();
-            this.homeTrendingRecipe();
-            this.homeSection3In1();
-            this.homeSidebarSection3In1();
-            this.followOnInstagram();
-            this.getLatestsRecipes(); 
-            this.getFeaturedRecipes(); 
-            this.getRandomRecipes(); 
-        },
-        computed:mapState({ 
-            homeSlider : state => state.data.getHomeSlider,
-            trending : state => state.data.homeTrendingRecipe,
-            homeSection3InOne : state => state.data.homeSection3In1,
-            homeSiderbar : state => state.data.homeSidebarSection3In1,
-            followOnInsta : state => state.data.followOnInstagram,
-            latestsRecipes : state => state.data.latestsRecipes,
-            featuredRecipes : state => state.data.featuredRecipes,
-            randomRecipes : state => state.data.randomRecipes, 
-        })
-    }
+export default {
+  name: "home",
+  components: { VueperSlides, VueperSlide },
+  data() {
+    return {};
+  },
+  methods: {
+    getHomeSlider() {
+      this.$store.dispatch("getHomeSlider");
+    },
+    homeTrendingRecipe() {
+      this.$store.dispatch("homeTrendingRecipe");
+    },
+    homeSection3In1() {
+      this.$store.dispatch("homeSection3In1");
+    },
+    homeSidebarSection3In1() {
+      this.$store.dispatch("homeSidebarSection3In1");
+    },
+    followOnInstagram() {
+      this.$store.dispatch("followOnInstagram");
+    },
+    getLatestsRecipes() {
+      this.$store.dispatch("latestsRecipes", 5);
+    },
+    getFeaturedRecipes() {
+      this.$store.dispatch("featuredRecipes", 3);
+    },
+    getRandomRecipes() {
+      this.$store.dispatch("randomRecipes", 3);
+    },
+  },
+  created() {
+    this.getHomeSlider();
+    this.homeTrendingRecipe();
+    this.homeSection3In1();
+    this.homeSidebarSection3In1();
+    this.followOnInstagram();
+    this.getLatestsRecipes();
+    this.getFeaturedRecipes();
+    this.getRandomRecipes();
+  },
+  computed: mapState({
+    homeSlider: (state) => state.data.getHomeSlider,
+    trending: (state) => state.data.homeTrendingRecipe,
+    homeSection3InOne: (state) => state.data.homeSection3In1,
+    homeSiderbar: (state) => state.data.homeSidebarSection3In1,
+    followOnInsta: (state) => state.data.followOnInstagram,
+    latestsRecipes: (state) => state.data.latestsRecipes,
+    featuredRecipes: (state) => state.data.featuredRecipes,
+    randomRecipes: (state) => state.data.randomRecipes,
+  }),
+};
 </script>
 
 <style>
-    .vueperslides {
-        margin-bottom: 17px !important;
-    } 
+.vueperslides {
+  margin-bottom: 17px !important;
+}
 
-    .ranna-slider-content-layout1 { 
-        margin-bottom: 0px !important; 
-    }
-    .vueperslides__bullets { 
-        bottom: -18px !important; 
-    }
+.ranna-slider-content-layout1 {
+  margin-bottom: 0px !important;
+}
+.vueperslides__bullets {
+  bottom: -18px !important;
+}
 
-    .item-img.latest-item-img img {
-        height: 97px;
-        width: 106px;
-    }
-    .item-img.latest-item-img {
-        max-width: 128px;
-        min-height: 70px;
-    }
-    .instagram-feed-figure img {
-        width: 230px;
-        height: 230px;
-    }
+.item-img.latest-item-img img {
+  height: 97px;
+  width: 106px;
+}
+.item-img.latest-item-img {
+  max-width: 128px;
+  min-height: 70px;
+}
+.instagram-feed-figure img {
+  width: 230px;
+  height: 230px;
+}
 
-    .padding-bottom-18 img,.trending_home img,.editors-choice img {
-        min-height: 273px;
-        max-height: 273px;
-        max-width: 365px;
-        min-width: 365px;
-    }
-    .popular-recipes img {
-        max-width: 425px;
-        min-width: 425px;
-        max-height: 271px;
-        min-height: 271px;
-    }
-    .trending_home_first img {
-        min-width: 780px;
-        max-width: 780px;
-        max-height: 400px;
-        min-height: 400px;
-    } 
+.padding-bottom-18 img,
+.trending_home img,
+.editors-choice img {
+  min-height: 273px;
+  max-height: 273px;
+  max-width: 365px;
+  min-width: 365px;
+}
+.popular-recipes img {
+  max-width: 425px;
+  min-width: 425px;
+  max-height: 271px;
+  min-height: 271px;
+}
+.trending_home_first img {
+  min-width: 780px;
+  max-width: 780px;
+  max-height: 400px;
+  min-height: 400px;
+}
 </style>

@@ -924,11 +924,9 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Single Recipe With Sidebar Area End Here -->
+        </section> 
     </div>
-</template>
-
+</template> 
 <script>
     export default {
         name : 'recipedetail',

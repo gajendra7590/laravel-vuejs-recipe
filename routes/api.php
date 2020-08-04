@@ -46,6 +46,8 @@ Route::group(['namespace' => 'Api'], function () {
 
         //Authors Page
         Route::get('authorsList' ,'CommonController@authorsList');
+        Route::get('authorsRecipe/{id}' ,'CommonController@authorsRecipe');
+        Route::get('authorsDetail/{id}' ,'CommonController@authorsDetail');
 
 
 
