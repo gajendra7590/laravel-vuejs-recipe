@@ -545,7 +545,7 @@
               <div class="widget-tag">
                 <ul v-if="homeSiderbar">
                   <li v-for="(tag,index) in homeSiderbar.popuplar_tags" :key="index">
-                    <router-link :to="'/recipe/tag/'+tag.name">{{ tag.name }}</router-link>
+                    <router-link :to="'/recipes/tag/'+tag.name">{{ tag.name }}</router-link>
                   </li>
                 </ul>
               </div>
