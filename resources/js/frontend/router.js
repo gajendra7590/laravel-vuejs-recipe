@@ -8,7 +8,6 @@ import Home from './components/public/Home';
 
 import Recipe from './components/public/Recipe';
 import RecipesByCategory from './components/public/RecipesByCategory';
-import RecipesByAuthor from './components/public/RecipesByAuthor';
 import RecipesByTag from './components/public/RecipesByTag';
 import RecipeDetail from './components/public/RecipeDetail';
 

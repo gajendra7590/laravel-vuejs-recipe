@@ -9,7 +9,7 @@ use App\models\Recipes;
 class Categories extends Model
 {
 
-    protected $appends = ['photo_url'];
+    protected $appends = ['photo_url','counts'];
 
 
     protected $table = 'recipe_categories';
@@ -25,6 +25,11 @@ class Categories extends Model
         return $this->hasMany(Recipes::class, 'category_id','id');
     }
 
+
+    //Get Total Arts Count
+    public function getCountsAttribute(){
+        return Recipes::where(['category_id' => $this->id])->get()->count();
+    }
 
     public function getPhotoUrlAttribute(){  
        if($this->photo !=''){

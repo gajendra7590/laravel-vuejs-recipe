@@ -185,7 +185,7 @@
                   <li class="single-item" v-for="(lr,index) in latestsRecipes" :key="index">
                     <div class="item-img">
                       <a href="#">
-                        <img :src="lr.photo_url" alt="Post" style="width:90px;height:70px;" />
+                        <img v-lazy="lr.photo_url" alt="Post" style="width:90px;height:70px;" />
                       </a>
                       <div class="count-number">1</div>
                     </div>

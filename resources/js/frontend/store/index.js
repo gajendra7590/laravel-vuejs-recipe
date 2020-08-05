@@ -50,6 +50,7 @@ const store = new Vuex.Store({
             featuredRecipes: [],
             randomRecipes: [],
             popularTags: [],
+            getSidebarCategories: [],
 
             categoriesList: [],
 
@@ -57,7 +58,9 @@ const store = new Vuex.Store({
             authorsDetai: [],
             authorsRecipe: [],
 
-            recipesList: []
+            recipesList: [],
+            recipesListByCategory: [],
+            recipesListByTag: [],
         }
     },
     mutations,

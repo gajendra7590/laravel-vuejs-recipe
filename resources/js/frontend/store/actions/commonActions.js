@@ -98,6 +98,16 @@ export default {
                 console.log(error.response);
             });
     },
+    getSidebarCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getSidebarCategories?limit=" + ((payload) ? payload : 3))
+            .then(function(response) {
+                commit("getSidebarCategories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
     //Common End
     //Category Start
     getCategories({ commit, state }, payload) {
@@ -156,5 +166,39 @@ export default {
                 console.log(error.response);
             });
     },
+    recipesListByCategory({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "recipesListByCategory/" + payload.slug, payload)
+            .then(function(response) {
+                commit("recipesListByCategory", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    recipesListByTag({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "recipesListByTag/" + payload.slug, payload)
+            .then(function(response) {
+                commit("recipesListByTag", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
     //Recipes End
+    //Recipe Detail Start
+    recipeDetail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "recipeDetail/" + payload.slug)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    //Recipe Detail End
 };

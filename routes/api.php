@@ -24,12 +24,15 @@ Route::group(['namespace' => 'Api'], function () {
     //All FrontEnd Routes
     Route::group(['namespace' => 'Frontend','prefix' => '/'], function () {
 
-        //Common
+        //Common Routes
         Route::get('followOnInstagram', 'CommonController@followOnInstagram');
         Route::get('latestsRecipes' ,'CommonController@latestsRecipes');
         Route::get('randomRecipes' ,'CommonController@randomRecipes');
         Route::get('featuredRecipes' ,'CommonController@featuredRecipes'); 
-        Route::get('popularTags' ,'CommonController@popularTags');  
+        Route::get('popularTags' ,'CommonController@popularTags');
+        Route::get('getSidebarCategories' ,'CommonController@getSidebarCategories');
+
+
 
         //All Home Page
         Route::get('getHomeSlider', 'HomeController@getHomeSlider');
@@ -42,13 +45,16 @@ Route::group(['namespace' => 'Api'], function () {
 
         //Recipe Page
         Route::get('recipesList' ,'RecipeController@recipesList');
-        Route::get('popuplarTags' ,'RecipeController@popuplarTags');
+        Route::get('recipesListByCategory/{slug}' ,'RecipeController@recipesListByCategory');
+        Route::get('recipesListByTag/{slug}' ,'RecipeController@recipesListByTag');
+
+        //Recipe Detail Page
+        Route::get('recipeDetail/{slug}' ,'RecipeController@recipeDetail');
 
         //Authors Page
         Route::get('authorsList' ,'CommonController@authorsList');
         Route::get('authorsRecipe/{id}' ,'CommonController@authorsRecipe');
         Route::get('authorsDetail/{id}' ,'CommonController@authorsDetail');
-
 
 
     }); 

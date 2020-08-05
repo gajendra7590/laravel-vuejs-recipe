@@ -29,11 +29,15 @@ export default {
     popularTags(state, data) {
         state.data.popularTags = data;
     },
+    getSidebarCategories(state, data) {
+        state.data.getSidebarCategories = data;
+    },
     //Common End
     //Category Start
     categoriesList(state, data) {
         state.data.categoriesList = data;
     },
+
     //Category End
     //Authors Start
     authorsList(state, data) {
@@ -49,6 +53,12 @@ export default {
     //Recipes Start
     recipesList(state, data) {
         state.data.recipesList = data;
+    },
+    recipesListByCategory(state, data) {
+        state.data.recipesListByCategory = data;
+    },
+    recipesListByTag(state, data) {
+        state.data.recipesListByTag = data;
     },
     //Recipes End
 

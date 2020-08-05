@@ -207,7 +207,7 @@
                 <div class="product-box-layout1 recipes-list-container">
                   <figure class="item-figure">
                     <router-link :to="'recipe/'+recipe.slug">
-                      <img :src="recipe.photo_url" alt="recipe.title" />
+                      <img v-lazy="recipe.photo_url" alt="recipe.title" />
                     </router-link>
                   </figure>
                   <div class="item-content">
@@ -398,7 +398,7 @@
                 <ul v-if="followOnInsta">
                   <li v-for="(inst,index) in followOnInsta" :key="index">
                     <div class="item-box">
-                      <img :src="inst.photo_url" alt="Social Figure" class="img-fluid insta-img" />
+                      <img v-lazy="inst.photo_url" alt="Social Figure" class="img-fluid insta-img" />
                       <a href="javascript:void(0);" class="item-icon">
                         <i class="fab fa-instagram"></i>
                       </a>
@@ -423,7 +423,7 @@
         </div>
       </div>
     </section>
-    <!-- Recipe With Sidebar Area End Here -->
+    <!-- Recipe With Sidebar Area End Here --> 
     >
   </div>
 </template>
@@ -439,8 +439,8 @@ export default {
     return {};
   },
   methods: {
-    getRecipesList() {
-      this.$store.dispatch("recipesList");
+    getRecipesList(slug) {
+      this.$store.dispatch("recipesListByCategory",{slug : slug});
     },
     getFeaturedRecipes() {
       this.$store.dispatch("featuredRecipes", 3);
@@ -456,14 +456,18 @@ export default {
     },
   },
   created() {
-    this.getRecipesList();
-    this.getFeaturedRecipes();
-    this.getLatestsRecipes();
-    this.followOnInstagram();
-    this.getPopularTags();
+
+    let slug = this.$route.params.slug; 
+    if (slug != undefined) { 
+      this.getRecipesList(slug);
+      this.getFeaturedRecipes();
+      this.getLatestsRecipes();
+      this.followOnInstagram();
+      this.getPopularTags();
+    }
   },
   computed: mapState({
-    recipesList: (state) => state.data.recipesList,
+    recipesList: (state) => state.data.recipesListByCategory,
     featuredRecipes: (state) => state.data.featuredRecipes,
     latestsRecipes: (state) => state.data.latestsRecipes,
     followOnInsta: (state) => state.data.followOnInstagram,

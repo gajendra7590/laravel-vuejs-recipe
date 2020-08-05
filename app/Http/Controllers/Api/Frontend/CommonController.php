@@ -52,7 +52,7 @@ class CommonController extends Controller
     } 
 
     /*
-    * followOnInstagram
+    * follow On Instagram
     */
     public function followOnInstagram(Request $request){
         $limit = $request->get('limit');
@@ -66,17 +66,32 @@ class CommonController extends Controller
     }  
 
      /*
-     * popularTags
+     * popular Tags
      */
     public function popularTags(Request $request){
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:20; 
         return RecipeTags::where(['status' => '1'])
-            ->select('id','name','slug') 
+            ->select('id','name','slug')
             ->limit($limit)
             ->get()
             ->all();
-    } 
+    }
+
+    /*
+     * get Sidebar Categories
+     */
+    public function getSidebarCategories(Request $request){
+        $limit = $request->get('limit');
+        $limit = ($limit)?$limit:20;
+        return Categories::with('recipes')
+            ->where(['status' => '1'])
+            ->select('*')
+            ->limit($limit)
+            ->get()
+            ->all();
+    }
+
 
     public function latestsRecipes(Request $request){
         $limit = $request->get('limit');
