@@ -17,6 +17,7 @@ class CreateBlogTagsTable extends Migration
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->string('name','256')->unique();
             $table->string('slug','256')->unique();
+            $table->string('photo','256')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', array('0', '1','2'))->default(1);
             $table->timestamps();

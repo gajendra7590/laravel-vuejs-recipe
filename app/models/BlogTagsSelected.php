@@ -4,15 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RecipeTags extends Model
+class BlogTagsSelected extends Model
 {
-
-    protected $table = 'recipe_tags';
+    protected $table = 'blog_tags_selected';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','slug','description','status'
+        'blog_id','tag_id','status'
     ];
-
-
 }
