@@ -52,7 +52,7 @@
               class="nav-link"
             >
               <i class="nav-icon fas fa-users"></i>
-              <p>Clients List</p>
+              <p>Clients</p>
             </router-link>
           </li>
 
@@ -64,7 +64,7 @@
               :class="( (this.$route.name == 'authors-list') || (this.$route.name == 'add-authors') || (this.$route.name == 'edit-authors') )?'active':''"
             >
               <i class="nav-icon fas fa-user-secret"></i>
-              <p>Authors List</p>
+              <p>Authors</p>
             </router-link>
           </li>
 
@@ -76,7 +76,7 @@
               class="nav-link"
             >
               <i class="nav-icon fas fa-hamburger"></i>
-              <p>Recipe List</p>
+              <p>Recipes</p>
             </router-link>
           </li>
 
@@ -112,7 +112,7 @@
               class="nav-link"
             >
               <i class="nav-icon fas fa-blog"></i>
-              <p>Blogs List</p>
+              <p>Blogs</p>
             </router-link>
           </li>
 
@@ -143,7 +143,7 @@
           <li class="nav-item">
             <router-link to="/products" title="View Products List" class="nav-link">
               <i class="nav-icon fab fa-product-hunt"></i>
-              <p>Prodcuts List</p>
+              <p>Prodcuts</p>
             </router-link>
           </li>
 

@@ -21,7 +21,7 @@ class Users extends Seeder
                 'last_name'=>'Admin',
                 'display_name'=>'Super Admin',
                 'email'=>'admin@recipe.com',
-                'password'=>bcrypt('12345678'),
+                'password'=>bcrypt('123456'),
                 'role'=>'admin',
                 'status'=>'1'
             ],
@@ -30,7 +30,7 @@ class Users extends Seeder
                 'last_name'=>'Author',
                 'display_name'=>'Author',
                 'email'=>'author@recipe.com',
-                'password'=>bcrypt('12345678'),
+                'password'=>bcrypt('123456'),
                 'role'=>'author',
                 'status'=>'1'
             ],
@@ -39,7 +39,7 @@ class Users extends Seeder
                 'last_name'=>'User',
                 'display_name'=>'User',
                 'email'=>'user@recipe.com',
-                'password'=>bcrypt('12345678'),
+                'password'=>bcrypt('123456'),
                 'role'=>'user',
                 'status'=>'1'
             ],
