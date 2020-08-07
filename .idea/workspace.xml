@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="814045b9-a76b-4148-bf97-94bfe2538d85" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/BlogCategoriesController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/BlogTagsController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/BlogsController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blog-categories/BlogCategoriesList.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blog-categories/BlogCategoryForm.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blog-tags/BlogTagsForm.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blog-tags/BlogTagsList.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blogs/BlogsForm.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blogs/BlogsList.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Blogs.php" afterPath="$PROJECT_DIR$/app/models/Blogs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_08_07_043402_create_blogs_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_08_07_043402_create_blogs_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/authors/AuthorsList.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/authors/AuthorsList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/categories/CategoriesList.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/categories/CategoriesList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/categories/CategoryForm.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/categories/CategoryForm.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/clients/ClientsList.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/clients/ClientsList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesForm.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesForm.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesList.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/tags/TagsList.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/tags/TagsList.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/shared/Sidebar.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/shared/Sidebar.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/router.js" afterPath="$PROJECT_DIR$/resources/js/admin/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/store/actions/commonActions.js" afterPath="$PROJECT_DIR$/resources/js/admin/store/actions/commonActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/store/index.js" afterPath="$PROJECT_DIR$/resources/js/admin/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/store/mutations/commonMutations.js" afterPath="$PROJECT_DIR$/resources/js/admin/store/mutations/commonMutations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.php" afterPath="$PROJECT_DIR$/routes/api.php" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path=".idea/vcs.xml" />
@@ -433,7 +411,7 @@
       <workItem from="1596167717281" duration="8237000" />
       <workItem from="1596623067715" duration="6271000" />
       <workItem from="1596686425235" duration="81000" />
-      <workItem from="1596774348613" duration="17195000" />
+      <workItem from="1596774348613" duration="17830000" />
     </task>
     <task id="LOCAL-00001" summary="fsdf">
       <created>1583932373061</created>
@@ -519,11 +497,18 @@
       <option name="project" value="LOCAL" />
       <updated>1596791210759</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="blog section created at admin end">
+      <created>1596799382096</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1596799382096</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72994000" />
+    <option name="totallyTimeSpent" value="73629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="59" y="25" width="1861" height="1055" extended-state="6" />
@@ -591,7 +576,8 @@
     <MESSAGE value="authors detail page completed" />
     <MESSAGE value="new migrations created" />
     <MESSAGE value="recipes tags added" />
-    <option name="LAST_COMMIT_MESSAGE" value="recipes tags added" />
+    <MESSAGE value="blog section created at admin end" />
+    <option name="LAST_COMMIT_MESSAGE" value="blog section created at admin end" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
