@@ -54,7 +54,7 @@ class HomeController extends Controller
      */
     public function homeSidebarSection3In1(Request $request){
         return [
-            'categories' => $this->categories(),
+            'RecipesCategories' => $this->categories(),
             'popuplar_tags' => $this->popuplarTags(),
             'about_me' => $this->aboutMe(),
         ];

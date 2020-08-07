@@ -1,0 +1,4 @@
+05/08/2020
+-------------------------
+ALTER TABLE `recipes` ADD `tags` varchar(50) NULL AFTER `user_id`;
+

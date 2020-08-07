@@ -18,6 +18,7 @@ class CreateBlogCategoriesTable extends Migration
             $table->string('name','256')->unique();
             $table->string('slug','256')->unique();
             $table->text('description')->nullable();
+            $table->text('photo','256')->nullable(); 
             $table->enum('status', array('0', '1','2'))->default(1);
             $table->timestamps();
         });

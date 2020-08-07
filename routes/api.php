@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('homeSection3In1', 'HomeController@homeSection3In1');
         Route::get('homeSidebarSection3In1', 'HomeController@homeSidebarSection3In1');
 
-        //Categories Page
+        //RecipesCategories Page
         Route::get('getCategories', 'CommonController@getCategories');
 
         //Recipe Page
@@ -88,8 +88,8 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('createRecipe', 'RecipesController@createRecipe');
             Route::post('updateRecipe/{id}', 'RecipesController@updateRecipe');
             Route::delete('deleteRecipe/{id}', 'RecipesController@deleteRecipe');
-            //Manage Recipes Categories
-            Route::get('categories', 'CategoriesController@categories');
+            //Manage Recipes RecipesCategories
+            Route::get('RecipesCategories', 'CategoriesController@categories');
             Route::get('getCategories', 'CategoriesController@getCategories');
             Route::get('getCategory/{id}','CategoriesController@getCategory');
             Route::post('createCategory', 'CategoriesController@createCategory');
@@ -108,7 +108,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('createBlog', 'BlogsController@createBlog');
             Route::post('updateBlog/{id}', 'BlogsController@updateBlog');
             Route::delete('deleteBlog/{id}', 'BlogsController@deleteBlog');
-            //Manage Blog Categories
+            //Manage Blog RecipesCategories
             Route::get('blogCategories', 'BlogCategoriesController@blogCategories');
             Route::get('getBlogCategories', 'BlogCategoriesController@getBlogCategories');
             Route::get('getBlogCategory/{id}','BlogCategoriesController@getBlogCategory');

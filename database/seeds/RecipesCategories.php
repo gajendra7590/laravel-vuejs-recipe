@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 use App\models\Categories as CatModel;
 
-class Categories extends Seeder
+class RecipesCategories extends Seeder
 {
     /**
      * Run the database seeds.

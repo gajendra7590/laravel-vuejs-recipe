@@ -19,7 +19,7 @@ class CommonController extends Controller
 {
     public function index(){ 
         return response()->json([
-            'categories' => Categories::count(),
+            'RecipesCategories' => Categories::count(),
             'recipes' => Recipes::count(),
             'clients' =>  User::whereHas('roles', function ($q) {
                 $q->where('roles.name', '=', 'user');

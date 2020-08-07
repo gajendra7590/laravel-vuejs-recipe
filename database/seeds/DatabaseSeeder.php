@@ -14,7 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             Role::class,
             Users::class,
-            Categories::class,
+            RecipesCategories::class,
+            RecipesTags::class,
+            BlogCategories::class,
+            BlogTags::class
         ]);
     }
 }
