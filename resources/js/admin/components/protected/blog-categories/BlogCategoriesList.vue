@@ -5,14 +5,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Recipe Tags List</h1>
+            <h1>Blog Categories List</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <router-link to="/dashboard" >Home</router-link>
               </li>
-              <li class="breadcrumb-item active">Recipe Tags List</li>
+              <li class="breadcrumb-item active">Blog Categories List</li>
             </ol>
           </div>
         </div>
@@ -25,9 +25,9 @@
           <div class="col-12"> 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title float-left">Manage All Tags</h3>
+                <h3 class="card-title float-left">Manage All Blog Categories</h3>
                 <h3 class="card-title float-right">
-                   <router-link to="/add-tag" class="btn btn-sm btn-primary">
+                   <router-link to="/add-blog-category" class="btn btn-sm btn-primary">
                       <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New
                    </router-link>
                 </h3>
@@ -35,8 +35,8 @@
               <!-- /.card-header -->
               <div class="card-body">
                  <v-server-table :url="API_URL" :columns="columns" :options="options" ref="table">  
-                   <div slot="description" slot-scope="{ row }">
-                      <div v-html="row.description"></div>
+                   <div slot="photo_url" slot-scope="{ row }">
+                      <img class="img-circle" width="50" height="50" v-lazy="row.photo_url" />
                     </div>      
                      <div slot="status" slot-scope="{ row }"> 
                        <span v-if="row.status == 1" class="badge badge-success">Active</span>   
@@ -44,10 +44,10 @@
                        <span v-if="row.status == 2" class="badge badge-danger">Archieved</span>                  
                      </div>
                     <div slot="actions" slot-scope="{ row }"> 
-                      <router-link :to="'/edit-tag/'+row.id" title="Edit Item" class="btn btn-sm bg-gradient-success">
+                      <router-link :to="'/edit-blog-category/'+row.id" title="Edit Item" class="btn btn-sm bg-gradient-success">
                           <i class="fa fa-edit" aria-hidden="true"></i>
                       </router-link> 
-                      <button v-if="row.status != '2'" @click="deleteTag( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
+                      <button v-if="row.status != '2'" @click="deleteBlogCategory( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </button> 
                     </div>                     
@@ -71,24 +71,24 @@
 import { mapState } from 'vuex';
 import config from '../../../../config';
 export default {
-  name: 'TagsList',
+  name: 'BlogCategoriesList',
   data() {
     return {
-        columns: [ 
+        columns: [
+          'photo_url',
           'name', 
           'slug',
-          'description',
           'status',
           'created_at',
           'actions'
         ], 
-        API_URL : config.API_URL+'admin/getTags',
+        API_URL : config.API_URL+'admin/getBlogCategories',
         tableData: [],
         options: { 
-          headings: { 
-            name : 'Tag Name',
-            slug : 'Tag Slug',
-            description : 'Tag Description',
+          headings: {
+            photo_url	: 'Image',
+            name : 'Category Name',
+            slug : 'Category Slug',
             status : 'Status',
             created_at : 'Created Date'
           },
@@ -128,19 +128,19 @@ export default {
             templates: { 
               created_at(h, row) {
                 return moment(row.created_at).format('DD MMM , YYYY');
-              }  
+              } 
             }
         } 
     }
   }, 
   methods:{   
-    deleteTag(id){
+    deleteBlogCategory(id){
       let _this = this; 
       _this.$dialog.confirm('Are you sure want to archieved?')
         .then(function(dialog) {
           loader: true;  
             //Delete Code start
-            _this.$store.dispatch('deleteTag',{ id : id })
+            _this.$store.dispatch('deleteBlogCategory',{ id : id })
             .then(function(result){
                 if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                   _this.$toastr.s('Data Saved Successfully','Success!'); 

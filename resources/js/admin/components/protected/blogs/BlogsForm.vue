@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Manage Category</h1>
+            <h1>Manage Blog</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><router-link to="/dashboard">Home</router-link></li>
-              <li class="breadcrumb-item active">Manage Category</li>
+              <li class="breadcrumb-item active">Manage Blog</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Manage Category</h3>
+                <h3 class="card-title">Manage Blog</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -42,11 +42,11 @@
                                             alt="User profile picture"
                                        >
                                     </div>   
-                                </div>
+                                </div> 
                                 <div class="customInput">
                                     <label for="file-upload" class="custom-file-upload">
                                         <i class="fa fa-cloud-upload-alt" aria-hidden="true"></i>
-                                        Upload Image
+                                        Feature Image
                                     </label>
                                     <input id="file-upload" class="_img_thumb_input" accept="image/*" name="image" type="file"/>
                                 </div>
@@ -56,45 +56,87 @@
                         <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Name</label>
+                                    <label>Blog Title</label> 
                                     <input 
                                         type="text" 
-                                        name="name"
-                                        v-model="editData.name"
+                                        name="title"
+                                        v-model="editData.title"
                                         class="form-control"  
-                                        placeholder="Enter category name...">
-                                    <p class="text-danger validation_errors" v-if="errorsList.name">{{ errorsList.name }} </p>
+                                        placeholder="Enter title...">
+                                    <p class="text-danger validation_errors" v-if="errorsList.title">{{ errorsList.title }} </p>
                                 </div>
                             </div>
                         </div>  
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group" v-if="tags">
+                                  <label>Blog Tags</label>
+                                  <select class="form-control select2" name="tags[]" multiple="multiple" style="width: 100%;">
+                                    <option v-for="(tag,index) in tags" :key="index" :selected="isSelectedTag(tag.id)" :value="tag.id">{{ tag.name }}</option> 
+                                  </select>
+                                  <p class="text-danger validation_errors" v-if="errorsList.tags">{{ errorsList.tags }} </p>
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Blog Category</label>
+                                    <select class="form-control" name="category_id" v-model="editData.category_id">
+                                        <option value="" selected>---Select Blog Category</option> 
+                                        <option v-for="(category,index) in categories" :key="index" :value="category.id">
+                                          {{ category.name }}
+                                        </option>
+                                    </select>   
+                                    <p class="text-danger validation_errors" v-if="errorsList.category_id">{{ errorsList.category_id }} </p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-sm-12"> 
+                                <div class="form-group">
+                                    <label>Blog Short Description</label>
+                                    <textarea 
+                                        class="form-control"
+                                        name="short_desc" 
+                                        placeholder='Short Desc..'
+                                        v-model="editData.short_desc">
+                                    </textarea>
+                                    <p class="text-danger validation_errors" 
+                                       v-if="errorsList.short_desc">{{ errorsList.short_desc }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="row">
                             <div class="col-sm-12"> 
                                 <div class="form-group">
-                                    <label>Category Description</label>
+                                    <label>Blog Description</label>
                                     <vue-editor
                                     name="description" 
+                                    placeholder='Full article note..'
                                     v-model="editData.description">
                                     </vue-editor>
                                     <p class="text-danger validation_errors" v-if="errorsList.description">{{ errorsList.description }} </p>
                                 </div>
                             </div>
-                        </div>  
+                        </div>    
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Status</label>
+                                    <label>Blog Status</label>
                                     <select class="form-control" name="status" v-model="editData.status">
                                         <option value="0">In Active</option>
                                         <option value="1">Active</option>
                                         <option value="2">Archive</option> 
-                                    </select>   
-                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>
+                                    </select> 
+                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>    
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div class="card-footer"> 
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <router-link to="/categories" class="btn btn-danger">Back</router-link>
+                            <router-link to="/blogs" class="btn btn-danger">Back</router-link>
                         </div>
                     </div>
               </form>
@@ -116,49 +158,68 @@
     import config from '../../../../config';
     // config
     export default {
-      name: 'CategoryForm',
+      name: 'RecipesForm',
       components: {
          VueEditor
       }, 
       data:function(){
         return {
-          loader:null,
+          loader : null,
           errorsList : [],
           editData : {  
               id: 0,
-              name: "",
-              description: "",
+              category_id : '',
+              title: "",
+              short_desc:"",
+              description: "", 
+              selected_tags : [], 
               photo_url: config.ASSET_BASE_URL+'default_img/default.jpg', 
+              is_slider: "0",
               status: "1",
           },
           errors : {},
         }
       },
       methods : {
-          editCategories(id){
+          editBlog(id){
             let _this = this;
-            this.$store.dispatch('editCategories',{id : id})
-            .then(function(result){
-                _this.editData = result;
+            this.$store.dispatch('editBlog',{id : id})
+            .then(function(result){ 
+                _this.editData = result;    
             }).catch(function(error){
                 console.log(error);
             }); 
           },
+          getCategories(){
+            this.$store.dispatch('blogCategories');  
+          },
+          getTags(){ 
+            setTimeout(function(){ $('.select2').select2(); },500);
+            this.$store.dispatch('blogTags');  
+          },
+          isSelectedTag(tag_id){  
+            var result = this.editData.selected_tags.find(function(tag) {  
+               return (tag.tag_id == tag_id); 
+            });   
+            if(result!=undefined){
+              return true;
+            }else{ return false; } 
+          }, 
           submitForm(){
             var vueForm = new FormData( $('#vueForm')[0]);
             vueForm.append('description',this.editData.description);
             let _this = this;
             _this.loader = _this.$loading.show();
             if( this.editData.id > 0){
-               this.$store.dispatch('updateCategory',{ id : this.editData.id,data : vueForm})
+               this.$store.dispatch('updateBlog',{ id : this.editData.id,data : vueForm})
                .then(function(result){
                   _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                    setTimeout(function(){ _this.$router.push('/blogs'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
-                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!'); 
-                     _this.errorsList = result.errors;   
+                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
+                    _this.errorsList = result.errors;
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   }  
@@ -167,15 +228,15 @@
                  console.log(error);
                });
             } else {
-              this.$store.dispatch('createCategory',{ id : this.editData.id,data : vueForm})
+              this.$store.dispatch('createBlog',{ id : this.editData.id,data : vueForm})
               .then(function(result){
                  _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                    setTimeout(function(){ _this.$router.push('/blogs'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
-                     _this.errorsList = result.errors;  
+                    _this.errorsList = result.errors;
                   }else{
                     _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
                   } 
@@ -186,16 +247,63 @@
             }
              
           }
+      }, 
+      created(){ 
+          this.getCategories();
+          this.getTags();
+          if( typeof(this.$route.params.id)!='undefined' ){
+              this.editBlog(this.$route.params.id);    
+          }
       },
       computed: mapState({ 
-         //editData: state => state.data.editCategories,
-      }),
-      created(){
-          if( typeof(this.$route.params.id)!='undefined' ){
-              this.editCategories(this.$route.params.id);    
-          }
-      }
+          categories : state => state.data.blogCategories,
+          tags : state => state.data.blogTags
+      })
+
     }
 </script> 
-<style scoped> 
+<style> 
+  .additional-input-box {
+        margin-bottom: 5px;
+        padding: 15px;
+        background-color: #eeeeee;
+        display: flex;
+        align-items: center;
+   }
+   .additional-input-box .form-control {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        height: 40px;
+        padding: 10px 15px;
+    }
+    .additional-input-box.icon-right i {
+        margin-left: 10px;
+        background-color: #ffffff;
+        padding: 13px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+    }
+    .additional-input-box.icon-right i:hover {
+        background-color: #ff4a52;
+        color: #ffffff;
+    }
+    .additional-input-box i {
+        color: #989898;
+        font-size: 20px;
+        width: 35px;
+    }  
+    .add-more-btn{
+        margin: 9px;
+        float: right;
+    }
+    .hideContainer {
+      display: none !important;
+    }
 </style>

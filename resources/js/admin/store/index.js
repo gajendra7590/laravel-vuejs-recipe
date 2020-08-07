@@ -42,19 +42,36 @@ const store = new Vuex.Store({
         baseURL: config.BASE_URL,
         ASSET_BURL: config.BASE_URL,
         data: {
+            //Clients
             getClients: [],
             editClients: [],
+            //Authors
             getAuthors: [],
             editAuthors: [],
+            //Recipes 
             recipeList: [],
             editRecipe: [],
+            //Recipe Categories
             categories: [],
             getCategories: [],
+            editCategories: [],
+            //Recipes Tags
             getTags: [],
             editTags: [],
             tags: [],
-            editCategories: [],
+            //Blogs 
+            getBlogs: [],
+            editBlog: [],
+            //Blog Categories
+            blogCategories: [],
+            getBlogCategories: [],
+            //Blog Tags
+            getBlogTags: [],
+            editBlogTags: [],
+            blogTags: [],
+            //User Profile 
             userProfile: [],
+            //Dashboard
             dashboardData: []
         }
     },

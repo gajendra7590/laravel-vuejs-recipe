@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Manage Category</h1>
+            <h1>Manage Blog Tags</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><router-link to="/dashboard">Home</router-link></li>
-              <li class="breadcrumb-item active">Manage Category</li>
+              <li class="breadcrumb-item active">Manage Blog Tags</li>
             </ol>
           </div>
         </div>
@@ -26,43 +26,22 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Manage Category</h3>
+                <h3 class="card-title">Manage Blog Tag</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form id="vueForm" name="vueForm" enctype="multipart/form-data" @submit.prevent="submitForm(this)"> 
-                    <div class="card-body">  
-                        <div class="row logo-container card-footer">
-                            <div class="col-sm-2 col-xs-12 profile_image_container">
-                                <div class="card-body box-profile">
-                                    <div class="text-center">
-                                       <img 
-                                            class="profile-user-img img-fluid img-circle _img_thumb_preview" 
-                                            :src="( editData.photo_url)?editData.photo_url:'/images/default/default.jpg'" 
-                                            alt="User profile picture"
-                                       >
-                                    </div>   
-                                </div>
-                                <div class="customInput">
-                                    <label for="file-upload" class="custom-file-upload">
-                                        <i class="fa fa-cloud-upload-alt" aria-hidden="true"></i>
-                                        Upload Image
-                                    </label>
-                                    <input id="file-upload" class="_img_thumb_input" accept="image/*" name="image" type="file"/>
-                                </div>
-                            </div> 
-                        </div> 
-                        <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p> 
+                    <div class="card-body">   
                         <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Name</label>
+                                    <label>Tag Name</label>
                                     <input 
                                         type="text" 
                                         name="name"
                                         v-model="editData.name"
                                         class="form-control"  
-                                        placeholder="Enter category name...">
+                                        placeholder="Enter tag name...">
                                     <p class="text-danger validation_errors" v-if="errorsList.name">{{ errorsList.name }} </p>
                                 </div>
                             </div>
@@ -70,7 +49,7 @@
                         <div class="row">
                             <div class="col-sm-12"> 
                                 <div class="form-group">
-                                    <label>Category Description</label>
+                                    <label>Tag Description</label>
                                     <vue-editor
                                     name="description" 
                                     v-model="editData.description">
@@ -82,7 +61,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Status</label>
+                                    <label>Tag Status</label>
                                     <select class="form-control" name="status" v-model="editData.status">
                                         <option value="0">In Active</option>
                                         <option value="1">Active</option>
@@ -94,7 +73,7 @@
                         </div>
                         <div class="card-footer"> 
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <router-link to="/categories" class="btn btn-danger">Back</router-link>
+                            <router-link to="/blog-tags" class="btn btn-danger">Back</router-link>
                         </div>
                     </div>
               </form>
@@ -116,7 +95,7 @@
     import config from '../../../../config';
     // config
     export default {
-      name: 'CategoryForm',
+      name: 'TagsForm',
       components: {
          VueEditor
       }, 
@@ -135,9 +114,9 @@
         }
       },
       methods : {
-          editCategories(id){
+          editBlogTags(id){
             let _this = this;
-            this.$store.dispatch('editCategories',{id : id})
+            this.$store.dispatch('editBlogTags',{id : id})
             .then(function(result){
                 _this.editData = result;
             }).catch(function(error){
@@ -150,12 +129,12 @@
             let _this = this;
             _this.loader = _this.$loading.show();
             if( this.editData.id > 0){
-               this.$store.dispatch('updateCategory',{ id : this.editData.id,data : vueForm})
+               this.$store.dispatch('updateBlogTag',{ id : this.editData.id,data : vueForm})
                .then(function(result){
                   _this.loader.hide();
                    if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                    setTimeout(function(){ _this.$router.push('/blog-tags'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!'); 
                      _this.errorsList = result.errors;   
@@ -167,12 +146,12 @@
                  console.log(error);
                });
             } else {
-              this.$store.dispatch('createCategory',{ id : this.editData.id,data : vueForm})
+              this.$store.dispatch('createBlogTag',{ id : this.editData.id,data : vueForm})
               .then(function(result){
                  _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
                     _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/categories'); },500);
+                    setTimeout(function(){ _this.$router.push('/blog-tags'); },500);
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
                      _this.errorsList = result.errors;  
@@ -192,7 +171,7 @@
       }),
       created(){
           if( typeof(this.$route.params.id)!='undefined' ){
-              this.editCategories(this.$route.params.id);    
+              this.editBlogTags(this.$route.params.id);    
           }
       }
     }

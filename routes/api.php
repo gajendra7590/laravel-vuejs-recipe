@@ -74,7 +74,6 @@ Route::group(['namespace' => 'Api'], function () {
 
         //Admin All Routes Need Authentication
         Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
-
             //Admin Profile
             Route::get('getProfile', 'ProfileController@getProfile');
             Route::get('loggedProfile', 'ProfileController@loggedProfile');
@@ -82,30 +81,47 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('changePassword', 'ProfileController@changePassword');
             Route::post('logout', 'AuthController@logout');
             Route::post('logoutAll', 'AuthController@logoutAll'); 
-            Route::get('getDashboardData', 'CommonController@index');  
-            
-            //Manage Categories
+            Route::get('getDashboardData', 'CommonController@index');
+            //Manage Recipes
+            Route::get('getRecipes', 'RecipesController@getRecipes');
+            Route::get('getRecipe/{id}','RecipesController@getRecipe');
+            Route::post('createRecipe', 'RecipesController@createRecipe');
+            Route::post('updateRecipe/{id}', 'RecipesController@updateRecipe');
+            Route::delete('deleteRecipe/{id}', 'RecipesController@deleteRecipe');
+            //Manage Recipes Categories
             Route::get('categories', 'CategoriesController@categories');
             Route::get('getCategories', 'CategoriesController@getCategories');
             Route::get('getCategory/{id}','CategoriesController@getCategory');
             Route::post('createCategory', 'CategoriesController@createCategory');
             Route::post('updateCategory/{id}', 'CategoriesController@updateCategory');
             Route::delete('deleteCategory/{id}', 'CategoriesController@deleteCategory');
-
-            //Manage Tags
+            //Manage Recipes Tags
             Route::get('tags', 'TagsController@tags');
             Route::get('getTags', 'TagsController@getTags');
             Route::get('getTag/{id}','TagsController@getTag');
             Route::post('createTag', 'TagsController@createTag');
             Route::post('updateTag/{id}', 'TagsController@updateTag');
             Route::delete('deleteTag/{id}', 'TagsController@deleteTag');
-
-            //Manage Recipes
-            Route::get('getRecipes', 'RecipesController@getRecipes');
-            Route::get('getRecipe/{id}','RecipesController@getRecipe');
-            Route::post('createRecipe', 'RecipesController@createRecipe');
-            Route::post('updateRecipe/{id}', 'RecipesController@updateRecipe');
-            Route::delete('deleteRecipe/{id}', 'RecipesController@deleteRecipe'); 
+            //Manage Blogs
+            Route::get('getBlogs', 'BlogsController@getBlogs');
+            Route::get('editBlog/{id}','BlogsController@editBlog');
+            Route::post('createBlog', 'BlogsController@createBlog');
+            Route::post('updateBlog/{id}', 'BlogsController@updateBlog');
+            Route::delete('deleteBlog/{id}', 'BlogsController@deleteBlog');
+            //Manage Blog Categories
+            Route::get('blogCategories', 'BlogCategoriesController@blogCategories');
+            Route::get('getBlogCategories', 'BlogCategoriesController@getBlogCategories');
+            Route::get('getBlogCategory/{id}','BlogCategoriesController@getBlogCategory');
+            Route::post('createBlogCategory', 'BlogCategoriesController@createBlogCategory');
+            Route::post('updateBlogCategory/{id}', 'BlogCategoriesController@updateBlogCategory');
+            Route::delete('deleteBlogCategory/{id}', 'BlogCategoriesController@deleteBlogCategory');
+            //Manage Blog Tags
+            Route::get('blogTags', 'BlogTagsController@blogTags');
+            Route::get('getBlogTags', 'BlogTagsController@getBlogTags');
+            Route::get('getBlogTag/{id}','BlogTagsController@getBlogTag');
+            Route::post('createBlogTag', 'BlogTagsController@createBlogTag');
+            Route::post('updateBlogTag/{id}', 'BlogTagsController@updateBlogTag');
+            Route::delete('deleteBlogTag/{id}', 'BlogTagsController@deleteBlogTag');
             //Manage Clients
             Route::get('getClients', 'ClientsController@getClients');  
             Route::get('editClients/{id}', 'ClientsController@editClients');
@@ -118,12 +134,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('createAuthors', 'AuthorsController@createAuthors');
             Route::post('updateAuthors/{id}', 'AuthorsController@updateAuthors');
             Route::delete('deleteAuthors/{id}', 'AuthorsController@deleteAuthors');
-             //Manage Recipes
-             Route::get('getRecipes', 'RecipesController@getRecipes'); 
-             Route::get('editRecipes/{id}', 'RecipesController@editRecipes');
-             Route::post('createRecipes', 'RecipesController@createRecipes');
-             Route::post('updateRecipes/{id}', 'RecipesController@updateRecipes');
-             Route::delete('deleteRecipes/{id}', 'RecipesController@deleteRecipes');
+
         });
 
     });  

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\models\BlogCategories;
+use App\models\BlogTagsSelected;
 
 class Blogs extends Model
 {
@@ -17,18 +18,23 @@ class Blogs extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'category_id','user_id','title', 'slug','photo','description','status'
+        'category_id','user_id','title', 'slug','photo','short_desc','description','status'
     ];
 
 
     public function user()
     {
-        return $this->hasOne(User::class, 'user_id','id');
+        return $this->hasOne(User::class, 'id','user_id');
     }
 
     public function category()
     {
-        return $this->hasOne(BlogCategories::class, 'category_id','id');
+        return $this->hasOne(BlogCategories::class, 'id','category_id');
+    }
+
+    public function selectedTags()
+    {
+        return $this->hasMany(BlogTagsSelected::class, 'blog_id','id');
     }
 
 

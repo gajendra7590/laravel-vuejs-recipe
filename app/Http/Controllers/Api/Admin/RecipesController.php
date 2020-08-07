@@ -95,6 +95,7 @@ class RecipesController extends Controller
             'recipe_nutritions.*.nutrition_value' => 'required'
         ],[
             'tags.*' => 'Please select recipe tag',
+            'category_id.required' => 'Category field is required',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
             'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
@@ -202,6 +203,7 @@ class RecipesController extends Controller
             'recipe_nutritions.*.nutrition_value' => 'required'
         ],[
             'tags.*' => 'Please select recipe tag',
+            'category_id.required' => 'Category field is required',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
             'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'

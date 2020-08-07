@@ -178,6 +178,67 @@ export default {
                 });
         });
     },
+    //All Functions For Recipes Section
+    getRecipes({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getRecipes", payload)
+            .then(function(response) {
+                commit("getRecipes", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "editRecipes/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    createRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "createRecipes", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateRecipes/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL_ADMIN + "deleteRecipes/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
     //All Functions for Recipe Category Section
     categories({ commit, state }, payload) {
         axios
@@ -320,21 +381,21 @@ export default {
                 });
         });
     },
-    //All Functions For Recipes Section
-    getRecipes({ commit, state }, payload) {
+    //All Functions For Blogs Section
+    getBlogs({ commit, state }, payload) {
         axios
-            .get(config.API_URL_ADMIN + "getRecipes", payload)
+            .get(config.API_URL_ADMIN + "getBlogs", payload)
             .then(function(response) {
-                commit("getRecipes", response.data);
+                commit("getBlogs", response.data);
             })
             .catch(function(error) {
                 console.log(error.response);
             });
     },
-    editRecipes({ commit, state }, payload) {
+    editBlog({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
             axios
-                .get(config.API_URL_ADMIN + "editRecipes/" + payload.id)
+                .get(config.API_URL_ADMIN + "editBlog/" + payload.id)
                 .then(function(response) {
                     return resolve(response.data)
                 })
@@ -343,24 +404,11 @@ export default {
                 });
         });
     },
-    createRecipes({ commit, state }, payload) {
-        return new Promise(function(resolve, reject) {
-            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
-            axios
-                .post(config.API_URL_ADMIN + "createRecipes", payload.data)
-                .then(function(response) {
-                    return resolve(response.data)
-                })
-                .catch(function(error) {
-                    return reject(error.response);
-                });
-        });
-    },
-    updateRecipes({ commit, state }, payload) {
+    createBlog({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
             axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
             axios
-                .post(config.API_URL_ADMIN + "updateRecipes/" + payload.id, payload.data)
+                .post(config.API_URL_ADMIN + "createBlog", payload.data)
                 .then(function(response) {
                     return resolve(response.data)
                 })
@@ -369,10 +417,23 @@ export default {
                 });
         });
     },
-    deleteRecipes({ commit, state }, payload) {
+    updateBlog({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateBlog/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteBlog({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
             axios
-                .delete(config.API_URL_ADMIN + "deleteRecipes/" + payload.id)
+                .delete(config.API_URL_ADMIN + "deleteBlog/" + payload.id)
                 .then(function(response) {
                     return resolve(response.data)
                 })
@@ -381,7 +442,148 @@ export default {
                 });
         });
     },
-
+    //All Functions for Blog Category Section
+    blogCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "blogCategories", payload)
+            .then(function(response) {
+                commit("blogCategories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    getBlogCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getBlogCategories", payload)
+            .then(function(response) {
+                commit("getBlogCategories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editBlogCategories({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getBlogCategory/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    createBlogCategory({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "createBlogCategory", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateBlogCategory({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateBlogCategory/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteBlogCategory({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL_ADMIN + "deleteBlogCategory/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    //All Functions for Blog tags Section
+    blogTags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "blogTags", payload)
+            .then(function(response) {
+                commit("blogTags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    getBlogTags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getBlogTags", payload)
+            .then(function(response) {
+                commit("getBlogTags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editBlogTags({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getBlogTag/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    createBlogTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "createBlogTag", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateBlogTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateBlogTag/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteBlogTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL_ADMIN + "deleteBlogTag/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
     //All Functions for Profile Section
     changePassword({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {

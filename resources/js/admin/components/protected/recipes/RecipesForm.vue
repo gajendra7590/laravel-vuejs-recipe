@@ -63,7 +63,7 @@
                                         v-model="editData.title"
                                         class="form-control"  
                                         placeholder="Enter title...">
-                                    <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p>
+                                    <p class="text-danger validation_errors" v-if="errorsList.title">{{ errorsList.title }} </p>
                                 </div>
                             </div>
                         </div>  

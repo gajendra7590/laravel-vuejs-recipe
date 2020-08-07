@@ -20,6 +20,7 @@ class CreateBlogsTable extends Migration
             $table->string('title','256')->unique();
             $table->string('slug','256')->unique();
             $table->string('photo','256')->unique();
+            $table->longText('short_desc')->nullable();
             $table->longText('description')->nullable();
             $table->enum('status', array('0', '1','2'))->default(1);
             $table->timestamps();

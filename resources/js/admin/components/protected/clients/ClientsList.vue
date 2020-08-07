@@ -47,7 +47,7 @@
                       <router-link :to="'/edit-clients/'+row.id" title="Edit Item" class="btn btn-sm bg-gradient-success">
                           <i class="fa fa-edit" aria-hidden="true"></i>
                       </router-link> 
-                      <button @click="deleteClients( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
+                      <button v-if="row.status != '2'" @click="deleteClients( row.id )" title="Archive Item" class="btn btn-sm bg-gradient-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </button> 
                     </div>                     
