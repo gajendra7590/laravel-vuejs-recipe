@@ -17,6 +17,9 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/fontawesome-free/css/all.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" />
+    <!-- Select2 --> 
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/select2/css/select2.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" /> 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/plugins/jqvmap/jqvmap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/html/dist/css/adminlte.min.css') }}" />
@@ -43,6 +46,7 @@
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('admin/html/plugins/select2/js/select2.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/moment/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/daterangepicker/daterangepicker.js') }}"></script> 
 <script type="text/javascript" src="{{ URL::asset('admin/html/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
@@ -51,6 +55,20 @@
 <script type="text/javascript" src="{{ URL::asset('admin/html/dist/js/adminlte.js') }}"></script> 
 
 <script type="text/javascript" src="{{ URL::asset('myjs/common.js') }}"></script>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+  });
+  </script>
+  
 </body>
 
 </html>

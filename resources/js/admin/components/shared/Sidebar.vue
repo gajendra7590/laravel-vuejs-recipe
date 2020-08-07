@@ -40,29 +40,64 @@
           <li class="nav-item">
             <router-link to="/clients" title="View Clients List" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Clients</p>
+              <p>Clients List</p>
             </router-link>
           </li> 
 
            <li class="nav-item">
             <router-link to="/authors" title="View Users List" class="nav-link">
               <i class="nav-icon fas fa-user-secret"></i>
-              <p>Authors</p>
+              <p>Authors List</p>
             </router-link>
-          </li> 
-
-          <li class="nav-item">
-            <router-link to="/categories" title="View Categories List" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>Categories</p>
-            </router-link>
-          </li> 
+          </li>  
 
            <li class="nav-item">
               <router-link to="/recipes" title="View Recipes List" class="nav-link">
                 <i class="nav-icon fas fa-hamburger"></i>
-                <p>Recipes</p>
+                <p>Recipe List</p>
               </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/categories" title="View Recipes Categories " class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>Recipe Categories</p>
+            </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/tags" title="View Recipe Tags" class="nav-link">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>Recipe Tags</p>
+            </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/blogs" title="View Blogs List" class="nav-link">
+              <i class="nav-icon fas fa-blog"></i>
+              <p>Blogs List</p>
+            </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/blog-categories" title="View Blog Tags" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>Blog  Categories</p>
+            </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/blog-tags" title="View Blog Tags" class="nav-link">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>Blog Tags</p>
+            </router-link>
+           </li> 
+
+           <li class="nav-item">
+            <router-link to="/products" title="View Products List" class="nav-link">
+              <i class="nav-icon fab fa-product-hunt"></i>
+              <p>Prodcuts List</p>
+            </router-link>
            </li> 
 
           <li class="nav-item">

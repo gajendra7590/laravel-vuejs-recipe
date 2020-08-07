@@ -67,6 +67,17 @@
                                 </div>
                             </div>
                         </div>  
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group" v-if="tags">
+                                  <label>Recipe Tags</label>
+                                  <select class="form-control select2" name="tags[]" multiple="multiple" style="width: 100%;">
+                                    <option v-for="(tag,index) in tags" :key="index" :selected="isSelectedTag(tag.id)" :value="tag.id">{{ tag.name }}</option> 
+                                  </select>
+                                  <p class="text-danger validation_errors" v-if="errorsList.tags">{{ errorsList.tags }} </p>
+                                </div>
+                            </div>
+                        </div>   
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -292,6 +303,7 @@
               prepairation_time : '',
               cooking_time : '',
               serving_peoples : '',
+              selected_tags : [],
               ingredients : [
                 {
                   id : 0,
@@ -332,9 +344,20 @@
                 console.log(error);
             }); 
           },
-           getCategories(){
-            let _this = this;
+          getCategories(){
             this.$store.dispatch('categories');  
+          },
+          getTags(){ 
+            setTimeout(function(){ $('.select2').select2(); },500);
+            this.$store.dispatch('tags');  
+          },
+          isSelectedTag(tag_id){  
+            var result = this.editData.selected_tags.find(function(tag) {  
+               return (tag.tag_id == tag_id); 
+            });   
+            if(result!=undefined){
+              return true;
+            }else{ return false; } 
           },
           addIngredient(){
               let oldObj = this.editData.ingredients;
@@ -436,12 +459,14 @@
       }, 
       created(){ 
           this.getCategories();
+          this.getTags();
           if( typeof(this.$route.params.id)!='undefined' ){
               this.editRecipes(this.$route.params.id);    
           }
       },
       computed: mapState({ 
-          categories : state => state.data.categories
+          categories : state => state.data.categories,
+          tags : state => state.data.tags
       })
 
     }

@@ -9,6 +9,7 @@ use App\models\Categories;
 use App\models\RecipeNutritions;
 use App\models\RecipeIngredients;
 use App\models\RecipeSteps;
+use App\models\RecipeTagsSelected;
 
 
 class Recipes extends Model
@@ -36,6 +37,11 @@ class Recipes extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id','user_id');
+    }
+
+    public function selectedTags()
+    {
+        return $this->hasMany(RecipeTagsSelected::class, 'recipe_id','id');
     }
 
 

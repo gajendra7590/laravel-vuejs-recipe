@@ -4,9 +4,12 @@ import VueToastr from "vue-toastr";
 import config from '../config'
 //Import All component Here
 import Dashboard from './components/protected/Dashboard';
-//Categories
+//Recipe Categories
 import CategoriesList from './components/protected/categories/CategoriesList';
 import CategoryForm from './components/protected/categories/CategoryForm';
+//Recipe Tags
+import TagsList from './components/protected/tags/TagsList';
+import TagsForm from './components/protected/tags/TagsForm';
 //Recipes
 import RecipesList from './components/protected/recipes/RecipesList';
 import RecipesForm from './components/protected/recipes/RecipesForm'
@@ -45,6 +48,10 @@ const router = new VueRouter({
         { name: "categories-list", path: "/categories", component: CategoriesList, meta: { protectedURL: true } },
         { name: "edit-category", path: "/edit-category/:id", component: CategoryForm, meta: { protectedURL: true } },
         { name: "add-category", path: "/add-category", component: CategoryForm, meta: { protectedURL: true } },
+        //Tags Routes
+        { name: "tags-list", path: "/tags", component: TagsList, meta: { protectedURL: true } },
+        { name: "edit-tag", path: "/edit-tag/:id", component: TagsForm, meta: { protectedURL: true } },
+        { name: "add-tag", path: "/add-tag", component: TagsForm, meta: { protectedURL: true } },
         //Reipes Routes
         { name: "recipes-list", path: "/recipes", component: RecipesList, meta: { protectedURL: true } },
         { name: "edit-recipe", path: "/edit-recipe/:id", component: RecipesForm, meta: { protectedURL: true } },

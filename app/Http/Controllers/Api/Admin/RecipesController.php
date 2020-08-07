@@ -11,6 +11,8 @@ use Validator;
 use Webpatser\Uuid\Uuid;
 
 use App\models\Recipes;
+use App\models\RecipeTags;
+use App\models\RecipeTagsSelected;
 use App\models\RecipeNutritions;
 use App\models\RecipeIngredients;
 use App\models\RecipeImages;
@@ -65,6 +67,7 @@ class RecipesController extends Controller
         return Recipes::with([  
             'nutritions'=> function($model){ $model->select('id','recipe_id','nutrition_name','nutrition_value'); },
             'ingredients' => function($model){ $model->select('id','recipe_id','name'); },
+            'selectedTags' => function($model){ $model->select('id','recipe_id','tag_id'); },
         ])
         ->where(['id' => $id])
         ->get()
@@ -85,11 +88,13 @@ class RecipesController extends Controller
             'cooking_time' => 'required',
             'serving_peoples' => 'required',
             'recipe_ingredients' => 'required|array|min:1',
+            'tags' => 'required|array|min:1',
             'recipe_ingredients.*.name' => 'required',
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
             'recipe_nutritions.*.nutrition_value' => 'required'
         ],[
+            'tags.*' => 'Please select recipe tag',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
             'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
@@ -130,6 +135,18 @@ class RecipesController extends Controller
             $save = $recipe->save();
             if($save){
                 $last_id = $recipe->id;
+
+                //Save Recipe Tags
+                if( isset($post['tags']) && count($post['tags']) > 0){
+                    foreach ($post['tags'] as $tag){
+                        $tagModel = new RecipeTagsSelected();
+                        $tagModel->recipe_id = $last_id;
+                        $tagModel->tag_id =  $tag;
+                        $tagModel->status = '1';
+                        $tagModel->save();
+                    }
+                }
+
                 //Save Ingredients
                 if( isset($post['recipe_ingredients']) && count($post['recipe_ingredients']) > 0){
                     foreach ($post['recipe_ingredients'] as $ingredient){
@@ -177,12 +194,14 @@ class RecipesController extends Controller
             'image' => 'image|mimes:jpg,jpeg,png',
             'cooking_time' => 'required',
             'serving_peoples' => 'required',
+            'tags' => 'required|array|min:1',
             'recipe_ingredients' => 'required|array|min:1',
             'recipe_ingredients.*.name' => 'required',
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
             'recipe_nutritions.*.nutrition_value' => 'required'
         ],[
+            'tags.*' => 'Please select recipe tag',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
             'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
@@ -219,6 +238,22 @@ class RecipesController extends Controller
             $save = $recipeModel->save();
             if($save){
                 $last_id = $recipeModel->id;
+                //Save Recipe Tags
+                if( isset($post['tags']) && count($post['tags']) > 0){
+                    foreach ($post['tags'] as $tag){
+                        $find = RecipeTagsSelected::where(['recipe_id' => $last_id,'tag_id' => $tag])->get()->first();
+                        if(!$find){
+                            $tagModel = new RecipeTagsSelected();
+                            $tagModel->recipe_id = $last_id;
+                            $tagModel->tag_id =  $tag;
+                            $tagModel->status = '1';
+                            $tagModel->save();
+                        }
+                    }
+                    //Delete If Any UnSelect
+                    RecipeTagsSelected::where('recipe_id',$last_id)->whereNotIn('tag_id',$post['tags'])->delete();
+                }
+
                 //Save Ingredients
                 if( isset($post['recipe_ingredients']) && count($post['recipe_ingredients']) > 0){
                     foreach ($post['recipe_ingredients'] as $ingredient){

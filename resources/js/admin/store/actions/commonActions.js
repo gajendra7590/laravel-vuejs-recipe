@@ -178,7 +178,7 @@ export default {
                 });
         });
     },
-    //All Functions for Category Section
+    //All Functions for Recipe Category Section
     categories({ commit, state }, payload) {
         axios
             .get(config.API_URL_ADMIN + "categories", payload)
@@ -241,6 +241,77 @@ export default {
         return new Promise(function(resolve, reject) {
             axios
                 .delete(config.API_URL_ADMIN + "deleteCategory/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    //All Functions for Recipe tags Section
+    tags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "tags", payload)
+            .then(function(response) {
+                commit("tags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    getTags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL_ADMIN + "getTags", payload)
+            .then(function(response) {
+                commit("getTags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+            });
+    },
+    editTags({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getTag/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    createTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "createTag", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    updateTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "updateTag/" + payload.id, payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    deleteTag({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL_ADMIN + "deleteTag/" + payload.id)
                 .then(function(response) {
                     return resolve(response.data)
                 })

@@ -90,7 +90,16 @@ Route::group(['namespace' => 'Api'], function () {
             Route::get('getCategory/{id}','CategoriesController@getCategory');
             Route::post('createCategory', 'CategoriesController@createCategory');
             Route::post('updateCategory/{id}', 'CategoriesController@updateCategory');
-            Route::delete('deleteCategory/{id}', 'CategoriesController@deleteCategory'); 
+            Route::delete('deleteCategory/{id}', 'CategoriesController@deleteCategory');
+
+            //Manage Tags
+            Route::get('tags', 'TagsController@tags');
+            Route::get('getTags', 'TagsController@getTags');
+            Route::get('getTag/{id}','TagsController@getTag');
+            Route::post('createTag', 'TagsController@createTag');
+            Route::post('updateTag/{id}', 'TagsController@updateTag');
+            Route::delete('deleteTag/{id}', 'TagsController@deleteTag');
+
             //Manage Recipes
             Route::get('getRecipes', 'RecipesController@getRecipes');
             Route::get('getRecipe/{id}','RecipesController@getRecipe');

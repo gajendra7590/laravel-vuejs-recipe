@@ -50,6 +50,9 @@ const store = new Vuex.Store({
             editRecipe: [],
             categories: [],
             getCategories: [],
+            getTags: [],
+            editTags: [],
+            tags: [],
             editCategories: [],
             userProfile: [],
             dashboardData: []
