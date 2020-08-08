@@ -67,12 +67,19 @@
                                 </div>
                             </div>
                         </div>  
-                        <div class="row"> 
+                        <div class="row">  
                             <div class="col-sm-12">
                                 <div class="form-group" v-if="tags">
                                   <label>Recipe Tags</label>
-                                  <select class="form-control select2" name="tags[]" multiple="multiple" style="width: 100%;">
-                                    <option v-for="(tag,index) in tags" :key="index" :selected="isSelectedTag(tag.id)" :value="tag.id">{{ tag.name }}</option> 
+                                  <select class="form-control select2" 
+                                  name="tags[]" 
+                                  multiple="multiple" 
+                                  style="width: 100%;">
+                                     <option v-for="(tag,index) in tags" :key="index" 
+                                            :selected="(editData.selected_tags.map(el => el.tag_id)).includes(tag.id)" 
+                                            :value="tag.id"> 
+                                            {{ tag.name }}
+                                     </option> 
                                   </select>
                                   <p class="text-danger validation_errors" v-if="errorsList.tags">{{ errorsList.tags }} </p>
                                 </div>
@@ -124,25 +131,25 @@
                         <div class="row"> 
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label>Prepairation Time</label> 
+                                    <label>Prepairation Time( In Minutes )</label> 
                                     <input 
                                         type="text" 
                                         name="prepairation_time"
                                         v-model="editData.prepairation_time"
                                         class="form-control"  
-                                        placeholder="Ex. : 5 Min">
+                                        placeholder="">
                                     <p class="text-danger validation_errors" v-if="errorsList.prepairation_time">{{ errorsList.prepairation_time }} </p>    
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label>Cooking Time</label> 
+                                    <label>Cooking Time ( In Minutes )</label> 
                                     <input 
                                         type="text" 
                                         name="cooking_time"
                                         v-model="editData.cooking_time"
                                         class="form-control"  
-                                        placeholder="Ex. : 10 Min">
+                                        placeholder="">                                       
                                       <p class="text-danger validation_errors" v-if="errorsList.cooking_time">{{ errorsList.cooking_time }} </p>  
                                 </div>
                             </div>
@@ -242,7 +249,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Category Status</label>
+                                    <label>Recipe Status</label>
                                     <select class="form-control" name="status" v-model="editData.status">
                                         <option value="0">In Active</option>
                                         <option value="1">Active</option>
@@ -329,7 +336,8 @@
         }
       },
       methods : {
-          editRecipes(id){
+          editRecipes(id){ 
+            this.editData.selected_tags = [];
             let _this = this;
             this.$store.dispatch('editRecipes',{id : id})
             .then(function(result){ 
@@ -348,16 +356,12 @@
             this.$store.dispatch('categories');  
           },
           getTags(){ 
-            setTimeout(function(){ $('.select2').select2(); },500);
+            setTimeout(function(){ $('.select2').select2(); },800);
             this.$store.dispatch('tags');  
           },
-          isSelectedTag(tag_id){  
-            var result = this.editData.selected_tags.find(function(tag) {  
-               return (tag.tag_id == tag_id); 
-            });   
-            if(result!=undefined){
-              return true;
-            }else{ return false; } 
+          isSelectedTag(tag_id){ 
+              let selTags = this.editData.selected_tags;  
+              return (selTags.map(el => el.tag_id)).includes(tag_id);  
           },
           addIngredient(){
               let oldObj = this.editData.ingredients;
@@ -457,12 +461,12 @@
              
           }
       }, 
-      created(){ 
+      created(){  
+          if( typeof(this.$route.params.id)!='undefined' ){
+            this.editRecipes(this.$route.params.id);    
+          } 
           this.getCategories();
           this.getTags();
-          if( typeof(this.$route.params.id)!='undefined' ){
-              this.editRecipes(this.$route.params.id);    
-          }
       },
       computed: mapState({ 
           categories : state => state.data.categories,

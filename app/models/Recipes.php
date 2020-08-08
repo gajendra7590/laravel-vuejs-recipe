@@ -60,13 +60,24 @@ class Recipes extends Model
         return $this->hasMany(RecipeIngredients::class, 'recipe_id','id');
     }
 
-    public function getPhotoUrlAttribute(){  
+    public function getPhotoUrlAttribute(){
         if($this->photo !=''){
             return \url('/').'/images/'.$this->photo;
         } else{
             return \url('/').'/default_img/default.jpg';
-        } 
-     }
+        }
+    }
 
+    public function getPrepairationTimeAttribute($value){
+        return (str_pad($value, 2, '0', STR_PAD_LEFT)).' Min';
+    }
+
+    public function getCookingTimeAttribute($value){
+        return (str_pad($value, 2, '0', STR_PAD_LEFT)).' Min';
+    }
+
+    public function getServingPeoplesAttribute($value){
+        return (str_pad($value, 2, '0', STR_PAD_LEFT));
+    }
 
 }
