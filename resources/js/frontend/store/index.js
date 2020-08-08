@@ -61,6 +61,13 @@ const store = new Vuex.Store({
             recipesList: [],
             recipesListByCategory: [],
             recipesListByTag: [],
+
+            getBlogFeatured: [],
+            getBlogLatest: [],
+            getBlogInstagrams: [],
+            getBlogCategories: [],
+            getBlogFeatured: [],
+            getBlogTags: [],
         }
     },
     mutations,

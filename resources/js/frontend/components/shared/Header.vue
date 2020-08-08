@@ -28,7 +28,7 @@
                   <router-link to="/authors">Authors</router-link>
                 </li>
                 <li>
-                  <router-link to="/blog">Blog</router-link>
+                  <router-link to="/blogs">Blog</router-link>
                 </li>
                 <li>
                   <router-link to="/shop">Shop</router-link>

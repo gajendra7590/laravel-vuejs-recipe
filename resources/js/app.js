@@ -5,6 +5,8 @@ import VueLazyload from "vue-lazyload";
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
+import Paginate from 'vuejs-paginate';
+
 import $ from 'jquery';
 require('./bootstrap');
 
@@ -30,7 +32,7 @@ Vue.use(VueToastr, {
     maxOpened: 1,
 });
 Vue.use(VueMoment, { moment });
-
+Vue.component('paginate', Paginate);
 
 export default new Vue({
     el: '#app',

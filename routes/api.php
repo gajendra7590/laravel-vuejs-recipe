@@ -31,32 +31,32 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('featuredRecipes' ,'CommonController@featuredRecipes'); 
         Route::get('popularTags' ,'CommonController@popularTags');
         Route::get('getSidebarCategories' ,'CommonController@getSidebarCategories');
-
-
-
-        //All Home Page
+        //All Home Page Routes
         Route::get('getHomeSlider', 'HomeController@getHomeSlider');
         Route::get('homeTrendingRecipe', 'HomeController@homeTrendingRecipe');
         Route::get('homeSection3In1', 'HomeController@homeSection3In1');
         Route::get('homeSidebarSection3In1', 'HomeController@homeSidebarSection3In1');
-
-        //RecipesCategories Page
+        //Recipes Categories Routes
         Route::get('getCategories', 'CommonController@getCategories');
-
-        //Recipe Page
+        //Recipe Section Routes
         Route::get('recipesList' ,'RecipeController@recipesList');
         Route::get('recipesListByCategory/{slug}' ,'RecipeController@recipesListByCategory');
         Route::get('recipesListByTag/{slug}' ,'RecipeController@recipesListByTag');
-
-        //Recipe Detail Page
         Route::get('recipeDetail/{slug}' ,'RecipeController@recipeDetail');
-
-        //Authors Page
+        //Authors Section Routes
         Route::get('authorsList' ,'CommonController@authorsList');
         Route::get('authorsRecipe/{id}' ,'CommonController@authorsRecipe');
         Route::get('authorsDetail/{id}' ,'CommonController@authorsDetail');
-
-
+        //Blog Section Routes
+        Route::get('getBlogList' ,'BlogsController@getBlogList');
+        Route::get('getBlogListByTags/{slug}' ,'BlogsController@getBlogListByTags');
+        Route::get('getBlogListByCategories/{slug}' ,'BlogsController@getBlogListByCategories');
+        Route::get('getBlogDetail/{slug}' ,'BlogsController@getBlogDetail');
+        Route::get('getBlogFeatured' ,'BlogsController@getBlogFeatured');
+        Route::get('getBlogLatest' ,'BlogsController@getBlogLatest');
+        Route::get('getBlogInstagrams' ,'BlogsController@getBlogInstagrams');
+        Route::get('getBlogCategories' ,'BlogsController@getBlogCategories');
+        Route::get('getBlogTags' ,'BlogsController@getBlogTags');
     }); 
 
 

@@ -26,8 +26,7 @@
     <section class="blog-list-page-wrap padding-top-80 padding-bottom-50">
       <div class="container">
         <div class="row gutters-60">
-          <div class="col-lg-8" v-if="blogsList">
-
+          <div class="col-lg-8" v-if="(blogsList)">
             <div class="blog-box-layout1" v-for="(blog,index) in blogsList" :key="index">
               <div class="item-figure">
                 <a href="single-blog.html">
@@ -73,17 +72,27 @@
                   <i class="flaticon-next"></i>
                 </router-link>
               </div>
-            </div>
-            <paginate
-              :page-count="(totalResult/perpage)"
-              :page-range="3"
-              :margin-pages="2"
-              :click-handler="blogPaginate"
-              :prev-text="'Prev'"
-              :next-text="'Next'"
-              :container-class="'pagination-layout1'"
-              :page-class="'page-item'">
-            </paginate>  
+            </div> 
+            <div v-if="blogsList.length > 0">
+                <paginate
+                    :page-count="(totalResult/perpage)"
+                    :page-range="3"
+                    :margin-pages="2"
+                    :click-handler="blogPaginate"
+                    :prev-text="'Prev'"
+                    :next-text="'Next'"
+                    :container-class="'pagination-layout1'"
+                    :page-class="'page-item'">
+                </paginate>  
+            </div> 
+            <div class="nocontainer">
+                <div class="error-content-box no-result-found" v-if="blogsList.length == 0"> 
+                    <h5 class="">No Blog Found For Category : {{ this.$route.params.slug }}</h5>  
+                </div>
+                <div class="noResultLink" style="text-algin:center;">
+                    <router-link class="btn btn-danger btn-md" :to="'/blogs'">Go To Blog List</router-link>
+                </div> 
+            </div>  
           </div> 
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
             <div class="widget">
@@ -279,7 +288,7 @@ import { mapState } from "vuex";
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 export default {
-  name: "blog",
+  name: "blogByTag",
   components: { VueperSlides, VueperSlide },
   data() {
     return {
@@ -290,10 +299,16 @@ export default {
        perpage : 5 
     };
   },
+  watch: {
+    '$route.params.slug'(newId, oldId) {
+        this.getBlogs(1)
+    }
+  },
   methods: {
-    getBlogs(page = 1) { 
+    getBlogs(page = 1) {  
       let _this = this; 
-      this.$store.dispatch("getBlogList",{ page : page })
+      let slug = _this.$route.params.slug; 
+      this.$store.dispatch("getBlogListByTags",{ slug : slug, page : page })
       .then(function(response){  
         if( response.status == true ){
           _this.blogsList = response.blogs;
@@ -327,7 +342,7 @@ export default {
     },
   },
   created() {
-    this.getBlogs();
+    this.getBlogs(1);
     this.latestsBlogs();
     this.featuredBlogs();
     this.instagramBlogs();
@@ -343,5 +358,20 @@ export default {
   }),
 };
 </script> 
-<style lang="scss" scoped>
+<style scoped>
+    .error-content-box.no-result-found {
+        border: 1px solid #f65058;
+        padding: 17px 0px 1px 0px !important;
+        margin-top: 4px !important;
+    }
+    .error-content-box.no-result-found h5 {
+        font-size: 20px;
+        font-weight: 600;
+        font-style: italic;
+        color: #808080;
+    }
+    .noResultLink {
+        text-align: center;
+        margin-top: 13px;
+    }
 </style>

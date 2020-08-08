@@ -24,6 +24,8 @@ import Shop from './components/public/Shop';
 import ShopDetail from './components/public/ShopDetail';
 
 import Blog from './components/public/Blog';
+import BlogByTag from './components/public/BlogByTag';
+import BlogByCategories from './components/public/BlogByCategories';
 import BlogDetail from './components/public/BlogDetail';
 
 
@@ -47,8 +49,10 @@ const router = new VueRouter({
         { name: "authorsDetail", path: "/authors/:slug", component: AuthorDetail },
         { name: "shop", path: "/shop", component: Shop },
         { name: "shopDetail", path: "/shop/:slug", component: ShopDetail },
-        { name: "blog", path: "/blog", component: Blog },
-        { name: "blogDetail", path: "/blog/:slug", component: BlogDetail },
+        { name: "blogs", path: "/blogs", component: Blog },
+        { name: "blogsByTag", path: "/blogs/tag/:slug", component: BlogByTag },
+        { name: "blogsByCategories", path: "/blogs/category/:slug", component: BlogByCategories },
+        { name: "blogsDetail", path: "/blogs/:slug", component: BlogDetail },
         //404 no route redirect   
         { name: "404", path: "**", redirect: '/home' }
     ],

@@ -13,7 +13,7 @@ export default {
                 commit("getHomeSlider", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     homeTrendingRecipe({ commit, state }, payload) {
@@ -23,7 +23,7 @@ export default {
                 commit("homeTrendingRecipe", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     homeSection3In1({ commit, state }, payload) {
@@ -33,7 +33,7 @@ export default {
                 commit("homeSection3In1", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     homeSidebarSection3In1({ commit, state }, payload) {
@@ -43,7 +43,7 @@ export default {
                 commit("homeSidebarSection3In1", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     //Home End
@@ -55,7 +55,7 @@ export default {
                 commit("followOnInstagram", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     latestsRecipes({ commit, state }, payload) {
@@ -65,7 +65,7 @@ export default {
                 commit("latestsRecipes", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     featuredRecipes({ commit, state }, payload) {
@@ -75,7 +75,7 @@ export default {
                 commit("featuredRecipes", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     randomRecipes({ commit, state }, payload) {
@@ -85,7 +85,7 @@ export default {
                 commit("randomRecipes", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     popularTags({ commit, state }, payload) {
@@ -95,7 +95,7 @@ export default {
                 commit("popularTags", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     getSidebarCategories({ commit, state }, payload) {
@@ -105,7 +105,7 @@ export default {
                 commit("getSidebarCategories", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     //Common End
@@ -117,7 +117,7 @@ export default {
                 commit("categoriesList", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     //Category End
@@ -129,7 +129,7 @@ export default {
                 commit("authorsList", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     authorsDetail({ commit, state }, payload) {
@@ -140,7 +140,7 @@ export default {
                     return resolve(response.data)
                 })
                 .catch(function(error) {
-                    return reject(error.response);
+                    return reject(error);
                 });
         });
     },
@@ -151,7 +151,7 @@ export default {
                 commit("authorsRecipe", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     //Authors End
@@ -163,7 +163,7 @@ export default {
                 commit("recipesList", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     recipesListByCategory({ commit, state }, payload) {
@@ -173,7 +173,7 @@ export default {
                 commit("recipesListByCategory", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     recipesListByTag({ commit, state }, payload) {
@@ -183,7 +183,7 @@ export default {
                 commit("recipesListByTag", response.data);
             })
             .catch(function(error) {
-                console.log(error.response);
+                console.log(error);
             });
     },
     //Recipes End
@@ -196,9 +196,109 @@ export default {
                     return resolve(response.data)
                 })
                 .catch(function(error) {
-                    return reject(error.response);
+                    return reject(error);
                 });
         });
     },
     //Recipe Detail End
+    //Blogs All functions start
+    getBlogList({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getBlogList?page=" + payload.page)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getBlogListByTags({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getBlogListByTags/" + payload.slug + "?page=" + payload.page)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getBlogListByCategories({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getBlogListByCategories/" + payload.slug + "?page=" + payload.page)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getBlogDetail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getBlogDetail/" + payload.slug)
+                .then(function(response) {
+                    return resolve(response.data);
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getBlogFeatured({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogFeatured?limit=" + payload.limit)
+            .then(function(response) {
+                commit("getBlogFeatured", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    getBlogLatest({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogLatest?limit=" + payload.limit)
+            .then(function(response) {
+                commit("getBlogLatest", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    getBlogInstagrams({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogInstagrams?limit=" + payload.limit)
+            .then(function(response) {
+                commit("getBlogInstagrams", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    getBlogCategories({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogCategories?limit=" + payload.limit)
+            .then(function(response) {
+                commit("getBlogCategories", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    getBlogTags({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogTags?limit=" + payload.limit)
+            .then(function(response) {
+                commit("getBlogTags", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    //logs All functions end
 };

@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             RecipesCategories::class,
             RecipesTags::class,
             BlogCategories::class,
-            BlogTags::class
+            BlogTags::class,
+            Blogs::class
         ]);
     }
 }

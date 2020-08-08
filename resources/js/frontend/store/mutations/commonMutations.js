@@ -62,4 +62,22 @@ export default {
     },
     //Recipes End
 
+    //Blogs Start
+    getBlogFeatured(state, data) {
+        state.data.getBlogFeatured = data;
+    },
+    getBlogLatest(state, data) {
+        state.data.getBlogLatest = data;
+    },
+    getBlogInstagrams(state, data) {
+        state.data.getBlogInstagrams = data;
+    },
+    getBlogCategories(state, data) {
+        state.data.getBlogCategories = data;
+    },
+    getBlogTags(state, data) {
+        state.data.getBlogTags = data;
+    },
+    //Blogs End
+
 };
