@@ -55,6 +55,32 @@ export default {
                 });
         });
     },
+    //All Functions for Company Detail Section
+    editCompanyDetail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL_ADMIN + "getCompanyDetail")
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
+    saveCompanyDetail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL_ADMIN + "saveCompanyDetail", payload.data)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error.response);
+                });
+        });
+    },
     //All Functions For clients Section
     getClients({ commit, state }, payload) {
         axios

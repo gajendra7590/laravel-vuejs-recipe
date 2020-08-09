@@ -22,6 +22,8 @@ Route::group(['namespace' => 'Api'], function () {
     //All FrontEnd Routes
     Route::group(['namespace' => 'Frontend','prefix' => '/'], function () {
         //Common Routes
+        Route::get('companyDetail', 'CommonController@companyDetail');
+        Route::get('getSocialLinks', 'CommonController@getSocialLinks');
         Route::get('followOnInstagram', 'CommonController@followOnInstagram');
         Route::get('latestsRecipes' ,'CommonController@latestsRecipes');
         Route::get('randomRecipes' ,'CommonController@randomRecipes');
@@ -69,14 +71,18 @@ Route::group(['namespace' => 'Api'], function () {
 
         //Admin All Routes Need Authentication
         Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
-            //Admin Profile
+            //Admin Profile & Auth
             Route::get('getProfile', 'ProfileController@getProfile');
             Route::get('loggedProfile', 'ProfileController@loggedProfile');
             Route::post('updateProfile', 'ProfileController@updateProfile');
             Route::post('changePassword', 'ProfileController@changePassword');
             Route::post('logout', 'AuthController@logout');
-            Route::post('logoutAll', 'AuthController@logoutAll'); 
+            Route::post('logoutAll', 'AuthController@logoutAll');
+            //Dashboard
             Route::get('getDashboardData', 'CommonController@index');
+            //Company Detail
+            Route::get('getCompanyDetail', 'CompanyDetailController@getCompanyDetail');
+            Route::post('saveCompanyDetail', 'CompanyDetailController@saveCompanyDetail');
             //Manage Recipes
             Route::get('getRecipes', 'RecipesController@getRecipes');
             Route::get('editRecipes/{id}','RecipesController@editRecipes');

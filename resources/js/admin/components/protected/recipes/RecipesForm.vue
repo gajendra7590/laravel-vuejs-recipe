@@ -339,6 +339,7 @@
           editRecipes(id){ 
             this.editData.selected_tags = [];
             let _this = this;
+            _this.loader = _this.$loading.show()
             this.$store.dispatch('editRecipes',{id : id})
             .then(function(result){ 
                 _this.editData = result;                  
@@ -348,8 +349,10 @@
                 if(result.nutritions.length == '0'){ 
                   _this.editData.nutritions = [{id : 0,recipe_id : 0,nutrition_name : '',nutrition_value : '',is_deleted : 0}];
                 }
+                _this.loader.hide();
             }).catch(function(error){
                 console.log(error);
+                _this.loader.hide();
             }); 
           },
           getCategories(){

@@ -19,16 +19,17 @@ class Users extends Seeder
             [
                 'first_name'=>'Super',
                 'last_name'=>'Admin',
-                'display_name'=>'Super Admin',
+                'display_name'=>'Recipe Admin',
                 'email'=>'admin@recipe.com',
                 'password'=>bcrypt('123456'),
                 'role'=>'admin',
                 'status'=>'1'
             ],
-            [
+            [   
+                'speciality' => 'Dessert Specialist',
                 'first_name'=>'Author',
                 'last_name'=>'Author',
-                'display_name'=>'Author',
+                'display_name'=>'Dessert Master',
                 'email'=>'author@recipe.com',
                 'password'=>bcrypt('123456'),
                 'role'=>'author',

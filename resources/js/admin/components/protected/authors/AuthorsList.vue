@@ -76,6 +76,7 @@ export default {
       return {
         columns: [
           'photo_url',
+          'speciality', 
           'first_name', 
           'last_name',
           'display_name',

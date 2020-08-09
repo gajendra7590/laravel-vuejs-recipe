@@ -31,11 +31,20 @@ class CreateUsersTable extends Migration
             $table->string('zip',10)->nullable();
             $table->timestamp('last_login')->nullable();
             $table->string('ip_address',50)->nullable();
+            $table->string('speciality',100)->nullable();
+            $table->string('website_url',256)->nullable();
+            $table->string('youtube_url',256)->nullable();
+            $table->string('facebook_url',256)->nullable();
+            $table->string('twitter_url',256)->nullable();
+            $table->string('linkedin_url',256)->nullable();
+            $table->string('instagram_url',256)->nullable();
+            $table->string('pinterest_url',256)->nullable();
+            $table->longText('about_me')->nullable();
+            $table->enum('status',array('0','1','2'))->default(1);
             $table->rememberToken();
             $table->string('reset_token',100)->nullable();
             $table->string('reset_token_at',100)->nullable();
-            $table->longText('about_me')->nullable();
-            $table->enum('status',array('0','1','2'))->default(1);
+
             $table->timestamps();
         });
     }

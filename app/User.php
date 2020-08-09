@@ -28,8 +28,10 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name','last_name','display_name', 'email', 'password',
         'phone','photo','address_line_one','address_line_two','city',
-        'state','country','zip','last_login','ip_address','reset_token',
-        'reset_token_at','status','about_me','email_verified_at'
+        'state','country','zip','last_login','ip_address','speciality',
+        'website_url','youtube_url','facebook_url','twitter_url','linkedin_url',
+        'instagram_url','pinterest_url', 'reset_token','reset_token_at','status',
+        'about_me','email_verified_at'
     ];
 
     /**

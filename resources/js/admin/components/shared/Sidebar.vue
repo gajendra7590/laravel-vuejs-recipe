@@ -44,6 +44,12 @@
               <p>Dashboard</p>
             </router-link>
           </li>
+           <li class="nav-item">
+            <router-link to="/company-detail" title="View Company Detail" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>Company Detail</p>
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link
               to="/clients"

@@ -29,9 +29,10 @@
           <div class="col-lg-8" v-if="(blogsList)">
             <div class="blog-box-layout1" v-for="(blog,index) in blogsList" :key="index">
               <div class="item-figure">
-                <a href="single-blog.html">
-                  <img v-lazy="blog.photo_url" alt="Blog"  style="min-width:760px;max-width:760px;min-height:390px;max-height:390px;"/>
-                </a>
+                <router-link :to="'/blogs/'+blog.slug">
+                  <img v-lazy="blog.photo_url" alt="Blog"  
+                  style="min-width:760px;max-width:760px;min-height:390px;max-height:390px;"/>
+                </router-link>
               </div>
               <div class="item-content">
                 <ul class="entry-meta">
@@ -60,9 +61,9 @@
                   </li>
                 </ul>
                 <h3 class="item-title">
-                  <a href="single-blog.html">
+                  <router-link :to="'/blogs/'+blog.slug">
                    {{ blog.title }}
-                  </a>
+                  </router-link>
                 </h3>
                 <p>
                   {{ blog.short_desc }}
@@ -87,7 +88,7 @@
             </div> 
             <div class="nocontainer">
                 <div class="error-content-box no-result-found" v-if="blogsList.length == 0"> 
-                    <h5 class="">No Blog Found For Category : {{ this.$route.params.slug }}</h5>  
+                    <h5 class="">No Blog Found For Tag : #{{ this.$route.params.slug }}</h5>  
                 </div>
                 <div class="noResultLink" style="text-algin:center;">
                     <router-link class="btn btn-danger btn-md" :to="'/blogs'">Go To Blog List</router-link>

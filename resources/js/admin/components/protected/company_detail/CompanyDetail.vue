@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Manage Authors</h1>
+            <h1>Manage Company Detail</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><router-link to="/dashboard">Home</router-link></li>
-              <li class="breadcrumb-item active">Manage Authors</li>
+              <li class="breadcrumb-item active">Manage Company Detail</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Manage Authors</h3>
+                <h3 class="card-title">Manage Company Detail</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -46,7 +46,7 @@
                                 <div class="customInput">
                                     <label for="file-upload" class="custom-file-upload">
                                         <i class="fa fa-cloud-upload-alt" aria-hidden="true"></i>
-                                        Upload Image
+                                        Upload Logo
                                     </label>
                                     <input id="file-upload" class="_img_thumb_input" accept="image/*" name="image" type="file"/>
                                 </div>
@@ -56,96 +56,44 @@
                         <div class="row"> 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>First Name</label>
+                                    <label>Company Name</label>
                                     <input 
                                         type="text" 
-                                        name="first_name"
-                                        v-model="editData.first_name"
+                                        name="company_name"
+                                        v-model="editData.company_name"
                                         class="form-control"  
-                                        placeholder="Enter first name...">
-                                        <p class="text-danger validation_errors" v-if="errorsList.first_name">{{ errorsList.first_name }} </p>
+                                        placeholder="Enter company name...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.company_name">{{ errorsList.company_name }} </p>
                                 </div>
                             </div>
                              <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Last Name</label>
+                                    <label>Company Contact</label>
                                     <input 
                                         type="text" 
-                                        name="last_name"
-                                        v-model="editData.last_name"
+                                        name="company_contact"
+                                        v-model="editData.company_contact"
                                         class="form-control"  
-                                        placeholder="Enter last name...">
-                                        <p class="text-danger validation_errors" v-if="errorsList.last_name">{{ errorsList.last_name }} </p>
+                                        placeholder="Enter company contact...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.company_contact">{{ errorsList.company_contact }} </p>
                                 </div>
                             </div>
                         </div>  
                          <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>My speciality</label>
+                                    <label>Company Email</label>
                                     <input 
                                         type="text" 
-                                        name="speciality"
-                                        v-model="editData.speciality"
+                                        name="company_email"
+                                        v-model="editData.company_email"
                                         class="form-control"  
-                                        placeholder="Ex : Dessert Specialist">
-                                        <p class="text-danger validation_errors" v-if="errorsList.speciality">{{ errorsList.speciality }} </p>
+                                        placeholder="Enter company email">
+                                        <p class="text-danger validation_errors" v-if="errorsList.company_email">{{ errorsList.company_email }} </p>
                                 </div> 
                             </div>
-                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Display Name</label>
-                                    <input 
-                                        type="text" 
-                                        name="display_name"
-                                        v-model="editData.display_name"
-                                        class="form-control"  
-                                        placeholder="Enter display name...">
-                                        <p class="text-danger validation_errors" v-if="errorsList.display_name">{{ errorsList.display_name }} </p>
-                                </div> 
-                            </div>
-                            <div class="col-sm-6"> 
-                                <div class="form-group">
-                                      <label>Email</label>
-                                      <input 
-                                          type="text" 
-                                          name="email"
-                                          v-model="editData.email"
-                                          class="form-control"  
-                                          placeholder="Enter email address...">
-                                          <p class="text-danger validation_errors" v-if="errorsList.email">{{ errorsList.email }} </p>
-                                 </div>
-                             </div>
-                        </div>
+                         </div> 
                          <div class="row"> 
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Password {{ (editData.id > 0) ? '( Leave empty if you don\'t want to update )':''  }}</label>
-                                    <input 
-                                        type="password" 
-                                        name="password"
-                                        v-model="editData.password"
-                                        class="form-control"  
-                                        placeholder="******">
-                                        <p class="text-danger validation_errors" v-if="errorsList.password">{{ errorsList.password }} </p>
-                                </div> 
-                            </div>
-                            <div class="col-sm-6"> 
-                                <div class="form-group">
-                                      <label>Phone</label>
-                                      <input 
-                                          type="text" 
-                                          name="phone"
-                                          v-model="editData.phone"
-                                          class="form-control"  
-                                          placeholder="Enter phone...">
-                                      <p class="text-danger validation_errors" v-if="errorsList.phone">{{ errorsList.phone }} </p>
-                                 </div>
-                             </div>
-                        </div>
-                        <div class="row"> 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Address Line One</label>
@@ -272,7 +220,7 @@
                             </div> 
                         </div>   
                         <div class="row"> 
-                           <div class="col-sm-4"> 
+                           <div class="col-sm-3"> 
                                 <div class="form-group">
                                       <label>LinkedIn URL</label>
                                       <input 
@@ -284,7 +232,7 @@
                                       <p class="text-danger validation_errors" v-if="errorsList.linkedin_url">{{ errorsList.linkedin_url }} </p>
                                  </div>
                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Instagram URL</label>
                                     <input 
@@ -296,7 +244,7 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.instagram_url">{{ errorsList.instagram_url }} </p>
                                 </div> 
                             </div> 
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Pinterest URL</label>
                                     <input 
@@ -308,23 +256,36 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.pinterest_url">{{ errorsList.pinterest_url }} </p>
                                 </div> 
                             </div>  
-                        </div>                     
-                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>TeleGram URL</label>
+                                    <input 
+                                        type="text" 
+                                        name="telegram_url"
+                                        v-model="editData.telegram_url"
+                                        class="form-control"  
+                                        placeholder="TeleGram URL">
+                                    <p class="text-danger validation_errors" v-if="errorsList.telegram_url">{{ errorsList.telegram_url }} </p>
+                                </div> 
+                            </div>  
+                        </div>   
+                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status" v-model="editData.status">
-                                        <option value="0">In Active</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Archive</option> 
-                                    </select>   
-                                    <p class="text-danger validation_errors" v-if="errorsList.status">{{ errorsList.status }} </p>
-                                </div>
-                            </div>
-                        </div>
+                                    <label>About Description</label>
+                                    <textarea 
+                                       class="form-control"
+                                       name="about" 
+                                       v-model="editData.about"
+                                       placeholder="About Description">
+                                    </textarea>
+                                    <p class="text-danger validation_errors" v-if="errorsList.about">{{ errorsList.about }} </p>
+                                </div> 
+                            </div>  
+                        </div>    
                         <div class="card-footer"> 
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <router-link to="/authors" class="btn btn-danger">Back</router-link>
+                            <input type="hidden" name="id" v-model="editData.id">
+                            <button type="submit" class="btn btn-success">Update Detail</button> 
                         </div>
                     </div>
               </form>
@@ -356,20 +317,16 @@
           loader : '',
           editData : {  
               id: 0,
-              first_name: "",
-              last_name: "",
-              display_name: "",
-              email: "", 
-              phone : "",
-              password: "",
+              company_name: "",
+              company_contact: "",
+              company_email: "", 
               address_line_one : "",
               address_line_two : "",
               city : "",
               state : "",
               country : "",
               zip : "",
-              photo_url: config.ASSET_BASE_URL+'default_img/default.jpg', 
-              speciality : "",
+              photo_url: config.ASSET_BASE_URL+'default_img/default.jpg',  
               website_url : "",
               youtube_url : "",
               facebook_url : "",
@@ -377,16 +334,17 @@
               linkedin_url : "",
               instagram_url : "",
               pinterest_url : "",
+              telegram_url : "",
               status: "1",
           },
           errors : {},
         }
       },
       methods : {
-          editAuthors(id){
+          editCompanyDetail(id){
             let _this = this;
-            _this.loader =  _this.$loading.show();
-            this.$store.dispatch('editAuthors',{id : id})
+            this.loader =  _this.$loading.show(); 
+            this.$store.dispatch('editCompanyDetail')
             .then(function(result){
                 _this.editData = result;
                  _this.loader.hide();
@@ -396,33 +354,15 @@
             }); 
           },
           submitForm(){
-            var vueForm = new FormData( $('#vueForm')[0]);
-            let _this = this;
-            _this.loader =  _this.$loading.show();
-            if( this.editData.id > 0){
-               this.$store.dispatch('updateAuthors',{ id : this.editData.id,data : vueForm})
-               .then(function(result){
-                   _this.loader.hide();
-                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
-                    _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/authors'); },500);
-                  }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
-                    _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
-                     _this.errorsList = result.errors;  
-                  }else{
-                    _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
-                  }  
-                })
-               .catch(function(error){
-                 console.log(error);
-               });
-            } else {
-              this.$store.dispatch('createAuthors',{ id : this.editData.id,data : vueForm})
+             var vueForm = new FormData( $('#vueForm')[0]);
+             let _this = this;
+             _this.errorsList = {};
+             _this.loader =  _this.$loading.show(); 
+              this.$store.dispatch('saveCompanyDetail',{ data : vueForm })
               .then(function(result){
                  _this.loader.hide();
                   if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
-                    _this.$toastr.s('Data Saved Successfully','Success!');
-                    setTimeout(function(){ _this.$router.push('/authors'); },500);
+                    _this.$toastr.s('Data Saved Successfully','Success!'); 
                   }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
                     _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
                     _this.errorsList = result.errors;  
@@ -433,17 +373,10 @@
                .catch(function(error){
                    _this.$toastr.e(error,'Errors!'); 
                });
-            }
-             
-          }
-      },
-      computed: mapState({ 
-         //editData: state => state.data.editCategories,
-      }),
+            } 
+      }, 
       created(){
-          if( typeof(this.$route.params.id)!='undefined' ){
-              this.editAuthors(this.$route.params.id);    
-          }
+          this.editCompanyDetail();
       }
     }
 </script> 

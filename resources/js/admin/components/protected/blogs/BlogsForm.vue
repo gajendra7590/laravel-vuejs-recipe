@@ -183,11 +183,14 @@
       methods : {
           editBlog(id){
             let _this = this;
+             _this.loader = _this.$loading.show();
             this.$store.dispatch('editBlog',{id : id})
             .then(function(result){ 
-                _this.editData = result;    
+                _this.editData = result;   
+                _this.loader.hide(); 
             }).catch(function(error){
                 console.log(error);
+                _this.loader.hide();
             }); 
           },
           getCategories(){

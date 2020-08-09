@@ -4,22 +4,7 @@
     <section
       class="inner-page-banner bg-common"
       data-bg-image="/app/img/figure/inner-page-banner1.jpg"
-    >
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>Standard Blog Page</h1>
-              <ul>
-                <li>
-                  <a href="index-2.html">Home</a>
-                </li>
-                <li>Blog</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> -->
+    > 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Submit Recipe Area Start Here --> 
@@ -43,7 +28,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-user"></i>by
-                      <span>{{ blogsDetail.user.first_name }}</span>
+                      <span>{{ (blogsDetail.user)?blogsDetail.user.first_name:'' }}</span>
                     </a>
                   </li>
                   <li>
@@ -60,7 +45,7 @@
                   </li>
                 </ul>
                 <h3 class="item-title">
-                  <a href="single-blog.html">
+                  <a href="javascript:void(0);">
                    {{ blogsDetail.title }}
                   </a>
                 </h3>
@@ -111,16 +96,16 @@
               <div class="recipe-author">
                 <div class="media media-none--xs">
                   <img
-                    v-lazy="blogsDetail.user.photo_url"
+                    v-lazy="(blogsDetail.user)?blogsDetail.user.photo_url:''"
                     style="height:75px;with:75px;"
                     alt="Blog Author"
                     class="rounded-circle media-img-auto"
                   />
                   <div class="media-body">
-                    <h4 class="author-title">{{ blogsDetail.user.first_name }}</h4>
+                    <h4 class="author-title">{{ (blogsDetail.user)?blogsDetail.user.first_name:'' }}</h4>
                     <h5 class="author-sub-title">Written by</h5>
                     <p>
-                      {{ blogsDetail.user.about_me }}
+                      {{ (blogsDetail.user)?blogsDetail.user.about_me:'' }}
                     </p>
                     <ul class="author-social">
                       <li>

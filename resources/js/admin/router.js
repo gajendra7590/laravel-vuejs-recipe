@@ -35,6 +35,9 @@ import SetNewPassword from "./components/public/SetNewPassword";
 //Admin Profile
 import UpdateProfile from "./components/protected/user-profile/UpdateProfile";
 import ChangePassword from "./components/protected/user-profile/ChangePassword";
+//Company Detail
+import CompanyDetail from "./components/protected/company_detail/CompanyDetail";
+
 
 //alert(config.URL_PREFIX_ADMIN)
 Vue.use(VueRouter);
@@ -73,6 +76,13 @@ const router = new VueRouter({
             name: "change-password",
             path: "/change-password",
             component: ChangePassword,
+            meta: { protectedURL: true },
+        },
+        //Company Detail Routes
+        {
+            name: "company_detail",
+            path: "/company-detail",
+            component: CompanyDetail,
             meta: { protectedURL: true },
         },
         //Dashboard Routes

@@ -13,13 +13,17 @@ use Illuminate\Support\Str;
 //models
 use App\User;
 use App\models\Categories;
-use App\models\Recipes; 
+use App\models\Recipes;
+use App\models\RecipeTags;
+use App\models\Blogs;
+use App\models\BlogCategories;
+use App\models\BlogTags;
 
 class CommonController extends Controller
 {
     public function index(){ 
         return response()->json([
-            'RecipesCategories' => Categories::count(),
+            'categories' => Categories::count(),
             'recipes' => Recipes::count(),
             'clients' =>  User::whereHas('roles', function ($q) {
                 $q->where('roles.name', '=', 'user');
@@ -27,6 +31,10 @@ class CommonController extends Controller
             'authors' =>  User::whereHas('roles', function ($q) {
                 $q->where('roles.name', '=', 'author');
             })->count(),
+            'recipeTags' => RecipeTags::count(),
+            'recipeBlogs' => Blogs::count(),
+            'recipeBlogCategories' => BlogCategories::count(),
+            'recipeBlogTags' => BlogTags::count()
         ]); 
     }    
 }

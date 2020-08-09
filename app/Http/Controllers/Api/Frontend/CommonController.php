@@ -9,9 +9,20 @@ use App\models\Categories;
 use App\models\Recipes;
 use App\models\RecipeTags;
 use App\User;
+use App\models\CompanyDetail;
 
 class CommonController extends Controller
 {
+
+    public function companyDetail(Request $request) {
+        return CompanyDetail::get()->first();
+    }
+
+    public function getSocialLinks(Request $request) {
+        return CompanyDetail::select('website_url','youtube_url','facebook_url','twitter_url',
+            'linkedin_url','instagram_url','pinterest_url','telegram_url')
+            ->get()->first();
+    }
 
     public function getCategories(Request $request){
         return Categories::withCount('recipes')->where([

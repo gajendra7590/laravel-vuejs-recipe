@@ -261,11 +261,14 @@ export default {
       methods : {
           getProfile(){
             let _this = this;
+            _this.loader = _this.$loading.show();
             this.$store.dispatch('getProfile')
             .then(function(result){
                 _this.editData = result;
+                _this.loader.hide();
             }).catch(function(error){
                 console.log(error);
+                _this.loader.hide();
             }); 
           },
           submitForm(){

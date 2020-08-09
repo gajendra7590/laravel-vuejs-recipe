@@ -30,9 +30,10 @@
 
             <div class="blog-box-layout1" v-for="(blog,index) in blogsList" :key="index">
               <div class="item-figure">
-                <a href="single-blog.html">
-                  <img v-lazy="blog.photo_url" alt="Blog"  style="min-width:760px;max-width:760px;min-height:390px;max-height:390px;"/>
-                </a>
+                <router-link :to="'/blogs/'+blog.slug">
+                  <img v-lazy="blog.photo_url" alt="Blog"  
+                  style="min-width:760px;max-width:760px;min-height:390px;max-height:390px;"/>
+                </router-link>
               </div>
               <div class="item-content">
                 <ul class="entry-meta">
@@ -61,9 +62,9 @@
                   </li>
                 </ul>
                 <h3 class="item-title">
-                  <a href="single-blog.html">
+                  <router-link :to="'/blogs/'+blog.slug">
                    {{ blog.title }}
-                  </a>
+                  </router-link>
                 </h3>
                 <p>
                   {{ blog.short_desc }}

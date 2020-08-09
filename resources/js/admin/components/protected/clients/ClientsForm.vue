@@ -108,13 +108,13 @@
                          <div class="row"> 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Password {{ (editData.id > 0) ? '( Leave empty if you don\'t want to update )':''  }}</label>
                                     <input 
                                         type="password" 
                                         name="password"
                                         v-model="editData.password"
                                         class="form-control"  
-                                        placeholder="Enter password...">
+                                        placeholder="******">
                                     <p class="text-danger validation_errors" v-if="errorsList.password">{{ errorsList.password }} </p>     
                                 </div> 
                             </div>
@@ -275,11 +275,14 @@
       methods : {
           editClients(id){
             let _this = this;
+            _this.loader = _this.$loading.show();
             this.$store.dispatch('editClients',{id : id})
             .then(function(result){
                 _this.editData = result;
+                 _this.loader.hide();
             }).catch(function(error){
                 console.log(error);
+                 _this.loader.hide();
             }); 
           },
           submitForm(){

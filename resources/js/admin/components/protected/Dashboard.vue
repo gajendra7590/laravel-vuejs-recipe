@@ -35,7 +35,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <router-link to="recipes" class="small-box-footer">
+              <router-link to="/recipes" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </router-link>
             </div>
@@ -51,7 +51,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <router-link to="authors" class="small-box-footer">
+              <router-link to="/authors" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </router-link>
             </div>
@@ -67,7 +67,7 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <router-link to="clients" class="small-box-footer">
+              <router-link to="/clients" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
                </router-link>
             </div>
@@ -83,7 +83,73 @@
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <router-link to="categories" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+              <router-link to="/categories" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row --> 
+         <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 v-html="(dashboardData.recipeTags)?dashboardData.recipeTags:'0'"></h3> 
+                <p>Total Recipes Tags</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pricetag"></i>
+              </div>
+              <router-link to="/tags" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3 v-html="(dashboardData.recipeBlogs)?dashboardData.recipeBlogs:'0'"></h3> 
+                <p>Total Blogs</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <router-link to="/blogs" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3 v-html="(dashboardData.recipeBlogCategories)?dashboardData.recipeBlogCategories:'0'"></h3> 
+                <p>Total Blog Categories </p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <router-link to="/blog-categories" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+               </router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3 v-html="(dashboardData.recipeBlogTags)?dashboardData.recipeBlogTags:'0'"></h3> 
+                <p>Total Blog Tags</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <router-link to="/blog-tags" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
             </div>
           </div>
           <!-- ./col -->
