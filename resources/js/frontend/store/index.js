@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import config from '../../config.js';
 Vue.use(axios);
 
 axios.interceptors.response.use(
@@ -22,9 +23,6 @@ axios.interceptors.response.use(
     }
 );
 
-const ASSET_BURL = window.location.origin + "/godoexp_laravel_vuejs/public/";
-const BASEURL = window.location.origin + "/godoexp_laravel_vuejs/api/client/";
-
 //All Mutations
 import * as commosMutations from "./mutations/commonMutations";
 const mutations = Object.assign({}, commosMutations.default);
@@ -37,8 +35,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        baseURL: BASEURL,
-        ASSET_BURL: ASSET_BURL,
+        ASSET_BASE_URL: config.ASSET_BASE_URL,
         data: {
             getHomeSlider: [],
             homeTrendingRecipe: [],
@@ -68,6 +65,9 @@ const store = new Vuex.Store({
             getBlogCategories: [],
             getBlogFeatured: [],
             getBlogTags: [],
+
+            getSocialLinks: [],
+            companyDetail: []
         }
     },
     mutations,

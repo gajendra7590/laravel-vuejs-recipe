@@ -3,23 +3,8 @@
     <!-- Inne Page Banner Area Start Here -->
     <section
       class="inner-page-banner bg-common"
-      data-bg-image="/app/img/figure/inner-page-banner1.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>Our All Author</h1>
-              <ul>
-                <li>
-                  <router-link to="/">Home</router-link>
-                </li>
-                <li>Authors</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      data-bg-image=""
+    > 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Author Area Start Here -->
@@ -120,92 +105,9 @@
             </div>
           </div>
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">ABOUT ME</h3>
-              </div>
-              <div class="widget-about">
-                <figure class="author-figure">
-                  <img src="/app/img/figure/about.jpg" alt="about" />
-                </figure>
-                <figure class="author-signature">
-                  <img src="/app/img/figure/signature.png" alt="about" />
-                </figure>
-                <p>
-                  Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
-                  doloer.
-                </p>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-              </div>
-              <div class="widget-follow-us">
-                <ul>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-facebook-f"></i>LIKE ME ON
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-twitter"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-linkedin-in"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-pinterest-p"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-instagram"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-youtube"></i>Subscribe
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">LATEST RECIPES</h3>
-              </div>
-              <div class="widget-latest">
-                <ul class="block-list" v-if="latestsRecipes">
-                  <li class="single-item" v-for="(lr,index) in latestsRecipes" :key="index">
-                    <div class="item-img">
-                      <a href="#">
-                        <img v-lazy="lr.photo_url" alt="Post" style="width:90px;height:70px;" />
-                      </a>
-                      <div class="count-number">1</div>
-                    </div>
-                    <div class="item-content">
-                      <div class="item-ctg">{{ lr.category.name }}</div>
-                      <h4 class="item-title">
-                        <a href="#">{{ lr.title }}</a>
-                      </h4>
-                      <div class="item-post-by">
-                        <a href="single-blog.html">
-                          <i class="fas fa-user"></i>
-                          <span>by</span>
-                          {{ lr.user.display_name }}
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+             <AboutMe />
+             <SubscribeAndFollow />
+             <LatestRecipes />
           </div>
         </div>
       </div>
@@ -216,26 +118,30 @@
 
     <script>
 import { mapState } from "vuex";
+//custom Components
+import AboutMe from './sidebar/AboutMe';
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import LatestRecipes from './sidebar/LatestRecipes'; 
 export default {
   name: "authorsList",
+  components: {  
+    AboutMe,
+    SubscribeAndFollow,
+    LatestRecipes,
+  },
   data() {
     return {};
   },
   methods: {
     getAuthorsList() {
       this.$store.dispatch("authorsList");
-    },
-    getLatestsRecipes() {
-      this.$store.dispatch("latestsRecipes");
-    },
+    } 
   },
   created() {
-    this.getAuthorsList();
-    this.getLatestsRecipes();
+    this.getAuthorsList(); 
   },
   computed: mapState({
-    authorsList: (state) => state.data.authorsList,
-    latestsRecipes: (state) => state.data.latestsRecipes,
+    authorsList: (state) => state.data.authorsList 
   }),
 };
 </script>

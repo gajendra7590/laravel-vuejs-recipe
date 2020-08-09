@@ -79,5 +79,13 @@ export default {
         state.data.getBlogTags = data;
     },
     //Blogs End
+    //Company Detail Start
+    getSocialLinks(state, data) {
+        state.data.getSocialLinks = data;
+    },
+    companyDetail(state, data) {
+        state.data.companyDetail = data;
+    },
+    //Company Detail End
 
 };

@@ -300,5 +300,27 @@ export default {
                 console.log(error);
             });
     },
-    //logs All functions end
+    //Blogs All functions end
+    //Company Detail All functions Start
+    getSocialLinks({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getSocialLinks")
+            .then(function(response) {
+                commit("getSocialLinks", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    companyDetail({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "companyDetail")
+            .then(function(response) {
+                commit("companyDetail", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    //Company Detail All functions End
 };

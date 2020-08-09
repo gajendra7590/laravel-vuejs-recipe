@@ -314,186 +314,14 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">LATEST BLOG</h3>
-              </div>
-               <div class="widget-blog-post">
-                <ul class="block-list" v-if="getBlogLatest">
-                  <li class="single-item" v-for="(blog,index) in getBlogLatest" :key="index">
-                    <div class="item-img">
-                      <router-link :to="'/blogs/'+blog.slug">
-                        <img v-lazy="blog.photo_url" style="min-width:90px;max-width:110px;min-height:90px;max-height:100px;" alt="Post" />
-                      </router-link>
-                    </div>
-                    <div class="item-content">
-                      <div class="item-post-date">
-                        <a href="javascript:void(0);">
-                          <i class="fas fa-clock"></i>{{ blog.created_at | moment('DD,MMM YYYY') }}
-                        </a>
-                      </div>
-                      <h4 class="item-title">
-                        <router-link :to="'/blogs/'+blog.slug">
-                          {{ blog.title }}
-                        </router-link>
-                      </h4>
-                      <div class="item-post-by">
-                        <router-link :to="'/blogs/'+blog.slug">
-                          <i class="fas fa-user"></i>
-                          <span>by</span>
-                          {{ blog.user.first_name }}
-                        </router-link>
-                      </div>
-                    </div>
-                  </li> 
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-              </div>
-              <div class="widget-follow-us">
-                <ul>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-facebook-f"></i>LIKE ME ON
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-twitter"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-linkedin-in"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-pinterest-p"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-instagram"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-youtube"></i>Subscribe
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-ad">
-                <a href="#">
-                  <img src="/app/img/figure/figure6.jpg" alt="Ad" class="img-fluid" />
-                </a>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">CATEGORIES</h3>
-              </div>
-              <div class="widget-categories">
-                <ul v-if="getBlogCategories">
-                  <li v-for="(cat,index) in getBlogCategories" :key="index">
-                    <router-link :to="'/blogs/category/'+cat.slug">
-                      {{ cat.name }}
-                      <span>{{ (cat.totalBlogs)?cat.totalBlogs:'0' }}</span>
-                    </router-link>
-                  </li>                    
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-newsletter-subscribe">
-                <h3>GET LATEST UPDATES</h3>
-                <p>Newsletter Subscribe</p>
-                <form class="newsletter-subscribe-form">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      placeholder="your e-mail address"
-                      class="form-control"
-                      name="email"
-                      data-error="E-mail field is required"
-                      required
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div class="form-group mb-none">
-                    <button type="submit" class="item-btn">SUBSCRIBE</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">FEATURED ARTICLE</h3>
-              </div>
-               <div class="widget-featured-feed" v-if="getBlogFeatured">
-                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
-                  <vueper-slide
-                    v-for="(fa,index) in getBlogFeatured"
-                    :key="index"
-                    class="featured-box-layout1 owl-stage-outer"
-                  >
-                    <template v-slot:content>
-                      <div class="item-img">
-                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" 
-                        style="min-width:352px;max-width:352px;min-height:250px;max-height:250px;" />
-                      </div>
-                      <div class="item-content">
-                        <span class="ctg-name">{{ fa.category.name }}</span>
-                        <h4 class="item-title">
-                          <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
-                        </h4>
-                        <p>{{ fa.short_desc }}</p>
-                      </div>
-                    </template>
-                  </vueper-slide>
-                </vueper-slides>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">INSTAGRAM</h3>
-              </div>
-                <div class="widget-instagram">
-                <ul v-if="getBlogInstagrams"> 
-                  <li v-for="(insta,index) in getBlogInstagrams" :key="index">
-                    <div class="item-box">
-                      <img
-                        v-lazy="insta.photo_url"
-                        alt="Social Figure"
-                        class="img-fluid"
-                      />
-                      <a href="javascript:void(0);" class="item-icon">
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                    </div>
-                  </li> 
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">POPULAR TAGS</h3>
-              </div>
-               <div class="widget-tag">
-                <ul v-if="getBlogTags">
-                  <li v-for="(tag,index) in getBlogTags" :key="index">
-                    <router-link :to="'/blogs/tag/'+tag.slug">#{{ tag.name }}</router-link>
-                  </li> 
-                </ul>
-              </div>
-            </div>
+           <div class="col-lg-4 sidebar-widget-area sidebar-break-md"> 
+            <LatestBlog />
+            <SubscribeAndFollow /> 
+            <LastestCategories /> 
+            <GetLatestUpdates />
+            <FeaturedBlog />
+            <Instagram />
+            <LatestTags /> 
           </div>
         </div>
       </div>
@@ -504,11 +332,26 @@
 
 <script>
 import { mapState } from "vuex";
-import { VueperSlides, VueperSlide } from "vueperslides";
-import "vueperslides/dist/vueperslides.css";
+//Custom Component
+import LatestBlog from './blog_sidebar/LatestBlog';
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import LastestCategories from './blog_sidebar/LastestCategories';
+import GetLatestUpdates from './blog_sidebar/GetLatestUpdates';
+import FeaturedBlog from './blog_sidebar/FeaturedBlog';
+import Instagram from './blog_sidebar/Instagram';
+import LatestTags from './blog_sidebar/LatestTags';
+
 export default {
   name: "blogDetail",
-  components: { VueperSlides, VueperSlide },
+  components : {
+    LatestBlog,
+    SubscribeAndFollow,
+    LastestCategories,
+    GetLatestUpdates,
+    FeaturedBlog,
+    Instagram,
+    LatestTags
+  },
   data() {
     return {
        blogsDetail : [],
@@ -540,37 +383,10 @@ export default {
         console.log( error );
       }); 
     }, 
-    featuredBlogs() {
-      this.$store.dispatch("getBlogFeatured", {limit : 3});
-    },
-    latestsBlogs() {
-      this.$store.dispatch("getBlogLatest", {limit : 4});
-    },
-    instagramBlogs() {
-      this.$store.dispatch("getBlogInstagrams", {limit : 9});
-    },
-    popularTags() {
-      this.$store.dispatch("getBlogTags", {limit : 9});
-    },
-    popularCategories() {
-      this.$store.dispatch("getBlogCategories", {limit : 7});
-    },
   },
   created() {
-    this.getBlogDetail();
-    this.latestsBlogs();
-    this.featuredBlogs();
-    this.instagramBlogs();
-    this.popularTags();
-    this.popularCategories();
-  },
-  computed: mapState({ 
-     getBlogLatest: (state) => state.data.getBlogLatest,
-     getBlogFeatured: (state) => state.data.getBlogFeatured,
-     getBlogInstagrams: (state) => state.data.getBlogInstagrams,
-     getBlogTags: (state) => state.data.getBlogTags,
-     getBlogCategories: (state) => state.data.getBlogCategories,
-  }),
+    this.getBlogDetail(); 
+  } 
 };
 </script> 
 <style scoped>

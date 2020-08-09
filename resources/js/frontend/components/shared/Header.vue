@@ -60,7 +60,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product1.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product1.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -82,7 +82,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product2.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product2.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -104,7 +104,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product3.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product3.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -164,50 +164,50 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 d-none d-lg-block">
-            <div class="nav-action-elements-layout2">
+            <div class="nav-action-elements-layout2"> 
               <ul class="nav-social">
                 <li>
-                  <a href="#" title="facebook">
+                  <a :href="( (companyDetail) && (companyDetail.youtube_url!='') )?companyDetail.youtube_url:'javascript:void(0);'" title="Youtube Channel">
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                </li>
+                <li>
+                  <a :href="( (companyDetail) && (companyDetail.facebook_url!='') )?companyDetail.facebook_url:'javascript:void(0);'" title="Facebook">
                     <i class="fab fa-facebook-f"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="twitter">
+                  <a :href="( (companyDetail) && (companyDetail.twitter_url!='') )?companyDetail.twitter_url:'javascript:void(0);'" title="Twitter">
                     <i class="fab fa-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="linkedin">
+                  <a :href="( (companyDetail) && (companyDetail.linkedin_url!='') )?companyDetail.linkedin_url:'javascript:void(0);'" title="Linkedin">
                     <i class="fab fa-linkedin-in"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="pinterest">
+                  <a :href="( (companyDetail) && (companyDetail.instagram_url!='') )?companyDetail.instagram_url:'javascript:void(0);'" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a :href="( (companyDetail) && (companyDetail.pinterest_url!='') )?companyDetail.pinterest_url:'javascript:void(0);'" title="Pinterest">
                     <i class="fab fa-pinterest-p"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="skype">
-                    <i class="fab fa-skype"></i>
+                  <a :href="( (companyDetail) && (companyDetail.telegram_url!='') )?companyDetail.telegram_url:'javascript:void(0);'" title="Telegram">
+                    <i class="fab fa-telegram"></i>
                   </a>
-                </li>
-                <li>
-                  <a href="#" title="rss">
-                    <i class="fas fa-rss"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="google-plus">
-                    <i class="fab fa-google-plus-g"></i>
-                  </a>
-                </li>
+                </li> 
               </ul>
             </div>
           </div>
           <div class="col-lg-4 d-none d-lg-block">
             <div class="site-logo-desktop">
               <router-link to="/" class="main-logo">
-                <img src="/app/img/logo-dark.png" alt="Recipe Logo" />
+                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'" alt="Recipe Logo" />
               </router-link>
             </div>
           </div>
@@ -234,7 +234,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product1.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product1.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -256,7 +256,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product2.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product2.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -278,7 +278,7 @@
                         <div class="cart-img">
                           <a href="#">
                             <img
-                              src="/app/img/product/top-product3.jpg"
+                              :src="this.$store.state.ASSET_BASE_URL+'app/img/product/top-product3.jpg'"
                               alt="product"
                               class="img-fluid"
                             />
@@ -315,8 +315,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "headercomponent",
+  data() {
+    return {}
+  },
+  computed:mapState({
+    companyDetail : (state) => state.data.companyDetail
+  })
 };
 </script>
 

@@ -3,23 +3,8 @@
     <!-- Inne Page Banner Area Start Here -->
     <section
       class="inner-page-banner bg-common"
-      data-bg-image="/app/img/figure/inner-page-banner1.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>{{ recipeDetail.title }}</h1>
-              <ul>
-                <li>
-                  <router-link to="/home">Home</router-link>
-                </li>
-                <li>Recipe Details</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      data-bg-image=""
+    > 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Single Recipe With Sidebar Area Start Here -->
@@ -908,158 +893,12 @@
             </div>
           </div>
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">LATEST RECIPES</h3>
-              </div>
-              <div class="widget-latest">
-                <ul class="block-list" v-if="latestsRecipes">
-                  <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
-                    <div class="item-img latest-item-img">
-                      <router-link :to="'/recipe/'+lr.slug">
-                        <img v-lazy="lr.photo_url" alt="Post" />
-                      </router-link>
-                      <div class="count-number">{{ index }}</div>
-                    </div>
-                    <div class="item-content">
-                      <div class="item-ctg">{{ lr.category.name }}</div>
-                      <h4 class="item-title">
-                        <router-link :to="'/recipe/'+lr.slug">{{ lr.title }}</router-link>
-                      </h4>
-                      <div class="item-post-by">
-                        <router-link :to="'/recipe/'+lr.slug">
-                          <i class="fas fa-user"></i>
-                          <span>by</span>
-                          {{ lr.user.first_name }}
-                        </router-link>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-              </div>
-              <div class="widget-follow-us">
-                <ul>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-facebook-f"></i>LIKE ME ON
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-twitter"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-linkedin-in"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-pinterest-p"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-instagram"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-youtube"></i>Subscribe
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-ad">
-                <a href="#">
-                  <img src="/app/img/figure/figure4.jpg" alt="Ad" class="img-fluid" />
-                </a>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">FEATURED ARTICLE</h3>
-              </div>
-              <div class="widget-featured-feed" v-if="featuredRecipes">
-                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
-                  <vueper-slide
-                    v-for="(fa,index) in featuredRecipes"
-                    :key="index"
-                    class="featured-box-layout1 owl-stage-outer"
-                  >
-                    <template v-slot:content>
-                      <div class="item-img">
-                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
-                      </div>
-                      <div class="item-content">
-                        <span class="ctg-name">{{ fa.category.name }}</span>
-                        <h4 class="item-title">
-                          <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
-                        </h4>
-                        <p>{{ fa.short_desc }}</p>
-                      </div>
-                    </template>
-                  </vueper-slide>
-                </vueper-slides>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-newsletter-subscribe">
-                <h3>GET LATEST UPDATES</h3>
-                <p>Newsletter Subscribe</p>
-                <form class="newsletter-subscribe-form">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      placeholder="your e-mail address"
-                      class="form-control"
-                      name="email"
-                      data-error="E-mail field is required"
-                      required
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div class="form-group mb-none">
-                    <button type="submit" class="item-btn">SUBSCRIBE</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">CATEGORIES</h3>
-              </div> 
-              <div class="widget-categories">
-                <ul v-if="categoriesList">
-                  <li v-for="(cat,index) in categoriesList" :key="index">
-                    <router-link :to="'/recipes/category/'+cat.slug">
-                      {{ cat.name }}
-                      <span>{{ cat.counts }}</span>
-                    </router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">POPULAR TAGS</h3>
-              </div>
-              <div class="widget-tag">
-                 <ul v-if="popularTags">
-                  <li v-for="(tag,index) in popularTags" :key="index">
-                    <router-link :to="'/recipes/tag/'+tag.name">{{ tag.name }}</router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <LatestRecipes />
+            <SubscribeAndFollow />  
+            <FeaturedRecipe />  
+            <GetLatestUpdates /> 
+            <Categories /> 
+            <PopularTags />   
           </div>
         </div>
       </div>
@@ -1068,11 +907,23 @@
 </template> 
 <script>
 import { mapState } from "vuex";
-import { VueperSlides, VueperSlide } from "vueperslides";
-import "vueperslides/dist/vueperslides.css";
+//custom Components
+import LatestRecipes from './sidebar/LatestRecipes';
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import FeaturedRecipe from './sidebar/FeaturedRecipe';
+import Categories from './sidebar/Categories';
+import PopularTags from './sidebar/PopularTags';
+import GetLatestUpdates from './blog_sidebar/GetLatestUpdates';
 export default {
   name: "recipedetail",
-  components: { VueperSlides, VueperSlide },
+  components: { 
+    LatestRecipes, 
+    SubscribeAndFollow,
+    FeaturedRecipe,
+    Categories,
+    PopularTags,
+    GetLatestUpdates 
+  },
   data() {
     return {
         recipeDetail : []
@@ -1094,36 +945,22 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    },
-    getLatestsRecipes() {
-      this.$store.dispatch("latestsRecipes", 4);
-    },
-    getFeaturedRecipes() {
-      this.$store.dispatch("featuredRecipes", 3);
-    },
-    getPopularTags() {
-      this.$store.dispatch("popularTags", 10);
-    },
-    getCategories() {
-      this.$store.dispatch("getSidebarCategories", 10);
-    },
+    }, 
   },
   created() {
     let slug = this.$route.params.slug;
     if (slug != undefined) {
-      this.getRecipeDetail(slug);
-      this.getLatestsRecipes();
-      this.getFeaturedRecipes();
-      this.getCategories();
-      this.getPopularTags();
+      this.getRecipeDetail(slug); 
     }
   },
-  computed: mapState({
-    featuredRecipes: (state) => state.data.featuredRecipes,
-    latestsRecipes: (state) => state.data.latestsRecipes,
-    categoriesList: (state) => state.data.getSidebarCategories,
-    popularTags: (state) => state.data.popularTags,
-  }),
+  watch: {
+    '$route.params.slug'(newId, oldId) {
+        let slug = this.$route.params.slug;
+        if (slug != undefined) {
+          this.getRecipeDetail(slug); 
+        }
+     }
+  } 
 };
 </script> 
 <style lang="scss" scoped>

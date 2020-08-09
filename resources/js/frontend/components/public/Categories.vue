@@ -3,23 +3,8 @@
     <!-- Inne Page Banner Area Start Here -->
     <section
       class="inner-page-banner bg-common"
-      data-bg-image="/app/img/figure/inner-page-banner1.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>Recipe Categories</h1>
-              <ul>
-                <li>
-                  <router-link to="/home">Home</router-link>
-                </li>
-                <li>Categories</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      data-bg-image=""
+    > 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Category Area Start Here -->

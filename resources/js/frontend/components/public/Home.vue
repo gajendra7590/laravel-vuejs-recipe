@@ -223,141 +223,16 @@
             </div>
             <div class="ranna-ad-box">
               <a href="javascript:void(0);">
-                <img src="/app/img/figure/figure1.jpg" alt="ad" />
+                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/figure/figure1.jpg'" alt="ad" />
               </a>
             </div>
           </div>
-          <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">ABOUT ME</h3>
-              </div>
-              <div class="widget-about">
-                <figure class="author-figure">
-                  <img src="/app/img/figure/about.jpg" alt="about" />
-                </figure>
-                <figure class="author-signature">
-                  <img src="/app/img/figure/signature.png" alt="about" />
-                </figure>
-                <p>
-                  Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
-                  doloer.
-                </p>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-              </div>
-              <div class="widget-follow-us">
-                <ul>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-facebook-f"></i>LIKE ME ON
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-twitter"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-linkedin-in"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-pinterest-p"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-instagram"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="javascript:void(0);">
-                      <i class="fab fa-youtube"></i>Subscribe
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">LATEST RECIPES</h3>
-              </div>
-              <div class="widget-latest">
-                <ul class="block-list" v-if="latestsRecipes">
-                  <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
-                    <div class="item-img latest-item-img">
-                      <router-link :to="'/recipe/'+lr.slug">
-                        <img v-lazy="lr.photo_url" alt="Post" />
-                      </router-link>
-                      <div class="count-number">{{ index }}</div>
-                    </div>
-                    <div class="item-content">
-                      <div class="item-ctg">{{ lr.category.name }}</div>
-                      <h4 class="item-title">
-                        <router-link :to="'/recipe/'+lr.slug">{{ lr.title }}</router-link>
-                      </h4>
-                      <div class="item-post-by">
-                        <router-link :to="'/recipe/'+lr.slug">
-                          <i class="fas fa-user"></i>
-                          <span>by</span>
-                          {{ lr.user.first_name }}
-                        </router-link>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-ad">
-                <a href="javascript:void(0);">
-                  <img src="/app/img/figure/figure2.jpg" alt="Ad" class="img-fluid" />
-                </a>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">CATEGORIES</h3>
-              </div>
-              <div class="widget-categories">
-                <ul v-if="homeSiderbar">
-                  <li v-for="(cat,index) in homeSiderbar.categories" :key="index">
-                    <router-link :to="'/recipes/category/'+cat.slug">
-                      {{ cat.name }}
-                      <span>25</span>
-                    </router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-newsletter-subscribe">
-                <h3>GET LATEST UPDATES</h3>
-                <p>Newsletter Subscribe</p>
-                <form class="newsletter-subscribe-form">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      placeholder="your e-mail address"
-                      class="form-control"
-                      name="email"
-                      data-error="E-mail field is required"
-                      required
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div class="form-group mb-none">
-                    <button type="submit" class="item-btn">SUBSCRIBE</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div class="col-lg-4 sidebar-widget-area sidebar-break-md"> 
+            <AboutMe /> 
+            <SubscribeAndFollow />
+            <LatestRecipes /> 
+            <Categories /> 
+            <GetLatestUpdates />
           </div>
         </div>
       </div>
@@ -511,45 +386,10 @@
             </div>
           </div>
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">FEATURED ARTICLE</h3>
-              </div>
-              <div class="widget-featured-feed" v-if="featuredRecipes">
-                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
-                  <vueper-slide
-                    v-for="(fa,index) in featuredRecipes"
-                    :key="index"
-                    class="featured-box-layout1 owl-stage-outer"
-                  >
-                    <template v-slot:content>
-                      <div class="item-img">
-                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
-                      </div>
-                      <div class="item-content">
-                        <span class="ctg-name">{{ fa.category.name }}</span>
-                        <h4 class="item-title">
-                          <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
-                        </h4>
-                        <p>{{ fa.short_desc }}</p>
-                      </div>
-                    </template>
-                  </vueper-slide>
-                </vueper-slides>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">POPULAR TAGS</h3>
-              </div>
-              <div class="widget-tag">
-                <ul v-if="homeSiderbar">
-                  <li v-for="(tag,index) in homeSiderbar.popuplar_tags" :key="index">
-                    <router-link :to="'/recipes/tag/'+tag.name">{{ tag.name }}</router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+
+             <FeaturedRecipe />
+             <PopularTags />     
+                   
           </div>
         </div>
       </div>
@@ -579,10 +419,28 @@ import { mapState } from "vuex";
 //In your Vue.js component.
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
-
+//Import Component 
+import AboutMe from './sidebar/AboutMe';
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import LatestRecipes from './sidebar/LatestRecipes';
+import Categories from './sidebar/Categories';
+import FeaturedRecipe from './sidebar/FeaturedRecipe';
+import PopularTags from './sidebar/PopularTags';
+import GetLatestUpdates from './blog_sidebar/GetLatestUpdates';
 export default {
   name: "home",
-  components: { VueperSlides, VueperSlide },
+  components: { 
+    VueperSlides, 
+    VueperSlide,
+    //below all custom components
+    AboutMe,
+    SubscribeAndFollow,
+    LatestRecipes,
+    Categories,
+    FeaturedRecipe,
+    PopularTags,
+    GetLatestUpdates
+  },
   data() {
     return {};
   },
@@ -595,19 +453,10 @@ export default {
     },
     homeSection3In1() {
       this.$store.dispatch("homeSection3In1");
-    },
-    homeSidebarSection3In1() {
-      this.$store.dispatch("homeSidebarSection3In1");
-    },
+    }, 
     followOnInstagram() {
       this.$store.dispatch("followOnInstagram");
-    },
-    getLatestsRecipes() {
-      this.$store.dispatch("latestsRecipes", 5);
-    },
-    getFeaturedRecipes() {
-      this.$store.dispatch("featuredRecipes", 3);
-    },
+    }, 
     getRandomRecipes() {
       this.$store.dispatch("randomRecipes", 3);
     },
@@ -616,21 +465,14 @@ export default {
     this.getHomeSlider();
     this.homeTrendingRecipe();
     this.homeSection3In1();
-    this.homeSidebarSection3In1();
-    this.followOnInstagram();
-    this.getLatestsRecipes();
-    this.getFeaturedRecipes();
+    this.followOnInstagram(); 
     this.getRandomRecipes();
   },
   computed: mapState({
     homeSlider: (state) => state.data.getHomeSlider,
     trending: (state) => state.data.homeTrendingRecipe,
     homeSection3InOne: (state) => state.data.homeSection3In1,
-    homeSiderbar: (state) => state.data.homeSidebarSection3In1,
-    followOnInsta: (state) => state.data.followOnInstagram,
-    latestsRecipes: (state) => state.data.latestsRecipes,
-    featuredRecipes: (state) => state.data.featuredRecipes,
-    randomRecipes: (state) => state.data.randomRecipes,
+    followOnInsta: (state) => state.data.followOnInstagram,  
   }),
 };
 </script>

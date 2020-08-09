@@ -1,22 +1,7 @@
 <template>
   <div id="authorDetail">
     <!-- Inne Page Banner Area Start Here -->
-    <section class="inner-page-banner bg-common" data-bg-image="/app/img/figure/inner-page-banner1.jpg">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>Author Archives</h1>
-              <ul>
-                <li>
-                  <router-link to="/home">Home</router-link>
-                </li>
-                <li>Author Archives</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section class="inner-page-banner bg-common" data-bg-image=""> 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Single Author Area Start Here -->
@@ -136,7 +121,7 @@
                     </div>
                   </div> 
                 </div>
-                <ul class="pagination-layout1">
+                <!-- <ul class="pagination-layout1">
                   <li class="active">
                     <a href="#">1</a>
                   </li>
@@ -152,127 +137,16 @@
                   <li>
                     <a href="#">5</a>
                   </li>
-                </ul>
+                </ul> -->
             </div>
           </div>
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">FEATURED RECIPE</h3>
-              </div>
-               <div class="widget-featured-feed" v-if="featuredRecipes">
-                <vueper-slides :autoplay="true" :duration="3000" class fixed-height="418px">
-                  <vueper-slide
-                    v-for="(fa,index) in featuredRecipes"
-                    :key="index"
-                    class="featured-box-layout1 owl-stage-outer"
-                  >
-                    <template v-slot:content>
-                      <div class="item-img">
-                        <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
-                      </div>
-                      <div class="item-content">
-                        <span class="ctg-name">{{ fa.category.name }}</span>
-                        <h4 class="item-title">
-                          <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
-                        </h4>
-                        <p>{{ fa.short_desc }}</p>
-                      </div>
-                    </template>
-                  </vueper-slide>
-                </vueper-slides>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-              </div>
-              <div class="widget-follow-us">
-                <ul>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-facebook-f"></i>LIKE ME ON
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-twitter"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-linkedin-in"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-pinterest-p"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-instagram"></i>LIKE ME
-                    </a>
-                  </li>
-                  <li class="single-item">
-                    <a href="#">
-                      <i class="fab fa-youtube"></i>Subscribe
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">LATEST RECIPES</h3>
-              </div>
-              <div class="widget-latest">
-                <ul class="block-list" v-if="latestsRecipes">
-                  <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
-                    <div class="item-img latest-item-img">
-                      <router-link :to="'/recipe/'+lr.slug">
-                        <img v-lazy="lr.photo_url" alt="Post" />
-                      </router-link>
-                      <div class="count-number">{{ index }}</div>
-                    </div>
-                    <div class="item-content">
-                      <div class="item-ctg">{{ lr.category.name }}</div>
-                      <h4 class="item-title">
-                        <router-link :to="'/recipe/'+lr.slug">{{ lr.title }}</router-link>
-                      </h4>
-                      <div class="item-post-by">
-                        <router-link :to="'/recipe/'+lr.slug">
-                          <i class="fas fa-user"></i>
-                          <span>by</span>
-                          {{ lr.user.first_name }}
-                        </router-link>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="section-heading heading-dark">
-                <h3 class="item-heading">INSTAGRAM</h3>
-              </div>
-              <div class="widget-instagram">
-                <ul v-if="followOnInsta">
-                  <li v-for="(insta,index) in followOnInsta" :key="index">
-                    <div class="item-box">
-                      <img
-                        v-lazy="insta.photo_url"
-                        alt="Social Figure"
-                        class="img-fluid"
-                      />
-                      <a href="javascript:void(0);" class="item-icon">
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                    </div>
-                  </li> 
-                </ul>
-              </div>
-            </div>
+
+             <FeaturedRecipe />
+             <SubscribeAndFollow />
+             <LatestRecipes />
+             <Instagram />
+
           </div>
         </div>
       </div>
@@ -283,11 +157,20 @@
 
 <script> 
 import { mapState } from "vuex";
-import { VueperSlides, VueperSlide } from "vueperslides";
-import "vueperslides/dist/vueperslides.css";
+//custom Components
+import LatestRecipes from './sidebar/LatestRecipes';
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import FeaturedRecipe from './sidebar/FeaturedRecipe';
+import Instagram from './sidebar/Instagram';
+ 
 export default {
   name: "recipes",
-  components: { VueperSlides, VueperSlide },
+  components: { 
+    LatestRecipes, 
+    SubscribeAndFollow,
+    FeaturedRecipe,
+    Instagram,
+  }, 
   data() {
     return {
       authorDetail : []
@@ -313,36 +196,17 @@ export default {
     },
     getRecipesList(id) {
       this.$store.dispatch("authorsRecipe",{id : id});
-    },
-    getFeaturedRecipes() {
-      this.$store.dispatch("featuredRecipes", 3);
-    },
-    getLatestsRecipes() {
-      this.$store.dispatch("latestsRecipes",5);
-    },
-    followOnInstagram() {
-      this.$store.dispatch("followOnInstagram", 9);
-    }, 
+    } 
   },
   created() {
     let id = this.$route.params.slug;
     if(id!=undefined){
       this.getAuthorsDetail(id);
-      this.getRecipesList(id);
-      this.getFeaturedRecipes();
-      this.getLatestsRecipes();
-      this.followOnInstagram();  
-    }else{
-
-    }
-
-   
+      this.getRecipesList(id); 
+    }    
   },
   computed: mapState({
-    authorsRecipe: (state) => state.data.authorsRecipe,  
-    featuredRecipes: (state) => state.data.featuredRecipes,
-    latestsRecipes: (state) => state.data.latestsRecipes,
-    followOnInsta: (state) => state.data.followOnInstagram,
+    authorsRecipe: (state) => state.data.authorsRecipe 
   }),
 };
 </script> 
