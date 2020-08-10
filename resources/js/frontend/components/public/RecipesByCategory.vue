@@ -40,7 +40,7 @@
                   <div class="item-content">
                     <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
                     <h3 class="item-title recipe_title">
-                      <router-link :to="'recipe/'+recipe.slug">{{ recipe.title }}</router-link>
+                      <router-link :to="'/recipe/'+recipe.slug">{{ recipe.title }}</router-link>
                     </h3>
                     <ul class="item-rating">
                       <li class="star-fill">

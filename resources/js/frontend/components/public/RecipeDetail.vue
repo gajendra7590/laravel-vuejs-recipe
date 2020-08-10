@@ -1,11 +1,7 @@
 <template>
   <div id="recipedetail">
     <!-- Inne Page Banner Area Start Here -->
-    <section
-      class="inner-page-banner bg-common"
-      data-bg-image=""
-    > 
-    </section>
+    <section class="inner-page-banner bg-common" data-bg-image></section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Single Recipe With Sidebar Area Start Here -->
     <section class="single-recipe-wrap-layout1 padding-top-74 padding-bottom-50">
@@ -20,15 +16,14 @@
                   <ul class="entry-meta">
                     <li class="single-meta">
                       <a href="javascript:void(0);">
-                        <i class="far fa-calendar-alt"></i>{{ recipeDetail.created_at | moment('MMM, DD YYYY') }}
+                        <i class="far fa-calendar-alt"></i>
+                        {{ recipeDetail.created_at | moment('MMM, DD YYYY') }}
                       </a>
                     </li>
                     <li class="single-meta">
                       <a href="#">
                         <i class="fas fa-user"></i>by
-                        <span>
-                         {{ (recipeDetail.user)?recipeDetail.user.first_name:'' }}
-                        </span>
+                        <span>{{ (recipeDetail.user)?recipeDetail.user.first_name:'' }}</span>
                       </a>
                     </li>
                     <li class="single-meta">
@@ -64,7 +59,7 @@
                       </a>
                     </li>
                   </ul>
-                </div> 
+                </div>
                 <div class="col-xl-3 col-12">
                   <ul class="action-item">
                     <li>
@@ -81,61 +76,55 @@
                       <button>
                         <i class="fas fa-share-alt"></i>
                       </button>
-                      <div class="action-share-wrap" v-if="recipeDetail"> 
-                         <ShareNetwork
-                            network="facebook"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                      <div class="action-share-wrap" v-if="recipeDetail.id">
+                        <ShareNetwork
+                          network="facebook"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-facebook-f"></i>
-                         </ShareNetwork>
-                         <ShareNetwork
-                            network="twitter"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                        </ShareNetwork>
+                        <ShareNetwork
+                          network="twitter"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-twitter"></i>
-                         </ShareNetwork>
-                         <ShareNetwork
-                            network="linkedin"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                        </ShareNetwork>
+                        <ShareNetwork
+                          network="linkedin"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-linkedin-in"></i>
-                         </ShareNetwork>
-                         <ShareNetwork
-                            network="pinterest"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                        </ShareNetwork>
+                        <ShareNetwork
+                          network="pinterest"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-pinterest-p"></i>
-                         </ShareNetwork>
-                         <ShareNetwork
-                            network="whatsapp"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                        </ShareNetwork>
+                        <ShareNetwork
+                          network="whatsapp"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-whatsapp"></i>
-                         </ShareNetwork>
-                         <ShareNetwork
-                            network="telegram"
-                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
-                            :title="recipeDetail.title"
-                            :description="recipeDetail.short_desc" 
-                            style="cursor: pointer;"
-                          > 
+                        </ShareNetwork>
+                        <ShareNetwork
+                          network="telegram"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-telegram"></i>
-                         </ShareNetwork>                         
+                        </ShareNetwork>
                       </div>
                     </li>
                   </ul>
@@ -200,19 +189,18 @@
                   </li>
                 </ul>
               </div>
-              <p class="item-description" v-html="recipeDetail.description"> 
-              </p>
+              <p class="item-description" v-html="recipeDetail.description"></p>
               <div class="making-elements-wrap">
                 <div class="row">
                   <div class="col-xl-6 col-12">
                     <div class="ingridients-wrap">
                       <h3 class="item-title">
                         <i class="fas fa-list-ul"></i>Ingridients
-                      </h3> 
-                      <div v-for="(ingr,index) in recipeDetail.ingredients" :key="index"> 
+                      </h3>
+                      <div v-for="(ingr,index) in recipeDetail.ingredients" :key="index">
                         <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
                         <label for="checkbox1">{{ ingr.name }}</label>
-                      </div> 
+                      </div>
                     </div>
                   </div>
                   <div class="col-xl-6 col-12">
@@ -224,12 +212,12 @@
                         <li v-for="(nutr,index) in recipeDetail.nutritions" :key="index">
                           <div class="nutrition-name">{{ nutr.nutrition_name }}</div>
                           <div class="nutrition-value">{{ nutr.nutrition_value }}</div>
-                        </li> 
+                        </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div class="direction-wrap-layout1">
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">DIRECTIONS</h2>
@@ -256,48 +244,85 @@
                       side crudey mightily rigorous plot life.
                     </p>
                   </div>
-                </div> 
+                </div>
               </div>
               <div class="tag-share">
                 <ul>
                   <li>
                     <ul class="inner-tag" v-if="recipeDetail.selected_tags">
                       <li v-for="(tg,index) in recipeDetail.selected_tags" :key="index">
-                        <router-link 
-                        class="recipe_category_name" 
-                        :title="'Search Recipe for #'+tg.tag.name"
-                        target="_blank"
-                        :to="'/recipes/tag/'+tg.tag.slug">#{{ tg.tag.name }}</router-link>
-                      </li> 
+                        <router-link
+                          class="recipe_category_name"
+                          :title="'Search Recipe for #'+tg.tag.name"
+                          target="_blank"
+                          :to="'/recipes/tag/'+tg.tag.slug"
+                        >#{{ tg.tag.name }}</router-link>
+                      </li>
                     </ul>
                   </li>
                   <li>
-                    <ul class="inner-share" v-if="recipeDetail.selected_tags">
+                    <ul class="inner-share" v-if="recipeDetail.id">
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="facebook"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-facebook-f"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="twitter"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-twitter"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="linkedin"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-google-plus-g"></i>
-                        </a>
+                        <ShareNetwork
+                          network="pinterest"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-pinterest-p"></i>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-pinterest"></i>
-                        </a>
+                        <ShareNetwork
+                          network="whatsapp"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-whatsapp"></i>
+                        </ShareNetwork>
                       </li>
+                      <li>
+                        <ShareNetwork
+                          network="telegram"
+                          :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                          :title="recipeDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-telegram"></i>
+                        </ShareNetwork>
+                      </li>
+                      <li></li>
                     </ul>
                   </li>
                 </ul>
@@ -305,64 +330,89 @@
               <div class="recipe-author">
                 <div class="media media-none--xs">
                   <img
-                    v-lazy="(recipeDetail.user)?recipeDetail.user.photo_url:''" style="height:112px;width:140px;"
+                    v-lazy="(recipeDetail.user)?recipeDetail.user.photo_url:''"
+                    style="height:112px;width:140px;"
                     alt="Blog Author"
                     class="rounded-circle media-img-auto"
                   />
                   <div class="media-body">
-                    <h4 class="author-title">{{ (recipeDetail.user)?recipeDetail.user.first_name:'Author' }}</h4>
+                    <h4
+                      class="author-title"
+                    >{{ (recipeDetail.user)?recipeDetail.user.first_name:'Author' }}</h4>
                     <h5 class="author-sub-title">Written by</h5>
-                    <p v-html="(recipeDetail.user)?recipeDetail.user.about_me:'No Author Descritpion'"> 
-                    </p>
+                    <p
+                      v-html="(recipeDetail.user)?recipeDetail.user.about_me:'No Author Descritpion'"
+                    ></p>
                     <ul class="author-social">
                       <li>
-                        <a :href="( (recipeDetail.user) && (recipeDetail.user.youtube_url!='') )?recipeDetail.user.youtube_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.youtube_url!='') )?recipeDetail.user.youtube_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-youtube"></i>
                         </a>
                       </li>
                       <li>
-                         <a :href="( (recipeDetail.user) && (recipeDetail.user.facebook_url!='') )?recipeDetail.user.facebook_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.facebook_url!='') )?recipeDetail.user.facebook_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-facebook-f"></i>
                         </a>
                       </li>
                       <li>
-                         <a :href="( (recipeDetail.user) && (recipeDetail.user.twitter_url!='') )?recipeDetail.user.twitter_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.twitter_url!='') )?recipeDetail.user.twitter_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-twitter"></i>
                         </a>
                       </li>
                       <li>
-                         <a :href="( (recipeDetail.user) && (recipeDetail.user.linkedin_url!='') )?recipeDetail.user.linkedin_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.linkedin_url!='') )?recipeDetail.user.linkedin_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-linkedin-in"></i>
                         </a>
                       </li>
                       <li>
-                         <a :href="( (recipeDetail.user) && (recipeDetail.user.instagram_url!='') )?recipeDetail.user.instagram_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.instagram_url!='') )?recipeDetail.user.instagram_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-instagram"></i>
                         </a>
                       </li>
                       <li>
-                         <a :href="( (recipeDetail.user) && (recipeDetail.user.pinterest_url!='') )?recipeDetail.user.pinterest_url:'javascript:void(0);'">
+                        <a
+                          :href="( (recipeDetail.user) && (recipeDetail.user.pinterest_url!='') )?recipeDetail.user.pinterest_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-pinterest"></i>
                         </a>
-                      </li> 
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="also-like-wrap">
                 <h4 class="also-like-title">YOU MAY ALSO LIKE</h4>
-                <div class="row" v-if="recipeDetail.user"> 
-                  <div class="col-xl-4 col-lg-6 col-md-6 col-12" v-for="(recipe,index) in recipeDetail.user.recipes" :key="index">
+                <div class="row" v-if="recipeDetail.user">
+                  <div
+                    class="col-xl-4 col-lg-6 col-md-6 col-12"
+                    v-for="(recipe,index) in recipeDetail.user.recipes"
+                    :key="index"
+                  >
                     <div class="product-box-layout2">
                       <figure class="item-figure">
-                        <img v-lazy="recipe.photo_url" alt="Product" style="width:233px;height:251px;" />
+                        <img
+                          v-lazy="recipe.photo_url"
+                          alt="Product"
+                          style="width:233px;height:251px;"
+                        />
                       </figure>
                       <div class="item-content">
                         <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
                         <h3 class="item-title">
-                          <router-link :to="'/recipe/'+recipe.slug" class="recipe_title">
-                            {{ recipe.title }}
-                          </router-link>
+                          <router-link
+                            :to="'/recipe/'+recipe.slug"
+                            class="recipe_title"
+                          >{{ recipe.title }}</router-link>
                         </h3>
                         <ul class="entry-meta">
                           <li>
@@ -374,9 +424,10 @@
                         </ul>
                       </div>
                     </div>
-                  </div>  
+                  </div>
                 </div>
               </div>
+
               <div class="recipe-reviews">
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">RECIPE REVIEWS</h2>
@@ -398,7 +449,7 @@
                     <span class="review-number">(02)</span>
                   </div>
                 </div>
-                <ul>
+                <ul class="reivew-ul"> 
                   <li class="reviews-single-item">
                     <div class="media media-none--xs">
                       <img src="/app/img/blog/comment1.jpg" alt="Comment" class="media-img-auto" />
@@ -427,60 +478,17 @@
                           </li>
                           <li class="single-item">
                             <span>
-                              9
-                              <span>/ 10</span>
+                              4
+                              <span>/ 5</span>
                             </span>
                           </li>
-                        </ul>
-                        <a href="#" class="item-btn">
-                          REPLY
-                          <i class="fas fa-long-arrow-alt-right"></i>
-                        </a>
+                        </ul> 
                       </div>
                     </div>
-                  </li>
-                  <li class="reviews-single-item">
-                    <div class="media media-none--xs">
-                      <img src="/app/img/blog/comment2.jpg" alt="Comment" class="media-img-auto" />
-                      <div class="media-body">
-                        <h4 class="comment-title">John Martin</h4>
-                        <span class="post-date">September 12, 2018</span>
-                        <p>
-                          Absolutely great recipe. I cooked it for my kids and they loved it, even
-                          asked for more, can you believe it?
-                        </p>
-                        <ul class="item-rating">
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-empty">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item">
-                            <span>
-                              7
-                              <span>/ 10</span>
-                            </span>
-                          </li>
-                        </ul>
-                        <a href="#" class="item-btn">
-                          REPLY
-                          <i class="fas fa-long-arrow-alt-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                  </li>  
+                </ul> 
               </div>
+
               <div class="leave-review">
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">LEAVE A REVIEW</h2>
@@ -563,106 +571,117 @@
                   <div class="form-response"></div>
                 </form>
               </div>
+
             </div>
           </div>
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
             <LatestRecipes />
-            <SubscribeAndFollow />  
-            <FeaturedRecipe />  
-            <GetLatestUpdates /> 
-            <Categories /> 
-            <PopularTags />   
+            <SubscribeAndFollow />
+            <FeaturedRecipe />
+            <GetLatestUpdates />
+            <Categories />
+            <PopularTags />
           </div>
         </div>
       </div>
     </section>
     <!-- Instagram Start Here -->
-      <section class="instagram-feed-wrap">
-        <div class="instagram-feed-title">
-          <a href="javascript:void(0);">
-            <i class="fab fa-instagram"></i>Follow On Instagram
-          </a>
-        </div>
-        <ul class="instagram-feed-figure" v-if="followOnInsta">
-          <li v-for="(insta,index) in followOnInsta" :key="index">
-            <router-link :to="'/recipe/'+insta.slug">
-              <img v-lazy="insta.photo_url" alt="Social" />
-            </router-link>
-          </li>
-        </ul>
-      </section>
-      <!-- Instagram End Here -->
+    <section class="instagram-feed-wrap">
+      <div class="instagram-feed-title">
+        <a href="javascript:void(0);">
+          <i class="fab fa-instagram"></i>Follow On Instagram
+        </a>
+      </div>
+      <ul class="instagram-feed-figure" v-if="followOnInsta">
+        <li v-for="(insta,index) in followOnInsta" :key="index">
+          <router-link :to="'/recipe/'+insta.slug">
+            <img v-lazy="insta.photo_url" alt="Social" />
+          </router-link>
+        </li>
+      </ul>
+    </section>
+    <!-- Instagram End Here -->
   </div>
 </template> 
 <script>
-import { mapState } from "vuex"; 
+import { mapState } from "vuex";
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 //custom Components
-import LatestRecipes from './sidebar/LatestRecipes';
-import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
-import FeaturedRecipe from './sidebar/FeaturedRecipe';
-import Categories from './sidebar/Categories';
-import PopularTags from './sidebar/PopularTags'; 
-import GetLatestUpdates from './blog_sidebar/GetLatestUpdates';
+import LatestRecipes from "./sidebar/LatestRecipes";
+import SubscribeAndFollow from "./sidebar/SubscribeAndFollow";
+import FeaturedRecipe from "./sidebar/FeaturedRecipe";
+import Categories from "./sidebar/Categories";
+import PopularTags from "./sidebar/PopularTags";
+import GetLatestUpdates from "./blog_sidebar/GetLatestUpdates";
 export default {
   name: "recipedetail",
-  components: { 
+  components: {
     VueperSlides,
     VueperSlide,
 
-    LatestRecipes, 
+    LatestRecipes,
     SubscribeAndFollow,
     FeaturedRecipe,
     Categories,
     PopularTags,
-    GetLatestUpdates 
+    GetLatestUpdates,
   },
   data() {
     return {
-        recipeDetail : []
+      loader : null,
+      recipeDetail: [],
     };
   },
   methods: {
     getRecipeDetail(slug) {
       let _this = this;
+      _this.loader =  _this.$loading.show();
       _this.$store
         .dispatch("recipeDetail", { slug: slug })
         .then(function (result) {
           if (result.id != undefined) {
             _this.recipeDetail = result;
+             setTimeout(() => { _this.loader.hide(); }, 500);
           } else {
             _this.$toastr.e("Opps! Invalid Request");
             _this.$router.push("/recipes");
+             _this.loader.hide();
           }
         })
         .catch(function (error) {
           console.log(error);
         });
-    }, 
+    },
     followOnInstagram() {
       this.$store.dispatch("followOnInstagram");
-    }, 
+    },
   },
   created() {
     let slug = this.$route.params.slug;
     if (slug != undefined) {
-      this.getRecipeDetail(slug); 
-      this.followOnInstagram(); 
+      this.getRecipeDetail(slug);
+      this.followOnInstagram();
     }
   },
-  computed: mapState({ 
-    followOnInsta: (state) => state.data.followOnInstagram,  
+  computed: mapState({
+    followOnInsta: (state) => state.data.followOnInstagram,
   }),
   watch: {
-    '$route.params.slug'(newId, oldId) {
-        let slug = this.$route.params.slug;
-        if (slug != undefined) {
-          this.getRecipeDetail(slug); 
-        }
-     }
-  } 
+    "$route.params.slug"(newId, oldId) {
+      let slug = this.$route.params.slug;
+      if (slug != undefined) {
+        this.getRecipeDetail(slug);
+      }
+    },
+  },
 };
 </script> 
-<style lang="scss" scoped>
+<style>
+.link-cursor {
+  cursor: pointer;
+}
+ul.reivew-ul {
+    padding-bottom: 5px;
+}
 </style>

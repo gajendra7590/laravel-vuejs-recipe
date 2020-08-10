@@ -34,14 +34,14 @@
               <div class="col-md-6 col-12" v-for="(recipe,index) in recipesList" :key="index">
                 <div class="product-box-layout1 recipes-list-container">
                   <figure class="item-figure">
-                    <router-link :to="'recipe/'+recipe.slug">
+                    <router-link :to="'/recipe/'+recipe.slug">
                       <img v-lazy="recipe.photo_url" alt="recipe.title" />
                     </router-link>
                   </figure>
                   <div class="item-content">
                     <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
                     <h3 class="item-title recipe_title">
-                      <router-link :to="'recipe/'+recipe.slug">{{ recipe.title }}</router-link>
+                      <router-link :to="'/recipe/'+recipe.slug">{{ recipe.title }}</router-link>
                     </h3>
                     <ul class="item-rating">
                       <li class="star-fill">

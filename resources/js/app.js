@@ -10,6 +10,8 @@ import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
 import Paginate from 'vuejs-paginate';
 import VueSocialSharing from 'vue-social-sharing';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 require('./bootstrap');
 //Impoer Custom
@@ -37,6 +39,14 @@ Vue.use(VueToastr, {
 Vue.use(VueMoment, { moment });
 Vue.component('paginate', Paginate);
 Vue.use(VueSocialSharing);
+Vue.use(Loading, {
+    color: 'blue',
+    backgroundColor: '#000000',
+    height: 50,
+    width: 50,
+    transition: 'slide-fade',
+    opacity: 0.9
+});
 
 
 export default new Vue({
