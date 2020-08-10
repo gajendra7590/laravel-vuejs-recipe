@@ -6,7 +6,7 @@
     <div class="widget-categories">
       <ul v-if="categories">
         <li v-for="(cat,index) in categories" :key="index">
-          <router-link :to="'/recipes/category/'+cat.slug">
+          <router-link :to="'/recipes/category/'+cat.slug" class="recipe_category_name">
             {{ cat.name }}
             <span>{{ cat.counts }}</span>
           </router-link>

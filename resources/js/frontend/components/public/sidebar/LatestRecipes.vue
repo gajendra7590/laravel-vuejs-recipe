@@ -8,14 +8,14 @@
         <li v-for="(lr ,index) in latestsRecipes" :key="index" class="single-item">
           <div class="item-img latest-item-img">
             <router-link :to="'/recipe/'+lr.slug">
-              <img v-lazy="lr.photo_url" alt="Post" />
+              <img v-lazy="lr.photo_url" alt="Post" class="sb-latest-img" />
             </router-link>
             <div class="count-number">{{ index }}</div>
           </div>
           <div class="item-content">
-            <div class="item-ctg">{{ lr.category.name }}</div>
+            <div class="item-ctg recipe_category_name">{{ lr.category.name }}</div>
             <h4 class="item-title">
-              <router-link :to="'/recipe/'+lr.slug">{{ lr.title }}</router-link>
+              <router-link :to="'/recipe/'+lr.slug" class="recipe_title">{{ lr.title }}</router-link>
             </h4>
             <div class="item-post-by">
               <router-link :to="'/recipe/'+lr.slug">
@@ -51,5 +51,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped> 
 </style>

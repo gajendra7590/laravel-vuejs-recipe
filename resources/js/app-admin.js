@@ -1,4 +1,5 @@
 import Vue from 'vue';
+Vue.config.productionTip = false;
 import VueToastr from "vue-toastr";
 import VueLazyload from "vue-lazyload";
 import CKEditor from '@ckeditor/ckeditor5-vue';
@@ -63,7 +64,8 @@ Vue.use(Loading, {
 });
 Vue.component('ValidationProvider', ValidationProvider);
 
-
+//ASSET_BASE_URL
+config.ASSET_BASE_URL = $('input[name="asset_url"]').val();
 
 var path = window.location.pathname;
 var authReq = 1;

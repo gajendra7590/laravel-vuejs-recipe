@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import $ from 'jquery';
 import config from '../../config.js';
-Vue.use(axios);
+
 
 axios.interceptors.response.use(
     function(response) {
@@ -17,7 +18,7 @@ axios.interceptors.response.use(
             ) {
                 localStorage.removeItem("token");
                 alert("Your session has been expired please login..");
-                window.location.href = "/godoexp_laravel_vuejs/";
+                window.location.href = config.URL_PREFIX;
             }
         }
     }
@@ -35,7 +36,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        ASSET_BASE_URL: config.ASSET_BASE_URL,
+        ASSET_BASE_URL: $('input[name="asset_url"]').val(),
         data: {
             getHomeSlider: [],
             homeTrendingRecipe: [],

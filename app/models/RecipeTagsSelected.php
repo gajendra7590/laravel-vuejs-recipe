@@ -15,4 +15,9 @@ class RecipeTagsSelected extends Model
     protected $fillable = [
         'recipe_id','tag_id','status'
     ];
+
+    public function tag()
+    {
+        return $this->hasOne(RecipeTags::class, 'id','tag_id');
+    }
 }

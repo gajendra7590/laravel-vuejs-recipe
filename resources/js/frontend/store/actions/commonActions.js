@@ -1,9 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
-Vue.use(axios);
-
+//Vue.use(axios); 
 import config from "../../../config";
-
 export default {
     //Home Start
     getHomeSlider({ commit, state }, payload) {

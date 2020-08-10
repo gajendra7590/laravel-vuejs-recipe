@@ -75,8 +75,21 @@ class RecipeController extends Controller
             'category' => function($m){
                 $m->select('id','name','slug');
             },
+            'selectedTags' => function($m){
+                $m->select('id','recipe_id','tag_id')->with(['tag' =>function($q){ $q->select('id','name','slug'); }]);
+            },
             'user' => function($m){
-                $m->select('id','first_name','last_name','display_name','photo');
+                $m->select('*')->with([
+                    'recipes' => function($query){
+                        $query->with([
+                            'category' => function($q){ $q->select('id','name','slug'); },
+                            'user' => function($q){ $q->select('id','first_name','last_name','display_name'); }
+                        ])
+                        ->select('id','category_id','user_id','title','slug','photo')
+                        ->where(['status' => '1'])
+                        ->limit(3);
+                    }
+                ]);
             },
             'nutritions'=> function($m){
                 $m->select('id','recipe_id','nutrition_name','nutrition_value');

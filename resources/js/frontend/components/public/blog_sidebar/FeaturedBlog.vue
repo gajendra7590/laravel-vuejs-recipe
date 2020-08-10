@@ -20,11 +20,11 @@
               />
             </div>
             <div class="item-content">
-              <span class="ctg-name">{{ fa.category.name }}</span>
-              <h4 class="item-title">
+              <span class="ctg-name recipe_category_name">{{ fa.category.name }}</span>
+              <h4 class="item-title recipe_title">
                 <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
               </h4>
-              <p>{{ fa.short_desc }}</p>
+              <p class="recipe_short_desc">{{ fa.short_desc }}</p>
             </div>
           </template>
         </vueper-slide>

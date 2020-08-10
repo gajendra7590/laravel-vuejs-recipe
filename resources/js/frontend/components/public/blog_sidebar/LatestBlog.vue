@@ -22,7 +22,7 @@
                 {{ blog.created_at | moment('DD,MMM YYYY') }}
               </a>
             </div>
-            <h4 class="item-title">
+            <h4 class="item-title recipe_title">
               <router-link :to="'/blogs/'+blog.slug">{{ blog.title }}</router-link>
             </h4>
             <div class="item-post-by">

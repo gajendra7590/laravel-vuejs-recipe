@@ -12,14 +12,14 @@
         >
           <template v-slot:content>
             <div class="item-img">
-              <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid" />
+              <img v-lazy="fa.photo_url" alt="Brand" class="img-fluid sb-featured-img"/>
             </div>
             <div class="item-content">
-              <span class="ctg-name">{{ fa.category.name }}</span>
+              <span class="ctg-name recipe_category_name">{{ fa.category.name }}</span>
               <h4 class="item-title">
-                <router-link :to="'/recipe/'+fa.slug">{{ fa.title }}</router-link>
+                <router-link :to="'/recipe/'+fa.slug" class="recipe_title">{{ fa.title }}</router-link>
               </h4>
-              <p>{{ fa.short_desc }}</p>
+              <p class="recipe_short_desc">{{ fa.short_desc }}</p>
             </div>
           </template>
         </vueper-slide>
@@ -51,5 +51,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped> 
+ 
 </style>

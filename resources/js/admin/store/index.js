@@ -1,11 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import $ from 'jquery';
 import config from '../../config';
-Vue.use(axios);
-
-
-
+//Vue.use(axios);
 axios.interceptors.response.use(function(response) {
     return response;
 }, function(err) {
@@ -25,8 +23,6 @@ axios.interceptors.response.use(function(response) {
     }
 });
 
-
-
 //All Mutations
 import * as commosMutations from "./mutations/commonMutations";
 const mutations = Object.assign({}, commosMutations.default);
@@ -39,8 +35,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        baseURL: config.BASE_URL,
-        ASSET_BURL: config.BASE_URL,
+        ASSET_BASE_URL: $('input[name="asset_url"]').val(),
         data: {
             //Clients
             getClients: [],

@@ -66,8 +66,8 @@
                         </router-link>
                       </figure>
                       <div class="item-content">
-                        <span class="sub-title">{{ recipe.category.name }}</span>
-                        <h3 class="item-title">
+                        <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
+                        <h3 class="item-title recipe_title">
                           <router-link :to="'/recipe/'+recipe.slug">
                             {{ recipe.title }}
                           </router-link>
@@ -95,23 +95,23 @@
                             </span>
                           </li>
                         </ul>
-                        <p>
+                        <p class="recipe_short_desc">
                          {{ recipe.short_desc }}
                         </p>
                         <ul class="entry-meta">
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <i class="fas fa-clock"></i>{{ recipe.cooking_time }}
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <i class="fas fa-user"></i>by
                               <span>{{ recipe.user.display_name }}</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <i class="fas fa-heart"></i>
                               <span>02</span> Likes
                             </a>

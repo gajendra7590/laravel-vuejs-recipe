@@ -7,7 +7,7 @@
       <ul v-if="followOnInsta">
         <li v-for="(insta,index) in followOnInsta" :key="index">
           <div class="item-box">
-            <img v-lazy="insta.photo_url" alt="Social Figure" class="img-fluid insta-img" />
+            <img v-lazy="insta.photo_url" alt="Social Figure" class="img-fluid sb-insta-img" />
             <router-link :to="'/recipe/'+insta.slug" class="item-icon">
               <i class="fab fa-instagram"></i>
             </router-link>

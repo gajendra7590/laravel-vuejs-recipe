@@ -6,7 +6,8 @@
         <vueper-slides
           :autoplay="true"
           :duration="3000"
-          class="rc-carousel nav-control-layout2 owl-carousel owl-loaded owl-drag"
+          fixed-height="300px"
+          class="rc-carousel nav-control-layout3 owl-carousel owl-loaded owl-drag"
         >
           <vueper-slide
             v-for="(sld,index) in homeSlider.slider"
@@ -16,12 +17,12 @@
             <template v-slot:content>
               <figure class="item-figure">
                 <router-link :to="'/recipe/'+sld.slug">
-                  <img v-lazy="sld.photo_url" alt="Product" />
+                  <img v-lazy="sld.photo_url" alt="Product" class="home_main_slider" />
                 </router-link>
               </figure>
               <div class="item-content">
-                <span class="sub-title">{{ sld.category.name }}</span>
-                <h2 class="item-title">
+                <span class="sub-title recipe_category_name">{{ sld.category.name }}</span>
+                <h2 class="item-title recipe_title">
                   <router-link :to="'/recipe/'+sld.slug">{{ sld.title }}</router-link>
                 </h2>
                 <ul class="item-rating">
@@ -47,7 +48,7 @@
                     </span>
                   </li>
                 </ul>
-                <p v-html="sld.short_desc"></p>
+                <p class="recipe_short_desc" v-html="sld.short_desc"></p>
                 <ul class="entry-meta">
                   <li>
                     <a href="javascript:void(0);">
@@ -91,8 +92,8 @@
                 </router-link>
               </figure>
               <div class="item-content">
-                <span class="sub-title">{{ rec.category.name }}</span>
-                <h3 class="item-title">
+                <span class="sub-title recipe_category_name">{{ rec.category.name }}</span>
+                <h3 class="item-title recipe_title">
                   <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
                 </h3>
                 <ul class="item-rating">
@@ -169,8 +170,8 @@
                     </router-link>
                   </figure>
                   <div class="item-content">
-                    <span class="sub-title">{{ rec.category.name }}</span>
-                    <h2 class="item-title">
+                    <span class="sub-title recipe_category_name">{{ rec.category.name }}</span>
+                    <h2 class="item-title recipe_title">
                       <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
                     </h2>
                     <ul class="item-rating">
@@ -196,7 +197,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p>{{ rec.short_desc }}</p>
+                    <p class="recipe_short_desc">{{ rec.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
                         <a href="javascript:void(0);">
@@ -257,9 +258,9 @@
                 </router-link>
               </figure>
               <div class="item-content">
-                <span class="sub-title">{{ ec.title }}</span>
+                <span class="sub-title recipe_title">{{ ec.title }}</span>
                 <h3 class="item-title">
-                  <router-link :to="'/recipe/'+ec.slug">{{ ec.short_desc }}</router-link>
+                  <router-link :to="'/recipe/'+ec.slug" class="recipe_short_desc">{{ ec.short_desc }}</router-link>
                 </h3>
                 <ul class="item-rating">
                   <li class="star-fill">
@@ -332,9 +333,9 @@
                     </router-link>
                   </figure>
                   <div class="item-content">
-                    <span class="sub-title">{{ pr.category.name }}</span>
+                    <span class="sub-title recipe_category_name">{{ pr.category.name }}</span>
                     <h3 class="item-title">
-                      <router-link :to="'/recipe/'+pr.slug">{{ pr.title }}</router-link>
+                      <router-link :to="'/recipe/'+pr.slug" class="recipe_title">{{ pr.title }}</router-link>
                     </h3>
                     <ul class="item-rating">
                       <li class="star-fill">
@@ -359,7 +360,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p>{{ pr.short_desc }}</p>
+                    <p class="recipe_description">{{ pr.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
                         <a href="javascript:void(0);">
@@ -521,5 +522,11 @@ export default {
   max-width: 780px;
   max-height: 400px;
   min-height: 400px;
+}
+.home_main_slider img {
+  min-width: 1170px !important;
+  max-width: 1170px !important;
+  max-height: 546px !important;
+  min-height: 546px !important;
 }
 </style>

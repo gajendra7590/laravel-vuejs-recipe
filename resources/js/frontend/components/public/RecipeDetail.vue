@@ -164,22 +164,7 @@
                   </li>
                 </ul>
               </div>
-              <p class="item-description">
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so
-                innocuously side crudey mightily rigorous plot life. New homes in particular are
-                subject.All recipes created with FoodiePress have suport for Micoformats and Google
-                Recipe View. Schema.org is a collaboration byo improve the web by creatinegaera
-                structured data markup.More off this less hello salamander lied porpoise much over
-                tightly circa horse tapedey innocuously side crudey mightily rigorous plot life.
-              </p>
-              <p class="item-description">
-                Salamander lied porpoise much over tightly circa horse taped so
-                innocuously side crudey
-                mightily rigorous plot life. New homes in particular are subject.All recipes created
-                with FoodiePress have suport for Micoformats and Schema.org is a collaboration byo
-                improve.s convallis mi et tellus vehicula convallis. Etiam odio eros, viverra id dui
-                inrutrum cursus ex. Curabitur et consequatenim.
+              <p class="item-description" v-html="recipeDetail.description"> 
               </p>
               <div class="making-elements-wrap">
                 <div class="row">
@@ -187,31 +172,9 @@
                     <div class="ingridients-wrap">
                       <h3 class="item-title">
                         <i class="fas fa-list-ul"></i>Ingridients
-                      </h3>
-                      <div class="adjust-servings">
-                        <div class="servings-title">Adjust Servings</div>
-                        <form class="servings-quantity">
-                          <div class="input-group quantity-holder" id="quantity-holder">
-                            <input
-                              type="text"
-                              name="quantity"
-                              class="form-control quantity-input"
-                              value="1"
-                              placeholder="1"
-                            />
-                            <div class="btn-quantity-select">
-                              <button class="quantity-plus" type="button">
-                                <i class="fas fa-plus"></i>
-                              </button>
-                              <button class="quantity-minus" type="button">
-                                <i class="fas fa-minus"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="checkbox checkbox-primary" v-for="(ingr,index) in recipeDetail.ingredients" :key="index">
-                        <input id="checkbox1" type="checkbox" readonly />
+                      </h3> 
+                      <div v-for="(ingr,index) in recipeDetail.ingredients" :key="index"> 
+                        <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
                         <label for="checkbox1">{{ ingr.name }}</label>
                       </div> 
                     </div>
@@ -230,233 +193,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="related-recipe">
-                <h4 class="heading-title">FROM OUR SHOP</h4>
-                <div
-                  class="rc-carousel nav-control-layout3"
-                  data-loop="true"
-                  data-items="5"
-                  data-margin="40"
-                  data-autoplay="true"
-                  data-autoplay-timeout="5000"
-                  data-smart-speed="700"
-                  data-dots="false"
-                  data-nav="true"
-                  data-nav-speed="false"
-                  data-r-x-small="1"
-                  data-r-x-small-nav="true"
-                  data-r-x-small-dots="false"
-                  data-r-x-medium="1"
-                  data-r-x-medium-nav="true"
-                  data-r-x-medium-dots="false"
-                  data-r-small="2"
-                  data-r-small-nav="true"
-                  data-r-small-dots="false"
-                  data-r-medium="1"
-                  data-r-medium-nav="true"
-                  data-r-medium-dots="false"
-                  data-r-large="2"
-                  data-r-large-nav="true"
-                  data-r-large-dots="false"
-                  data-r-extra-large="2"
-                  data-r-extra-large-nav="true"
-                  data-r-extra-large-dots="false"
-                >
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure1.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure2.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure3.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure4.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure5.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                  <div class="shop-box-layout1">
-                    <div class="mask-item bg--light">
-                      <div class="item-figure">
-                        <img src="/app/img/product/shop-figure6.png" alt="Product" />
-                      </div>
-                      <ul class="action-items">
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-exchange-alt"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fas fa-heart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="item-content">
-                      <h3 class="item-title">
-                        <a href="single-shop.html">Kitchen Utensils</a>
-                      </h3>
-                      <div class="item-price">
-                        <span class="currency">$</span>28.00
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </div> 
               <div class="direction-wrap-layout1">
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">DIRECTIONS</h2>
@@ -483,79 +220,23 @@
                       side crudey mightily rigorous plot life.
                     </p>
                   </div>
-                </div>
-                <div class="direction-box-layout1">
-                  <div class="item-figure">
-                    <img src="/app/img/figure/direction2.jpg" alt="DIRECTIONS" />
-                  </div>
-                  <div class="item-content">
-                    <div class="serial-number">02 Step</div>
-                    <p>
-                      Recipe View
-                      <span class="item-time">
-                        <i class="far fa-clock"></i>5 Minutes
-                      </span> chemaorg is a
-                      collaboration improve
-                      the web by creat inegaera structured markupinn ocuously
-                      side crudey mightily rigorous plot life.
-                    </p>
-                  </div>
-                </div>
-                <div class="direction-box-layout1">
-                  <div class="item-figure">
-                    <img src="/app/img/figure/direction3.jpg" alt="DIRECTIONS" />
-                  </div>
-                  <div class="item-content">
-                    <div class="serial-number">03 Step</div>
-                    <p>
-                      Recipe View
-                      <span class="item-time">
-                        <i class="far fa-clock"></i>5 Minutes
-                      </span> chemaorg is a
-                      collaboration improve
-                      the web by creat inegaera structured markupinn ocuously
-                      side crudey mightily rigorous plot life.
-                    </p>
-                  </div>
-                </div>
-                <div class="direction-box-layout1">
-                  <div class="item-figure">
-                    <img src="/app/img/figure/direction4.jpg" alt="DIRECTIONS" />
-                  </div>
-                  <div class="item-content">
-                    <div class="serial-number">04 Step</div>
-                    <p>
-                      Recipe View
-                      <span class="item-time">
-                        <i class="far fa-clock"></i>5 Minutes
-                      </span> chemaorg is a
-                      collaboration improve
-                      the web by creat inegaera structured markupinn ocuously
-                      side crudey mightily rigorous plot life.
-                    </p>
-                  </div>
-                </div>
+                </div> 
               </div>
               <div class="tag-share">
                 <ul>
                   <li>
-                    <ul class="inner-tag">
-                      <li>
-                        <a href="#">Burger</a>
-                      </li>
-                      <li>
-                        <a href="#">Dinner</a>
-                      </li>
-                      <li>
-                        <a href="#">Pizza</a>
-                      </li>
-                      <li>
-                        <a href="#">Salad</a>
-                      </li>
+                    <ul class="inner-tag" v-if="recipeDetail.selected_tags">
+                      <li v-for="(tg,index) in recipeDetail.selected_tags" :key="index">
+                        <router-link 
+                        class="recipe_category_name" 
+                        :title="'Search Recipe for #'+tg.tag.name"
+                        target="_blank"
+                        :to="'/recipes/tag/'+tg.tag.slug">#{{ tg.tag.name }}</router-link>
+                      </li> 
                     </ul>
                   </li>
                   <li>
-                    <ul class="inner-share">
+                    <ul class="inner-share" v-if="recipeDetail.selected_tags">
                       <li>
                         <a href="#">
                           <i class="fab fa-facebook-f"></i>
@@ -588,120 +269,76 @@
               <div class="recipe-author">
                 <div class="media media-none--xs">
                   <img
-                    src="/app/img/blog/author9.jpg"
+                    v-lazy="(recipeDetail.user)?recipeDetail.user.photo_url:''" style="height:112px;width:140px;"
                     alt="Blog Author"
                     class="rounded-circle media-img-auto"
                   />
                   <div class="media-body">
-                    <h4 class="author-title">Michel Jack</h4>
+                    <h4 class="author-title">{{ (recipeDetail.user)?recipeDetail.user.first_name:'Author' }}</h4>
                     <h5 class="author-sub-title">Written by</h5>
-                    <p>
-                      I love cooking and blogging. Using a fork, break salmon. Halve reserved
-                      potatoes and eggs crosswise. The of something of did require met of
-                      help have someone.
+                    <p v-html="(recipeDetail.user)?recipeDetail.user.about_me:'No Author Descritpion'"> 
                     </p>
                     <ul class="author-social">
                       <li>
-                        <a href="#">
+                        <a :href="( (recipeDetail.user) && (recipeDetail.user.youtube_url!='') )?recipeDetail.user.youtube_url:'javascript:void(0);'">
+                          <i class="fab fa-youtube"></i>
+                        </a>
+                      </li>
+                      <li>
+                         <a :href="( (recipeDetail.user) && (recipeDetail.user.facebook_url!='') )?recipeDetail.user.facebook_url:'javascript:void(0);'">
                           <i class="fab fa-facebook-f"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                         <a :href="( (recipeDetail.user) && (recipeDetail.user.twitter_url!='') )?recipeDetail.user.twitter_url:'javascript:void(0);'">
                           <i class="fab fa-twitter"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                         <a :href="( (recipeDetail.user) && (recipeDetail.user.linkedin_url!='') )?recipeDetail.user.linkedin_url:'javascript:void(0);'">
                           <i class="fab fa-linkedin-in"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-pinterest-p"></i>
+                         <a :href="( (recipeDetail.user) && (recipeDetail.user.instagram_url!='') )?recipeDetail.user.instagram_url:'javascript:void(0);'">
+                          <i class="fab fa-instagram"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-skype"></i>
+                         <a :href="( (recipeDetail.user) && (recipeDetail.user.pinterest_url!='') )?recipeDetail.user.pinterest_url:'javascript:void(0);'">
+                          <i class="fab fa-pinterest"></i>
                         </a>
-                      </li>
+                      </li> 
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="also-like-wrap">
                 <h4 class="also-like-title">YOU MAY ALSO LIKE</h4>
-                <div class="row">
-                  <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                <div class="row" v-if="recipeDetail.user"> 
+                  <div class="col-xl-4 col-lg-6 col-md-6 col-12" v-for="(recipe,index) in recipeDetail.user.recipes" :key="index">
                     <div class="product-box-layout2">
                       <figure class="item-figure">
-                        <img src="/app/img/product/product11.jpg" alt="Product" />
+                        <img v-lazy="recipe.photo_url" alt="Product" style="width:233px;height:251px;" />
                       </figure>
                       <div class="item-content">
-                        <span class="sub-title">BREAKFAST</span>
+                        <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
                         <h3 class="item-title">
-                          <a href="single-recipe1.html">
-                            Tomatoes Stuffed with Foie and
-                            Chanterelles
-                          </a>
+                          <router-link :to="'/recipe/'+recipe.slug" class="recipe_title">
+                            {{ recipe.title }}
+                          </router-link>
                         </h3>
                         <ul class="entry-meta">
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <i class="fas fa-user"></i>by
-                              <span>John Martin</span>
+                              <span>{{ recipe.user.first_name }}</span>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-6 col-12">
-                    <div class="product-box-layout2">
-                      <figure class="item-figure">
-                        <img src="/app/img/product/product12.jpg" alt="Product" />
-                      </figure>
-                      <div class="item-content">
-                        <span class="sub-title">DESERT</span>
-                        <h3 class="item-title">
-                          <a href="single-recipe1.html">
-                            Pumpkin Cheesecake With
-                            GingersnapCrust
-                          </a>
-                        </h3>
-                        <ul class="entry-meta">
-                          <li>
-                            <a href="#">
-                              <i class="fas fa-user"></i>by
-                              <span>John Martin</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-4 d-block d-md-none d-xl-block col-12">
-                    <div class="product-box-layout2">
-                      <figure class="item-figure">
-                        <img src="/app/img/product/product13.jpg" alt="Product" />
-                      </figure>
-                      <div class="item-content">
-                        <span class="sub-title">JUICE</span>
-                        <h3 class="item-title">
-                          <a href="single-recipe1.html">Blueberry Juice with Lemon Crema</a>
-                        </h3>
-                        <ul class="entry-meta">
-                          <li>
-                            <a href="#">
-                              <i class="fas fa-user"></i>by
-                              <span>John Martin</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  </div>  
                 </div>
               </div>
               <div class="recipe-reviews">
@@ -903,20 +540,41 @@
         </div>
       </div>
     </section>
+    <!-- Instagram Start Here -->
+      <section class="instagram-feed-wrap">
+        <div class="instagram-feed-title">
+          <a href="javascript:void(0);">
+            <i class="fab fa-instagram"></i>Follow On Instagram
+          </a>
+        </div>
+        <ul class="instagram-feed-figure" v-if="followOnInsta">
+          <li v-for="(insta,index) in followOnInsta" :key="index">
+            <router-link :to="'/recipe/'+insta.slug">
+              <img v-lazy="insta.photo_url" alt="Social" />
+            </router-link>
+          </li>
+        </ul>
+      </section>
+      <!-- Instagram End Here -->
   </div>
 </template> 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"; 
+import { VueperSlides, VueperSlide } from "vueperslides";
+import "vueperslides/dist/vueperslides.css";
 //custom Components
 import LatestRecipes from './sidebar/LatestRecipes';
 import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
 import FeaturedRecipe from './sidebar/FeaturedRecipe';
 import Categories from './sidebar/Categories';
-import PopularTags from './sidebar/PopularTags';
+import PopularTags from './sidebar/PopularTags'; 
 import GetLatestUpdates from './blog_sidebar/GetLatestUpdates';
 export default {
   name: "recipedetail",
   components: { 
+    VueperSlides,
+    VueperSlide,
+
     LatestRecipes, 
     SubscribeAndFollow,
     FeaturedRecipe,
@@ -946,13 +604,20 @@ export default {
           console.log(error);
         });
     }, 
+    followOnInstagram() {
+      this.$store.dispatch("followOnInstagram");
+    }, 
   },
   created() {
     let slug = this.$route.params.slug;
     if (slug != undefined) {
       this.getRecipeDetail(slug); 
+      this.followOnInstagram(); 
     }
   },
+  computed: mapState({ 
+    followOnInsta: (state) => state.data.followOnInstagram,  
+  }),
   watch: {
     '$route.params.slug'(newId, oldId) {
         let slug = this.$route.params.slug;

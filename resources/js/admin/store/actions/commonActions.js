@@ -1,8 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
-Vue.use(axios);
+//Vue.use(axios);
 import config from "../../../config";
-
 //Set Axios header
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 export default {

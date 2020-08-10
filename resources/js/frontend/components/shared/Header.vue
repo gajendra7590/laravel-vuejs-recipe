@@ -5,17 +5,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-3 col-sm-4 col-4 possition-static">
-            <div class="site-logo-mobile">
-              <router-link to="/" class="sticky-logo-light">
-                <img src="/app/img/logo-light.png" alt="Recipe Logo" />
+            <div class="site-logo-mobile">               
+              <router-link to="/" class="sticky-logo-light"> 
+                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-light.png'" alt="Recipe Logo" />
               </router-link>
               <router-link to="/" class="sticky-logo-dark">
-                <img src="/app/img/logo-dark.png" alt="Recipe Logo" />
+                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'" alt="Recipe Logo" />
               </router-link>
             </div>
             <nav class="site-nav">
               <ul id="site-menu" class="site-menu">
-                <li>
+                <li> 
                   <router-link to="/home">Home</router-link>
                 </li>
                 <li>
@@ -320,6 +320,8 @@ export default {
   name: "headercomponent",
   data() {
     return {}
+  },
+  created(){ 
   },
   computed:mapState({
     companyDetail : (state) => state.data.companyDetail

@@ -9,49 +9,49 @@
           <a
             :href="( (companyDetail && (companyDetail.youtube_url!='') ) )?companyDetail.youtube_url:'javascript:void(0);'"
           >
-            <i class="fab fa-youtube"></i>Subscribe Channel
+            <i class="fab fa-youtube"></i>SUBSCRIBE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="( (companyDetail && (companyDetail.youtube_url!='')) )?companyDetail.facebook_url:'javascript:void(0);'"
           >
-            <i class="fab fa-facebook-f"></i>LIKE ME ON
+            <i class="fab fa-facebook-f"></i>LIKE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="( (companyDetail && (companyDetail.twitter_url!='')))?companyDetail.twitter_url:'javascript:void(0);'"
           >
-            <i class="fab fa-twitter"></i>LIKE ME
+            <i class="fab fa-twitter"></i>LIKE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="((companyDetail && (companyDetail.linkedin_url!='')))?companyDetail.linkedin_url:'javascript:void(0);'"
           >
-            <i class="fab fa-linkedin-in"></i>LIKE ME
+            <i class="fab fa-linkedin-in"></i>LIKE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="((companyDetail && (companyDetail.instagram_url!='')))?companyDetail.instagram_url:'javascript:void(0);'"
           >
-            <i class="fab fa-instagram"></i>LIKE ME
+            <i class="fab fa-instagram"></i>LIKE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="( (companyDetail && (companyDetail.pinterest_url!='')))?companyDetail.pinterest_url:'javascript:void(0);'"
           >
-            <i class="fab fa-pinterest-p"></i>LIKE ME
+            <i class="fab fa-pinterest-p"></i>LIKE US
           </a>
         </li>
         <li class="single-item">
           <a
             :href="( (companyDetail && (companyDetail.telegram_url!='')) )?companyDetail.telegram_url:'javascript:void(0);'"
           >
-            <i class="fab fa-telegram"></i>Subscribe US
+            <i class="fab fa-telegram"></i>SUBSCRIBE US
           </a>
         </li>
       </ul>

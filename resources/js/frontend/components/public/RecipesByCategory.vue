@@ -38,8 +38,8 @@
                     </router-link>
                   </figure>
                   <div class="item-content">
-                    <span class="sub-title">{{ recipe.category.name }}</span>
-                    <h3 class="item-title">
+                    <span class="sub-title recipe_category_name">{{ recipe.category.name }}</span>
+                    <h3 class="item-title recipe_title">
                       <router-link :to="'recipe/'+recipe.slug">{{ recipe.title }}</router-link>
                     </h3>
                     <ul class="item-rating">
@@ -65,7 +65,7 @@
                         </span>
                       </li>
                     </ul>
-                    <p>{{ recipe.short_desc }}</p>
+                    <p class="recipe_short_desc">{{ recipe.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
                         <a href="javascript:void(0);" title="Cooking Time">

@@ -7,11 +7,11 @@
       <figure class="author-figure">
         <img
           v-lazy="(companyDetail)?companyDetail.photo_url:''"
-          style="height: 150px;width: 170px;"
+          class="sb-aboutme-img"
           alt="about"
         />
       </figure>
-      <p>{{ (companyDetail)?companyDetail.about:'' }}</p>
+      <p class="recipe_title">{{ (companyDetail)?companyDetail.about:'' }}</p>
     </div>
   </div>
 </template> 
