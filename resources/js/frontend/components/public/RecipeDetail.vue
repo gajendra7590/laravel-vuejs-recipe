@@ -64,7 +64,7 @@
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> 
                 <div class="col-xl-3 col-12">
                   <ul class="action-item">
                     <li>
@@ -81,25 +81,61 @@
                       <button>
                         <i class="fas fa-share-alt"></i>
                       </button>
-                      <div class="action-share-wrap">
-                        <a href="#" title="facebook">
+                      <div class="action-share-wrap" v-if="recipeDetail"> 
+                         <ShareNetwork
+                            network="facebook"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
                           <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" title="twitter">
+                         </ShareNetwork>
+                         <ShareNetwork
+                            network="twitter"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
                           <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" title="linkedin">
+                         </ShareNetwork>
+                         <ShareNetwork
+                            network="linkedin"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
                           <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" title="pinterest">
+                         </ShareNetwork>
+                         <ShareNetwork
+                            network="pinterest"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
                           <i class="fab fa-pinterest-p"></i>
-                        </a>
-                        <a href="#" title="skype">
-                          <i class="fab fa-skype"></i>
-                        </a>
-                        <a href="#" title="rss">
-                          <i class="fas fa-rss"></i>
-                        </a>
+                         </ShareNetwork>
+                         <ShareNetwork
+                            network="whatsapp"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
+                          <i class="fab fa-whatsapp"></i>
+                         </ShareNetwork>
+                         <ShareNetwork
+                            network="telegram"
+                            :url="this.$store.state.BASE_URL+'recipe/'+recipeDetail.slug"
+                            :title="recipeDetail.title"
+                            :description="recipeDetail.short_desc" 
+                            style="cursor: pointer;"
+                          > 
+                          <i class="fab fa-telegram"></i>
+                         </ShareNetwork>                         
                       </div>
                     </li>
                   </ul>

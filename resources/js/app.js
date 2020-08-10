@@ -9,6 +9,8 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
 import Paginate from 'vuejs-paginate';
+import VueSocialSharing from 'vue-social-sharing';
+
 require('./bootstrap');
 //Impoer Custom
 import App from './frontend/components/App.vue';
@@ -34,6 +36,8 @@ Vue.use(VueToastr, {
 });
 Vue.use(VueMoment, { moment });
 Vue.component('paginate', Paginate);
+Vue.use(VueSocialSharing);
+
 
 export default new Vue({
     el: '#app',
