@@ -187,20 +187,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "Sidebar",
   data: function () {
     return {
-      userProfile: {},
+       
     };
   },
-  methods: {
-    getProfile() {
-      let _this = this;
-      _this.$store.dispatch("loggedProfile").then(function (result) {
-        _this.userProfile = result;
-      });
-    },
+  methods: { 
     signOutAccount() {
       let _this = this;
       _this.$dialog
@@ -208,17 +203,14 @@ export default {
         .then(function (dialog) {
           loader: true;
           //Delete Code start
-          _this.$loading.show();
+          _this.$loading.show({opacity:1 ,backgroundColor: 'red', color: '#fff'});
           _this.$store
             .dispatch("adminLogout", _this.loginData)
             .then((res) => {
               if (typeof res.status != "undefined" && res.status == true) {
-                localStorage.removeItem("current_user");
-                localStorage.removeItem("token");
+                localStorage.removeItem("ADMIN_SESSION"); 
                 _this.$toastr.s("You have been logged out", "SUCCESS!!");
-                setTimeout(function () {
-                  window.location.href = "/admin/login";
-                }, 500);
+                 window.location.href = "/admin/login"; 
               } else if (
                 typeof res.status != "undefined" &&
                 res.status == false
@@ -232,10 +224,13 @@ export default {
         });
     },
   },
+  computed:mapState({
+     userProfile : (state) => state.data.userProfile 
+  }),
   created() {
-    if (!!localStorage.getItem("token")) {
-      this.getProfile();
-    }
+    // if (!!localStorage.getItem("token")) {
+    //   this.getProfile();
+    // }
   },
 };
 </script> 

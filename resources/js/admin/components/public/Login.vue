@@ -38,39 +38,16 @@
             </div> 
         </div>
         <p class="text-danger validation_errors" v-if="errorsList.password">{{ errorsList.password }} </p>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input 
-                  name="remember"
-                  type="checkbox" 
-                  v-model="loginData.remeberMe"
-                  id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
+        <div class="row"> 
           <!-- /.col -->
-          <div class="col-4">
+          <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
-      </form>
-
-      <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="javascript:void(0);" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="javascript:void(0);" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
-
+      </form> 
       <p class="mb-1">
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         <router-link to="/forgot-password">I forgot my password,reset here</router-link>
       </p> 
     </div>
@@ -104,9 +81,12 @@ export default {
              _this.alertClass = 'alert-success';
              _this.alertShow = true; 
              _this.alertMessage = res.message
-             _this.$toastr.s("You have been logged in", "SUCCESS!!");
-             localStorage.setItem('current_user',res.current_user);
-             localStorage.setItem('token',res.token.access_token);
+             _this.$toastr.s("You have been logged in", "SUCCESS!!");             
+             localStorage.setItem('ADMIN_SESSION',JSON.stringify({
+                 'token' : res.token.access_token,
+                 'role' : res.role,
+                 'current_user' : res.token.access_token
+             }));  
              setTimeout(function(){
                window.location.href='/admin/dashboard';
              },500);
@@ -115,8 +95,7 @@ export default {
              _this.alertClass = 'alert-danger';
              _this.alertShow = true;  
              _this.$toastr.e("Opps! error in logged in", "ERROR!!");
-             localStorage.setItem('current_user','');
-             localStorage.setItem('token','');
+             localStorage.removeItem('ADMIN_SESSION'); 
              _this.alertMessage = res.message
            } 
         })
@@ -132,4 +111,7 @@ export default {
 }
 </script> 
 <style scoped> 
+.mb-1, .my-1 { 
+    margin-top: 14px !important;
+}
 </style>

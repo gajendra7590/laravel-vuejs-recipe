@@ -76,6 +76,7 @@ class AuthController extends Controller
                             'photo' => auth()->user()->photo,
                             'role' => auth()->user()->userRoleName,
                         ],
+                        'role' => auth()->user()->userRoleName,
                         'token'=>[
                             'access_token' => $tokenResult->accessToken,
                             'token_type' => 'Bearer',

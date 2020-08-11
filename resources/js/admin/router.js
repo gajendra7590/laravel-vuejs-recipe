@@ -260,13 +260,13 @@ const router = new VueRouter({
 
 router.beforeResolve((to, from, next) => {
     if (to.matched.some((record) => record.meta.protectedURL)) {
-        if (!!!localStorage.getItem("token")) {
+        if (!!!localStorage.getItem("ADMIN_SESSION")) {
             window.location.href = config.BASE_URL_ADMIN + "login";
         } else {
             next();
         }
     } else if (to.matched.some((record) => record.meta.visitorURL)) {
-        if (!!localStorage.getItem("token")) {
+        if (!!localStorage.getItem("ADMIN_SESSION")) {
             window.location.href = config.BASE_URL_ADMIN + "dashboard";
         } else {
             next();

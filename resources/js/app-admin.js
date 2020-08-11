@@ -55,12 +55,12 @@ Vue.use(ServerTable);
 Vue.use(VuejsDialog);
 Vue.use(Vuelidate);
 Vue.use(Loading, {
-    color: 'blue',
-    backgroundColor: '#fffff',
+    backgroundColor: 'red',
+    color: '#fff',
     height: 40,
     width: 40,
     transition: 'slide-fade',
-    opacity: 0.9
+    opacity: 1
 });
 Vue.component('ValidationProvider', ValidationProvider);
 

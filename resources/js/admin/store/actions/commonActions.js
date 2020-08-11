@@ -2,8 +2,20 @@ import Vue from "vue";
 import axios from "axios";
 //Vue.use(axios);
 import config from "../../../config";
-//Set Axios header
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+//Set Axios header 
+
+let adminData = localStorage.getItem('ADMIN_SESSION');
+let token = null;
+if (!!adminData) {
+    try {
+        adminData = JSON.parse(adminData);
+        token = adminData.token;
+    } catch (e) {
+        localStorage.removeItem('ADMIN_SESSION');
+        window.location.href = '/admin/login';
+    }
+}
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
     adminLogin({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
@@ -658,6 +670,4 @@ export default {
                 });
         });
     }
-
-
 };
