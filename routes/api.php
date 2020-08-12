@@ -21,6 +21,27 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     //All FrontEnd Routes
     Route::group(['namespace' => 'Frontend','prefix' => '/'], function () {
+        //Auth
+        Route::post('login', 'AuthController@login');
+        Route::post('register', 'AuthController@register');
+        Route::post('forgot-password', 'AuthController@sendResetPasswordLink');
+        Route::post('verify-token', 'AuthController@verifyTokenStatus');
+        Route::post('forgot-password-save', 'AuthController@ResetPasswordSetNew');
+        Route::post('signout', 'AuthController@logout')->middleware('auth:api');
+        Route::post('signoutAll', 'AuthController@logoutAll')->middleware('auth:api');
+        //Recipe Detail & Enquiry common
+        Route::post('saveContactUsEnquiry', 'CommonController@saveContactUsEnquiry');
+        Route::post('createNewRecipeRating/{id}', 'RecipeExtraController@createNewRecipeRating')->middleware('auth:api');
+        Route::post('createNewRecipeLike/{id}', 'RecipeExtraController@createNewRecipeLike')->middleware('auth:api');
+        Route::post('createNewRecipeView/{id}', 'RecipeExtraController@createNewRecipeView');
+        Route::get('getRecipeRatings/{id}', 'RecipeExtraController@getRecipeRatings');
+
+        Route::post('createNewBlogRating/{id}', 'BlogExtraController@createNewBlogRating')->middleware('auth:api');
+        Route::post('createNewBlogLike/{id}', 'BlogExtraController@createNewBlogLike')->middleware('auth:api');
+        Route::post('createNewBlogView/{id}', 'BlogExtraController@createNewBlogView');
+        Route::get('getBlogRatings/{id}', 'BlogExtraController@getBlogRatings');
+
+
         //Common Routes
         Route::get('companyDetail', 'CommonController@companyDetail');
         Route::get('getSocialLinks', 'CommonController@getSocialLinks');
@@ -30,22 +51,27 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('featuredRecipes' ,'CommonController@featuredRecipes'); 
         Route::get('popularTags' ,'CommonController@popularTags');
         Route::get('getSidebarCategories' ,'CommonController@getSidebarCategories');
+
         //All Home Page Routes
         Route::get('getHomeSlider', 'HomeController@getHomeSlider');
         Route::get('homeTrendingRecipe', 'HomeController@homeTrendingRecipe');
         Route::get('homeSection3In1', 'HomeController@homeSection3In1');
         Route::get('homeSidebarSection3In1', 'HomeController@homeSidebarSection3In1');
+
         //Recipes Categories Routes
         Route::get('getCategories', 'CommonController@getCategories');
+
         //Recipe Section Routes
         Route::get('recipesList' ,'RecipeController@recipesList');
         Route::get('recipesListByCategory/{slug}' ,'RecipeController@recipesListByCategory');
         Route::get('recipesListByTag/{slug}' ,'RecipeController@recipesListByTag');
         Route::get('recipeDetail/{slug}' ,'RecipeController@recipeDetail');
+
         //Authors Section Routes
         Route::get('authorsList' ,'CommonController@authorsList');
         Route::get('authorsRecipe/{id}' ,'CommonController@authorsRecipe');
         Route::get('authorsDetail/{id}' ,'CommonController@authorsDetail');
+
         //Blog Section Routes
         Route::get('getBlogList' ,'BlogsController@getBlogList');
         Route::get('getBlogListByTags/{slug}' ,'BlogsController@getBlogListByTags');

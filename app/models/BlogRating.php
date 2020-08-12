@@ -15,18 +15,17 @@ class BlogRating extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'blog_id','user_id','rating', 'comment'
+       'blog_id','user_id','rating', 'comment'
     ];
-
 
     public function user()
     {
         return $this->hasOne(User::class, 'id','user_id');
     }
 
-    public function blogs()
+    public function blog()
     {
-        return $this->hasMany(Blogs::class, 'id','blog_id');
+        return $this->hasOne(Blogs::class, 'id','blog_id');
     }
 
 }

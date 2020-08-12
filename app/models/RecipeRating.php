@@ -24,9 +24,9 @@ class RecipeRating extends Model
         return $this->hasOne(User::class, 'id','user_id');
     }
 
-    public function recipes()
+    public function recipe()
     {
-        return $this->hasMany(Recipes::class, 'id','recipe_id');
+        return $this->hasOne(Recipes::class, 'id','recipe_id');
     }
 
 

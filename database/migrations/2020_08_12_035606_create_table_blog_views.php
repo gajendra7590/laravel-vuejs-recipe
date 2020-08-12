@@ -16,7 +16,7 @@ class CreateTableBlogViews extends Migration
         Schema::create('blog_views', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->integer('blog_id');
-            $table->integer('ip_address');
+            $table->string('ip_address','50')->nullable();
             $table->timestamps();
             $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
         });

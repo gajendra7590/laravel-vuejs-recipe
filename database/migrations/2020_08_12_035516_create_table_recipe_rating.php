@@ -17,7 +17,7 @@ class CreateTableRecipeRating extends Migration
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->integer('recipe_id');
             $table->integer('user_id');
-            $table->string('rating')->unique();
+            $table->string('rating');
             $table->longText('comment')->nullable();
             $table->timestamps();
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');

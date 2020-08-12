@@ -4,18 +4,53 @@ namespace App\Http\Controllers\Api\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 use App\models\Categories;
 use App\models\Recipes;
 use App\models\RecipeTags;
 use App\User;
 use App\models\CompanyDetail;
+use App\models\ContactUs;
 
 class CommonController extends Controller
 {
 
     public function companyDetail(Request $request) {
         return CompanyDetail::get()->first();
+    }
+
+    public function saveContactUsEnquiry(Request $request){
+        $post = $request->only('name','email','phone','comment');
+        $validator = Validator::make($post,[
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:10',
+            'comment' => 'required'
+        ]);
+        if ($validator->fails()) {
+            $result = errorArrayCreate( $validator->messages() );
+            return response()->json([
+                'status' => false,
+                'message' => 'Incorrect form data',
+                'errors' => $result
+            ]);
+        }else{
+            $model = new ContactUs();
+            $save = $model->create($post);
+            if($save){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Enquiry submitted successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Opps! Error in submitted enquiry'
+                ]);
+            }
+        }
     }
 
     public function getSocialLinks(Request $request) {

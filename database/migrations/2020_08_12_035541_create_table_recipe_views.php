@@ -16,7 +16,7 @@ class CreateTableRecipeViews extends Migration
         Schema::create('recipe_views', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->integer('recipe_id');
-            $table->integer('ip_address');
+            $table->string('ip_address','50')->nullable();
             $table->timestamps();
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
         });

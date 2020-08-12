@@ -17,7 +17,7 @@ class CreateTableBlogRating extends Migration
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->integer('blog_id');
             $table->integer('user_id');
-            $table->string('rating')->unique();
+            $table->string('rating');
             $table->longText('comment')->nullable();
             $table->timestamps();
             $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');

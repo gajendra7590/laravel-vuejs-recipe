@@ -61,6 +61,14 @@ class User extends Authenticatable
     }
 
 
+    public static function boot() {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->display_name = ($model->display_name!='')?$model->display_name:( $model->first_name.' '.$model->last_name);
+        });
+    }
+
+
     public function getUserRoleNameAttribute(){
         if( $this->hasRole('admin') ){
             return 'admin';
