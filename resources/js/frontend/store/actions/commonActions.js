@@ -2,7 +2,225 @@ import Vue from "vue";
 import axios from "axios";
 //Vue.use(axios); 
 import config from "../../../config";
+
+let userData = localStorage.getItem('USER_SESSION');
+let token = null;
+if (!!userData) {
+    try {
+        userData = JSON.parse(userData);
+        token = (typeof(userData.token) != 'undefined') ? userData.token : null;
+    } catch (e) {
+        localStorage.removeItem('USER_SESSION');
+    }
+}
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
+    //Auth Section Start
+    login({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "login", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    register({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "register", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    forgotPassword({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "forgot-password", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    forgotPasswordSave({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "forgot-password-save", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    verifyToken({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "verify-token", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    signout({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "signout", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    signoutAll({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "signoutAll", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    //Auth Section End
+    //Extra Routes For Blog & Recipe Start
+    saveContactUsEnquiry({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "saveContactUsEnquiry", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getRecipeRatings({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getRecipeRatings/" + payload.id)
+            .then(function(response) {
+                commit("getRecipeRatings", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    createNewRecipeRating({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewRecipeRating/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    createNewRecipeLike({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewRecipeLike/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    createNewRecipeView({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewRecipeView/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getBlogRatings({ commit, state }, payload) {
+        axios
+            .get(config.API_URL + "getBlogRatings/" + payload.id)
+            .then(function(response) {
+                commit("getBlogRatings", response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    createNewBlogRating({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewBlogRating/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    createNewBlogLike({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewBlogLike/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    createNewBlogView({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createNewBlogView/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    //Extra Routes For Blog & Recipe Start
     //Home Start
     getHomeSlider({ commit, state }, payload) {
         axios

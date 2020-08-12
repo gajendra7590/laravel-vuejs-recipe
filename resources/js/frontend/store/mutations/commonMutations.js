@@ -87,5 +87,13 @@ export default {
         state.data.companyDetail = data;
     },
     //Company Detail End
+    //Other Extras End
+    getRecipeRatings(state, data) {
+        state.data.getRecipeRatings = data;
+    },
+    getBlogRatings(state, data) {
+        state.data.getBlogRatings = data;
+    },
+    //Other Extras End
 
 };

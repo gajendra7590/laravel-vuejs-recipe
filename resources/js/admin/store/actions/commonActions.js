@@ -9,7 +9,7 @@ let token = null;
 if (!!adminData) {
     try {
         adminData = JSON.parse(adminData);
-        token = adminData.token;
+        token = (typeof(adminData.token) != 'undefined') ? adminData.token : null;
     } catch (e) {
         localStorage.removeItem('ADMIN_SESSION');
         window.location.href = '/admin/login';
