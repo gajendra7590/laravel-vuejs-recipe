@@ -9,10 +9,9 @@
         </form>
     </div>
     <!-- Search Box End Here -->
-    <!-- Modal Start-->
-    <div class="modal fade" id="loginModal" role="dialog">
-        <div class="modal-dialog"> 
-
+    <!-- Modal Start--> 
+    <div class="modal fade" id="loginModal" role="dialog" v-if="!userDetail.id">
+        <div class="modal-dialog">  
               <div class="modal-content" v-show="modelOpen1">
                   <div class="modal-header">
                       <div class="title-default-bold mb-none">Login</div>
@@ -262,20 +261,39 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li> 
                   <button
                     type="button"
                     class="login-btn" 
-                    @click.prevent="loginModal"
-                  >
-                    <i class="flaticon-profile"></i>Login
-                  </button>
+                    v-if="!userDetail.id"
+                    @click.prevent="loginModal">
+                    <i class="flaticon-profile"></i>Login 
+                  </button>                      
+                   <nav class="site-nav custom-site-nav" v-if="userDetail.id">
+                        <ul id="site-menu" class="site-menu"> 
+                          <i class="flaticon-profile"></i>
+                            <li><a href="#">{{ userDetail.display_name }}</a>
+                                <ul class="dropdown-menu-col-1">
+                                    <li>
+                                      <router-link :to="'/account/profile'">Profile</router-link>
+                                    </li>
+                                    <li>
+                                      <router-link :to="'/account/change-password'">Change Password</router-link>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" @click.prevent="userLogout">
+                                        Logout
+                                      </a>
+                                   </li>
+                                </ul>
+                            </li> 
+                        </ul>
+                    </nav> 
                 </li>
                 <li>
-                  <a href="submit-recipe.html" class="fill-btn">
-                    <i class="flaticon-plus-1"></i>SUBMIT
-                    RECIPE
-                  </a>
+                  <router-link :to="'/account/cerate-recipe'" class="fill-btn">
+                    <i class="flaticon-plus-2"></i>SUBMIT RECIPE
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -477,10 +495,27 @@ export default {
     }
   },
   methods :{ 
+    userLogout(){
+       let userDetail = this.$store.state.data.userDetail;
+       let _this = this;
+       _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
+       if(userDetail.id){ 
+            _this.$store.dispatch('signout').then(function(result){
+              if( typeof(result.status)!='undefined' && (result.status == true) ){
+                localStorage.removeItem('USER_SESSION');
+                window.location.href = '';
+              }
+            })
+           .catch(function(error){
+               console.log(error) 
+                _this.loader.hide();
+            }); 
+       }
+    },
     loginSubmit(){
         let _this = this; 
         _this.loginErrors = {};
-        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
         _this.$store.dispatch('login',_this.login).then(function(result){
           _this.loader.hide();
           if( typeof(result.status)!='undefined' && (result.status == false)){
@@ -504,7 +539,7 @@ export default {
     },
     forgotSubmit(){
         let _this = this; 
-        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
         _this.forgotErrors = {};
         _this.$store.dispatch('forgotPassword',_this.forgot).then(function(result){
           _this.loader.hide();
@@ -521,7 +556,7 @@ export default {
     },
     registerSubmit(){
         let _this = this; 
-        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
         _this.forgotErrors = {};
         _this.$store.dispatch('register',_this.register).then(function(result){
           _this.loader.hide();
@@ -565,7 +600,8 @@ export default {
   created(){ 
   },
   computed:mapState({
-    companyDetail : (state) => state.data.companyDetail
+    companyDetail : (state) => state.data.companyDetail,
+    userDetail : (state) => state.data.userDetail
   })
 };
 </script>

@@ -338,5 +338,17 @@ class AuthController extends Controller
         }
     }
 
+    /*
+     * Get User Profile
+     */
+    public function getProfile(Request $request) {
+        $user =  User::where(['id' => Auth::user()->id ])->get()->first();//->toArray();
+        if($user){
+            $user = $user->toArray();
+            $user['role'] = auth()->user()->userRoleName;
+        }
+        return $user;
+    }
+
 
 } //Main Class Closed Here

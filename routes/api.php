@@ -29,6 +29,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('forgot-password-save', 'AuthController@ResetPasswordSetNew');
         Route::post('signout', 'AuthController@logout')->middleware('auth:api');
         Route::post('signoutAll', 'AuthController@logoutAll')->middleware('auth:api');
+        Route::get('getProfile', 'AuthController@getProfile')->middleware('auth:api');
+
         //Recipe Detail & Enquiry common
         Route::post('saveContactUsEnquiry', 'CommonController@saveContactUsEnquiry');
         Route::post('createNewRecipeRating/{id}', 'RecipeExtraController@createNewRecipeRating')->middleware('auth:api');

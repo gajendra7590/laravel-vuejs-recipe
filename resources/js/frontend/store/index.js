@@ -39,6 +39,8 @@ const store = new Vuex.Store({
         ASSET_BASE_URL: $('input[name="asset_url"]').val(),
         BASE_URL: config.BASE_URL,
         data: {
+            userDetail: [],
+
             getHomeSlider: [],
             homeTrendingRecipe: [],
             homeSection3In1: [],

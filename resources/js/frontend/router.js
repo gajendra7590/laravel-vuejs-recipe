@@ -30,6 +30,10 @@ import BlogDetail from './components/public/BlogDetail';
 
 import ResetPassword from './components/public/ResetPassword';
 
+//Account
+import RecipeForm from './components/protected/RecipeForm';
+import Profile from './components/protected/Profile';
+import ChangePassword from './components/protected/ChangePassword';
 
 //alert(config.URL_PREFIX_ADMIN)
 Vue.use(VueRouter)
@@ -56,6 +60,11 @@ const router = new VueRouter({
         { name: "blogsByTag", path: "/blogs/tag/:slug", component: BlogByTag },
         { name: "blogsByCategories", path: "/blogs/category/:slug", component: BlogByCategories },
         { name: "blogsDetail", path: "/blogs/:slug", component: BlogDetail },
+        //Account Pages
+        { name: "userProfile", path: "/account/profile", component: Profile },
+        { name: "changePassword", path: "/account/change-password", component: ChangePassword },
+        { name: "addRecpe", path: "/account/cerate-recipe", component: RecipeForm },
+        { name: "editRecpe", path: "/account/edit-recipe/:slug", component: RecipeForm },
         //404 no route redirect   
         { name: "404", path: "**", redirect: '/home' }
     ],

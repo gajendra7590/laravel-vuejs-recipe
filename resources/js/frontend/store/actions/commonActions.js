@@ -8,7 +8,7 @@ let token = null;
 if (!!userData) {
     try {
         userData = JSON.parse(userData);
-        token = (typeof(userData.token) != 'undefined') ? userData.token : null;
+        token = (typeof(userData.userToken) != 'undefined') ? userData.userToken : null;
     } catch (e) {
         localStorage.removeItem('USER_SESSION');
     }
@@ -99,6 +99,19 @@ export default {
             axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
             axios
                 .post(config.API_URL + "signoutAll", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getProfile({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .get(config.API_URL + "getProfile")
                 .then(function(response) {
                     return resolve(response.data)
                 })
