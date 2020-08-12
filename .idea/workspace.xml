@@ -2,12 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="814045b9-a76b-4148-bf97-94bfe2538d85" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/App.vue" afterPath="$PROJECT_DIR$/resources/js/admin/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/public/Login.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/public/Login.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/shared/Sidebar.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/shared/Sidebar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/BlogLikes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/BlogRating.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/BlogViews.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/ContactUs.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/RecipeLikes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/RecipeRating.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/RecipeViews.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035516_create_table_recipe_rating.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035528_create_table_recipe_likes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035541_create_table_recipe_views.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035556_create_table_blog_rating.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035606_create_table_blog_views.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_035615_create_table_blog_likes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_041514_create_table_contact_us.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/store/index.js" afterPath="$PROJECT_DIR$/resources/js/admin/store/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helper.php" afterPath="$PROJECT_DIR$/app/helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/CompanyDetail.php" afterPath="$PROJECT_DIR$/app/models/CompanyDetail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_08_09_071209_create_company_detail_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_08_09_071209_create_company_detail_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/company_detail/CompanyDetail.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/company_detail/CompanyDetail.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path=".idea/vcs.xml" />
@@ -21,18 +34,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="78" column="63" lean-forward="false" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -42,6 +44,7 @@
       <find>Uuid</find>
       <find>blogTags</find>
       <find>updateBlog</find>
+      <find>\&lt;\?php\n\nuse Illuminate\\Support\\Facades\\Mail\;\nuse App\\Mail\\CommonEmail\;\nuse Illuminate\\Support\\Facades\\Storage\;\nuse App\\User\;\nuse App\\Models\\UserSubscriptions\;\nuse App\\Models\\UsersArtistCategory\;\nuse App\\Models\\Arts\;\nuse App\\Models\\ArtsCategories\;\n\n\n\/\/Common Email Send Function\nif \(\! function_exists\(\'emailSend\'\)\) \{\n    function emailSend\(\$view\,\$email\,\$data\) \{\n        if \(view\(\)\-\&gt;exists\(\'emails\.\'\.\$view\)\) \{\n            \$data\[\'view\'\] \= \$view\;\n            return Mail\:\:to\(\$email\) \n                \-\&gt;send\(new CommonEmail\(\$data\)\)\;\n        \}else\{\n            return false\;\n        \}\n    \}\n\}\n\n\/\/get Unique uuid\nif \(\! function_exists\(\'getIPAddress\'\)\) \{\n    function getIPAddress\(\)\{\n        \/\/whether ip is from the share internet\n        if\(\!emptyempty\(\$_SERVER\[\'HTTP_CLIENT_IP\'\]\)\) \{\n            \$ip \= \$_SERVER\[\'HTTP_CLIENT_IP\'\]\;\n        \}\n        \/\/whether ip is from the proxy\n        elseif \(\!emptyempty\(\$_SERVER\[\'HTTP_X_FORWARDED_FOR\'\]\)\) \{\n            \$ip \= \$_SERVER\[\'HTTP_X_FORWARDED_FOR\'\]\;\n        \}\n       \/\/whether ip is from the remote address\n        else\{\n            \$ip \= \$_SERVER\[\'REMOTE_ADDR\'\]\;\n        \}\n        return \$ip\; \n       \$ip \= getIPAddress\(\)\;\n    \}\n\}\n\n\n\n\/\/get Unique uuid\nif \(\! function_exists\(\'gen_uuid\'\)\) \{\n    function gen_uuid\(\)\{\n        return sprintf\(\'\%04x\%04x_\%04x_\%04x_\%04x_\%04x\%04x\%04x\'\,\n            mt_rand\(0\, 0xffff\)\, mt_rand\(0\, 0xffff\)\,\n            mt_rand\(0\, 0xffff\)\,\n            mt_rand\(0\, 0x0fff\) \| 0x4000\,\n            mt_rand\(0\, 0x3fff\) \| 0x8000\,\n            mt_rand\(0\, 0xffff\)\, mt_rand\(0\, 0xffff\)\, mt_rand\(0\, 0xffff\)\n        \)\;\n    \}\n\}\n\n\n\/\/Function for slug creator\nif \(\! function_exists\(\'slugCreator\'\)\) \{\n    function slugCreator\(\$name\) \{\n        \$name \= strtolower\(\$name\)\;\n        \$name \= preg_replace\(\'\/\\s\+\/\'\, \'\-\'\, \$name\)\;\n        \$name \= preg_replace\(\'\/\[\^A\-Za\-z0\-9\\\-\]\/\'\, \'\'\, \$name\)\;\n        return \$name\;\n    \}\n\}\n\n\/\/Create laravel errors array\nif \(\! function_exists\(\'errorArrayCreate\'\)\) \{\n    function errorArrayCreate\(\$obj\) \{\n        try\{\n            \$obj \= \$obj\-\&gt;toArray\(\)\;\n            \$errors \= array\(\)\;\n            if\( is_array\(\$obj\) \&amp;\&amp; \!empty\(\$obj\)\)\{\n                foreach\(\$obj as \$k \=\&gt; \$v\)\{\n                    if\( count\(\$v\) \&gt; 1 \)\{\n                        \$err \= \'\'\;\n                        foreach \(\$v as \$value\) \{\n                            \$err\.\= \$value\.\' \&amp;\&amp; \'\;\n                        \}\n                        trim\(\$err\,\'\&amp;\&amp;\'\)\;\n                        \$errors\[\$k\] \= \$err\;\n                    \}else\{\n                        \$errors\[\$k\] \= \$v\[0\]\;\n                    \}\n\n                \}\n            \}\n            return \$errors\;\n        \}\n        catch\(\\Exception \$e\)\{\n            throw \$e\;\n        \}\n    \}\n\} \n\n\n</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -50,23 +53,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/webpack.mix.js" />
-        <option value="$PROJECT_DIR$/resources/views/emails/reset-password-admin.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/app/helper.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_03_11_123559_create_recipes_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_03_11_123707_create_recipe_ingredients_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_03_11_123729_create_recipe_nutritions_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_03_11_124158_create_recipe_steps_table.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/CategoriesController.php" />
-        <option value="$PROJECT_DIR$/app/Rules/MatchOldPassword.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ClientsController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthorsController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProfileController.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/admin-app.blade.php" />
-        <option value="$PROJECT_DIR$/public/env.envfile" />
-        <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/database/migrations/2020_07_30_102223_create_tags_table.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/HomeController.php" />
@@ -100,7 +86,24 @@
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/BlogsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/RecipeController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035556_create_table_blog_rating.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035516_create_table_recipe_rating.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035528_create_table_recipe_likes.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035541_create_table_recipe_views.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035606_create_table_blog_views.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_035615_create_table_blog_likes.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_12_041514_create_table_contact_us.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_08_09_071209_create_company_detail_table.php" />
+        <option value="$PROJECT_DIR$/app/models/CompanyDetail.php" />
+        <option value="$PROJECT_DIR$/resources/js/admin/components/protected/company_detail/CompanyDetail.vue" />
+        <option value="$PROJECT_DIR$/app/models/BlogLikes.php" />
+        <option value="$PROJECT_DIR$/app/models/BlogRating.php" />
+        <option value="$PROJECT_DIR$/app/models/RecipeLikes.php" />
+        <option value="$PROJECT_DIR$/app/helper.php" />
+        <option value="$PROJECT_DIR$/app/models/RecipeRating.php" />
+        <option value="$PROJECT_DIR$/app/models/BlogViews.php" />
+        <option value="$PROJECT_DIR$/app/models/RecipeViews.php" />
+        <option value="$PROJECT_DIR$/app/models/ContactUs.php" />
       </list>
     </option>
   </component>
@@ -117,10 +120,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="59" />
+    <option name="y" value="25" />
+    <option name="width" value="1861" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -137,6 +140,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -159,7 +163,39 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laravel-vuejs-recipe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -206,7 +242,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,6 +263,124 @@
       <recent name="$PROJECT_DIR$/resources/js/frontend" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Api/Admin" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/App.vue</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/components/public/Login.vue</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/components/shared/Sidebar.vue</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/router.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/store/actions/commonActions.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/admin/store/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/js/app-admin.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -344,7 +497,10 @@
       <workItem from="1597031733837" duration="642000" />
       <workItem from="1597057959741" duration="1793000" />
       <workItem from="1597069119590" duration="113000" />
-      <workItem from="1597154858446" duration="1239000" />
+      <workItem from="1597136692108" duration="624000" />
+      <workItem from="1597137798414" duration="13000" />
+      <workItem from="1597204158166" duration="6000" />
+      <workItem from="1597204170328" duration="4112000" />
     </task>
     <task id="LOCAL-00001" summary="fsdf">
       <created>1583932373061</created>
@@ -469,30 +625,29 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94075000" />
+    <option name="totallyTimeSpent" value="98895000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="59" y="25" width="1861" height="1055" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22012103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27162534" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5041322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6666667" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6666667" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47863248" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2588997" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -552,120 +707,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProfileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="87" column="7" lean-forward="true" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin-index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin-app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="28" column="56" lean-forward="true" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/env.envfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="32" column="11" lean-forward="false" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/RecipeSteps.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthorsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="34" column="23" lean-forward="true" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/RecipeNutritions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="1" lean-forward="false" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_07_30_102223_create_tags_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_043343_create_blog_categories_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="22" column="11" lean-forward="true" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_043903_create_recipe_tags_selected_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_043510_create_shop_products_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_045212_create_blog_tags_table.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_045108_create_blog_tags_selected_table.php" />
     <entry file="file://$PROJECT_DIR$/app/models/RecipeImages.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -764,20 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_03_11_123559_create_recipes_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_043402_create_blogs_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="22" column="55" lean-forward="false" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -825,13 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Blogs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="27" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -885,11 +905,191 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_03_11_123559_create_recipes_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="78" column="63" lean-forward="false" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
+        <state relative-caret-position="234">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_07_043402_create_blogs_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="73" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035615_create_table_blog_likes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="73" lean-forward="false" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035606_create_table_blog_views.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="73" lean-forward="false" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035556_create_table_blog_rating.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="15" column="67" lean-forward="true" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035541_create_table_recipe_views.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="73" lean-forward="false" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035516_create_table_recipe_rating.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="17" column="41" lean-forward="true" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_035528_create_table_recipe_likes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="16" column="73" lean-forward="false" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_09_071209_create_company_detail_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_08_12_041514_create_table_contact_us.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/admin/components/protected/company_detail/CompanyDetail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="304" column="76" lean-forward="false" selection-start-line="304" selection-start-column="76" selection-end-line="304" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/CompanyDetail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#7#43#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Blogs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ContactUs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/RecipeLikes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/RecipeRating.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/RecipeViews.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/BlogLikes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/BlogRating.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/BlogViews.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

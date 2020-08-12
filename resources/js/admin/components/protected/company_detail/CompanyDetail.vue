@@ -54,7 +54,7 @@
                         </div> 
                         <p class="text-danger validation_errors" v-if="errorsList.image">{{ errorsList.image }} </p>
                         <div class="row"> 
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Company Name</label>
                                     <input 
@@ -66,7 +66,7 @@
                                         <p class="text-danger validation_errors" v-if="errorsList.company_name">{{ errorsList.company_name }} </p>
                                 </div>
                             </div>
-                             <div class="col-sm-6">
+                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Company Contact</label>
                                     <input 
@@ -76,6 +76,18 @@
                                         class="form-control"  
                                         placeholder="Enter company contact...">
                                         <p class="text-danger validation_errors" v-if="errorsList.company_contact">{{ errorsList.company_contact }} </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Company Mobile</label>
+                                    <input
+                                        type="text"
+                                        name="company_mobile"
+                                        v-model="editData.company_mobile"
+                                        class="form-control"
+                                        placeholder="Enter company mobile...">
+                                        <p class="text-danger validation_errors" v-if="errorsList.company_mobile">{{ errorsList.company_mobile }} </p>
                                 </div>
                             </div>
                         </div>  
@@ -268,7 +280,33 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.telegram_url">{{ errorsList.telegram_url }} </p>
                                 </div> 
                             </div>  
-                        </div>   
+                        </div>
+                        <div class="row">
+                               <div class="col-sm-6">
+                                  <div class="form-group">
+                                      <label>Map Latitude</label>
+                                      <input
+                                          type="text"
+                                          name="latitude"
+                                          v-model="editData.latitude"
+                                          class="form-control"
+                                          placeholder="Enter Latitude..">
+                                      <p class="text-danger validation_errors" v-if="errorsList.latitude">{{ errorsList.latitude }} </p>
+                                  </div>
+                              </div>
+                                <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label>Map Longitude</label>
+                                          <input
+                                              type="text"
+                                              name="longitude"
+                                              v-model="editData.longitude"
+                                              class="form-control"
+                                              placeholder="Enter Longitude..">
+                                          <p class="text-danger validation_errors" v-if="errorsList.longitude">{{ errorsList.longitude }} </p>
+                                      </div>
+                                  </div>
+                        </div>
                          <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">

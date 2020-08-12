@@ -17,6 +17,7 @@ class CreateCompanyDetailTable extends Migration
             $table->bigIncrements('id');
             $table->string('company_name',50)->nullable();
             $table->string('company_contact',50)->nullable();
+            $table->string('company_mobile',50)->nullable();
             $table->string('company_email',100)->nullable();
             $table->string('company_logo',256)->nullable();
             $table->string('address_line_one',100)->nullable();
@@ -33,6 +34,8 @@ class CreateCompanyDetailTable extends Migration
             $table->string('instagram_url',100)->nullable();
             $table->string('pinterest_url',100)->nullable();
             $table->string('telegram_url',100)->nullable();
+            $table->string('latitude',100)->nullable();
+            $table->string('longitude',100)->nullable();
             $table->longText('about')->nullable();
             $table->timestamps();
         });
