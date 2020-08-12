@@ -28,6 +28,8 @@ import BlogByTag from './components/public/BlogByTag';
 import BlogByCategories from './components/public/BlogByCategories';
 import BlogDetail from './components/public/BlogDetail';
 
+import ResetPassword from './components/public/ResetPassword';
+
 
 //alert(config.URL_PREFIX_ADMIN)
 Vue.use(VueRouter)
@@ -37,6 +39,7 @@ const router = new VueRouter({
     linkExactActiveClass: "active",
     routes: [
         { name: "home", path: "/home", component: Home },
+        { name: "resetPassword", path: "/reset-password", component: ResetPassword },
         { name: "about-us", path: "/about-us", component: About },
         { name: "contact-us", path: "/contact-us", component: ContactUs },
         { name: "recipe-categories", path: "/categories", component: Categories },

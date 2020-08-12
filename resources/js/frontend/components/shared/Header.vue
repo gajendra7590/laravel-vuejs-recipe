@@ -1,5 +1,136 @@
 <template>
   <header class="header-one">
+    <!-- Search Box Start Here -->
+    <div id="search" class="search-wrap">
+        <button type="button" class="close">×</button>
+        <form class="search-form">
+            <input type="search" id="ooooo" value="" placeholder="Type here........" />
+            <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
+        </form>
+    </div>
+    <!-- Search Box End Here -->
+    <!-- Modal Start-->
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog"> 
+
+              <div class="modal-content" v-show="modelOpen1">
+                  <div class="modal-header">
+                      <div class="title-default-bold mb-none">Login</div>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="loginForm" class="login-form" @submit.prevent="loginSubmit">
+                          <input class="main-input-box" 
+                                v-model="login.email" 
+                                name="email"
+                                type="text" 
+                                autocomplete="off" 
+                                placeholder="Your email address.." />
+                                <span class="text-danger" v-if="loginErrors.email">{{ loginErrors.email }}</span>
+                          <input class="main-input-box" 
+                                v-model="login.password" name="password" 
+                                type="password" 
+                                autocomplete="off"
+                                placeholder="Your password.." />
+                                <span class="text-danger" v-if="loginErrors.password">{{ loginErrors.password }}</span>
+                          <div class="inline-box mb-5 mt-4">
+                              <div class="checkbox checkbox-primary">
+                                  <input v-model="login.rememberMe" id="modal-checkbox" type="checkbox">
+                                  <label for="modal-checkbox">Remember Me</label>
+                              </div>
+                              <label class="lost-password">
+                                <a href="javascript:void(0);" @click.prevent="forgotModal">Lost your password?</a>
+                              </label>
+                          </div>
+                          <div class="inline-box mb-5 mt-4">
+                              <button class="btn-fill" type="submit" value="Login">Login</button>
+                              <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register"><i class="fas fa-user"></i>Register Here!</a>
+                          </div>
+                      </form> 
+                  </div>
+              </div>
+
+              <div class="modal-content" v-show="modelOpen2">
+                  <div class="modal-header">
+                      <div class="title-default-bold mb-none">Forgot Your Password</div>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="forgotForm" class="login-form" @submit.prevent="forgotSubmit">
+                          <input class="main-input-box" 
+                                v-model="forgot.email" 
+                                name="email" type="text" 
+                                autocomplete="off" 
+                                placeholder="Enter Your Email Address.." />
+                                <span class="text-danger" v-if="forgotErrors.email">{{ forgotErrors.email }}</span>
+                          <div class="inline-box mb-5 mt-4"> 
+                              <button class="btn-fill btn-block" type="submit" value="Login">Reset Password</button>
+                          </div> 
+                          <div class="inline-box mb-5 mt-4"> 
+                              <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register"><i class="fas fa-user"></i>Login Here!</a>
+                              <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register"><i class="fas fa-user"></i>Register Here!</a>
+                          </div>
+                      </form> 
+                  </div>
+              </div>
+
+              <div class="modal-content" v-show="modelOpen3">
+                  <div class="modal-header">
+                      <div class="title-default-bold mb-none">Create Your Account</div>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="regiterForm" class="login-form" @submit.prevent="registerSubmit">
+                          <input class="main-input-box" 
+                                  v-model="register.first_name" 
+                                  name="first_name" 
+                                  autocomplete="off" 
+                                  type="text" placeholder="Your First Name.." />
+                                  <span class="text-danger" v-if="regiterErrors.first_name">{{ regiterErrors.first_name }}</span>
+                          <input class="main-input-box"
+                                  v-model="register.last_name" 
+                                  name="last_name" 
+                                  autocomplete="off" 
+                                  type="tex" placeholder="Your Last Name.." />
+                                  <span class="text-danger" v-if="regiterErrors.last_name">{{ regiterErrors.last_name }}</span>
+                          <input class="main-input-box" 
+                                  v-model="register.email" 
+                                  name="email" 
+                                  autocomplete="off" 
+                                  type="text" 
+                                  placeholder="Your Email.." />
+                                  <span class="text-danger" v-if="regiterErrors.email">{{ regiterErrors.email }}</span>
+                          <input class="main-input-box" 
+                                  v-model="register.password" 
+                                  name="password" 
+                                  autocomplete="off" 
+                                  type="password" 
+                                  placeholder="Choose Your Password" />
+                                  <span class="text-danger" v-if="regiterErrors.password">{{ regiterErrors.password }}</span>
+                            <div class="inline-box mb-5 mt-4">  
+                            <div class="radio checkbox-primary">
+                                  <span class="account-type-span"> Account Type : </span>
+                                  <input name="user_role" v-model="register.user_role" value="author" id="modal-checkbox1" type="radio">
+                                  <label for="modal-checkbox1">Recipe Author</label> 
+                                  <input name="user_role" v-model="register.user_role" value="user" id="modal-checkbox2" type="radio">
+                                  <label for="modal-checkbox2">Recipe Lover</label> 
+                              </div>        
+                              <span class="text-danger" v-if="regiterErrors.user_role">{{ regiterErrors.user_role }}</span>                      
+                            </div>
+                          <div class="inline-box mb-5 mt-4"> 
+                              <button class="btn-fill btn-block" type="submit">Create Account</button>
+                          </div> 
+                          <div class="inline-box mb-5 mt-4"> 
+                              <a href="javascript:void(0);" @click.prevent="forgotModal" class="btn-register"><i class="fas fa-user"></i>Forgot Password Here!</a>
+                              <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register"><i class="fas fa-user"></i>Login Here!</a>
+                          </div>
+                      </form> 
+                  </div>
+              </div>  
+
+        </div>
+    </div>
+    <!-- Modal End-->
     <!-- Mobile Responsive -->
     <div id="header-main-menu" class="header-main-menu header-sticky">
       <div class="container">
@@ -134,9 +265,8 @@
                 <li>
                   <button
                     type="button"
-                    class="login-btn"
-                    data-toggle="modal"
-                    data-target="#myModal"
+                    class="login-btn" 
+                    @click.prevent="loginModal"
                   >
                     <i class="flaticon-profile"></i>Login
                   </button>
@@ -316,10 +446,121 @@
 
 <script>
 import { mapState } from "vuex";
+import $ from 'jquery';
+
 export default {
   name: "headercomponent",
   data() {
-    return {}
+    return {
+      loader : null,
+      loginErrors : {},
+      forgotErrors : {},
+      regiterErrors : {},
+      login : {
+        email : '',
+        passwrod : '',
+        rememberMe : ''
+      },
+      forgot : {
+        email : ''
+      },
+      register : {
+        first_name : '',
+        last_name : '',
+        email : '',
+        user_role : 'author',
+        password : ''
+      },
+      modelOpen1 : true,
+      modelOpen2 : false,
+      modelOpen3 : false
+    }
+  },
+  methods :{ 
+    loginSubmit(){
+        let _this = this; 
+        _this.loginErrors = {};
+        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.$store.dispatch('login',_this.login).then(function(result){
+          _this.loader.hide();
+          if( typeof(result.status)!='undefined' && (result.status == false)){
+            _this.loginErrors = result.errors;
+            _this.$toastr.e('ERROR','Please Check Error Log');
+          }else if( typeof(result.status)!='undefined' && (result.status == true)){
+              localStorage.setItem('USER_SESSION',JSON.stringify({
+                  'userToken' : result.token.access_token,
+                  'userRole' : result.role,
+                  'currentUser' : result.current_user
+              }));
+              _this.$toastr.s('SUCCESS','You have been loggin successfully');  
+              _this.resetFunction();
+              setTimeout(function(){
+                window.location.href='/';
+              },500); 
+          } 
+        }).catch(function(error){
+          console.log( error );
+        });  
+    },
+    forgotSubmit(){
+        let _this = this; 
+        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.forgotErrors = {};
+        _this.$store.dispatch('forgotPassword',_this.forgot).then(function(result){
+          _this.loader.hide();
+          if( typeof(result.status)!='undefined' && (result.status == false)){
+            _this.forgotErrors = result.errors;
+            _this.$toastr.e('ERROR','Please Check Error Log');
+          }else if( typeof(result.status)!='undefined' && (result.status == true)){                
+              _this.$toastr.s('SUCCESS','Reset password link sent on your email please check...');  
+               _this.resetFunction();
+          } 
+        }).catch(function(error){
+          console.log( error );
+        });   
+    },
+    registerSubmit(){
+        let _this = this; 
+        _this.loader = _this.$loading.show({zIndex:9999999,color:'white'});
+        _this.forgotErrors = {};
+        _this.$store.dispatch('register',_this.register).then(function(result){
+          _this.loader.hide();
+          if( typeof(result.status)!='undefined' && (result.status == false)){
+            _this.regiterErrors = result.errors;
+            _this.$toastr.e('ERROR','Please Check Error Log');
+          }else if( typeof(result.status)!='undefined' && (result.status == true)){                
+              _this.$toastr.s('SUCCESS','You have been register successfully,please check email to verify account');  
+              _this.resetFunction();
+          } 
+        }).catch(function(error){
+          console.log( error );
+        });   
+    }, 
+    resetFunction(){
+        this.loginErrors = {};
+        this.forgotErrors = {};
+        this.regiterErrors = {};
+        this.login  = { email : '',passwrod : '',rememberMe : ''}; 
+        this.forgot  = { email : ''}; 
+        this.register  = { first_name : '', last_name : '',  email : '',  user_role : 'author',  password : '' }
+    },
+    loginModal(){ 
+      this.resetFunction();  //Reset All Forms    
+      $('#loginModal').modal('show');
+      this.modelOpen1  = true;
+      this.modelOpen2  =  false;
+      this.modelOpen3 = false;
+    },    
+    forgotModal(){ 
+      this.modelOpen1  = false;
+      this.modelOpen2  =  true;
+      this.modelOpen3 = false;      
+    },
+    registerModal(){
+      this.modelOpen1  = false;
+      this.modelOpen2  =  false;
+      this.modelOpen3 = true;      
+    },
   },
   created(){ 
   },
@@ -335,4 +576,11 @@ export default {
   padding: 3px 8px;
   border-radius: 0px 9px;
 }
+.account-type-span{ 
+    background: #f54a52;
+    color: #fff;
+    padding: 2px 6px;
+    margin-right: 9px;
+    border-radius: 5px; 
+} 
 </style>

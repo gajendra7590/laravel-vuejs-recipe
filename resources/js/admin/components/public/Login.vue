@@ -84,8 +84,8 @@ export default {
              _this.$toastr.s("You have been logged in", "SUCCESS!!");             
              localStorage.setItem('ADMIN_SESSION',JSON.stringify({
                  'token' : res.token.access_token,
-                 'role' : res.role,
-                 'current_user' : res.token.access_token
+                 'adminRole' : res.role,
+                 'adminUser' : res.current_user
              }));  
              setTimeout(function(){
                window.location.href='/admin/dashboard';
