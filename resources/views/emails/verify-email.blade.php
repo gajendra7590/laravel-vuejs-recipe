@@ -1,4 +1,5 @@
 @extends('emails.layout');
+
 @section('content')
     <tr>
         <td style="padding-left:20px; padding-right:20px; padding-top:30px; padding-bottom:5px; border-radius: 5px 5px 0 0;"
@@ -31,7 +32,7 @@
                                                 valign="middle" height="45" width="164">
                                                 <a href="{{ URL::to('/verify-email?token='.(isset($data['token'])?$data['token']:'') ) }}" target="_blank"
                                                    style="display: block; font-family: 'Montserrat', sans-serif !important; border-radius: 4px; font-size: 14px; line-height: 14px; color: #fff; text-decoration: none; font-weight: 500;">
-                                                    <span>Verify your account</span>
+                                                    <span>Verify your email</span>
                                                 </a>
                                             </td>
                                         </tr>

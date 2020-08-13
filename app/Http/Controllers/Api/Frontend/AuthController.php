@@ -130,7 +130,7 @@ class AuthController extends Controller
             $userModel = $user->create($post);
             if($userModel){
                 User::find($userModel->id)->assignRole($role);
-                $email = emailSend('verify-account',$userModel->email,[
+                $email = emailSend('verify-email',$userModel->email,[
                     'subject' => 'Recipe - Verify Your Account',
                     'display_name' => ucwords($userModel->display_name),
                     'email' => $userModel->email,
@@ -204,6 +204,61 @@ class AuthController extends Controller
         }
     }
 
+    public function verifyEmail(Request $request){
+        $post = $request->all();
+        $validator = Validator::make($request->all(),[
+            'token' => ['required']
+        ]);
+        if($validator->fails()){
+            $allMessages = $validator->messages();
+            $result = errorArrayCreate($allMessages);
+            return response()->json([
+                'status'=>false,
+                'message'=>'Please correct form values',
+                'errors' => $result
+            ]);
+        }else{ //If Validation success
+            $model = User::where(['reset_token' => $post['token']])->get()->first();
+            if(!$model){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid token',
+                    'errors' => '',
+                ]);
+            } else {
+                $model->update(['status' => '1','reset_token' => null,'reset_token_at' => null,'email_verified_at' => date('Y-m-d h:i:s')]);
+                //Auto Login Code
+                $tokenResult = $model->createToken('Personal Access Token');
+                $token = $tokenResult->token;
+                if ($request->remember_me)
+                    $token->expires_at = Carbon::now()->addWeeks(1);
+                $token->save();
+                return response()->json([
+                    'status'=>true,
+                    'message'=>'You have logged in successfully',
+                    'current_user' => [
+                        'id' => $token->id,
+                        'first_name' => $model->first_name,
+                        'last_name' => $model->last_name,
+                        'display_name' => $model->display_name,
+                        'email' => $model->email,
+                        'photo' => $model->photo,
+                        'role' => $model->userRoleName,
+                    ],
+                    'role' => $model->userRoleName,
+                    'token'=>[
+                        'access_token' => $tokenResult->accessToken,
+                        'token_type' => 'Bearer',
+                        'expires_at' => Carbon::parse(
+                            $tokenResult->token->expires_at
+                        )->toDateTimeString()
+                    ],
+                ]);
+            }
+
+        }
+    }
+
     public function verifyTokenStatus(Request $request){
         $post = $request->all();
         $validator = Validator::make($request->all(),[
@@ -262,7 +317,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            $userModel = User::role(['admin'])->where([
+            $userModel = User::role(['author','user'])->where([
                 'id' => $model->id
             ])->get()->first();
 

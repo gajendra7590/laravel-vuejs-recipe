@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('register', 'AuthController@register');
         Route::post('forgot-password', 'AuthController@sendResetPasswordLink');
         Route::post('verify-token', 'AuthController@verifyTokenStatus');
+        Route::post('verifyEmail', 'AuthController@verifyEmail');
         Route::post('forgot-password-save', 'AuthController@ResetPasswordSetNew');
         Route::post('signout', 'AuthController@logout')->middleware('auth:api');
         Route::post('signoutAll', 'AuthController@logoutAll')->middleware('auth:api');
@@ -96,7 +97,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('forgot-password-save', 'AuthController@ResetPasswordSetNew');
         Route::post('resendAccountVerifyLink', 'AuthController@sendResetPasswordLink');
         Route::post('verifyTokenStatus', 'AuthController@verifyTokenStatus');
-
         //Admin All Routes Need Authentication
         Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
             //Admin Profile & Auth

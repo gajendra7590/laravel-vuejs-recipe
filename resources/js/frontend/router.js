@@ -29,12 +29,14 @@ import BlogByCategories from './components/public/BlogByCategories';
 import BlogDetail from './components/public/BlogDetail';
 
 import ResetPassword from './components/public/ResetPassword';
+import VerifyEmail from './components/public/VerifyEmail';
 
 //Account
-import RecipeForm from './components/protected/RecipeForm';
+import MyAccount from './components/protected/MyAccount';
 import Profile from './components/protected/Profile';
 import ChangePassword from './components/protected/ChangePassword';
-
+import RecipeForm from './components/protected/RecipeForm';
+import RecipeList from './components/protected/RecipeList';
 //alert(config.URL_PREFIX_ADMIN)
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -44,6 +46,7 @@ const router = new VueRouter({
     routes: [
         { name: "home", path: "/home", component: Home },
         { name: "resetPassword", path: "/reset-password", component: ResetPassword },
+        { name: "verifyEmail", path: "/verify-email", component: VerifyEmail },
         { name: "about-us", path: "/about-us", component: About },
         { name: "contact-us", path: "/contact-us", component: ContactUs },
         { name: "recipe-categories", path: "/categories", component: Categories },
@@ -61,10 +64,42 @@ const router = new VueRouter({
         { name: "blogsByCategories", path: "/blogs/category/:slug", component: BlogByCategories },
         { name: "blogsDetail", path: "/blogs/:slug", component: BlogDetail },
         //Account Pages
-        { name: "userProfile", path: "/account/profile", component: Profile },
-        { name: "changePassword", path: "/account/change-password", component: ChangePassword },
-        { name: "addRecpe", path: "/account/cerate-recipe", component: RecipeForm },
-        { name: "editRecpe", path: "/account/edit-recipe/:slug", component: RecipeForm },
+        {
+            name: "myAccount",
+            path: "/my-account",
+            component: MyAccount,
+            children: [{
+                    name: 'profile',
+                    path: 'profile',
+                    component: Profile,
+                    meta: { requireAuth: true, role: 'any' }
+                },
+                {
+                    name: 'change-password',
+                    path: 'change-password',
+                    component: ChangePassword,
+                    meta: { requireAuth: true, role: 'any' }
+                },
+                {
+                    name: 'recipes-list',
+                    path: 'recipes-list',
+                    component: RecipeList,
+                    meta: { requireAuth: true, role: 'author' }
+                },
+                {
+                    name: 'create-recipe',
+                    path: 'create-recipe',
+                    component: RecipeForm,
+                    meta: { requireAuth: true, role: 'author' }
+                },
+                {
+                    name: 'edit-recipe',
+                    path: 'edit-recipe/:slug',
+                    component: RecipeForm,
+                    meta: { requireAuth: true, role: 'author' }
+                }
+            ]
+        },
         //404 no route redirect   
         { name: "404", path: "**", redirect: '/home' }
     ],

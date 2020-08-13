@@ -2,132 +2,179 @@
   <header class="header-one">
     <!-- Search Box Start Here -->
     <div id="search" class="search-wrap">
-        <button type="button" class="close">×</button>
-        <form class="search-form">
-            <input type="search" id="ooooo" value="" placeholder="Type here........" />
-            <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
-        </form>
+      <button type="button" class="close">×</button>
+      <form class="search-form">
+        <input type="search" id="ooooo" value placeholder="Type here........" />
+        <button type="submit" class="search-btn">
+          <i class="flaticon-search"></i>
+        </button>
+      </form>
     </div>
     <!-- Search Box End Here -->
-    <!-- Modal Start--> 
+    <!-- Modal Start-->
     <div class="modal fade" id="loginModal" role="dialog" v-if="!userDetail.id">
-        <div class="modal-dialog">  
-              <div class="modal-content" v-show="modelOpen1">
-                  <div class="modal-header">
-                      <div class="title-default-bold mb-none">Login</div>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="loginForm" class="login-form" @submit.prevent="loginSubmit">
-                          <input class="main-input-box" 
-                                v-model="login.email" 
-                                name="email"
-                                type="text" 
-                                autocomplete="off" 
-                                placeholder="Your email address.." />
-                                <span class="text-danger" v-if="loginErrors.email">{{ loginErrors.email }}</span>
-                          <input class="main-input-box" 
-                                v-model="login.password" name="password" 
-                                type="password" 
-                                autocomplete="off"
-                                placeholder="Your password.." />
-                                <span class="text-danger" v-if="loginErrors.password">{{ loginErrors.password }}</span>
-                          <div class="inline-box mb-5 mt-4">
-                              <div class="checkbox checkbox-primary">
-                                  <input v-model="login.rememberMe" id="modal-checkbox" type="checkbox">
-                                  <label for="modal-checkbox">Remember Me</label>
-                              </div>
-                              <label class="lost-password">
-                                <a href="javascript:void(0);" @click.prevent="forgotModal">Lost your password?</a>
-                              </label>
-                          </div>
-                          <div class="inline-box mb-5 mt-4">
-                              <button class="btn-fill" type="submit" value="Login">Login</button>
-                              <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register"><i class="fas fa-user"></i>Register Here!</a>
-                          </div>
-                      </form> 
-                  </div>
+      <div class="modal-dialog">
+        <div class="modal-content" v-show="modelOpen1">
+          <div class="modal-header">
+            <div class="title-default-bold mb-none">Login</div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="loginForm" class="login-form" @submit.prevent="loginSubmit">
+              <input
+                class="main-input-box"
+                v-model="login.email"
+                name="email"
+                type="text"
+                autocomplete="off"
+                placeholder="Your email address.."
+              />
+              <span class="text-danger" v-if="loginErrors.email">{{ loginErrors.email }}</span>
+              <input
+                class="main-input-box"
+                v-model="login.password"
+                name="password"
+                type="password"
+                autocomplete="off"
+                placeholder="Your password.."
+              />
+              <span class="text-danger" v-if="loginErrors.password">{{ loginErrors.password }}</span>
+              <div class="inline-box mb-5 mt-4">
+                <div class="checkbox checkbox-primary">
+                  <input v-model="login.rememberMe" id="modal-checkbox" type="checkbox" />
+                  <label for="modal-checkbox">Remember Me</label>
+                </div>
+                <label class="lost-password">
+                  <a href="javascript:void(0);" @click.prevent="forgotModal">Lost your password?</a>
+                </label>
               </div>
-
-              <div class="modal-content" v-show="modelOpen2">
-                  <div class="modal-header">
-                      <div class="title-default-bold mb-none">Forgot Your Password</div>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="forgotForm" class="login-form" @submit.prevent="forgotSubmit">
-                          <input class="main-input-box" 
-                                v-model="forgot.email" 
-                                name="email" type="text" 
-                                autocomplete="off" 
-                                placeholder="Enter Your Email Address.." />
-                                <span class="text-danger" v-if="forgotErrors.email">{{ forgotErrors.email }}</span>
-                          <div class="inline-box mb-5 mt-4"> 
-                              <button class="btn-fill btn-block" type="submit" value="Login">Reset Password</button>
-                          </div> 
-                          <div class="inline-box mb-5 mt-4"> 
-                              <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register"><i class="fas fa-user"></i>Login Here!</a>
-                              <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register"><i class="fas fa-user"></i>Register Here!</a>
-                          </div>
-                      </form> 
-                  </div>
+              <div class="inline-box mb-5 mt-4">
+                <button class="btn-fill" type="submit" value="Login">Login</button>
+                <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register">
+                  <i class="fas fa-user"></i>Register Here!
+                </a>
               </div>
-
-              <div class="modal-content" v-show="modelOpen3">
-                  <div class="modal-header">
-                      <div class="title-default-bold mb-none">Create Your Account</div>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="regiterForm" class="login-form" @submit.prevent="registerSubmit">
-                          <input class="main-input-box" 
-                                  v-model="register.first_name" 
-                                  name="first_name" 
-                                  autocomplete="off" 
-                                  type="text" placeholder="Your First Name.." />
-                                  <span class="text-danger" v-if="regiterErrors.first_name">{{ regiterErrors.first_name }}</span>
-                          <input class="main-input-box"
-                                  v-model="register.last_name" 
-                                  name="last_name" 
-                                  autocomplete="off" 
-                                  type="tex" placeholder="Your Last Name.." />
-                                  <span class="text-danger" v-if="regiterErrors.last_name">{{ regiterErrors.last_name }}</span>
-                          <input class="main-input-box" 
-                                  v-model="register.email" 
-                                  name="email" 
-                                  autocomplete="off" 
-                                  type="text" 
-                                  placeholder="Your Email.." />
-                                  <span class="text-danger" v-if="regiterErrors.email">{{ regiterErrors.email }}</span>
-                          <input class="main-input-box" 
-                                  v-model="register.password" 
-                                  name="password" 
-                                  autocomplete="off" 
-                                  type="password" 
-                                  placeholder="Choose Your Password" />
-                                  <span class="text-danger" v-if="regiterErrors.password">{{ regiterErrors.password }}</span>
-                            <div class="inline-box mb-5 mt-4">  
-                            <div class="radio checkbox-primary">
-                                  <span class="account-type-span"> Account Type : </span>
-                                  <input name="user_role" v-model="register.user_role" value="author" id="modal-checkbox1" type="radio">
-                                  <label for="modal-checkbox1">Recipe Author</label> 
-                                  <input name="user_role" v-model="register.user_role" value="user" id="modal-checkbox2" type="radio">
-                                  <label for="modal-checkbox2">Recipe Lover</label> 
-                              </div>        
-                              <span class="text-danger" v-if="regiterErrors.user_role">{{ regiterErrors.user_role }}</span>                      
-                            </div>
-                          <div class="inline-box mb-5 mt-4"> 
-                              <button class="btn-fill btn-block" type="submit">Create Account</button>
-                          </div> 
-                          <div class="inline-box mb-5 mt-4"> 
-                              <a href="javascript:void(0);" @click.prevent="forgotModal" class="btn-register"><i class="fas fa-user"></i>Forgot Password Here!</a>
-                              <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register"><i class="fas fa-user"></i>Login Here!</a>
-                          </div>
-                      </form> 
-                  </div>
-              </div>  
-
+            </form>
+          </div>
         </div>
+
+        <div class="modal-content" v-show="modelOpen2">
+          <div class="modal-header">
+            <div class="title-default-bold mb-none">Forgot Your Password</div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="forgotForm" class="login-form" @submit.prevent="forgotSubmit">
+              <input
+                class="main-input-box"
+                v-model="forgot.email"
+                name="email"
+                type="text"
+                autocomplete="off"
+                placeholder="Enter Your Email Address.."
+              />
+              <span class="text-danger" v-if="forgotErrors.email">{{ forgotErrors.email }}</span>
+              <div class="inline-box mb-5 mt-4">
+                <button class="btn-fill btn-block" type="submit" value="Login">Reset Password</button>
+              </div>
+              <div class="inline-box mb-5 mt-4">
+                <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register">
+                  <i class="fas fa-user"></i>Login Here!
+                </a>
+                <a href="javascript:void(0);" @click.prevent="registerModal" class="btn-register">
+                  <i class="fas fa-user"></i>Register Here!
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="modal-content" v-show="modelOpen3">
+          <div class="modal-header">
+            <div class="title-default-bold mb-none">Create Your Account</div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="regiterForm" class="login-form" @submit.prevent="registerSubmit">
+              <input
+                class="main-input-box"
+                v-model="register.first_name"
+                name="first_name"
+                autocomplete="off"
+                type="text"
+                placeholder="Your First Name.."
+              />
+              <span
+                class="text-danger"
+                v-if="regiterErrors.first_name"
+              >{{ regiterErrors.first_name }}</span>
+              <input
+                class="main-input-box"
+                v-model="register.last_name"
+                name="last_name"
+                autocomplete="off"
+                type="tex"
+                placeholder="Your Last Name.."
+              />
+              <span class="text-danger" v-if="regiterErrors.last_name">{{ regiterErrors.last_name }}</span>
+              <input
+                class="main-input-box"
+                v-model="register.email"
+                name="email"
+                autocomplete="off"
+                type="text"
+                placeholder="Your Email.."
+              />
+              <span class="text-danger" v-if="regiterErrors.email">{{ regiterErrors.email }}</span>
+              <input
+                class="main-input-box"
+                v-model="register.password"
+                name="password"
+                autocomplete="off"
+                type="password"
+                placeholder="Choose Your Password"
+              />
+              <span class="text-danger" v-if="regiterErrors.password">{{ regiterErrors.password }}</span>
+              <div class="inline-box mb-5 mt-4">
+                <div class="radio checkbox-primary">
+                  <span class="account-type-span">Account Type :</span>
+                  <input
+                    name="user_role"
+                    v-model="register.user_role"
+                    value="author"
+                    id="modal-checkbox1"
+                    type="radio"
+                  />
+                  <label for="modal-checkbox1">Recipe Author</label>
+                  <input
+                    name="user_role"
+                    v-model="register.user_role"
+                    value="user"
+                    id="modal-checkbox2"
+                    type="radio"
+                  />
+                  <label for="modal-checkbox2">Recipe Lover</label>
+                </div>
+                <span
+                  class="text-danger"
+                  v-if="regiterErrors.user_role"
+                >{{ regiterErrors.user_role }}</span>
+              </div>
+              <div class="inline-box mb-5 mt-4">
+                <button class="btn-fill btn-block" type="submit">Create Account</button>
+              </div>
+              <div class="inline-box mb-5 mt-4">
+                <a href="javascript:void(0);" @click.prevent="forgotModal" class="btn-register">
+                  <i class="fas fa-user"></i>Forgot Password Here!
+                </a>
+                <a href="javascript:void(0);" @click.prevent="loginModal" class="btn-register">
+                  <i class="fas fa-user"></i>Login Here!
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Modal End-->
     <!-- Mobile Responsive -->
@@ -135,17 +182,23 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-3 col-sm-4 col-4 possition-static">
-            <div class="site-logo-mobile">               
-              <router-link to="/" class="sticky-logo-light"> 
-                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-light.png'" alt="Recipe Logo" />
+            <div class="site-logo-mobile">
+              <router-link to="/" class="sticky-logo-light">
+                <img
+                  :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-light.png'"
+                  alt="Recipe Logo"
+                />
               </router-link>
               <router-link to="/" class="sticky-logo-dark">
-                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'" alt="Recipe Logo" />
+                <img
+                  :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'"
+                  alt="Recipe Logo"
+                />
               </router-link>
             </div>
             <nav class="site-nav">
               <ul id="site-menu" class="site-menu">
-                <li> 
+                <li>
                   <router-link to="/home">Home</router-link>
                 </li>
                 <li>
@@ -261,34 +314,24 @@
                     </div>
                   </div>
                 </li>
-                <li> 
+                <li>
                   <button
                     type="button"
-                    class="login-btn" 
+                    class="login-btn"
                     v-if="!userDetail.id"
-                    @click.prevent="loginModal">
-                    <i class="flaticon-profile"></i>Login 
-                  </button>                      
-                   <nav class="site-nav custom-site-nav" v-if="userDetail.id">
-                        <ul id="site-menu" class="site-menu"> 
-                          <i class="flaticon-profile"></i>
-                            <li><a href="#">{{ userDetail.display_name }}</a>
-                                <ul class="dropdown-menu-col-1">
-                                    <li>
-                                      <router-link :to="'/account/profile'">Profile</router-link>
-                                    </li>
-                                    <li>
-                                      <router-link :to="'/account/change-password'">Change Password</router-link>
-                                    </li>
-                                    <li>
-                                      <a href="javascript:void(0);" @click.prevent="userLogout">
-                                        Logout
-                                      </a>
-                                   </li>
-                                </ul>
-                            </li> 
-                        </ul>
-                    </nav> 
+                    @click.prevent="loginModal"
+                  >
+                    <i class="flaticon-profile"></i>Login
+                  </button>
+
+                  <router-link
+                    type="button"
+                    class="login-btn"
+                    v-if="userDetail.id"
+                    :to="'/my-account/profile'"
+                  >
+                    <i class="flaticon-profile"></i>My Account
+                  </router-link>
                 </li>
                 <li>
                   <router-link :to="'/account/cerate-recipe'" class="fill-btn">
@@ -312,50 +355,74 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 d-none d-lg-block">
-            <div class="nav-action-elements-layout2"> 
+            <div class="nav-action-elements-layout2">
               <ul class="nav-social">
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.youtube_url!='') )?companyDetail.youtube_url:'javascript:void(0);'" title="Youtube Channel">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.youtube_url!='') )?companyDetail.youtube_url:'javascript:void(0);'"
+                    title="Youtube Channel"
+                  >
                     <i class="fab fa-youtube"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.facebook_url!='') )?companyDetail.facebook_url:'javascript:void(0);'" title="Facebook">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.facebook_url!='') )?companyDetail.facebook_url:'javascript:void(0);'"
+                    title="Facebook"
+                  >
                     <i class="fab fa-facebook-f"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.twitter_url!='') )?companyDetail.twitter_url:'javascript:void(0);'" title="Twitter">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.twitter_url!='') )?companyDetail.twitter_url:'javascript:void(0);'"
+                    title="Twitter"
+                  >
                     <i class="fab fa-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.linkedin_url!='') )?companyDetail.linkedin_url:'javascript:void(0);'" title="Linkedin">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.linkedin_url!='') )?companyDetail.linkedin_url:'javascript:void(0);'"
+                    title="Linkedin"
+                  >
                     <i class="fab fa-linkedin-in"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.instagram_url!='') )?companyDetail.instagram_url:'javascript:void(0);'" title="Instagram">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.instagram_url!='') )?companyDetail.instagram_url:'javascript:void(0);'"
+                    title="Instagram"
+                  >
                     <i class="fab fa-instagram"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.pinterest_url!='') )?companyDetail.pinterest_url:'javascript:void(0);'" title="Pinterest">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.pinterest_url!='') )?companyDetail.pinterest_url:'javascript:void(0);'"
+                    title="Pinterest"
+                  >
                     <i class="fab fa-pinterest-p"></i>
                   </a>
                 </li>
                 <li>
-                  <a :href="( (companyDetail) && (companyDetail.telegram_url!='') )?companyDetail.telegram_url:'javascript:void(0);'" title="Telegram">
+                  <a
+                    :href="( (companyDetail) && (companyDetail.telegram_url!='') )?companyDetail.telegram_url:'javascript:void(0);'"
+                    title="Telegram"
+                  >
                     <i class="fab fa-telegram"></i>
                   </a>
-                </li> 
+                </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-4 d-none d-lg-block">
             <div class="site-logo-desktop">
               <router-link to="/" class="main-logo">
-                <img :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'" alt="Recipe Logo" />
+                <img
+                  :src="this.$store.state.ASSET_BASE_URL+'app/img/logo-dark.png'"
+                  alt="Recipe Logo"
+                />
               </router-link>
             </div>
           </div>
@@ -464,145 +531,180 @@
 
 <script>
 import { mapState } from "vuex";
-import $ from 'jquery';
+import $ from "jquery";
 
 export default {
   name: "headercomponent",
   data() {
     return {
-      loader : null,
-      loginErrors : {},
-      forgotErrors : {},
-      regiterErrors : {},
-      login : {
-        email : '',
-        passwrod : '',
-        rememberMe : ''
+      loader: null,
+      loginErrors: {},
+      forgotErrors: {},
+      regiterErrors: {},
+      login: {
+        email: "",
+        passwrod: "",
+        rememberMe: "",
       },
-      forgot : {
-        email : ''
+      forgot: {
+        email: "",
       },
-      register : {
-        first_name : '',
-        last_name : '',
-        email : '',
-        user_role : 'author',
-        password : ''
+      register: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        user_role: "author",
+        password: "",
       },
-      modelOpen1 : true,
-      modelOpen2 : false,
-      modelOpen3 : false
-    }
+      modelOpen1: true,
+      modelOpen2: false,
+      modelOpen3: false,
+    };
   },
-  methods :{ 
-    userLogout(){
-       let userDetail = this.$store.state.data.userDetail;
-       let _this = this;
-       _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
-       if(userDetail.id){ 
-            _this.$store.dispatch('signout').then(function(result){
-              if( typeof(result.status)!='undefined' && (result.status == true) ){
-                localStorage.removeItem('USER_SESSION');
-                window.location.href = '';
-              }
-            })
-           .catch(function(error){
-               console.log(error) 
-                _this.loader.hide();
-            }); 
-       }
-    },
-    loginSubmit(){
-        let _this = this; 
-        _this.loginErrors = {};
-        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
-        _this.$store.dispatch('login',_this.login).then(function(result){
+  methods: { 
+    loginSubmit() {
+      let _this = this;
+      _this.loginErrors = {};
+      _this.loader = _this.$loading.show({
+        zIndex: 9999999,
+        backgroundColor: "#dc3545",
+        color: "#fff",
+      });
+      _this.$store
+        .dispatch("login", _this.login)
+        .then(function (result) {
           _this.loader.hide();
-          if( typeof(result.status)!='undefined' && (result.status == false)){
+          if (typeof result.status != "undefined" && result.status == false) {
             _this.loginErrors = result.errors;
-            _this.$toastr.e('ERROR','Please Check Error Log');
-          }else if( typeof(result.status)!='undefined' && (result.status == true)){
-              localStorage.setItem('USER_SESSION',JSON.stringify({
-                  'userToken' : result.token.access_token,
-                  'userRole' : result.role,
-                  'currentUser' : result.current_user
-              }));
-              _this.$toastr.s('SUCCESS','You have been loggin successfully');  
-              _this.resetFunction();
-              setTimeout(function(){
-                window.location.href='/';
-              },500); 
-          } 
-        }).catch(function(error){
-          console.log( error );
-        });  
+            _this.$toastr.e("ERROR", "Please Check Error Log");
+          } else if (
+            typeof result.status != "undefined" &&
+            result.status == true
+          ) {
+            localStorage.setItem(
+              "USER_SESSION",
+              JSON.stringify({
+                userToken: result.token.access_token,
+                userRole: result.role,
+                currentUser: result.current_user,
+              })
+            );
+            _this.$toastr.s("SUCCESS", "You have been logged in successfully");
+            _this.resetFunction();
+            _this.loginModalHide();
+            setTimeout(function () {
+              window.location.href = "/";
+            }, 500);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
-    forgotSubmit(){
-        let _this = this; 
-        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
-        _this.forgotErrors = {};
-        _this.$store.dispatch('forgotPassword',_this.forgot).then(function(result){
+    forgotSubmit() {
+      let _this = this;
+      _this.loader = _this.$loading.show({
+        zIndex: 9999999,
+        backgroundColor: "#dc3545",
+        color: "#fff",
+      });
+      _this.forgotErrors = {};
+      _this.$store
+        .dispatch("forgotPassword", _this.forgot)
+        .then(function (result) {
           _this.loader.hide();
-          if( typeof(result.status)!='undefined' && (result.status == false)){
+          if (typeof result.status != "undefined" && result.status == false) {
             _this.forgotErrors = result.errors;
-            _this.$toastr.e('ERROR','Please Check Error Log');
-          }else if( typeof(result.status)!='undefined' && (result.status == true)){                
-              _this.$toastr.s('SUCCESS','Reset password link sent on your email please check...');  
-               _this.resetFunction();
-          } 
-        }).catch(function(error){
-          console.log( error );
-        });   
+            _this.$toastr.e("ERROR", "Please Check Error Log");
+          } else if (
+            typeof result.status != "undefined" &&
+            result.status == true
+          ) {
+            _this.$toastr.s(
+              "SUCCESS",
+              "Please check you email,we have sent reset link to you."
+            );
+            _this.resetFunction();
+            _this.loginModalHide();
+            window.location.href = "";
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
-    registerSubmit(){
-        let _this = this; 
-        _this.loader = _this.$loading.show({zIndex:9999999,backgroundColor: '#dc3545',color:'#fff'});
-        _this.forgotErrors = {};
-        _this.$store.dispatch('register',_this.register).then(function(result){
+    registerSubmit() {
+      let _this = this;
+      _this.loader = _this.$loading.show({
+        zIndex: 9999999,
+        backgroundColor: "#dc3545",
+        color: "#fff",
+      });
+      _this.forgotErrors = {};
+      _this.$store
+        .dispatch("register", _this.register)
+        .then(function (result) {
           _this.loader.hide();
-          if( typeof(result.status)!='undefined' && (result.status == false)){
+          if (typeof result.status != "undefined" && result.status == false) {
             _this.regiterErrors = result.errors;
-            _this.$toastr.e('ERROR','Please Check Error Log');
-          }else if( typeof(result.status)!='undefined' && (result.status == true)){                
-              _this.$toastr.s('SUCCESS','You have been register successfully,please check email to verify account');  
-              _this.resetFunction();
-          } 
-        }).catch(function(error){
-          console.log( error );
-        });   
-    }, 
-    resetFunction(){
-        this.loginErrors = {};
-        this.forgotErrors = {};
-        this.regiterErrors = {};
-        this.login  = { email : '',passwrod : '',rememberMe : ''}; 
-        this.forgot  = { email : ''}; 
-        this.register  = { first_name : '', last_name : '',  email : '',  user_role : 'author',  password : '' }
+            _this.$toastr.e("ERROR", "Please Check Error Log");
+          } else if (
+            typeof result.status != "undefined" &&
+            result.status == true
+          ) {
+            _this.$toastr.s(
+              "SUCCESS",
+              "You have been register successfully,please check email to verify account"
+            );
+            _this.resetFunction();
+            _this.loginModalHide();
+            window.location.href = "";
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
-    loginModal(){ 
-      this.resetFunction();  //Reset All Forms    
-      $('#loginModal').modal('show');
-      this.modelOpen1  = true;
-      this.modelOpen2  =  false;
+    resetFunction() {
+      this.loginErrors = {};
+      this.forgotErrors = {};
+      this.regiterErrors = {};
+      this.login = { email: "", passwrod: "", rememberMe: "" };
+      this.forgot = { email: "" };
+      this.register = {
+        first_name: "",
+        last_name: "",
+        email: "",
+        user_role: "author",
+        password: "",
+      };
+    },
+    loginModalHide() { 
+      $("#loginModal").modal("hide"); 
+    },
+    loginModal() {
+      this.resetFunction(); //Reset All Forms
+      $("#loginModal").modal("show");
+      this.modelOpen1 = true;
+      this.modelOpen2 = false;
       this.modelOpen3 = false;
-    },    
-    forgotModal(){ 
-      this.modelOpen1  = false;
-      this.modelOpen2  =  true;
-      this.modelOpen3 = false;      
     },
-    registerModal(){
-      this.modelOpen1  = false;
-      this.modelOpen2  =  false;
-      this.modelOpen3 = true;      
+    forgotModal() {
+      this.modelOpen1 = false;
+      this.modelOpen2 = true;
+      this.modelOpen3 = false;
+    },
+    registerModal() {
+      this.modelOpen1 = false;
+      this.modelOpen2 = false;
+      this.modelOpen3 = true;
     },
   },
-  created(){ 
-  },
-  computed:mapState({
-    companyDetail : (state) => state.data.companyDetail,
-    userDetail : (state) => state.data.userDetail
-  })
+  created() {},
+  computed: mapState({
+    companyDetail: (state) => state.data.companyDetail,
+    userDetail: (state) => state.data.userDetail,
+  }),
 };
 </script>
 
@@ -612,11 +714,11 @@ export default {
   padding: 3px 8px;
   border-radius: 0px 9px;
 }
-.account-type-span{ 
-    background: #f54a52;
-    color: #fff;
-    padding: 2px 6px;
-    margin-right: 9px;
-    border-radius: 5px; 
-} 
+.account-type-span {
+  background: #f54a52;
+  color: #fff;
+  padding: 2px 6px;
+  margin-right: 9px;
+  border-radius: 5px;
+}
 </style>

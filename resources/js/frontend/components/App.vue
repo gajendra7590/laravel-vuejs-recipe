@@ -41,12 +41,12 @@ export default {
             _this.$store.dispatch('getProfile')
             .then(function(result){
               _this.$store.state.data.userDetail = result;
-               setTimeout(function(){ _this.loader.hide(); },2000);
+               setTimeout(function(){ _this.loader.hide(); },1000);
             })
             .catch(function(error){
                 console.log( error );
             });
-        } else{ setTimeout(function(){ _this.loader.hide(); },2000); }  
+        } else{ setTimeout(function(){ _this.loader.hide(); },1000); }  
     }
   },
   created(){ 

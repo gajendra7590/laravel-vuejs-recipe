@@ -68,6 +68,19 @@ export default {
                 });
         });
     },
+    verifyEmail({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "verifyEmail", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
     verifyToken({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
             axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
