@@ -120,9 +120,10 @@ export default {
                 });
         });
     },
+    //Auth Section End
+    //My Account Section Start
     getProfile({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
-            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
             axios
                 .get(config.API_URL + "getProfile")
                 .then(function(response) {
@@ -133,7 +134,95 @@ export default {
                 });
         });
     },
-    //Auth Section End
+    saveProfile({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "saveProfile", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    changePassword({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "changePassword", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getAuthorsRecipes({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getAuthorsRecipes")
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    editAuthorsRecipe({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "editAuthorsRecipe/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    createAuthorsRecipe({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "createAuthorsRecipe", payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    updateAuthorsRecipe({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
+            axios
+                .post(config.API_URL + "updateAuthorsRecipe/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    deleteAuthorsRecipe({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .delete(config.API_URL + "deleteAuthorsRecipe/" + payload.id)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    //My Account Section End
     //Extra Routes For Blog & Recipe Start
     saveContactUsEnquiry({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
