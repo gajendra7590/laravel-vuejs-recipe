@@ -4,6 +4,16 @@
     <div id="home" class>
       <h3>Your Profile</h3> 
       <div class="dashboard_Panel">
+           <div class="alert" :class="alerts.class" v-if="alerts.message" role="alert">
+              <h4 class="alert-heading text-capitalize">{{ alerts.message }}</h4>
+              <div class="" v-if="errorsList">
+                <hr>
+                <p class="text-capitalize" v-for="(item,index) in errorsList" :key="index"> 
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    {{ item }}
+                </p>
+              </div>  
+           </div> 
         <ValidationObserver v-slot="{ handleSubmit }">
         <form id="vueForm" 
               name="vueForm" 
@@ -178,7 +188,7 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label>Zip Code</label>
-                    <ValidationProvider name="Zip" rules="numeric|min:5" v-slot="{ errors }">
+                    <ValidationProvider name="Zip" rules="numeric|min:5|max:5" v-slot="{ errors }">
                         <input
                           type="text"
                           placeholder="Zip.."
@@ -312,6 +322,7 @@ export default {
   data() {
     return {
       loader : null,
+      alerts : { class : 'alert-success',message : ''},
       errorsList : [],
       editData : { 
           "first_name": "",
@@ -344,17 +355,19 @@ export default {
     submitProfile(){
       var vueForm = new FormData( $('#vueForm')[0]);
       let _this = this;
+      _this.errorsList = null;
       _this.loader =  _this.$loading.show();
        this.$store.dispatch('saveProfile',vueForm)
         .then(function(result) {
             _this.loader.hide();
-              if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){ 
-              _this.$toastr.s('Profile Updated Successfully','Success!'); 
+              if( ( typeof(result.status) != 'undefined' ) && (result.status == true) ){  
+              _this.alerts = { class : 'alert-success',message : 'Profile Updated Successfully'};
             }else if( ( typeof(result.status) != 'undefined' ) && (result.status == false) ){ 
               _this.$toastr.e('Opps! Unable to save form,please check error log','Error!');  
                 _this.errorsList = result.errors;  
+                _this.alerts = { class : 'alert-danger',message : result.message};
             }else{
-              _this.$toastr.e('Opps! Something went wrong,please check log','Error!'); 
+                _this.alerts = { class : 'alert-danger',message : 'Opps! something went wrong'}; 
             }  
         })
         .catch(function(error){
@@ -365,8 +378,7 @@ export default {
     getUserProfile(){
       let _this = this;
       _this.$store.dispatch('getProfile')
-      .then(function(result){
-        console.log( result )
+      .then(function(result){ 
         _this.editData = result;
       })
       .catch(function(error){

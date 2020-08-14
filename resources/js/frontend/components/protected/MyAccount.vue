@@ -13,13 +13,32 @@
           <div class="col-lg-3 col-sm-12 col-xs-12 dashboard-nav-container">
             <ul class="nav nav-pills flex-column">
               <li class="nav-item">
-                <router-link class="nav-link active" :to="'profile'">Profile</router-link>
+                <router-link
+                  class="nav-link"
+                  :class="(this.$route.name == 'profile')?'active':''"
+                  :to="'/my-account/profile'"
+                >Profile</router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" :to="'change-password'">Change Password</router-link>
+                <router-link
+                  class="nav-link"
+                  :class="(this.$route.name == 'changePassword')?'active':''"
+                  :to="'/my-account/change-password'"
+                >Change Password</router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" :to="'recipes-list'">My Recipes</router-link>
+                <router-link
+                  class="nav-link"
+                  :class="(this.$route.name == 'favRecipes')?'active':''"
+                  :to="'/my-account/fav-recipes'"
+                >My Fav Recipes</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link
+                  class="nav-link"
+                  :class="(this.$route.name == 'recipesList' || this.$route.name == 'createRecipe' || this.$route.name == 'editRecipe')?'active':''"
+                  :to="'/my-account/recipes-list'"
+                >My Recipes</router-link>
               </li>
               <li class="nav-item">
                 <a class="nav-link" @click.prevent="userLogout" href="javascript:void(0);">Logout</a>
@@ -36,37 +55,87 @@
   </div>
 </template> 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "userProfile",
   data() {
-    return {};
+    return {
+      loader: null,
+    };
   },
+  computed: mapState({}),
   methods: {
-    userLogout() {
-      let userDetail = this.$store.state.data.userDetail;
+    getUserToken() {
+      let token = null;
+      let userData = localStorage.getItem("USER_SESSION");
+      if (!!userData) {
+        try {
+          userData = JSON.parse(userData);
+          token =
+            typeof userData.userToken != "undefined"
+              ? userData.userToken
+              : null;
+        } catch (e) {
+          token = null;
+        }
+      }
+      return token;
+    },
+    validateAccount() {
       let _this = this;
-      _this.loader = _this.$loading.show({
+      _this.loader = this.$loading.show({
         zIndex: 9999999,
         backgroundColor: "#dc3545",
         color: "#fff",
+        opacity: 1,
       });
-      if (userDetail.id) {
-        _this.$store
-          .dispatch("signout")
-          .then(function (result) {
-            if (typeof result.status != "undefined" && result.status == true) {
-              localStorage.removeItem("USER_SESSION");
-              window.location.href = "";
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-            _this.loader.hide();
+      setTimeout(function () {
+        if (!_this.$store.state.loggedIn) {
+          _this.$toastr.e("Opps! Your session has been expired");
+          _this.loader.hide();
+          _this.$router.push("/home");
+        } else {
+          _this.loader.hide();
+        }
+      }, 500);
+    },
+    userLogout() {
+      let userDetail = this.$store.state.data.userDetail;
+      let _this = this;
+      _this.$dialog
+        .confirm("Are you sure want to singout your account?")
+        .then(function (dialog) { 
+          _this.loader = _this.$loading.show({
+            zIndex: 9999999,
+            backgroundColor: "#dc3545",
+            color: "#fff",
           });
-      }
+          if (userDetail.id) {
+            _this.$store
+              .dispatch("signout")
+              .then(function (result) {
+                if (
+                  typeof result.status != "undefined" &&
+                  result.status == true
+                ) {
+                  _this.$toastr.s("You have been logged out successfully");
+                  localStorage.removeItem("USER_SESSION");
+                  window.location.href = "/home";
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+                _this.loader.hide();
+              });
+          } else {
+            _this.$router.push("/home");
+          }
+        });
     },
   },
-  created() {},
+  created() {
+    this.validateAccount();
+  },
 };
 </script>
 

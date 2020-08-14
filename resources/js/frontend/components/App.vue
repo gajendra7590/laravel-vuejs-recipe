@@ -39,8 +39,10 @@ export default {
         _this.loader = _this.$loading.show({zIndex : 99999999,opacity:1,backgroundColor: '#dc3545',color:'#fff'});
         if( (token != null) && (token != '') ){
             _this.$store.dispatch('getProfile')
-            .then(function(result){
+            .then(function(result){ 
               _this.$store.state.data.userDetail = result;
+              _this.$store.state.loggedIn = true;
+              _this.$store.state.userRole = result.role;
                setTimeout(function(){ _this.loader.hide(); },1000);
             })
             .catch(function(error){
@@ -49,7 +51,7 @@ export default {
         } else{ setTimeout(function(){ _this.loader.hide(); },1000); }  
     }
   },
-  created(){ 
+  created(){  
     this.getUserProfile();
   }
 };

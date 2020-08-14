@@ -38,6 +38,8 @@ const store = new Vuex.Store({
     state: {
         ASSET_BASE_URL: $('input[name="asset_url"]').val(),
         BASE_URL: config.BASE_URL,
+        loggedIn: false,
+        userRole: '',
         data: {
             userDetail: [],
 

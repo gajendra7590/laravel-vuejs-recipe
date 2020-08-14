@@ -33,6 +33,16 @@ Object.keys(rules).forEach(rule => {
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
+//Datatable
+import { ServerTable, ClientTable, Event } from 'vue-tables-2';
+Vue.use(ClientTable);
+
+//Confirm dialog 
+import VuejsDialog from 'vuejs-dialog';
+import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+Vue.use(VuejsDialog);
+
 Vue.use(VueLazyload, {
     preLoad: 1,
     error: config.BASE_URL + "default_img/default.jpg",

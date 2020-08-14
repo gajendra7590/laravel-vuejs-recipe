@@ -110,6 +110,7 @@ class AccountController extends Controller
   */
    public function changePassword(Request $request){
         $data = $request->only(['old_password','new_password','new_password_confirmation']);
+       // echo '<pre>';print_r($data);die;
         $validator = Validator::make($data,[
             'old_password' => ['required','min:6', new MatchOldPassword],
             'new_password' => ['required','min:6','confirmed'],
@@ -160,7 +161,7 @@ class AccountController extends Controller
             'user' => function($model){ $model->select('id','display_name'); },
             'category' => function($model){ $model->select('id','name'); },
         ])
-        ->select('id','category_id','user_id','title','photo','prepairation_time','cooking_time','serving_peoples','is_slider','status')
+        ->select('id','category_id','user_id','title','slug','photo','prepairation_time','cooking_time','serving_peoples','is_slider','status','updated_at')
         ->where(['user_id' => Auth::user()->id,'status' => '1'])
         //->orWhere('title', 'LIKE', '%'.$search.'%')
         ->orderBy($sort,$direction)

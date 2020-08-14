@@ -85,12 +85,13 @@ if (!function_exists('errorArrayCreate')) {
                         foreach ($v as $value) {
                             $err .= $value . ' && ';
                         }
-                        trim($err, '&&');
+                        $err = trim($err, '&& ');
+                        $err = str_replace('.','',$err);
                         $errors[$k] = $err;
                     } else {
-                        $errors[$k] = $v[0];
+                        $err = str_replace('.','',$v[0]);
+                        $errors[$k] = $err;
                     }
-
                 }
             }
             return $errors;

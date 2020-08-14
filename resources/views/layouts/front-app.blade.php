@@ -9,18 +9,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
-    <link rel="shortcut icon" href="{{ URL::asset('app//app/img/favicon.png') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/normalize.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/main.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/bootstrap.min.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/animate.min.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/fontawesome-all.min.css') }}"> 
+    <link rel="shortcut icon" href="{{ URL::asset('favicon.png') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/normalize.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/main.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/bootstrap.min.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/animate.min.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/fontawesome-all.min.css') }}"> 
     <link rel="stylesheet" href="{{ URL::asset('app/fonts/flaticon.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('app/css/owl.theme.default.min.css') }}"> 
-    <link rel="stylesheet" href="{{ URL::asset('app/style.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/app/css/owl.theme.default.min.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('/app/style.css') }}"> 
     <link rel="stylesheet" href="{{ URL::asset('css/front-custom.css') }}"> 
-    <script src="{{ URL::asset('app/js/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/modernizr-3.6.0.min.js') }}"></script>
 </head> 
 <body>
     {{-- <div id="preloader"></div> --}}
@@ -35,18 +35,18 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Jquery Js -->
-    <script src="{{ URL::asset('app/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/jquery-3.3.1.min.js') }}"></script>
     <!-- Bootstrap Js -->
-    <script src="{{ URL::asset('app/js/popper.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/popper.min.js') }}"></script>
     <!-- Bootstrap Js -->
-    <script src="{{ URL::asset('app/js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/bootstrap.min.js') }}"></script>
     <!-- Plugins Js -->
-    <script src="{{ URL::asset('app/js/plugins.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/plugins.js') }}"></script>
     <!-- Owl Carousel Js -->
-    <script src="{{ URL::asset('app/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/owl.carousel.min.js') }}"></script>
     <!-- Smoothscroll Js -->
-    <script src="{{ URL::asset('app/js/smoothscroll.min.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/smoothscroll.min.js') }}"></script>
     <!-- Custom Js -->
-    <script src="{{ URL::asset('app/js/main.js') }}"></script>
+    <script src="{{ URL::asset('/app/js/main.js') }}"></script>
 </body>
 </html>
