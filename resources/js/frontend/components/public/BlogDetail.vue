@@ -360,12 +360,7 @@ export default {
        likes : 0,
        perpage : 5 
     };
-  },
-  watch: {
-    '$route.params.slug'(newId, oldId) {
-        this.getBlogDetail()
-    }
-  },
+  }, 
   methods: {
     getBlogDetail() {  
       let _this = this; 
@@ -376,6 +371,7 @@ export default {
           _this.blogsDetail = response.data; 
           _this.comments = response.comments;
           _this.likes = response.likes;
+          _this.blogViewSubmit( response.data.id);
         } else {
            _this.$toastr.e('Error','No Data Founded');
         }
@@ -383,9 +379,17 @@ export default {
         console.log( error );
       }); 
     }, 
+    blogViewSubmit(id){
+      this.$store.dispatch("createNewBlogView",{id :id});
+    }
   },
   created() {
-    this.getBlogDetail(); 
+    this.getBlogDetail();  
+  },
+   watch: {
+    '$route.params.slug'(newId, oldId) {
+        this.getBlogDetail()
+    }
   } 
 };
 </script> 

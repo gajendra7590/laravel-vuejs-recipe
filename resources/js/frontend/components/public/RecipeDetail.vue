@@ -63,10 +63,10 @@
                 <div class="col-xl-3 col-12">
                   <ul class="action-item">
                     <li>
-                      <button>
-                        <i class="fas fa-print"></i>
+                      <button @click="likeSubmit( (recipeDetail.id)?recipeDetail.id:0 )">
+                        <i class="fas fa-heart" :class="'like-active'"></i>
                       </button>
-                    </li>
+                    </li> 
                     <li>
                       <button>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -642,6 +642,7 @@ export default {
         .then(function (result) {
           if (result.id != undefined) {
             _this.recipeDetail = result;
+            _this.recipeViewSubmit(result.id);
              setTimeout(() => { _this.loader.hide(); }, 500);
           } else {
             _this.$toastr.e("Opps! Invalid Request");
@@ -656,16 +657,24 @@ export default {
     followOnInstagram() {
       this.$store.dispatch("followOnInstagram");
     },
+    recipeViewSubmit(id){
+      this.$store.dispatch("createNewRecipeView",{id :id});
+    },
+    likeSubmit(id){
+       let slug = this.$route.params.slug;
+       alert(id)
+    }
   },
   created() {
     let slug = this.$route.params.slug;
     if (slug != undefined) {
       this.getRecipeDetail(slug);
-      this.followOnInstagram();
+      this.followOnInstagram(); 
     }
   },
   computed: mapState({
     followOnInsta: (state) => state.data.followOnInstagram,
+    
   }),
   watch: {
     "$route.params.slug"(newId, oldId) {
@@ -683,5 +692,8 @@ export default {
 }
 ul.reivew-ul {
     padding-bottom: 5px;
+}
+.like-active {
+  color: #ff4a52;
 }
 </style>

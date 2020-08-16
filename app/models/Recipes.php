@@ -10,6 +10,10 @@ use App\models\RecipeNutritions;
 use App\models\RecipeIngredients;
 use App\models\RecipeSteps;
 use App\models\RecipeTagsSelected;
+use App\models\RecipeViews;
+use App\models\RecipeLikes;
+use App\models\RecipeRating;
+
 
 
 class Recipes extends Model
@@ -19,7 +23,7 @@ class Recipes extends Model
      *
      * @var string
      */
-    protected $appends = ['photo_url'];
+    protected $appends = ['photo_url','views','likes','rating'];
     protected $table = 'recipes';
     protected $primaryKey = 'id';
 
@@ -66,6 +70,19 @@ class Recipes extends Model
         } else{
             return \url('/').'/default_img/default.jpg';
         }
+    }
+
+    public function getViewsAttribute(){
+        return RecipeViews::where(['recipe_id' => $this->id])->count();
+    }
+
+    public function getLikesAttribute(){
+        return RecipeLikes::where(['recipe_id' => $this->id])->count();
+    }
+
+    public function getRatingAttribute(){
+        $rating = RecipeRating::where(['recipe_id' => $this->id])->avg('rating');
+        return round($rating,2);
     }
 
     public function getPrepairationTimeAttribute($value){

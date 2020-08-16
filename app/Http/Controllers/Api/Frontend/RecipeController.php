@@ -98,6 +98,7 @@ class RecipeController extends Controller
                 $m->select('id','recipe_id','name');
             },
         ])
+        ->select('*')
         ->where(['slug' => $slug])
         ->get()->first();
     }
