@@ -237,6 +237,30 @@ export default {
                 });
         });
     },
+    getUsersRating({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getUsersRating/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
+    getUsersLike({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getUsersLike/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
     getRecipeRatings({ commit, state }, payload) {
         axios
             .get(config.API_URL + "getRecipeRatings/" + payload.id)
@@ -489,7 +513,7 @@ export default {
     //Recipes Start
     recipesList({ commit, state }, payload) {
         axios
-            .get(config.API_URL + "recipesList")
+            .get(config.API_URL + "recipesList?search=" + payload.search)
             .then(function(response) {
                 commit("recipesList", response.data);
             })

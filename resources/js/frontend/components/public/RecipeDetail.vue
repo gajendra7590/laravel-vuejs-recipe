@@ -21,40 +21,18 @@
                       </a>
                     </li>
                     <li class="single-meta">
-                      <a href="#">
+                      <a href="jvascript:void(0);">
                         <i class="fas fa-user"></i>by
                         <span>{{ (recipeDetail.user)?recipeDetail.user.first_name:'' }}</span>
                       </a>
                     </li>
                     <li class="single-meta">
-                      <ul class="item-rating">
-                        <li class="star-fill">
-                          <i class="fas fa-star"></i>
-                        </li>
-                        <li class="star-fill">
-                          <i class="fas fa-star"></i>
-                        </li>
-                        <li class="star-fill">
-                          <i class="fas fa-star"></i>
-                        </li>
-                        <li class="star-fill">
-                          <i class="fas fa-star"></i>
-                        </li>
-                        <li class="star-empty">
-                          <i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>
-                            9
-                            <span>/ 10</span>
-                          </span>
-                        </li>
-                      </ul>
+                      <Rating :rating="recipeDetail.avg_rating"/>
                     </li>
                     <li class="single-meta">
-                      <a href="#">
+                      <a href="jvascript:void(0);">
                         <i class="fas fa-heart"></i>
-                        <span>02</span>
+                        <span>{{ recipeDetail.likes_count }}</span>
                         Likes
                       </a>
                     </li>
@@ -182,7 +160,7 @@
                         </div>
                         <div class="media-body space-sm">
                           <div class="feature-title">VIEWS</div>
-                          <div class="feature-sub-title">3,450</div>
+                          <div class="feature-sub-title">{{ recipeDetail.views_count }}</div>
                         </div>
                       </div>
                     </div>
@@ -197,9 +175,9 @@
                       <h3 class="item-title">
                         <i class="fas fa-list-ul"></i>Ingridients
                       </h3>
-                      <div v-for="(ingr,index) in recipeDetail.ingredients" :key="index">
+                      <div v-for="(ingr,index) in recipeDetail.ingredients" :key="index" class="ing-cont">
                         <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
-                        <label for="checkbox1">{{ ingr.name }}</label>
+                        {{ ingr.name }}
                       </div>
                     </div>
                   </div>
@@ -432,144 +410,98 @@
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">RECIPE REVIEWS</h2>
                 </div>
-                <div class="avarage-rating-wrap">
-                  <div class="avarage-rating">
-                    Avarage Rating:
-                    <span class="rating-icon-wrap">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </span>
-                    <span class="rating-number">(5)</span>
-                  </div>
-                  <div class="total-reviews">
-                    Total Reviews:
-                    <span class="review-number">(02)</span>
-                  </div>
-                </div>
-                <ul class="reivew-ul"> 
-                  <li class="reviews-single-item">
-                    <div class="media media-none--xs">
-                      <img src="/app/img/blog/comment1.jpg" alt="Comment" class="media-img-auto" />
-                      <div class="media-body">
-                        <h4 class="comment-title">Liza Zaman</h4>
-                        <span class="post-date">September 27, 2018</span>
-                        <p>
-                          Absolutely great recipe. I cooked it for my kids and they loved it, even
-                          asked for more, can you believe it?
-                        </p>
-                        <ul class="item-rating">
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item star-empty">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="single-item">
-                            <span>
-                              4
-                              <span>/ 5</span>
-                            </span>
-                          </li>
-                        </ul> 
+
+                <div v-if="(ratingsList) && (ratingsList.ratings_count > 0)">
+                    <div class="avarage-rating-wrap">
+                      <div class="avarage-rating">
+                        Avarage Rating:
+                        <span class="rating-icon-wrap"> 
+                          <i class="fas fa-star" v-for="(i,index) in getInteger(ratingsList.avg_rating)" :key="index+11" ></i>
+                          <i class="fas fa-star-half" v-if="getFloat(ratingsList.avg_rating)"></i>
+                          <i class="fas fa-star empty" v-for="(i,index) in (5 - getInteger(ratingsList.avg_rating) - getFloat(ratingsList.avg_rating) )" :key="index+21" ></i>
+                        </span>
+                        <span class="rating-number">({{ ratingsList.avg_rating}})</span>
+                      </div>
+                      <div class="total-reviews">
+                        Total Reviews:<span class="review-number">({{ ratingsList.ratings_count }})</span>
                       </div>
                     </div>
-                  </li>  
-                </ul> 
+                    <ul class="reivew-ul" v-for="(rating,index) in ratingsList.ratings" :key="index"> 
+                      <li class="reviews-single-item">
+                        <div class="media media-none--xs">
+                          <img v-lazy="rating.user.photo_url" height="120" width="130" alt="Comment" class="media-img-auto" />
+                          <div class="media-body">
+                            <h4 class="comment-title">{{ rating.user.first_name }}</h4>
+                            <span class="post-date">{{ rating.rating_time | moment('MMM DD,YYYY') }}</span>
+                            <p>{{ rating.comment }}</p>
+                            <ul class="item-rating">
+                              <li class="single-item star-fill" v-for="(j) in parseInt(rating.rating)" :key="j+12">
+                                <i class="fas fa-star"></i>
+                              </li> 
+                              <li class="single-item star-empty" v-for="(k) in (5 - parseInt(rating.rating))" :key="k+21">
+                                <i class="fas fa-star"></i>
+                              </li>
+                              <li class="single-item">
+                                <span>
+                                  {{ rating.rating }}
+                                  <span>/ 5</span>
+                                </span>
+                              </li>
+                            </ul> 
+                          </div>
+                        </div>
+                      </li>  
+                    </ul> 
+                </div>
+                <div v-else class="no-review-container">
+                  <p>No Review found for this recipe.</p>
+                </div>
+                
               </div>
 
               <div class="leave-review">
                 <div class="section-heading heading-dark">
                   <h2 class="item-heading">LEAVE A REVIEW</h2>
+                  <a v-if="userRating" 
+                    @click="toggleForm" href="javascript:void(0);"
+                     class="btn btn-xl btn-info">Edit Review</a>
+                </div> 
+                <div v-if="this.$store.state.loggedIn" v-show="isRatingFormShow">
+                  <ValidationObserver v-slot="{ handleSubmit }">                      
+                    <form class="leave-form-box" @submit.prevent="handleSubmit(reviewSubmit)">
+                      <div class="row">
+                        <div class="col-12 form-group">
+                          <label>Rating :</label>
+                          <ValidationProvider name="rating" rules="required|min:1|max:5" v-slot="{ errors }"> 
+                             <star-rating v-model="review.rating" :show-rating="false"></star-rating> 
+                             <div class="help-block text-danger">{{ errors[0] }}</div>
+                          </ValidationProvider> 
+                        </div>
+                        <div class="col-12 form-group">
+                          <label>Comment :</label>
+                          <ValidationProvider name="Comment" rules="required|min:15" v-slot="{ errors }"> 
+                            <textarea
+                              placeholder
+                              class="textarea form-control"
+                              name="message"
+                              rows="7"
+                              cols="20"
+                              v-model="review.comment"
+                            ></textarea>
+                            <div class="help-block text-danger">{{ errors[0] }}</div>
+                          </ValidationProvider> 
+                        </div>  
+                        <div class="col-12 form-group mb-0">
+                          <button type="submit" class="item-btn">POST REVIEW</button>
+                        </div>
+                      </div>
+                      <div class="form-response"></div>
+                    </form>
+                  </ValidationObserver>
                 </div>
-                <div class="rate-wrapper">
-                  <div class="rate-label">Rating</div>
-                  <div class="rate">
-                    <div class="rate-item">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    <div class="rate-item">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    <div class="rate-item">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    <div class="rate-item">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    <div class="rate-item">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                  </div>
+                <div v-else>
+                  <p>Logged In & Live Comment</p>
                 </div>
-                <form class="leave-form-box">
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <label>Comment :</label>
-                      <textarea
-                        placeholder
-                        class="textarea form-control"
-                        name="message"
-                        rows="7"
-                        cols="20"
-                        data-error="Message field is required"
-                        required
-                      ></textarea>
-                      <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-lg-4 form-group">
-                      <label>Name :</label>
-                      <input
-                        type="text"
-                        placeholder
-                        class="form-control"
-                        name="name"
-                        data-error="Name field is required"
-                        required
-                      />
-                      <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-lg-4 form-group">
-                      <label>E-mail :</label>
-                      <input
-                        type="email"
-                        placeholder
-                        class="form-control"
-                        name="email"
-                        data-error="E-mail field is required"
-                        required
-                      />
-                      <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-lg-4 form-group">
-                      <label>Website :</label>
-                      <input
-                        type="email"
-                        placeholder
-                        class="form-control"
-                        name="email"
-                        data-error="E-mail field is required"
-                        required
-                      />
-                      <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-12 form-group mb-0">
-                      <button type="submit" class="item-btn">POST REVIEW</button>
-                    </div>
-                  </div>
-                  <div class="form-response"></div>
-                </form>
               </div>
 
             </div>
@@ -606,6 +538,7 @@
 <script>
 import { mapState } from "vuex";
 import { VueperSlides, VueperSlide } from "vueperslides";
+import StarRating from 'vue-star-rating';
 import "vueperslides/dist/vueperslides.css";
 //custom Components
 import LatestRecipes from "./sidebar/LatestRecipes";
@@ -619,7 +552,7 @@ export default {
   components: {
     VueperSlides,
     VueperSlide,
-
+    StarRating, 
     LatestRecipes,
     SubscribeAndFollow,
     FeaturedRecipe,
@@ -630,10 +563,18 @@ export default {
   data() {
     return {
       loader : null,
+      isRatingFormShow : false,
+      userLike : null,
+      userRating : null,
+      review : {
+        id : 0,
+        rating : 1,
+        comment : '' 
+      },
       recipeDetail: [],
     };
   },
-  methods: {
+  methods: { 
     getRecipeDetail(slug) {
       let _this = this;
       _this.loader =  _this.$loading.show();
@@ -643,6 +584,9 @@ export default {
           if (result.id != undefined) {
             _this.recipeDetail = result;
             _this.recipeViewSubmit(result.id);
+            _this.getRatings(result.id); 
+            _this.getCurrentLike(result.id);
+            _this.getCurrentRating(result.id);
              setTimeout(() => { _this.loader.hide(); }, 500);
           } else {
             _this.$toastr.e("Opps! Invalid Request");
@@ -657,8 +601,90 @@ export default {
     followOnInstagram() {
       this.$store.dispatch("followOnInstagram");
     },
+    getRatings(id){
+       this.$store.dispatch('getRecipeRatings',{id : id}); 
+    },
+    getInteger(rating){
+       let fraction = ((rating % 1).toFixed(2));
+        if(fraction != '0.00'){ 
+          return (rating - fraction);
+        } else {
+          return rating;
+        } 
+    },
+    getFloat(rating){
+        let fraction = ((rating % 1).toFixed(2));
+        if(fraction != '0.00'){
+          return 1;
+        } else {
+          return 0;
+        } 
+    },
     recipeViewSubmit(id){
       this.$store.dispatch("createNewRecipeView",{id :id});
+    },
+    toggleForm(){
+      this.isRatingFormShow = true;
+      let ur = this.userRating;      
+      this.review = {
+         id : (ur.id)?ur.id:0,
+         rating : (ur.rating)?parseInt(ur.rating):1,
+         comment : (ur.comment)?ur.comment:'',
+      }
+    },
+    getCurrentLike(recipe_id){ 
+        if(this.$store.state.loggedIn){
+            let _this = this;
+            _this.$store.dispatch('getUsersLike',{id : recipe_id})
+            .then(function(result){
+              _this.userLike = result;
+            })
+            .catch(function(error){
+              console.log( error )              
+            }); 
+        }
+    },
+    getCurrentRating(recipe_id){
+       if(this.$store.state.loggedIn){
+            let _this = this;
+            _this.$store.dispatch('getUsersRating',{id : recipe_id})
+            .then(function(result){
+              _this.userRating = result;
+              alert('dddd')
+              console.log( typeof(result) )
+              if(result!=null){
+                 _this.isRatingFormShow = false;
+              } else {
+                alert('else');
+                 _this.isRatingFormShow = true;
+              } 
+
+            })
+            .catch(function(error){
+              console.log( error )              
+            }); 
+        }
+    },
+    reviewSubmit(){
+      let recipe_id = this.recipeDetail.id;
+      if(recipe_id > 0){
+        let _this = this;
+        _this.review.id = recipe_id;
+        _this.loader = _this.$loading.show();
+        _this.$store.dispatch('createNewRecipeRating',_this.review)
+        .then(function(result){
+            _this.loader.hide();
+            if( (typeof(result.status) !='undefined') && (result.status == true) ){
+              _this.getRatings(recipe_id);
+              _this.getCurrentRating(recipe_id);
+              _this.$toastr.s(result.message); 
+            }  
+        })
+         .catch(function(error){
+           _this.loader.hide();
+           console.log( error );          
+        }) 
+      } 
     },
     likeSubmit(id){
        let slug = this.$route.params.slug;
@@ -667,13 +693,15 @@ export default {
   },
   created() {
     let slug = this.$route.params.slug;
+    let _this = this;
     if (slug != undefined) {
-      this.getRecipeDetail(slug);
-      this.followOnInstagram(); 
+      _this.getRecipeDetail(slug);
+      _this.followOnInstagram();        
     }
   },
   computed: mapState({
     followOnInsta: (state) => state.data.followOnInstagram,
+    ratingsList :(state) => state.data.getRecipeRatings
     
   }),
   watch: {

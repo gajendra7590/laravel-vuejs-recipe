@@ -15,6 +15,8 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 require('./bootstrap');
 //Impoer Custom
 import App from './frontend/components/App.vue';
+import Rating from './frontend/components/shared/Rating.vue';
+Vue.component('Rating', Rating);
 import router from './frontend/router';
 import store from './frontend/store/index';
 

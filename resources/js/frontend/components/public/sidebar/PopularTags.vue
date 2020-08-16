@@ -6,7 +6,7 @@
     <div class="widget-tag">
       <ul v-if="popularTags">
         <li v-for="(tag,index) in popularTags" :key="index">
-          <router-link :to="'/recipes/tag/'+tag.name">#{{ tag.name }}</router-link>
+          <router-link :to="'/recipes/tag/'+tag.slug">#{{ tag.name }}</router-link>
         </li>
       </ul>
     </div>

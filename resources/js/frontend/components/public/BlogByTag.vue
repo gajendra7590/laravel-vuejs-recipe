@@ -174,20 +174,5 @@ export default {
   } 
 };
 </script> 
-<style scoped>
-    .error-content-box.no-result-found {
-        border: 1px solid #f65058;
-        padding: 17px 0px 1px 0px !important;
-        margin-top: 4px !important;
-    }
-    .error-content-box.no-result-found h5 {
-        font-size: 20px;
-        font-weight: 600;
-        font-style: italic;
-        color: #808080;
-    }
-    .noResultLink {
-        text-align: center;
-        margin-top: 13px;
-    }
+<style scoped> 
 </style>

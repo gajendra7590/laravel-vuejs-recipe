@@ -23,7 +23,8 @@ class Recipes extends Model
      *
      * @var string
      */
-    protected $appends = ['photo_url','views','likes','rating'];
+    //protected $appends = ['photo_url','views','likes','rating'];
+    protected $appends = ['avg_rating','photo_url'];
     protected $table = 'recipes';
     protected $primaryKey = 'id';
 
@@ -64,6 +65,22 @@ class Recipes extends Model
         return $this->hasMany(RecipeIngredients::class, 'recipe_id','id');
     }
 
+    public function views()
+    {
+        return $this->hasMany(RecipeViews::class, 'recipe_id','id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(RecipeLikes::class, 'recipe_id','id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(RecipeRating::class, 'recipe_id','id');
+    }
+
+
     public function getPhotoUrlAttribute(){
         if($this->photo !=''){
             return \url('/').'/images/'.$this->photo;
@@ -72,17 +89,17 @@ class Recipes extends Model
         }
     }
 
-    public function getViewsAttribute(){
+    /* public function getViewsAttribute(){
         return RecipeViews::where(['recipe_id' => $this->id])->count();
     }
 
     public function getLikesAttribute(){
         return RecipeLikes::where(['recipe_id' => $this->id])->count();
-    }
+    } */
 
-    public function getRatingAttribute(){
+    public function getAvgRatingAttribute(){
         $rating = RecipeRating::where(['recipe_id' => $this->id])->avg('rating');
-        return round($rating,2);
+        return round($rating,1);
     }
 
     public function getPrepairationTimeAttribute($value){

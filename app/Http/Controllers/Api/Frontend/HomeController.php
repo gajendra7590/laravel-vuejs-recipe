@@ -28,7 +28,8 @@ class HomeController extends Controller
      * Trending 7 Recipe Section
      */
     public function homeTrendingRecipe(Request $request){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+            ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])
@@ -62,7 +63,8 @@ class HomeController extends Controller
 
     //Below functions are callback
     private function homeSliderArea(){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+        ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])
@@ -74,7 +76,8 @@ class HomeController extends Controller
     }
 
     private function homePaddingBottom18(){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+        ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])
@@ -86,7 +89,8 @@ class HomeController extends Controller
     }
 
     private function editorsChoice(){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+        ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])
@@ -98,7 +102,8 @@ class HomeController extends Controller
     }
 
     private function popular(){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+        ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])

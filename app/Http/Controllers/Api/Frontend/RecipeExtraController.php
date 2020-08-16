@@ -21,18 +21,20 @@ class RecipeExtraController extends Controller
 {
     public function getRecipeRatings(Request $request, $id)
     {
-        return RecipeRating::with([
-            'user' => function($query){
-               $query->select('id','first_name','last_name','display_name','photo');
-            },
-            'recipe' => function($query){
-                $query->select('id','title','slug');
-            }
+        return Recipes::select('id','user_id')
+            ->withCount('ratings')
+            ->with([
+                'ratings' => function($query){
+                $query->with([
+                    'user' => function($query){
+                        $query->select('id','first_name','last_name','display_name','photo');
+                    }
+                ])->select('id', 'recipe_id', 'user_id','rating','comment',DB::Raw('updated_at as rating_time'));
+             }
         ])
-        ->select('id', 'recipe_id', 'user_id','comment',DB::Raw('updated_at as rating_time'))
-        ->where(['recipe_id' => $id])
+        ->where(['id' => $id])
         ->get()
-        ->all();
+        ->first();
     }
 
     public function createNewRecipeRating(Request $request, $id)
@@ -143,6 +145,21 @@ class RecipeExtraController extends Controller
             $model = new RecipeViews();
             $save = $model->create(['recipe_id' => $id]);
         }
+    }
+
+    public function getUsersLike(Request $request, $id){
+        $result = RecipeLikes::where(['recipe_id' => $id,'user_id' => Auth::user()->id])->get()->first();
+        if(!$result){
+            return null;
+        }
+        return $result;
+    }
+    public function getUsersRating(Request $request, $id){
+        $result = RecipeRating::where(['recipe_id' => $id,'user_id' => Auth::user()->id])->get()->first();
+        if(!$result){
+            return null;
+        }
+        return $result;
     }
 
 }

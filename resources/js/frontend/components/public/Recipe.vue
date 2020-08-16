@@ -11,24 +11,28 @@
     <section class="all-recipes-page-wrap padding-top-80 padding-bottom-22">
       <div class="container">
         <div class="row gutters-60">
+
           <div class="col-lg-8">
             <div class="adv-search-wrap">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Recipe Search . . ."
-                />
-                <div class="btn-group">
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn-search">
-                      <i class="flaticon-search"></i>
-                    </button>
+               <form @submit.prevent="searchRecipe">
+                  <div class="input-group"> 
+                    <input
+                      type="text"
+                      v-model="search"
+                      class="form-control"
+                      placeholder="Recipe Search...."
+                    />
+                    <div class="btn-group">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn-search">
+                          <i class="flaticon-search"></i>
+                        </button>
+                      </div>
+                    </div> 
                   </div>
-                </div>
-              </div>
+               </form>
             </div>
-            <div class="row" v-if="recipesList">
+            <div class="row" v-if="(recipesList) && (recipesList.length > 0)">
               <div class="col-md-6 col-12" v-for="(recipe,index) in recipesList" :key="index">
                 <div class="product-box-layout1 recipes-list-container">
                   <figure class="item-figure">
@@ -41,29 +45,7 @@
                     <h3 class="item-title recipe_title">
                       <router-link :to="'/recipe/'+recipe.slug">{{ recipe.title }}</router-link>
                     </h3>
-                    <ul class="item-rating">
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-empty">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li>
-                        <span>
-                          9
-                          <span>/ 10</span>
-                        </span>
-                      </li>
-                    </ul>
+                     <Rating :rating="recipe.avg_rating"/>
                     <p class="recipe_short_desc">{{ recipe.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
@@ -81,7 +63,7 @@
                       <li>
                         <a href="javascript:void(0);">
                           <i class="fas fa-heart"></i>
-                          <span>02</span> Likes
+                          <span>{{ recipe.likes_count }}</span> Likes
                         </a>
                       </li>
                     </ul>
@@ -89,7 +71,12 @@
                 </div>
               </div>
             </div>
-          </div>
+             <div class="nocontainer" v-else>
+                <div class="error-content-box no-result-found"> 
+                    <h5 class="">No Recipe Found For String : {{ search }}</h5>  
+                </div> 
+            </div>
+          </div> 
           <div class="col-lg-4 sidebar-widget-area sidebar-break-md"> 
             <LatestRecipes />
             <SubscribeAndFollow />  
@@ -126,11 +113,16 @@ export default {
     GetLatestUpdates 
   },
   data() {
-    return {};
+    return {
+      search : ''
+    };
   },
   methods: {
+    searchRecipe (){
+      this.getRecipesList();
+    },
     getRecipesList() {
-      this.$store.dispatch("recipesList");
+      this.$store.dispatch("recipesList",{search : this.search});
     } 
   },
   created() {

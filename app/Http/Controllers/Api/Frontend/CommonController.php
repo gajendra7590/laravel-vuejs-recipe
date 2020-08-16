@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\models\RecipeRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -65,8 +66,6 @@ class CommonController extends Controller
         ])->get()->all();
     }
 
-
-
     public function authorsList(Request $request){ 
         return User::withCount(['recipes'])
             ->whereHas('roles', function ($q) {
@@ -84,7 +83,8 @@ class CommonController extends Controller
     }
 
     public function authorsRecipe(Request $request,$id){
-        return Recipes::with([
+        return Recipes::withCount(['views','likes'])
+            ->with([
             'category' => function($m){
                     $m->select('id','name','slug');
              },
@@ -95,11 +95,8 @@ class CommonController extends Controller
         ->where(['user_id' => $id,'status' => '1'])
         ->orderBy('id','DESC')
         ->get()->all();
-    } 
+    }
 
-    /*
-    * follow On Instagram
-    */
     public function followOnInstagram(Request $request){
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:8; 
@@ -111,9 +108,6 @@ class CommonController extends Controller
             ->all();
     }  
 
-     /*
-     * popular Tags
-     */
     public function popularTags(Request $request){
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:20; 
@@ -124,9 +118,6 @@ class CommonController extends Controller
             ->all();
     }
 
-    /*
-     * get Sidebar Categories
-     */
     public function getSidebarCategories(Request $request){
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:20;
@@ -137,7 +128,6 @@ class CommonController extends Controller
             ->get()
             ->all();
     }
-
 
     public function latestsRecipes(Request $request){
         $limit = $request->get('limit');
@@ -180,9 +170,4 @@ class CommonController extends Controller
         ->get()
         ->all();
     }
-
-
-    
-
-
 }

@@ -24,30 +24,10 @@
                 <span class="sub-title recipe_category_name">{{ sld.category.name }}</span>
                 <h2 class="item-title recipe_title">
                   <router-link :to="'/recipe/'+sld.slug">{{ sld.title }}</router-link>
-                </h2>
-                <ul class="item-rating">
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-empty">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li>
-                    <span>
-                      9
-                      <span>/ 10</span>
-                    </span>
-                  </li>
-                </ul>
+                </h2> 
+                 
+                 <Rating :rating="sld.avg_rating"/>
+
                 <p class="recipe_short_desc" v-html="sld.short_desc"></p>
                 <ul class="entry-meta">
                   <li>
@@ -65,7 +45,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-heart"></i>
-                      <span>02</span> Likes
+                      <span>{{sld.likes_count }}</span> Likes
                     </a>
                   </li>
                 </ul>
@@ -96,29 +76,7 @@
                 <h3 class="item-title recipe_title">
                   <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
                 </h3>
-                <ul class="item-rating">
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-empty">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li>
-                    <span>
-                      9
-                      <span>/ 10</span>
-                    </span>
-                  </li>
-                </ul>
+                <Rating :rating="rec.avg_rating"/>
                 <ul class="entry-meta">
                   <li>
                     <a href="javascript:void(0);">
@@ -135,7 +93,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-heart"></i>
-                      <span>02</span> Likes
+                      <span>{{ rec.likes_count }}</span> Likes
                     </a>
                   </li>
                 </ul>
@@ -174,29 +132,9 @@
                     <h2 class="item-title recipe_title">
                       <router-link :to="'/recipe/'+rec.slug">{{ rec.title }}</router-link>
                     </h2>
-                    <ul class="item-rating">
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-empty">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li>
-                        <span>
-                          9
-                          <span>/ 10</span>
-                        </span>
-                      </li>
-                    </ul>
+
+                     <Rating :rating="rec.avg_rating"/>
+
                     <p class="recipe_short_desc">{{ rec.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
@@ -214,7 +152,7 @@
                       <li>
                         <a href="javascript:void(0);">
                           <i class="fas fa-heart"></i>
-                          <span>02</span> Likes
+                          <span>{{ rec.likes_count }}</span> Likes
                         </a>
                       </li>
                     </ul>
@@ -262,29 +200,7 @@
                 <h3 class="item-title">
                   <router-link :to="'/recipe/'+ec.slug" class="recipe_short_desc">{{ ec.short_desc }}</router-link>
                 </h3>
-                <ul class="item-rating">
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-fill">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li class="star-empty">
-                    <i class="fas fa-star"></i>
-                  </li>
-                  <li>
-                    <span>
-                      9
-                      <span>/ 10</span>
-                    </span>
-                  </li>
-                </ul>
+                 <Rating :rating="ec.avg_rating"/>
                 <ul class="entry-meta">
                   <li>
                     <a href="javascript:void(0);">
@@ -301,7 +217,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-heart"></i>
-                      <span>02</span> Likes
+                      <span>{{ ec.likes_count }}</span> Likes
                     </a>
                   </li>
                 </ul>
@@ -337,29 +253,7 @@
                     <h3 class="item-title">
                       <router-link :to="'/recipe/'+pr.slug" class="recipe_title">{{ pr.title }}</router-link>
                     </h3>
-                    <ul class="item-rating">
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-fill">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li class="star-empty">
-                        <i class="fas fa-star"></i>
-                      </li>
-                      <li>
-                        <span>
-                          9
-                          <span>/ 10</span>
-                        </span>
-                      </li>
-                    </ul>
+                    <Rating :rating="pr.avg_rating"/>
                     <p class="recipe_description">{{ pr.short_desc }}</p>
                     <ul class="entry-meta">
                       <li>
@@ -377,7 +271,7 @@
                       <li>
                         <a href="javascript:void(0);">
                           <i class="fas fa-heart"></i>
-                          <span>02</span> Likes
+                          <span>{{ pr.likes_count }}</span> Likes
                         </a>
                       </li>
                     </ul>

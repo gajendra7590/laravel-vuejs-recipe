@@ -593,7 +593,7 @@ export default {
             _this.resetFunction();
             _this.loginModalHide();
             setTimeout(function () {
-              window.location.href = "/";
+              window.location.reload();
             }, 500);
           }
         })

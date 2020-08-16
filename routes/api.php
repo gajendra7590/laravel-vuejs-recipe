@@ -48,12 +48,13 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('createNewRecipeLike/{id}', 'RecipeExtraController@createNewRecipeLike')->middleware('auth:api');
         Route::post('createNewRecipeView/{id}', 'RecipeExtraController@createNewRecipeView');
         Route::get('getRecipeRatings/{id}', 'RecipeExtraController@getRecipeRatings');
+        Route::get('getUsersLike/{id}', 'RecipeExtraController@getUsersLike')->middleware('auth:api');
+        Route::get('getUsersRating/{id}', 'RecipeExtraController@getUsersRating')->middleware('auth:api');
 
         Route::post('createNewBlogRating/{id}', 'BlogExtraController@createNewBlogRating')->middleware('auth:api');
         Route::post('createNewBlogLike/{id}', 'BlogExtraController@createNewBlogLike')->middleware('auth:api');
         Route::post('createNewBlogView/{id}', 'BlogExtraController@createNewBlogView');
         Route::get('getBlogRatings/{id}', 'BlogExtraController@getBlogRatings');
-
 
         //Common Routes
         Route::get('companyDetail', 'CommonController@companyDetail');
@@ -64,6 +65,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('featuredRecipes' ,'CommonController@featuredRecipes'); 
         Route::get('popularTags' ,'CommonController@popularTags');
         Route::get('getSidebarCategories' ,'CommonController@getSidebarCategories');
+        Route::get('getAvgRating/{id}' ,'CommonController@getAvgRating');
 
         //All Home Page Routes
         Route::get('getHomeSlider', 'HomeController@getHomeSlider');

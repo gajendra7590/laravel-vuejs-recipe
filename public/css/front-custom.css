@@ -57,3 +57,40 @@ ul.instagram-feed-figure img {
 .ctg-name {
     text-transform: uppercase;
 }
+
+.error-content-box.no-result-found {
+    border: 1px solid #f65058;
+    padding: 17px 0px 1px 0px !important;
+    margin-top: 4px !important;
+}
+
+.error-content-box.no-result-found h5 {
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    color: #808080;
+}
+
+.noResultLink {
+    text-align: center;
+    margin-top: 13px;
+}
+
+.noResultLink a.btn-danger {
+    padding: 11px 30px;
+    font-size: 14px;
+}
+
+.ing-cont {
+    background-color: #fff;
+    padding: 13px 10px;
+    margin-bottom: 8px;
+}
+
+.ing-cont i {
+    color: #ff4a52 !important;
+}
+
+i.empty {
+    color: #d9d9d9 !important;
+}
