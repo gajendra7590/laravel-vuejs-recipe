@@ -216,8 +216,17 @@ if (!!userData) {
     }
 }
 
-//
-Vue.use(VueToastr);
+//Toastr Message Global config
+Vue.use(VueToastr, {
+    defaultTimeout: 3000,
+    defaultProgressBar: false,
+    defaultProgressBarValue: 0,
+    defaultType: "success",
+    maxOpened: 1,
+    autoDismiss: true,
+    closeButton: true
+});
+
 const vm = new Vue();
 
 router.beforeResolve((to, from, next) => {

@@ -3,23 +3,8 @@
     <!-- Inne Page Banner Area Start Here -->
     <section
       class="inner-page-banner bg-common"
-      data-bg-image="/app/img/figure/inner-page-banner1.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="breadcrumbs-area">
-              <h1>Contact With Us</h1>
-              <ul>
-                <li>
-                  <a href="index-2.html">Home</a>
-                </li>
-                <li>Contact</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      data-bg-image=""
+    > 
     </section>
     <!-- Inne Page Banner Area End Here -->
     <!-- Contact Page Area Start Here -->
@@ -30,31 +15,40 @@
             <h3 class="item-heading-big">Our Address</h3>
           </div>
           <p>
-            Korem ipsum dolor sitter amet consectetuer adipiscing elitter Curabt
-            ur ugueque habitant morbi tristique.
+            {{ (companyDetail.about)?companyDetail.about:'' }}
           </p>
           <div class="contact-address">
             <ul>
               <li>
                 <div class="item-icon">
                   <i class="fas fa-map"></i>
-                </div>House #111/B, Street #05, New East NewYork City,
-                Near rebay resort -1111
+                </div>
+                {{ 
+                   (companyDetail.address_line_one)
+                    ?( companyDetail.address_line_one 
+                      +' '+companyDetail.address_line_two 
+                      +' '+companyDetail.city
+                      +' '+companyDetail.state
+                      +' '+companyDetail.country
+                      +' '+companyDetail.zip
+                      )
+                    :''  
+                 }}
               </li>
               <li>
                 <div class="item-icon">
                   <i class="far fa-envelope"></i>
-                </div>rannarecipes@gmail.com
+                </div>{{ (companyDetail.company_email)?companyDetail.company_email:'' }}
               </li>
               <li>
                 <div class="item-icon">
                   <i class="fas fa-phone"></i>
-                </div>+123 5889 000 - 10, +123 8889 011 - 22
+                </div>{{ (companyDetail.company_contact)?companyDetail.company_contact:'' }}
               </li>
               <li>
                 <div class="item-icon">
                   <i class="fas fa-fax"></i>
-                </div>+9856000, +9856010
+                </div>{{ (companyDetail.company_mobile)?companyDetail.company_mobile:'' }}
               </li>
             </ul>
           </div>
@@ -116,7 +110,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </div> 
       <div class="contact-box-right">
         <div class="google-map-wrap-layout1">
           <iframe
@@ -130,11 +124,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "contactus",
   data() {
-    return {};
+    return {
+      companyDetail : []       
+    };
   },
+  methods:{
+    getCompanyDetail(){
+      this.$store.dispatch('companyDetail');
+    }
+  },
+  created(){
+     let _this = this;
+     setTimeout(function(){
+       _this.companyDetail = _this.$store.state.data.companyDetail
+     },1000);
+  } 
 };
 </script>
 

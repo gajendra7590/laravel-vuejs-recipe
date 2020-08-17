@@ -30,7 +30,7 @@
                       <Rating :rating="recipeDetail.avg_rating"/>
                     </li>
                     <li class="single-meta">
-                      <a href="jvascript:void(0);">
+                      <a href="javascript:void(0);">
                         <i class="fas fa-heart"></i>
                         <span>{{ recipeDetail.likes_count }}</span>
                         Likes
@@ -42,7 +42,7 @@
                   <ul class="action-item">
                     <li>
                       <button @click="likeSubmit( (recipeDetail.id)?recipeDetail.id:0 )">
-                        <i class="fas fa-heart" :class="'like-active'"></i>
+                        <i class="fas fa-heart" :class="likeActive"></i>
                       </button>
                     </li> 
                     <li>
@@ -566,6 +566,7 @@ export default {
       isRatingFormShow : false,
       userLike : null,
       userRating : null,
+      likeActive : '', //like-active
       review : {
         id : 0,
         rating : 1,
@@ -638,6 +639,12 @@ export default {
             _this.$store.dispatch('getUsersLike',{id : recipe_id})
             .then(function(result){
               _this.userLike = result;
+              if(result!=''){
+                _this.likeActive = 'like-active';
+              } else{
+                _this.likeActive = '';
+              }
+              
             })
             .catch(function(error){
               console.log( error )              
@@ -649,16 +656,12 @@ export default {
             let _this = this;
             _this.$store.dispatch('getUsersRating',{id : recipe_id})
             .then(function(result){
-              _this.userRating = result;
-              alert('dddd')
-              console.log( typeof(result) )
-              if(result!=null){
+              _this.userRating = result; 
+              if(result!=''){ 
                  _this.isRatingFormShow = false;
-              } else {
-                alert('else');
+              } else { 
                  _this.isRatingFormShow = true;
-              } 
-
+              }  
             })
             .catch(function(error){
               console.log( error )              
@@ -667,28 +670,54 @@ export default {
     },
     reviewSubmit(){
       let recipe_id = this.recipeDetail.id;
-      if(recipe_id > 0){
-        let _this = this;
-        _this.review.id = recipe_id;
-        _this.loader = _this.$loading.show();
-        _this.$store.dispatch('createNewRecipeRating',_this.review)
-        .then(function(result){
-            _this.loader.hide();
-            if( (typeof(result.status) !='undefined') && (result.status == true) ){
-              _this.getRatings(recipe_id);
-              _this.getCurrentRating(recipe_id);
-              _this.$toastr.s(result.message); 
-            }  
-        })
-         .catch(function(error){
-           _this.loader.hide();
-           console.log( error );          
-        }) 
-      } 
+      let _this = this;
+      if(!(this.$store.state.loggedIn)){
+        _this.$toastr.e("Login & submit this",'Warning!'); 
+      } else {
+          if(recipe_id > 0){            
+            _this.review.id = recipe_id;
+            _this.loader = _this.$loading.show();
+            _this.$store.dispatch('createNewRecipeRating',_this.review)
+            .then(function(result){
+                _this.loader.hide();
+                if( (typeof(result.status) !='undefined') && (result.status == true) ){
+                  _this.getRatings(recipe_id);
+                  _this.getCurrentRating(recipe_id);
+                  _this.$toastr.s(result.message,'Success!'); 
+                }  
+            })
+            .catch(function(error){
+              _this.loader.hide();
+              console.log( error );          
+            }) 
+          } 
+
+      }
+      
     },
     likeSubmit(id){
-       let slug = this.$route.params.slug;
-       alert(id)
+      let recipe_id = this.recipeDetail.id;
+      let _this = this;
+      if(!(this.$store.state.loggedIn)){
+         _this.$toastr.e("Login & submit this",'Warning!'); 
+      } else {
+          if(recipe_id > 0){           
+            _this.review.id = recipe_id;
+            _this.loader = _this.$loading.show();
+            _this.$store.dispatch('createNewRecipeLike',{id : recipe_id})
+            .then(function(result){
+                _this.loader.hide();
+                if( (typeof(result.status) !='undefined') && (result.status == true) ){
+                  _this.getCurrentLike(recipe_id); 
+                  _this.$toastr.s(result.message,'Success!'); 
+                }  
+            })
+            .catch(function(error){
+              _this.loader.hide();
+              console.log( error );          
+            }) 
+          } 
+      } 
     }
   },
   created() {

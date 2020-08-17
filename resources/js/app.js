@@ -2,7 +2,6 @@ import Vue from 'vue';
 Vue.config.productionTip = false;
 import $ from 'jquery';
 import config from './config';
-import VueRouter from 'vue-router';
 import VueToastr from "vue-toastr";
 import VueLazyload from "vue-lazyload";
 import CKEditor from '@ckeditor/ckeditor5-vue';
@@ -59,6 +58,8 @@ Vue.use(VueToastr, {
     defaultProgressBarValue: 0,
     defaultType: "success",
     maxOpened: 1,
+    autoDismiss: true,
+    closeButton: true
 });
 Vue.use(VueMoment, { moment });
 Vue.component('paginate', Paginate);
