@@ -26,14 +26,14 @@
                   :to="'/my-account/change-password'"
                 >Change Password</router-link>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <router-link
                   class="nav-link"
                   :class="(this.$route.name == 'favRecipes')?'active':''"
                   :to="'/my-account/fav-recipes'"
                 >My Fav Recipes</router-link>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <li class="nav-item" v-if="userDetail.role == 'author'">
                 <router-link
                   class="nav-link"
                   :class="(this.$route.name == 'recipesList' || this.$route.name == 'createRecipe' || this.$route.name == 'editRecipe')?'active':''"
@@ -97,13 +97,13 @@ export default {
         } else {
           _this.loader.hide();
         }
-      }, 500);
+      }, 1000);
     },
     userLogout() {
       let userDetail = this.$store.state.data.userDetail;
       let _this = this;
       _this.$dialog
-        .confirm("Are you sure want to singout your account?")
+        .confirm("ARE YOU SURE TO SIGN OFF YOUR SESSION?")
         .then(function (dialog) { 
           _this.loader = _this.$loading.show({
             zIndex: 9999999,
@@ -136,6 +136,9 @@ export default {
   created() {
     this.validateAccount();
   },
+  computed: mapState({ 
+    userDetail: (state) => state.data.userDetail,
+  }),
 };
 </script>
 

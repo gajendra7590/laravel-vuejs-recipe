@@ -1,96 +1,130 @@
-.inner-page-banner {
-    padding: 6px 4px !important;
-}
-
-.breadcrumbs-area h1 {
-    font-size: 2.6rem !important;
-}
-
-.sb-featured-img {
-    height: 200px !important;
-    width: 350px !important;
-}
-
-.sb-latest-img {
-    height: 88px !important;
-    width: 106px !important;
-}
-
-.sb-insta-img {
-    height: 80px !important;
-    width: 110px !important;
-}
-
-.sb-aboutme-img {
-    height: 170px !important;
-    width: 200px !important;
-}
-
-ul.instagram-feed-figure img {
-    width: 231px !important;
-    height: 189px !important;
-}
-
-.recipe_img {
-    height: 250px !important;
-    height: 366px !important;
-}
-
-.recipe_title,
-.item-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.recipe_short_desc {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.recipe_category_name,
-.ctg-name {
-    text-transform: uppercase;
-}
-
-.error-content-box.no-result-found {
-    border: 1px solid #f65058;
-    padding: 17px 0px 1px 0px !important;
-    margin-top: 4px !important;
-}
-
-.error-content-box.no-result-found h5 {
-    font-size: 20px;
-    font-weight: 600;
-    font-style: italic;
-    color: #808080;
-}
-
-.noResultLink {
-    text-align: center;
-    margin-top: 13px;
-}
-
-.noResultLink a.btn-danger {
-    padding: 11px 30px;
-    font-size: 14px;
-}
-
-.ing-cont {
-    background-color: #fff;
-    padding: 13px 10px;
-    margin-bottom: 8px;
-}
-
-.ing-cont i {
-    color: #ff4a52 !important;
-}
-
-i.empty {
-    color: #d9d9d9 !important;
-}
+            .inner-page-banner {
+                padding: 6px 4px !important;
+            }
+            
+            .breadcrumbs-area h1 {
+                font-size: 2.6rem !important;
+            }
+            
+            .sb-featured-img {
+                height: 200px !important;
+                width: 350px !important;
+            }
+            
+            .sb-latest-img {
+                height: 88px !important;
+                width: 106px !important;
+            }
+            
+            .sb-insta-img {
+                height: 80px !important;
+                width: 110px !important;
+            }
+            
+            .sb-aboutme-img {
+                height: 170px !important;
+                width: 200px !important;
+            }
+            
+            ul.instagram-feed-figure img {
+                width: 231px !important;
+                height: 189px !important;
+            }
+            
+            .recipe_img {
+                height: 250px !important;
+                height: 366px !important;
+            }
+            
+            .recipe_title,
+            .item-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            
+            .recipe_short_desc {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            
+            .recipe_category_name,
+            .ctg-name {
+                text-transform: uppercase;
+            }
+            
+            .error-content-box.no-result-found {
+                border: 1px solid #f65058;
+                padding: 17px 0px 1px 0px !important;
+                margin-top: 4px !important;
+            }
+            
+            .error-content-box.no-result-found h5 {
+                font-size: 20px;
+                font-weight: 600;
+                font-style: italic;
+                color: #808080;
+            }
+            
+            .noResultLink {
+                text-align: center;
+                margin-top: 13px;
+            }
+            
+            .noResultLink a.btn-danger {
+                padding: 11px 30px;
+                font-size: 14px;
+            }
+            
+            .ing-cont {
+                background-color: #fff;
+                padding: 13px 10px;
+                margin-bottom: 8px;
+            }
+            
+            .ing-cont i {
+                color: #ff4a52 !important;
+            }
+            
+            i.empty {
+                color: #d9d9d9 !important;
+            }
+            
+            .alert-success {
+                color: #ffffff;
+                background-color: #ff5057;
+                border-color: #ff5057;
+            }
+            
+            .alert-success h4 {
+                text-transform: capitalize!important;
+                margin: 7px;
+            }
+            
+            .dg-main-content {
+                background: #507e86 !important;
+                color: #fff !important;
+                max-width: 490px;
+                min-height: 154px !important;
+            }
+            
+            .dg-content {
+                font-size: 19px !important;
+                padding: 16px 0px !important;
+            }
+            
+            .dg-btn--cancel {
+                color: #fefefe !important;
+                background-color: #da3434 !important;
+            }
+            
+            .dg-btn--ok {
+                color: #fff !important;
+                background-color: #da3434 !important;
+                border-color: #da3434 !important;
+            }

@@ -322,8 +322,7 @@
                     @click.prevent="loginModal"
                   >
                     <i class="flaticon-profile"></i>Login
-                  </button>
-
+                  </button> 
                   <router-link
                     type="button"
                     class="login-btn"
@@ -332,9 +331,9 @@
                   >
                     <i class="flaticon-profile"></i>My Account
                   </router-link>
-                </li>
-                <li>
-                  <router-link :to="'/account/cerate-recipe'" class="fill-btn">
+                </li> 
+                <li> 
+                  <router-link v-if="(userDetail.role == 'author')" :to="'/my-account/recipes-list'" class="fill-btn">
                     <i class="flaticon-plus-2"></i>SUBMIT RECIPE
                   </router-link>
                 </li>
