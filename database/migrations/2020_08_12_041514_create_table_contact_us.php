@@ -17,9 +17,9 @@ class CreateTableContactUs extends Migration
             $table->integerIncrements('id')->unsigned(false)->length(11);
             $table->string('name','50')->nullable();
             $table->string('email','100')->nullable();
-            $table->string('phone','50')->nullable();
-            $table->string('ip_address','50')->nullable();
+            $table->string('subject','50')->nullable();
             $table->longText('comment')->nullable();
+            $table->string('ip_address','50')->nullable();
             $table->timestamps();
         });
     }

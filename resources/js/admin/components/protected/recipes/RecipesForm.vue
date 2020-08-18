@@ -165,7 +165,8 @@
                                     <p class="text-danger validation_errors" v-if="errorsList.serving_peoples">{{ errorsList.serving_peoples }} </p>    
                                 </div>
                             </div>
-                        </div>  
+                        </div>
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -246,6 +247,65 @@
                                 </div>
                             </div>
                         </div> 
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Directions / Steps</label>
+                                    <div class="row ingredients-container card-footer">  
+                                       <div class="col-sm-12">
+                                          <a href="javascript:void(0);" @click.prevent="addDirections" class="add-more-btn btn btn-sm btn-primary">
+                                             <i aria-hidden="true" class="fa fa-plus-circle"></i> Add More Directions
+                                           </a>
+                                        </div>  
+                                        <div v-for="(ig,index) in editData.directions" :key="index" 
+                                            class="col-sm-12" 
+                                            :class="(ig.is_deleted == '1')?'hideContainer':''"> 
+                                           <div class="form-group additional-input-box icon-right">
+                                               <div class="col-sm-10">
+                                                  <div class="col-sm-12">
+                                                        <label>Time( in Minute )</label>
+                                                        <input 
+                                                            type="text"
+                                                            placeholder="example : 5 min" 
+                                                            class="form-control" 
+                                                            :name="`recipe_directions[${index}][time]`"
+                                                            v-model="editData.directions[index].time">
+                                                        <p class="text-danger validation_errors" v-if="errorsList['recipe_directions.'+index+'.time']">
+                                                            {{ errorsList['recipe_directions.'+index+'.time'] }} 
+                                                        </p>     
+                                                    </div> 
+                                                    <br/>
+                                                    <div class="col-sm-12">
+                                                      <label>Step Description</label> 
+                                                      <textarea  
+                                                          rows="5"
+                                                          placeholder="Step Description" 
+                                                          class="form-control" 
+                                                          :name="`recipe_directions[${index}][description]`"
+                                                          v-model="editData.directions[index].description"
+                                                          style="margin-top: 0px; margin-bottom: 0px; height: 68px;"
+                                                          ></textarea>
+                                                      <p class="text-danger validation_errors" v-if="errorsList['recipe_directions.'+index+'.description']">
+                                                        {{ errorsList['recipe_directions.'+index+'.description'] }} 
+                                                      </p>      
+                                                    </div>
+                                               </div> 
+                                                <div class="col-sm-2" style="margin-top: 31px;"> 
+                                                    <i class="fas fa-times" @click.prevent="removeDirection(index)"></i>
+                                                    <input type="hidden" 
+                                                          :name="`recipe_directions[${index}][id]`" 
+                                                          v-model="editData.directions[index].id">
+                                                    <input type="hidden"
+                                                          :name="`recipe_directions[${index}][is_deleted]`" 
+                                                          v-model="editData.directions[index].is_deleted">
+                                                </div>
+                                            </div>  
+                                          </div>   
+                                    </div>                                     
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -328,6 +388,15 @@
                   is_deleted : 0
                 }
               ],
+              directions : [
+                {
+                  id : 0,
+                  recipe_id : 0,
+                  time : '',
+                  description : '',
+                  is_deleted : 0
+                }
+              ],
               photo_url: config.ASSET_BASE_URL+'default_img/default.jpg', 
               is_slider: "0",
               status: "1",
@@ -349,6 +418,10 @@
                 if(result.nutritions.length == '0'){ 
                   _this.editData.nutritions = [{id : 0,recipe_id : 0,nutrition_name : '',nutrition_value : '',is_deleted : 0}];
                 }
+
+                if(result.directions.length == '0'){ 
+                  _this.editData.directions = [{id : 0,recipe_id : 0,time : '',description : '',is_deleted : 0}];
+                }
                 _this.loader.hide();
             }).catch(function(error){
                 console.log(error);
@@ -358,14 +431,37 @@
           getCategories(){
             this.$store.dispatch('categories');  
           },
-          getTags(){ 
-            setTimeout(function(){ $('.select2').select2(); },800);
+          getTags(){  
             this.$store.dispatch('tags');  
+          }, 
+          addDirections(){
+            let oldObj = this.editData.directions;
+            oldObj.push({
+                id : 0,
+                recipe_id : 0,
+                time : '',
+                description : '',
+                is_deleted : 0
+            });   
+            this.editData.directions = oldObj;
           },
-          isSelectedTag(tag_id){ 
-              let selTags = this.editData.selected_tags;  
-              return (selTags.map(el => el.tag_id)).includes(tag_id);  
-          },
+          removeDirection(index){ 
+              let oldObj = this.editData.directions;  
+              var newObj = [];
+              var counts = oldObj.filter(function(dir) { return (dir.is_deleted!==1); }).length;  
+              if(counts > 1){     
+                  if(oldObj[index].id > 0){  
+                    oldObj[index].is_deleted = 1;   
+                    this.editData.directions = oldObj; 
+                    this.$forceUpdate();
+                  } else { 
+                    var newObj =  oldObj.filter(function(dir,i) { return (i!==index); });  
+                    this.editData.directions = newObj;  
+                  }    
+              } else{
+                this.$toastr.e('Opps! you can not remove all the directions','Error!'); 
+              }  
+          },          
           addIngredient(){
               let oldObj = this.editData.ingredients;
               oldObj.push({
@@ -470,6 +566,11 @@
           } 
           this.getCategories();
           this.getTags();
+      },
+      mounted:function(){ 
+          setTimeout( function(){
+              $('.select2').select2();
+           },1000);
       },
       computed: mapState({ 
           categories : state => state.data.categories,

@@ -73,7 +73,7 @@ const store = new Vuex.Store({
             getBlogTags: [],
 
             getSocialLinks: [],
-            companyDetail: [],
+            companyDetail: {},
 
             getRecipeRatings: [],
             getBlogRatings: []

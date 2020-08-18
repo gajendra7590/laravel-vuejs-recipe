@@ -44,6 +44,15 @@ import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 Vue.use(VuejsDialog);
 
+import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyD_7uinsD4oYiDSRlunpS1_C5mtPNHJ1dI',
+        libraries: 'places'
+    },
+    installComponents: true
+})
+
 Vue.use(VueLazyload, {
     preLoad: 1,
     error: config.BASE_URL + "default_img/default.jpg",

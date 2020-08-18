@@ -1,22 +1,7 @@
 <template>
     <div id="aboutcomponent">
         <!-- Inne Page Banner Area Start Here -->
-        <section class="inner-page-banner bg-common" data-bg-image="/app/img/figure/inner-page-banner1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumbs-area">
-                            <h1>About Us</h1>
-                            <ul>
-                                <li>
-                                    <a href="index-2.html">Home</a>
-                                </li>
-                                <li>About</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section class="inner-page-banner bg-common" data-bg-image="">             
         </section>
         <!-- Inne Page Banner Area End Here -->
         <!-- Recipe With Sidebar Area Start Here -->
@@ -26,121 +11,77 @@
                     <div class="col-lg-8">
                         <div class="about-box">
                             <div class="about-figure">
-                                <img src="/app/img/figure/about2.jpg" alt="About">
+                                <img v-lazy="companyDetail.photo_url" alt="About" width="770" height="380">
                             </div>
-                            <h2 class="about-title title-bar bar-center">Rosario Kareon</h2>
-                            <p class="item-description">More off this less hello salamander lied porpoise much over tightly circa horse taped so innocuously side crudey mightily rigorous plot life. New homes in particular are subject.All recipes created with FoodiePress have suport for Micoformats and Google Recipe View. Schema.org is a collaboration byo improve the web by creatinegaera structured data markupore off this less hello salamander lied 
-                                    porpoise much over tightlyapedey innocuouslylife.</p>
+                            <h2 class="about-title title-bar bar-center">{{ companyDetail.company_name }}</h2>
+                            <p class="item-description">{{ companyDetail.about }}</p>
                             <div class="section-heading heading-dark">
                                 <h2 class="item-heading">QUICK CONTACT ME</h2>
                             </div>
-                            <form class="about-contact-form">
-                                <div class="row">
-                                    <div class="col-md-4 form-group">
-                                        <input type="text" placeholder="Name *" class="form-control" name="name" data-error="Name field is required"
-                                            required>
-                                        <div class="help-block with-errors"></div>
+                               <ValidationObserver v-slot="{ handleSubmit }" ref="observer"> 
+                                <form id="contact-form" @submit.prevent="handleSubmit(contactSubmit)" class="contact-form-box">
+                                    <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <ValidationProvider name="name" rules="required" v-slot="{ errors }"> 
+                                        <input
+                                            name="name"
+                                            v-model="contactData.name"
+                                            type="text"
+                                            placeholder="Name *"
+                                            class="form-control" 
+                                        />
+                                        <div class="help-block text-danger">{{ errors[0] }}</div>
+                                        </ValidationProvider> 
                                     </div>
-                                    <div class="col-md-4 form-group">
-                                        <input type="email" placeholder="E-mail *" class="form-control" name="email" data-error="E-mail field is required"
-                                            required>
-                                        <div class="help-block with-errors"></div>
+                                    <div class="col-md-6 form-group">
+                                        <ValidationProvider name="email" rules="required|email" v-slot="{ errors }"> 
+                                        <input
+                                            name="email"
+                                            v-model="contactData.email"
+                                            type="text"
+                                            placeholder="Email *"
+                                            class="form-control" 
+                                        />
+                                        <div class="help-block text-danger">{{ errors[0] }}</div>
+                                        </ValidationProvider> 
                                     </div>
-                                    <div class="col-md-4 form-group">
-                                        <input type="text" placeholder="Phone *" class="form-control" name="phone"
-                                            data-error="Subject field is required" required>
-                                        <div class="help-block with-errors"></div>
+                                    <div class="col-md-12 form-group">
+                                        <ValidationProvider name="subject" rules="required" v-slot="{ errors }"> 
+                                        <input
+                                            name="subject"
+                                            v-model="contactData.subject"
+                                            type="text"
+                                            placeholder="Subject *"
+                                            class="form-control" 
+                                        />
+                                        <div class="help-block text-danger">{{ errors[0] }}</div>
+                                        </ValidationProvider> 
                                     </div>
                                     <div class="col-12 form-group">
-                                        <textarea placeholder="Message" class="textarea form-control" name="message" id="form-message"
-                                            rows="7" cols="20" data-error="Message field is required" required></textarea>
-                                        <div class="help-block with-errors"></div>
+                                        <ValidationProvider name="message" rules="required" v-slot="{ errors }">
+                                        <textarea 
+                                        name="message" 
+                                        v-model="contactData.message"
+                                        rows="7"
+                                        cols="20" 
+                                        placeholder="Type your text"
+                                        class="textarea form-control"
+                                        ></textarea>
+                                        <div class="help-block text-danger">{{ errors[0] }}</div>
+                                        </ValidationProvider>  
                                     </div>
                                     <div class="col-12 form-group mb-0 mt-3">
-                                        <button type="submit" class="item-btn">SEND MESSAGE</button>
+                                        <button type="submit" class="item-btn">SUBMIT MESSAGE</button>
                                     </div>
                                     <div class="form-response"></div>
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                                </ValidationObserver>
                         </div>
                     </div>
                     <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">SUBSCRIBE &amp; FOLLOW</h3>
-                            </div>
-                            <div class="widget-follow-us">
-                                <ul>
-                                    <li class="single-item"><a href="#"><i class="fab fa-facebook-f"></i>LIKE ME ON</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-twitter"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-linkedin-in"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-pinterest-p"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-instagram"></i>LIKE ME</a></li>
-                                    <li class="single-item"><a href="#"><i class="fab fa-youtube"></i>Subscribe</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">LATEST RECIPES</h3>
-                            </div>
-                            <div class="widget-latest">
-                                <ul class="block-list">
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest1.jpg" alt="Post"></a>
-                                            <div class="count-number">1</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest2.jpg" alt="Post"></a>
-                                            <div class="count-number">2</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest3.jpg" alt="Post"></a>
-                                            <div class="count-number">3</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="/app/img/product/latest4.jpg" alt="Post"></a>
-                                            <div class="count-number">4</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-ctg">DESERT</div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <SubscribeAndFollow />
+                        <LatestRecipes />
                         <div class="widget">
                             <div class="widget-ad">
                                 <a href="#"><img src="/app/img/figure/figure4.jpg" alt="Ad" class="img-fluid"></a>
@@ -155,15 +96,43 @@
 </template>
 
 <script>
-    export default {
-        name : 'about',
-        data() {
-            return {
-                
-            }
-        },
-        
-    }
+import { mapState } from 'vuex';
+//Import Component 
+import SubscribeAndFollow from './sidebar/SubscribeAndFollow';
+import LatestRecipes from './sidebar/LatestRecipes'; 
+export default {
+    name : 'about',
+    components: {  
+        SubscribeAndFollow,
+        LatestRecipes 
+    },
+    data() {
+        return {
+             contactData : {name : '',email : '',subject : '',message : ''}           
+        }
+    },
+    methods:{
+        contactSubmit(){
+            let _this = this;
+            _this.$store.dispatch('saveContactUsEnquiry',_this.contactData)
+            .then(function(result){
+            if( (typeof(result)!='undefined') && (result.status == true) ){
+                _this.$toastr.s('Your contact enquiry submitted successfully','SUCCESS!');
+                _this.contactData  = {name : '',email : '',subject : '',message : ''};
+                _this.$nextTick(() => _this.$refs.observer.reset());
+
+            } else {
+                _this.$toastr.e('Getting some error','ERROR!');
+            } 
+            }).catch(function(error){
+            _this.$toastr.e('Getting some error','ERROR!');
+            }); 
+        } 
+    },
+    computed: mapState({
+        companyDetail: (state) => state.data.companyDetail 
+    }), 
+}
 </script>
 
 <style lang="scss" scoped>

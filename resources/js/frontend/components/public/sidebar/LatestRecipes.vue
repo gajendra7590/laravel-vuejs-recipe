@@ -10,7 +10,7 @@
             <router-link :to="'/recipe/'+lr.slug">
               <img v-lazy="lr.photo_url" alt="Post" class="sb-latest-img" />
             </router-link>
-            <div class="count-number">{{ index }}</div>
+            <div class="count-number">{{ lr.views_count }}</div>
           </div>
           <div class="item-content">
             <div class="item-ctg recipe_category_name">{{ lr.category.name }}</div>

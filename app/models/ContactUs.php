@@ -10,7 +10,7 @@ class ContactUs extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','email','phone','ip_address', 'comment'
+        'name','email','subject', 'message','ip_address'
     ];
 
 

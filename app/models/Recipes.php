@@ -65,6 +65,11 @@ class Recipes extends Model
         return $this->hasMany(RecipeIngredients::class, 'recipe_id','id');
     }
 
+    public function directions()
+    {
+        return $this->hasMany(RecipeSteps::class, 'recipe_id','id');
+    }
+
     public function views()
     {
         return $this->hasMany(RecipeViews::class, 'recipe_id','id');
@@ -103,11 +108,11 @@ class Recipes extends Model
     }
 
     public function getPrepairationTimeAttribute($value){
-        return (str_pad($value, 2, '0', STR_PAD_LEFT)).' Min';
+        return (str_pad($value, 2, '0', STR_PAD_LEFT));
     }
 
     public function getCookingTimeAttribute($value){
-        return (str_pad($value, 2, '0', STR_PAD_LEFT)).' Min';
+        return (str_pad($value, 2, '0', STR_PAD_LEFT));
     }
 
     public function getServingPeoplesAttribute($value){

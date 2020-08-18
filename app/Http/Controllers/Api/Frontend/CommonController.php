@@ -23,12 +23,12 @@ class CommonController extends Controller
     }
 
     public function saveContactUsEnquiry(Request $request){
-        $post = $request->only('name','email','phone','comment');
+        $post = $request->only('name','email','subject','message');
         $validator = Validator::make($post,[
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|numeric|digits:10',
-            'comment' => 'required'
+            'subject' => 'required',
+            'message' => 'required'
         ]);
         if ($validator->fails()) {
             $result = errorArrayCreate( $validator->messages() );
@@ -132,7 +132,8 @@ class CommonController extends Controller
     public function latestsRecipes(Request $request){
         $limit = $request->get('limit');
         $limit = ($limit)?$limit:3;
-        return Recipes::with([
+        return Recipes::withCount(['views'])
+        ->with([
             'category' => function($m){ $m->select('id','name','slug'); },
             'user' => function($m){ $m->select('id','first_name','last_name','display_name','photo'); },
         ])

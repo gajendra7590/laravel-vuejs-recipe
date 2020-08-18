@@ -23,7 +23,7 @@ class RecipeSteps extends Model
      * @var array
      */
     protected $fillable = [
-        'recipe_id','title','description', 'status'
+        'recipe_id','time','description', 'status'
     ];
 
 }

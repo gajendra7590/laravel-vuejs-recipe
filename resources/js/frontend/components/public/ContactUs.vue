@@ -13,7 +13,7 @@
         <div class="container">
           <div class="section-heading heading-dark">
             <h3 class="item-heading-big">Our Address</h3>
-          </div>
+          </div> 
           <p>
             {{ (companyDetail.about)?companyDetail.about:'' }}
           </p>
@@ -38,70 +38,74 @@
               <li>
                 <div class="item-icon">
                   <i class="far fa-envelope"></i>
-                </div>{{ (companyDetail.company_email)?companyDetail.company_email:'' }}
+                </div>{{ (companyDetail.company_email)?companyDetail.company_email:'--' }}
               </li>
               <li>
                 <div class="item-icon">
                   <i class="fas fa-phone"></i>
-                </div>{{ (companyDetail.company_contact)?companyDetail.company_contact:'' }}
+                </div>{{ (companyDetail.company_contact)?companyDetail.company_contact:'--' }}
               </li>
               <li>
                 <div class="item-icon">
                   <i class="fas fa-fax"></i>
-                </div>{{ (companyDetail.company_mobile)?companyDetail.company_mobile:'' }}
+                </div>{{ (companyDetail.company_mobile)?companyDetail.company_mobile:'--' }}
               </li>
             </ul>
           </div>
           <div class="section-heading heading-dark">
             <h3 class="item-heading-big">Send Us Message</h3>
           </div>
-          <form id="contact-form" class="contact-form-box">
+          <ValidationObserver v-slot="{ handleSubmit }" ref="observer"> 
+          <form id="contact-form" @submit.prevent="handleSubmit(contactSubmit)" class="contact-form-box">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input
-                  type="text"
-                  placeholder="Name *"
-                  class="form-control"
-                  name="name"
-                  data-error="Name field is required"
-                  required
-                />
-                <div class="help-block with-errors"></div>
+                <ValidationProvider name="name" rules="required" v-slot="{ errors }"> 
+                  <input
+                    name="name"
+                    v-model="contactData.name"
+                    type="text"
+                    placeholder="Name *"
+                    class="form-control" 
+                  />
+                 <div class="help-block text-danger">{{ errors[0] }}</div>
+                </ValidationProvider> 
               </div>
-              <div class="col-md-6 form-group">
-                <input
-                  type="email"
-                  placeholder="E-mail *"
-                  class="form-control"
-                  name="email"
-                  data-error="E-mail field is required"
-                  required
-                />
-                <div class="help-block with-errors"></div>
+               <div class="col-md-6 form-group">
+                <ValidationProvider name="email" rules="required|email" v-slot="{ errors }"> 
+                  <input
+                    name="email"
+                    v-model="contactData.email"
+                    type="text"
+                    placeholder="Email *"
+                    class="form-control" 
+                  />
+                 <div class="help-block text-danger">{{ errors[0] }}</div>
+                </ValidationProvider> 
+              </div>
+               <div class="col-md-12 form-group">
+                <ValidationProvider name="subject" rules="required" v-slot="{ errors }"> 
+                  <input
+                    name="subject"
+                    v-model="contactData.subject"
+                    type="text"
+                    placeholder="Subject *"
+                    class="form-control" 
+                  />
+                 <div class="help-block text-danger">{{ errors[0] }}</div>
+                </ValidationProvider> 
               </div>
               <div class="col-12 form-group">
-                <input
-                  type="text"
-                  placeholder="Subject *"
-                  class="form-control"
-                  name="subject"
-                  data-error="Subject field is required"
-                  required
-                />
-                <div class="help-block with-errors"></div>
-              </div>
-              <div class="col-12 form-group">
-                <textarea
+                <ValidationProvider name="message" rules="required" v-slot="{ errors }">
+                <textarea 
+                  name="message" 
+                  v-model="contactData.message"
+                  rows="7"
+                  cols="20" 
                   placeholder="Type your text"
                   class="textarea form-control"
-                  name="message"
-                  id="form-message"
-                  rows="7"
-                  cols="20"
-                  data-error="Message field is required"
-                  required
                 ></textarea>
-                <div class="help-block with-errors"></div>
+                <div class="help-block text-danger">{{ errors[0] }}</div>
+                </ValidationProvider>  
               </div>
               <div class="col-12 form-group mb-0 mt-3">
                 <button type="submit" class="item-btn">SUBMIT MESSAGE</button>
@@ -109,6 +113,7 @@
               <div class="form-response"></div>
             </div>
           </form>
+          </ValidationObserver>
         </div>
       </div> 
       <div class="contact-box-right">
@@ -129,20 +134,32 @@ export default {
   name: "contactus",
   data() {
     return {
-      companyDetail : []       
+      contactData : {name : '',email : '',subject : '',message : ''}
+      //companyDetail : null       
     };
   },
   methods:{
-    getCompanyDetail(){
-      this.$store.dispatch('companyDetail');
-    }
-  },
-  created(){
-     let _this = this;
-     setTimeout(function(){
-       _this.companyDetail = _this.$store.state.data.companyDetail
-     },1000);
-  } 
+    contactSubmit(){
+        let _this = this;
+        _this.$store.dispatch('saveContactUsEnquiry',_this.contactData)
+        .then(function(result){
+          if( (typeof(result)!='undefined') && (result.status == true) ){
+            _this.$toastr.s('Your contact enquiry submitted successfully','SUCCESS!');
+            _this.contactData  = {name : '',email : '',subject : '',message : ''};
+            _this.$nextTick(() => _this.$refs.observer.reset());
+
+          } else {
+            _this.$toastr.e('Getting some error','ERROR!');
+          } 
+        }).catch(function(error){
+          _this.$toastr.e('Getting some error','ERROR!');
+        }); 
+    } 
+  },  
+  computed: mapState({
+    companyDetail: (state) => state.data.companyDetail 
+  }),
+
 };
 </script>
 

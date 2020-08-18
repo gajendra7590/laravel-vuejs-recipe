@@ -16,6 +16,7 @@ use App\models\RecipeTagsSelected;
 use App\models\RecipeNutritions;
 use App\models\RecipeIngredients;
 use App\models\RecipeImages;
+use App\models\RecipeSteps;
 
 
 class RecipesController extends Controller
@@ -69,6 +70,7 @@ class RecipesController extends Controller
         return Recipes::with([  
             'nutritions'=> function($model){ $model->select('id','recipe_id','nutrition_name','nutrition_value'); },
             'ingredients' => function($model){ $model->select('id','recipe_id','name'); },
+            'directions' => function($model){ $model->select('id','recipe_id','time','description'); },
             'selectedTags' => function($model){ $model->select('id','recipe_id','tag_id'); },
         ])
         ->where(['id' => $id])
@@ -82,6 +84,8 @@ class RecipesController extends Controller
     public function createRecipes(Request $request)
     {
         $post = $request->all();
+       // print_r($post);die;
+
         $validator = Validator::make($post,[
             'category_id' => 'required',
             'title' => 'required|unique:recipes',
@@ -96,13 +100,20 @@ class RecipesController extends Controller
             'recipe_ingredients.*.name' => 'required',
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
-            'recipe_nutritions.*.nutrition_value' => 'required'
+            'recipe_nutritions.*.nutrition_value' => 'required',
+            'recipe_directions' => 'required|array|min:1',
+            'recipe_directions.*.time' => 'required|numeric',
+            'recipe_directions.*.description' => 'required'
         ],[
             'tags.*' => 'Please select recipe tag',
             'category_id.required' => 'Category field is required',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
-            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
+            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required',
+            'recipe_directions.*.time.required' => 'Direction time field is required',
+            'recipe_directions.*.time.numeric' => 'Direction time field has invalid time',
+            'recipe_directions.*.description.required' => 'Direction description is required',
+
         ]); 
 
         if ($validator->fails()) {
@@ -162,6 +173,17 @@ class RecipesController extends Controller
                     }
                 }
 
+                //Save Directions
+                if( isset($post['recipe_directions']) && count($post['recipe_directions']) > 0){
+                    foreach ($post['recipe_ingredients'] as $ingredient){
+                        $recStepModel = new RecipeSteps();
+                        $recStepModel->recipe_id = $last_id;
+                        $recStepModel->time = $ingredient['time'];
+                        $recStepModel->description =  $ingredient['description'];
+                        $recStepModel->save();
+                    }
+                }
+
                 //Save Nutritions
                 if( isset($post['recipe_nutritions']) && count($post['recipe_nutritions']) > 0){
                     foreach ($post['recipe_nutritions'] as $nutrition){
@@ -207,13 +229,19 @@ class RecipesController extends Controller
             'recipe_ingredients.*.name' => 'required',
             'recipe_nutritions' => 'required|array|min:1',
             'recipe_nutritions.*.nutrition_name' => 'required',
-            'recipe_nutritions.*.nutrition_value' => 'required'
+            'recipe_nutritions.*.nutrition_value' => 'required',
+            'recipe_directions' => 'required|array|min:1',
+            'recipe_directions.*.time' => 'required|numeric',
+            'recipe_directions.*.description' => 'required'
         ],[
             'tags.*' => 'Please select recipe tag',
             'category_id.required' => 'Category field is required',
             'recipe_ingredients.*.name.required' => 'Ingredient name field is required',
             'recipe_nutritions.*.nutrition_name.required' => 'Nutrition name field is required',
-            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required'
+            'recipe_nutritions.*.nutrition_value.required' => 'Nutrition value field is required',
+            'recipe_directions.*.time.required' => 'Direction time field is required',
+            'recipe_directions.*.time.numeric' => 'Direction time field has invalid time',
+            'recipe_directions.*.description.required' => 'Direction description is required',
         ]); 
 
         if ($validator->fails()) {
@@ -281,6 +309,29 @@ class RecipesController extends Controller
                             $IngModel->name =  $ingredient['name'];
                             $IngModel->save();
                         } 
+                    }
+                }
+
+                //Save Directions
+                if( isset($post['recipe_directions']) && count($post['recipe_directions']) > 0){
+                    foreach ($post['recipe_directions'] as $direction){
+
+                        if( isset($direction['id']) && ($direction['id'] > 0)){ //Update & Delete Case
+                            $recDirModel = RecipeSteps::find($direction['id']);
+                            if( isset($direction['is_deleted']) && ($direction['is_deleted'] == '1') ){
+                                $recDirModel->delete();
+                            }else{
+                                $recDirModel->time =  $direction['time'];
+                                $recDirModel->description =  $direction['description'];
+                                $recDirModel->save();
+                            }
+                        }else{  //Insert New Case
+                            $recDirModel = new RecipeSteps();
+                            $recDirModel->recipe_id = $last_id;
+                            $recDirModel->time =  $direction['time'];
+                            $recDirModel->description =  $direction['description'];
+                            $recDirModel->save();
+                        }
                     }
                 }
 

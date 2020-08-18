@@ -72,7 +72,10 @@
                                 <div class="form-group" v-if="tags">
                                   <label>Blog Tags</label>
                                   <select class="form-control select2" name="tags[]" multiple="multiple" style="width: 100%;">
-                                    <option v-for="(tag,index) in tags" :key="index" :selected="isSelectedTag(tag.id)" :value="tag.id">{{ tag.name }}</option> 
+                                    <option v-for="(tag,index) in tags" 
+                                    :key="index" 
+                                    :selected="(editData.selected_tags.map(el => el.tag_id)).includes(tag.id)" 
+                                    :value="tag.id">{{ tag.name }}</option> 
                                   </select>
                                   <p class="text-danger validation_errors" v-if="errorsList.tags">{{ errorsList.tags }} </p>
                                 </div>
@@ -196,18 +199,9 @@
           getCategories(){
             this.$store.dispatch('blogCategories');  
           },
-          getTags(){ 
-            setTimeout(function(){ $('.select2').select2(); },500);
+          getTags(){  
             this.$store.dispatch('blogTags');  
-          },
-          isSelectedTag(tag_id){  
-            var result = this.editData.selected_tags.find(function(tag) {  
-               return (tag.tag_id == tag_id); 
-            });   
-            if(result!=undefined){
-              return true;
-            }else{ return false; } 
-          }, 
+          },  
           submitForm(){
             var vueForm = new FormData( $('#vueForm')[0]);
             vueForm.append('description',this.editData.description);
@@ -257,6 +251,11 @@
           if( typeof(this.$route.params.id)!='undefined' ){
               this.editBlog(this.$route.params.id);    
           }
+      },
+      mounted:function(){ 
+          setTimeout( function(){
+              $('.select2').select2();
+           },1000);
       },
       computed: mapState({ 
           categories : state => state.data.blogCategories,

@@ -196,34 +196,22 @@
                   </div>
                 </div>
               </div>
-              <div class="direction-wrap-layout1">
-                <div class="section-heading heading-dark">
-                  <h2 class="item-heading">DIRECTIONS</h2>
-                </div>
-                <p class="section-paragraph">
-                  Salamander lied porpoise much over tightly circa horse
-                  taped so innocuously side crudey mightily rigorous plot life. New homes in
-                  particular are subject. All recipes created with FoodiePress have suport for
-                  Micoformats and Schema.org is a collaboration byo improve convallis.
-                </p>
-                <div class="direction-box-layout1">
-                  <div class="item-figure">
-                    <img src="/app/img/figure/direction1.jpg" alt="DIRECTIONS" />
-                  </div>
-                  <div class="item-content">
-                    <div class="serial-number">01 Step</div>
-                    <p>
-                      Recipe View
-                      <span class="item-time">
-                        <i class="far fa-clock"></i>5 Minutes
-                      </span> chemaorg is a
-                      collaboration improve
-                      the web by creat inegaera structured markupinn ocuously
-                      side crudey mightily rigorous plot life.
-                    </p>
-                  </div>
-                </div>
-              </div>
+               <div class="direction-wrap-layout1" v-if="recipeDetail.directions">
+                        <div class="section-heading2 heading-dark">
+                            <h2 class="item-heading">Follow The Directions</h2>
+                        </div>
+
+                        <div class="direction-box-layout2" v-for="(step,index) in recipeDetail.directions" :key="index">
+                            <div class="serial-number">
+                                <h4 class="number-title">0{{ index+1 }}</h4><span>Step</span>
+                            </div>
+                            <div class="item-content">
+                                <span class="item-time"><i class="far fa-clock"></i>{{ step.time }} Mins</span>
+                                <p>{{ step.description }}</p>
+                            </div>
+                        </div>
+                         
+                    </div>
               <div class="tag-share">
                 <ul>
                   <li>
@@ -752,5 +740,8 @@ ul.reivew-ul {
 }
 .like-active {
   color: #ff4a52;
+}
+.direction-wrap-layout1 {
+    margin-bottom: 30px;
 }
 </style>

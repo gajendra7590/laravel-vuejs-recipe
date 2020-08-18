@@ -16,9 +16,8 @@ class CreateRecipeStepsTable extends Migration
         Schema::create('recipe_steps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('recipe_id');
-            $table->string('title','100')->nullable();
-            $table->longText('description')->nullable();
-            $table->string('photo','100')->nullable();
+            $table->string('time','100')->nullable();
+            $table->longText('description')->nullable(); 
             $table->enum('status',array('0','1','2'))->default(1);
             $table->timestamps();
 

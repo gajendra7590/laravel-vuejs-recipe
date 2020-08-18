@@ -123,6 +123,9 @@ class RecipeController extends Controller
                 'ingredients'=> function($m){
                     $m->select('id','recipe_id','name');
                 },
+                'directions'=> function($m){
+                    $m->select('id','recipe_id','time','description');
+                },
             ])
             ->where(['slug' => $slug])
             ->get()->first();
