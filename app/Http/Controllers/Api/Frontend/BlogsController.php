@@ -23,7 +23,8 @@ class BlogsController extends Controller
         $page = ( isset($get['page']) && ($get['page'] > 0) )?intval($get['page']):1;
         $limit = 5;
         $offset = ( $page - 1 ) * $limit;
-        $blogs = Blogs::with([
+        $blogs = Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){
@@ -41,8 +42,6 @@ class BlogsController extends Controller
         return response()->json([
             'status' => true,
             'total_counts' => $this->getBlogCounts($request,'1',0),
-            'comments' => '1',
-            'likes' => '1',
             'blogs' => $blogs,
         ]);
     }
@@ -84,7 +83,8 @@ class BlogsController extends Controller
         $page = ( isset($get['page']) && ($get['page'] > 0) )?intval($get['page']):1;
         $limit = 5;
         $offset = ( $page - 1 ) * $limit;
-        $blogs = Blogs::with([
+        $blogs = Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){
@@ -106,9 +106,7 @@ class BlogsController extends Controller
         ->all();
         return response()->json([
             'status' => true,
-            'total_counts' => $this->getBlogCounts($request,'2',$tagModel->id),
-            'comments' => '1',
-            'likes' => '1',
+            'total_counts' => $this->getBlogCounts($request,'2',$tagModel->id), 
             'blogs' => $blogs,
         ]);
 
@@ -131,7 +129,8 @@ class BlogsController extends Controller
         $page = ( isset($get['page']) && ($get['page'] > 0) )?intval($get['page']):1;
         $limit = 5;
         $offset = ( $page - 1 ) * $limit;
-        $blogs = Blogs::with([
+        $blogs = Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){
@@ -148,9 +147,7 @@ class BlogsController extends Controller
         ->all();
         return response()->json([
             'status' => true,
-            'total_counts' => $this->getBlogCounts($request,'3',$catModel->id),
-            'comments' => '1',
-            'likes' => '1',
+            'total_counts' => $this->getBlogCounts($request,'3',$catModel->id), 
             'blogs' => $blogs,
         ]);
     }
@@ -164,11 +161,10 @@ class BlogsController extends Controller
             return response()->json(['status' => false,'message' => 'Invalid Blog ID']);
         } else {
             return response()->json([
-                'status' => true,
-                'comments' => 0,
-                'likes' => 0,
-                'data' => Blogs::with([
-                    'user' => function($q){ $q->select('id','first_name','last_name','photo','about_me'); },
+                'status' => true, 
+                'data' => Blogs::withCount(['comments','likes'])
+                ->with([
+                    'user',
                     'category' => function($q){ $q->select('id','name','slug'); },
                     'selectedTags' => function($q){
                         $q->select('id','blog_id','tag_id')->with([
@@ -192,7 +188,8 @@ class BlogsController extends Controller
     public function getBlogFeatured(Request $request){
         $get = $request->all();
         $limit = ( isset($get['limit']) && ($get['limit'] > 0) )?intval($get['limit']):4;
-        return Blogs::with([
+        return Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){
@@ -214,7 +211,8 @@ class BlogsController extends Controller
     public function getBlogLatest(Request $request){
         $get = $request->all();
         $limit = ( isset($get['limit']) && ($get['limit'] > 0) )?intval($get['limit']):4;
-        return Blogs::with([
+        return Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){
@@ -236,7 +234,8 @@ class BlogsController extends Controller
     public function getBlogInstagrams(Request $request){
         $get = $request->all();
         $limit = ( isset($get['limit']) && ($get['limit'] > 0) )?intval($get['limit']):9;
-        return Blogs::with([
+        return Blogs::withCount(['comments','likes'])
+        ->with([
             'user' => function($q){ $q->select('id','first_name','last_name'); },
             'category' => function($q){ $q->select('id','name','slug'); },
             'selectedTags' => function($q){

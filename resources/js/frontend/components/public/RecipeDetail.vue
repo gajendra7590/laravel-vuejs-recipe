@@ -121,7 +121,7 @@
                         </div>
                         <div class="media-body space-sm">
                           <div class="feature-title">PREP TIME</div>
-                          <div class="feature-sub-title">{{ recipeDetail.prepairation_time }}</div>
+                          <div class="feature-sub-title">{{ recipeDetail.prepairation_time }} Min</div>
                         </div>
                       </div>
                     </div>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="media-body space-sm">
                           <div class="feature-title">COOK TIME</div>
-                          <div class="feature-sub-title">{{ recipeDetail.cooking_time }}</div>
+                          <div class="feature-sub-title">{{ recipeDetail.cooking_time }} Min</div>
                         </div>
                       </div>
                     </div>
@@ -628,7 +628,7 @@ export default {
             .then(function(result){
               _this.userLike = result;
               if(result!=''){
-                _this.likeActive = 'like-active';
+                _this.likeActive = 'like-active'; 
               } else{
                 _this.likeActive = '';
               }
@@ -685,8 +685,9 @@ export default {
     },
     likeSubmit(id){
       let recipe_id = this.recipeDetail.id;
+      let slug = this.$route.params.slug;
       let _this = this;
-      if(!(this.$store.state.loggedIn)){
+      if(!(_this.$store.state.loggedIn)){
          _this.$toastr.e("Login & submit this",'Warning!'); 
       } else {
           if(recipe_id > 0){           
@@ -697,6 +698,7 @@ export default {
                 _this.loader.hide();
                 if( (typeof(result.status) !='undefined') && (result.status == true) ){
                   _this.getCurrentLike(recipe_id); 
+                  _this.getRecipeDetail(slug);
                   _this.$toastr.s(result.message,'Success!'); 
                 }  
             })

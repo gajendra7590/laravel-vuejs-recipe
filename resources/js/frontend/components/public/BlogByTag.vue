@@ -50,13 +50,13 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-comments"></i>Comments
-                      <span>( {{ comments}} )</span>
+                      <span>( {{ blog.comments_count }} )</span>
                     </a>
                   </li>
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-heart"></i>
-                      <span>{{ likes }}</span>
+                      <span>{{ blog.likes_count }}</span>
                     </a>
                   </li>
                 </ul>

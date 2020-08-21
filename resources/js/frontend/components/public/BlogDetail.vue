@@ -22,7 +22,8 @@
                 <ul class="entry-meta">
                   <li>
                     <a href="javascript:void(0);">
-                      <i class="fas fa-clock"></i>{{ blogsDetail.created_at | moment('DD MMMM YYYY') }}
+                      <i class="fas fa-clock"></i>{{ (blogsDetail.created_at)?
+                      (blogsDetail.created_at | moment('DD MMMM YYYY')):'' }}
                     </a>
                   </li>
                   <li>
@@ -34,13 +35,13 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-comments"></i>Comments
-                      <span>( {{ comments }} )</span>
+                      <span>( {{ blogsDetail.comments_count }} )</span>
                     </a>
                   </li>
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-heart"></i>
-                      <span>{{ likes }}</span>
+                      <span>{{ blogsDetail.likes_count }}</span>
                     </a>
                   </li>
                 </ul>
@@ -63,32 +64,68 @@
                     </ul>
                   </li>
                   <li>
-                    <ul class="inner-share">
+                     <ul class="inner-share" v-if="blogsDetail.id">
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="facebook"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-facebook-f"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="twitter"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-twitter"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
+                        <ShareNetwork
+                          network="linkedin"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
                           <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-google-plus-g"></i>
-                        </a>
+                        <ShareNetwork
+                          network="pinterest"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-pinterest-p"></i>
+                        </ShareNetwork>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-pinterest"></i>
-                        </a>
+                        <ShareNetwork
+                          network="whatsapp"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-whatsapp"></i>
+                        </ShareNetwork>
                       </li>
+                      <li>
+                        <ShareNetwork
+                          network="telegram"
+                          :url="this.$store.state.BASE_URL+'recipe/'+blogsDetail.slug"
+                          :title="blogsDetail.title"
+                          class="link-cursor"
+                        >
+                          <i class="fab fa-telegram"></i>
+                        </ShareNetwork>
+                      </li>
+                      <li></li>
                     </ul>
                   </li>
                 </ul>
@@ -109,28 +146,45 @@
                     </p>
                     <ul class="author-social">
                       <li>
-                        <a href="#">
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.youtube_url!='') )?blogsDetail.user.youtube_url:'javascript:void(0);'"
+                        >
+                          <i class="fab fa-youtube"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.facebook_url!='') )?blogsDetail.user.facebook_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-facebook-f"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.twitter_url!='') )?blogsDetail.user.twitter_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-twitter"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.linkedin_url!='') )?blogsDetail.user.linkedin_url:'javascript:void(0);'"
+                        >
                           <i class="fab fa-linkedin-in"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-pinterest-p"></i>
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.instagram_url!='') )?blogsDetail.user.instagram_url:'javascript:void(0);'"
+                        >
+                          <i class="fab fa-instagram"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i class="fab fa-skype"></i>
+                        <a
+                          :href="( (blogsDetail.user) && (blogsDetail.user.pinterest_url!='') )?blogsDetail.user.pinterest_url:'javascript:void(0);'"
+                        >
+                          <i class="fab fa-pinterest"></i>
                         </a>
                       </li>
                     </ul>
@@ -161,6 +215,8 @@
                   </a>
                 </div>
               </div>
+
+
               <div class="recipe-reviews">
                 <div class="section-heading3 heading-dark">
                   <h2 class="item-heading">RECIPE REVIEWS</h2>

@@ -72,36 +72,14 @@
                             {{ recipe.title }}
                           </router-link>
                         </h3>
-                        <ul class="item-rating">
-                          <li class="star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="star-fill">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li class="star-empty">
-                            <i class="fas fa-star"></i>
-                          </li>
-                          <li>
-                            <span>
-                              9
-                              <span>/ 10</span>
-                            </span>
-                          </li>
-                        </ul>
+                        <Rating :rating="recipe.avg_rating" />
                         <p class="recipe_short_desc">
                          {{ recipe.short_desc }}
                         </p>
                         <ul class="entry-meta">
                           <li>
                             <a href="javascript:void(0);">
-                              <i class="fas fa-clock"></i>{{ recipe.cooking_time }}
+                              <i class="fas fa-clock"></i>{{ recipe.cooking_time }} Min
                             </a>
                           </li>
                           <li>
@@ -113,7 +91,7 @@
                           <li>
                             <a href="javascript:void(0);">
                               <i class="fas fa-heart"></i>
-                              <span>02</span> Likes
+                              <span>{{ recipe.likes_count }}</span> Likes
                             </a>
                           </li>
                         </ul>

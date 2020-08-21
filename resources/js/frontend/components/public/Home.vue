@@ -33,7 +33,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-clock"></i>
-                      {{ sld.cooking_time }}
+                      {{ sld.cooking_time }} Min
                     </a>
                   </li>
                   <li>
@@ -81,7 +81,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-clock"></i>
-                      {{ rec.cooking_time }}
+                      {{ rec.cooking_time }} Min
                     </a>
                   </li>
                   <li>
@@ -140,7 +140,7 @@
                       <li>
                         <a href="javascript:void(0);">
                           <i class="fas fa-clock"></i>
-                          {{ rec.cooking_time }}
+                          {{ rec.cooking_time }} Min
                         </a>
                       </li>
                       <li>
@@ -205,7 +205,7 @@
                   <li>
                     <a href="javascript:void(0);">
                       <i class="fas fa-clock"></i>
-                      {{ ec.cooking_time }}
+                      {{ ec.cooking_time }} Min
                     </a>
                   </li>
                   <li>
@@ -259,7 +259,7 @@
                       <li>
                         <a href="javascript:void(0);">
                           <i class="fas fa-clock"></i>
-                          {{ pr.cooking_time }}
+                          {{ pr.cooking_time }} Min
                         </a>
                       </li>
                       <li>

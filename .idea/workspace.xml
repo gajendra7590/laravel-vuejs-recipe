@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="352ebf08-059a-4182-bbd2-8124115d0f81" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/blogs/BlogsForm.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/blogs/BlogsForm.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesForm.vue" afterPath="$PROJECT_DIR$/resources/js/admin/components/protected/recipes/RecipesForm.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/components/public/About.vue" afterPath="$PROJECT_DIR$/resources/js/frontend/components/public/About.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/components/public/ContactUs.vue" afterPath="$PROJECT_DIR$/resources/js/frontend/components/public/ContactUs.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/components/public/RecipeDetail.vue" afterPath="$PROJECT_DIR$/resources/js/frontend/components/public/RecipeDetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/components/public/sidebar/LatestRecipes.vue" afterPath="$PROJECT_DIR$/resources/js/frontend/components/public/sidebar/LatestRecipes.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/CommonController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/CommonController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/RecipeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/RecipeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ContactUs.php" afterPath="$PROJECT_DIR$/app/models/ContactUs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/RecipeSteps.php" afterPath="$PROJECT_DIR$/app/models/RecipeSteps.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Recipes.php" afterPath="$PROJECT_DIR$/app/models/Recipes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_124158_create_recipe_steps_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_03_11_124158_create_recipe_steps_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_08_12_041514_create_table_contact_us.php" afterPath="$PROJECT_DIR$/database/migrations/2020_08_12_041514_create_table_contact_us.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/css/main.css" afterPath="$PROJECT_DIR$/public/app/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/style.css" afterPath="$PROJECT_DIR$/public/app/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/app.js" afterPath="$PROJECT_DIR$/resources/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/frontend/store/index.js" afterPath="$PROJECT_DIR$/resources/js/frontend/store/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,42 +14,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="RecipesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="330" column="66" lean-forward="false" selection-start-line="330" selection-start-column="66" selection-end-line="330" selection-end-column="66" />
-              <folding>
-                <element signature="e#50#86#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Recipes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/Recipes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="114" column="54" lean-forward="false" selection-start-line="114" selection-start-column="54" selection-end-line="114" selection-end-column="54" />
-              <folding>
-                <element signature="e#30#69#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Frontend/RecipeController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="126" column="67" lean-forward="false" selection-start-line="126" selection-start-column="67" selection-end-line="126" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -199,120 +144,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laravel-vuejs-recipe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -455,7 +286,8 @@
       <workItem from="1597574775448" duration="10309000" />
       <workItem from="1597678069596" duration="1369000" />
       <workItem from="1597725400335" duration="49000" />
-      <workItem from="1597754547136" duration="2520000" />
+      <workItem from="1597754547136" duration="2654000" />
+      <workItem from="1597808043343" duration="349000" />
     </task>
     <task id="LOCAL-00001" summary="fsdf">
       <created>1583932373061</created>
@@ -618,22 +450,29 @@
       <option name="project" value="LOCAL" />
       <updated>1597599603449</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="recipe steps section dynamic">
+      <created>1597759612684</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1597759612684</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154553000" />
+    <option name="totallyTimeSpent" value="155036000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2602118" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14599092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5041322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6666667" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6666667" sideWeight="0.49586776" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25811967" sideWeight="0.4980716" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -700,7 +539,8 @@
     <MESSAGE value="vuejs actions added for new routes" />
     <MESSAGE value="git ignore changed" />
     <MESSAGE value="recipe detqil page and rating" />
-    <option name="LAST_COMMIT_MESSAGE" value="recipe detqil page and rating" />
+    <MESSAGE value="recipe steps section dynamic" />
+    <option name="LAST_COMMIT_MESSAGE" value="recipe steps section dynamic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -874,12 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding>
-            <element signature="e#53#89#0#PHP" expanded="false" />
-            <element signature="e#903#2764#0#PHP" expanded="false" />
-            <element signature="e#2770#3942#0#PHP" expanded="false" />
-            <element signature="e#3948#4500#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -971,7 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="10" lean-forward="false" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,9 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="308" column="38" lean-forward="true" selection-start-line="295" selection-start-column="7" selection-end-line="308" selection-end-column="38" />
-          <folding>
-            <element signature="e#53#89#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1003,7 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,10 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="26" column="6" lean-forward="true" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="e#2101#3837#0#PHP" expanded="false" />
-            <element signature="e#18674#19388#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,9 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="111" column="18" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="18" />
-          <folding>
-            <element signature="e#53#89#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1039,9 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
           <caret line="171" column="5" lean-forward="false" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
-          <folding>
-            <element signature="e#53#89#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1064,32 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="160" column="9" lean-forward="true" selection-start-line="160" selection-start-column="9" selection-end-line="160" selection-end-column="9" />
-          <folding>
-            <element signature="e#424#1042#0#PHP" expanded="false" />
-            <element signature="e#1048#2928#0#PHP" expanded="false" />
-            <element signature="e#2934#4124#0#PHP" expanded="false" />
-            <element signature="e#4130#4701#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="330" column="66" lean-forward="false" selection-start-line="330" selection-start-column="66" selection-end-line="330" selection-end-column="66" />
-          <folding>
-            <element signature="e#50#86#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Recipes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="114" column="54" lean-forward="false" selection-start-line="114" selection-start-column="54" selection-end-line="114" selection-end-column="54" />
-          <folding>
-            <element signature="e#30#69#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,7 +890,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="126" column="67" lean-forward="false" selection-start-line="126" selection-start-column="67" selection-end-line="126" selection-end-column="67" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Recipes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="114" column="54" lean-forward="false" selection-start-line="114" selection-start-column="54" selection-end-line="114" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/RecipesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="330" column="66" lean-forward="false" selection-start-line="330" selection-start-column="66" selection-end-line="330" selection-end-column="66" />
         </state>
       </provider>
     </entry>
