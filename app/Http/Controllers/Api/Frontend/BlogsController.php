@@ -161,20 +161,26 @@ class BlogsController extends Controller
             return response()->json(['status' => false,'message' => 'Invalid Blog ID']);
         } else {
             return response()->json([
-                'status' => true, 
+                'status' => true,
+                'nexPrevPost' => Blogs::with(['category' => function($q){ $q->select('id','name','slug'); },])
+                                 ->orderByRaw('RAND()')
+                                 ->limit(2)->get()->all(),
                 'data' => Blogs::withCount(['comments','likes'])
-                ->with([
-                    'user',
-                    'category' => function($q){ $q->select('id','name','slug'); },
-                    'selectedTags' => function($q){
-                        $q->select('id','blog_id','tag_id')->with([
-                            'tag' => function($q){ $q->select('id','name','slug'); },
-                        ]);
-                    },
-                ])
-                ->where(['status' => '1','id' => $blogModel->id])
-                ->get()
-                ->first()
+                          ->with([
+                            'user',
+                            'category' => function($q){ $q->select('id','name','slug'); },
+                            'selectedTags' => function($q){
+                                $q->select('id','blog_id','tag_id')
+                                    ->with([
+                                        'tag' => function($q){
+                                              $q->select('id','name','slug');
+                                         },
+                                    ]);
+                            },
+                         ])
+                         ->where(['status' => '1','id' => $blogModel->id])
+                         ->get()
+                         ->first()
             ]);
 
         }

@@ -18,18 +18,20 @@ use App\models\BlogViews;
 class BlogExtraController extends Controller
 {
     public function getBlogRatings(Request $request,$id) {
-        return BlogRating::with([
-            'user' => function($query){
-                $query->select('id','first_name','last_name','display_name','photo');
-            },
-            'blog' => function($query){
-                $query->select('id','title','slug');
-            }
-        ])
-        ->select('id', 'blog_id', 'user_id','comment',DB::Raw('updated_at as rating_time'))
-        ->where(['blog_id' => $id])
-        ->get()
-        ->all();
+        return Blogs::select('id','user_id')
+            ->withCount('ratings')
+            ->with([
+                'ratings' => function($query){
+                    $query->with([
+                        'user' => function($query){
+                            $query->select('id','first_name','last_name','display_name','photo');
+                        }
+                    ])->select('id', 'blog_id', 'user_id','rating','comment',DB::Raw('updated_at as rating_time'));
+                }
+            ])
+            ->where(['id' => $id])
+            ->get()
+            ->first();
     }
 
     public function createNewBlogRating(Request $request,$id) {
@@ -138,6 +140,14 @@ class BlogExtraController extends Controller
             $model = new BlogViews();
             $save = $model->create(['blog_id' => $id]);
         }
+    }
+
+    public function getUsersBlogRating(Request $request, $id){
+        $result = BlogRating::where(['blog_id' => $id,'user_id' => Auth::user()->id])->get()->first();
+        if(!$result){
+            return null;
+        }
+        return $result;
     }
 
 

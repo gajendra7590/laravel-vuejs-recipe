@@ -13,7 +13,7 @@ use App\models\BlogRating;
 
 class Blogs extends Model
 {
-    protected $appends = ['photo_url'];
+    protected $appends = ['avg_rating','photo_url'];
 
 
     protected $table = 'blogs';
@@ -52,6 +52,11 @@ class Blogs extends Model
     public function ratings()
     {
         return $this->hasMany(BlogRating::class, 'blog_id','id');
+    }
+
+    public function getAvgRatingAttribute(){
+        $rating = BlogRating::where(['blog_id' => $this->id])->avg('rating');
+        return round($rating,1);
     }
 
 

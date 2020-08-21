@@ -50,8 +50,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'reset_token_at' => 'datetime',
-        'last_login' => 'datetime',
+        //'reset_token_at' => 'datetime',
+        //'last_login' => 'datetime',
     ];
 
 

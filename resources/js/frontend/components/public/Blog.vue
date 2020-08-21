@@ -26,7 +26,7 @@
     <section class="blog-list-page-wrap padding-top-80 padding-bottom-50">
       <div class="container">
         <div class="row gutters-60">
-          <div class="col-lg-8" v-if="blogsList">
+          <div class="col-lg-8" v-if="(blogsList) && (blogsList.length > 0)">
 
             <div class="blog-box-layout1" v-for="(blog,index) in blogsList" :key="index">
               <div class="item-figure">

@@ -55,6 +55,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('createNewBlogLike/{id}', 'BlogExtraController@createNewBlogLike')->middleware('auth:api');
         Route::post('createNewBlogView/{id}', 'BlogExtraController@createNewBlogView');
         Route::get('getBlogRatings/{id}', 'BlogExtraController@getBlogRatings');
+        Route::get('getUsersBlogRating/{id}', 'BlogExtraController@getUsersBlogRating')->middleware('auth:api');
 
         //Common Routes
         Route::get('companyDetail', 'CommonController@companyDetail');

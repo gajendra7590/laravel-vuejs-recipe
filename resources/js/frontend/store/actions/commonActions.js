@@ -320,6 +320,18 @@ export default {
                 console.log(error);
             });
     },
+    getUsersBlogRating({ commit, state }, payload) {
+        return new Promise(function(resolve, reject) {
+            axios
+                .get(config.API_URL + "getUsersBlogRating/" + payload.id, payload)
+                .then(function(response) {
+                    return resolve(response.data)
+                })
+                .catch(function(error) {
+                    return reject(error);
+                });
+        });
+    },
     createNewBlogRating({ commit, state }, payload) {
         return new Promise(function(resolve, reject) {
             axios.defaults.headers.common['Content-Type'] = `multipart/form-data`;
